@@ -86,7 +86,7 @@ public class Baloot {
 
     }
     public boolean isProviderExists(int id){
-        return true;
+        return providerManager.isIDValid(id);
     }
     public void displayRes(String status,String dataValue, JsonNode j) throws JsonProcessingException {
         ((ObjectNode) jsonResNode).put("status",status);
