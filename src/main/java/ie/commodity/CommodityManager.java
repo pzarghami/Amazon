@@ -3,13 +3,12 @@ package ie.commodity;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import ie.Baloot;
 import ie.CustomException;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -56,8 +55,16 @@ public class CommodityManager {
         }
         JsonNode jsonNode = mapper.createObjectNode();
         ((ObjectNode) jsonNode).set("commoditiesList",mapper.convertValue(mapper.valueToTree(JsonNodesList),JsonNode.class));
-        //System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonNode));
+
         return jsonNode;
+    }
+    public JsonNode getCommoditiesIdData(String jsonData) throws JsonProcessingException, CustomException {
+        int commodityId=mapper.readTree(jsonData).get("id").asInt();
+        if(!isIdExist(commodityId))
+            throw new CustomException("The commodity was not found.");
+        var commodity= commodityHashMap.get(commodityId);
+        JsonNode s = (ObjectNode) mapper.valueToTree(commodity);
+        return s;
     }
 
 }

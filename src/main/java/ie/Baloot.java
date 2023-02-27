@@ -59,7 +59,7 @@ public class Baloot {
 //todo
             }
             else if(Objects.equals(command,"getCommodityById")){
-                System.out.println(data);
+                displayRes("true","",commodityManager.getCommoditiesIdData(data));
 //todo
             }
             else if(Objects.equals(command,"getCommodityByCategory")){
@@ -78,7 +78,6 @@ public class Baloot {
 //todo
 
         } catch (CustomException e) {
-
             displayRes("false",e.getMessage(),null);
 //todo
         } catch (Exception e) {
