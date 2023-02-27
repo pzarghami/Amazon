@@ -1,11 +1,13 @@
 package ie;
 
-
-
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import ie.commodity.CommodityManager;
 import ie.user.UserManager;
 import ie.provider.ProviderManager;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Objects;
 
@@ -14,28 +16,34 @@ public class Baloot {
     private final UserManager userManager;
     private final ProviderManager providerManager;
     private final CommodityManager commodityManager;
+    private final ObjectMapper mapper;
+    private final JsonNode jsonResNode;
+
 
     public Baloot(){
         this.userManager = new UserManager(this);
         this.providerManager = new ProviderManager(this);
         this.commodityManager= new CommodityManager(this);
+        this.mapper=new ObjectMapper();
+        this.jsonResNode=mapper.createObjectNode();
     }
-    public void RunCommand(String command,String data){
+    public void RunCommand(String command,String data) throws JsonProcessingException {
         try{
-            String res="";
+
             if(Objects.equals(command,"addUser")){
-                res = userManager.updateOrAddUser(data);
+                displayRes("true",userManager.updateOrAddUser(data),null);
+
             }
             else if(Objects.equals(command,"addProvider")){
-                res = providerManager.updateOrAddProvider(data);
+                displayRes("true",providerManager.updateOrAddProvider(data),null);
             }
             else if(Objects.equals(command,"addCommodity")){
-                System.out.println(data);
-                res=commodityManager.addCommodity(data);
+                displayRes("true",commodityManager.addCommodity(data),null);
 //todo
             }
             else if(Objects.equals(command,"getCommoditiesList")){
-                System.out.println(data);
+                displayRes("true","",commodityManager.getCommoditiesList());
+
 //todo
             }
             else if(Objects.equals(command,"rateCommodity")){
@@ -68,18 +76,26 @@ public class Baloot {
             }
 
 //todo
-            System.out.println(res);
 
         } catch (CustomException e) {
-            System.out.println(e.getMessage());
+
+            displayRes("false",e.getMessage(),null);
 //todo
         } catch (Exception e) {
-            System.out.println("yes");
+            displayRes("false",e.getMessage(),null);
         }
+
     }
     public boolean isProviderExists(int id){
         return true;
     }
-
-
+    public void displayRes(String status,String dataValue, JsonNode j) throws JsonProcessingException {
+        ((ObjectNode) jsonResNode).put("status",status);
+        if(j==null)
+            ((ObjectNode) jsonResNode).put("data",dataValue);
+        else{
+            ((ObjectNode) jsonResNode).put("data",mapper.convertValue(mapper.valueToTree(j),JsonNode.class));
+        }
+        System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonResNode));
+    }
 }
