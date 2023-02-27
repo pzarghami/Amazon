@@ -20,7 +20,7 @@ public class UserManager {
     }
 
     public void updateOrAddUser(String jsonData) throws  JsonProcessingException {
-        String username = mapper.readTree(jsonData).get("Constant.User.E_ID").asText();
+        String username = mapper.readTree(jsonData).get("username").asText();
         if(isIdValid(username)){
             updateUser(username,jsonData);
         }else{
@@ -33,7 +33,7 @@ public class UserManager {
     }
 
     private void addUser(String username,String jsonData) throws JsonProcessingException{
-        User newUser = mapper.readValue(jsonData, User.class);
+        var newUser = mapper.readValue(jsonData, User.class);
         userMap.put(username,newUser);
     }
 

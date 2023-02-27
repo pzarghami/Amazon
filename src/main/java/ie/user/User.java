@@ -44,7 +44,7 @@ public class User {
         this.address = address;
     }
 
-    @JsonProperty(value = "username", required = true)
+    @JsonProperty(value = "credit", required = true)
     private void setUsername(int credit){
         this.credit = credit;
     }

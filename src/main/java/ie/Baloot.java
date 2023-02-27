@@ -3,6 +3,7 @@ package ie;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import ie.commodity.CommodityManager;
 import ie.user.UserManager;
 
 import java.util.Objects;
@@ -10,8 +11,10 @@ import java.util.Objects;
 
 public class Baloot {
     private final UserManager userManager;
+    private final CommodityManager commodityManager;
     public Baloot(){
         this.userManager=new UserManager(this);
+        this.commodityManager= new CommodityManager(this);
     }
     public void RunCommand(String command,String data){
         try{
@@ -25,6 +28,8 @@ public class Baloot {
             }
             else if(Objects.equals(command,"addCommodity")){
                 System.out.println(data);
+               res= commodityManager.addCommodity(data);
+
                 //todo
             }
             else if(Objects.equals(command,"getCommoditiesList")){
@@ -66,8 +71,10 @@ public class Baloot {
         } catch (CustomException e) {
             System.out.println(e.getMessage());
             //todo
-        } catch (Exception e) {
-            System.out.println("yes");
+
+        } catch (JsonProcessingException e) {
+            System.out.println("yaya");
+
         }
     }
 
@@ -75,4 +82,9 @@ public class Baloot {
         userManager.updateOrAddUser(jsonData);
         return "user added";
     }
+    public boolean isProviderExists(int id){
+        return true;
+        //todo
+    }
+
 }
