@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Commodity {
     private int id;
@@ -75,6 +76,14 @@ public class Commodity {
 
     @JsonGetter(value = "inStock")
     private int getInStock() {return this.inStock;}
+
+    public  boolean isYourCategory(String cat){
+        for(String category: categories){
+            if(Objects.equals(category, cat))
+                return true;
+        }
+        return false;
+    }
 
 
 

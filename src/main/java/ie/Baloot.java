@@ -62,8 +62,8 @@ public class Baloot {
                 displayRes("true","",commodityManager.getCommoditiesIdData(data));
 //todo
             }
-            else if(Objects.equals(command,"getCommodityByCategory")){
-                System.out.println(data);
+            else if(Objects.equals(command,"getCommoditiesByCategory")){
+                displayRes("true","",commodityManager.getCommoditiesByCategory(data));
 //todo
             }
             else if(Objects.equals(command,"getBuyList")){

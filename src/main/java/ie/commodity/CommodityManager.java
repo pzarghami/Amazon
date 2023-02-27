@@ -64,7 +64,24 @@ public class CommodityManager {
             throw new CustomException("The commodity was not found.");
         var commodity= commodityHashMap.get(commodityId);
         JsonNode s = (ObjectNode) mapper.valueToTree(commodity);
+        ((ObjectNode) s).remove("inStock");
+;
         return s;
+    }
+    public JsonNode getCommoditiesByCategory(String jsonData) throws JsonProcessingException {
+        ArrayList<JsonNode> JsonNodesList=new ArrayList<>();
+        String category=mapper.readTree(jsonData).get("category").asText();
+        for(Commodity c: commodityHashMap.values()){
+            if(c.isYourCategory(category)){
+                JsonNode s = (ObjectNode) mapper.valueToTree(c);
+                ((ObjectNode) s).remove("inStock");
+                JsonNodesList.add(s);
+            }
+
+        }
+        JsonNode jsonNode = mapper.createObjectNode();
+        ((ObjectNode) jsonNode).set("commoditiesList",mapper.convertValue(mapper.valueToTree(JsonNodesList),JsonNode.class));
+        return jsonNode;
     }
 
 }
