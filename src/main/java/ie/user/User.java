@@ -3,7 +3,10 @@ package ie.user;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ie.CustomException;
+
 import java.util.ArrayList;
+
 public class User {
 
     private String username;
@@ -12,7 +15,7 @@ public class User {
     private String birthDate;
     private String address;
     private int credit;
-    private ArrayList<String>buyList;
+    private ArrayList<Integer>buyList;
 
     @JsonCreator
     private User(){
@@ -44,13 +47,19 @@ public class User {
         this.address = address;
     }
 
-    @JsonProperty(value = "username", required = true)
+    @JsonProperty(value = "credit", required = true)
     private void setUsername(int credit){
         this.credit = credit;
     }
 
     @JsonIgnore()
-    public ArrayList<String> getBuyList() {
+    public ArrayList<Integer> getBuyList() {
         return this.buyList;
+    }
+
+    public void addToBuyList(int commodityId)throws CustomException {
+        if(buyList.contains(commodityId))
+            throw new CustomException("already exists in buy list.");
+        buyList.add(commodityId);
     }
 }

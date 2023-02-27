@@ -3,7 +3,6 @@ package ie.user;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ie.Baloot;
-import ie.CustomException;
 import java.util.HashMap;
 
 
@@ -19,13 +18,16 @@ public class UserManager {
         userMap = new HashMap<>();
     }
 
-    public void updateOrAddUser(String jsonData) throws  JsonProcessingException {
-        String username = mapper.readTree(jsonData).get("Constant.User.E_ID").asText();
-        if(isIdValid(username)){
+    public String updateOrAddUser(String jsonData) throws  JsonProcessingException {
+        String username = mapper.readTree(jsonData).get("username").asText();
+        if(isUsernameValid(username)){
             updateUser(username,jsonData);
+            return "user updated.";
         }else{
             addUser(username,jsonData);
+            return "user added.";
         }
+
     }
 
     private void updateUser(String username, String jsonData) throws JsonProcessingException{
@@ -37,7 +39,7 @@ public class UserManager {
         userMap.put(username,newUser);
     }
 
-    private boolean isIdValid(String username){
+    public boolean isUsernameValid(String username){
         return userMap.containsKey(username);
     }
 }

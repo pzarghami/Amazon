@@ -4,24 +4,27 @@ package ie;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import ie.user.UserManager;
+import ie.provider.ProviderManager;
 
 import java.util.Objects;
 
 
 public class Baloot {
     private final UserManager userManager;
+    private final ProviderManager providerManager;
+
     public Baloot(){
-        this.userManager=new UserManager(this);
+        this.userManager = new UserManager(this);
+        this.providerManager = new ProviderManager(this);
     }
     public void RunCommand(String command,String data){
         try{
             String res="";
             if(Objects.equals(command,"addUser")){
-                res = addUser(data);
+                res = userManager.updateOrAddUser(data);
             }
             else if(Objects.equals(command,"addProvider")){
-                System.out.println(data);
-                //todo
+                res = providerManager.updateOrAddProvider(data);
             }
             else if(Objects.equals(command,"addCommodity")){
                 System.out.println(data);
@@ -71,8 +74,4 @@ public class Baloot {
         }
     }
 
-    private String addUser(String jsonData) throws JsonProcessingException {
-        userManager.updateOrAddUser(jsonData);
-        return "user added";
-    }
 }
