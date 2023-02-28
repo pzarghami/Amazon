@@ -9,7 +9,7 @@ public class Provider {
     private int id;
     private String name;
     private String registryDate;
-    private final HashMap<String, Float> commodityRateMap;
+    private final HashMap<Integer, Float> commodityRateMap;
 
     @JsonCreator
     private Provider(){this.commodityRateMap=new HashMap<>();}
@@ -27,6 +27,10 @@ public class Provider {
     @JsonProperty(value = "registryDate", required = true)
     private void setAddress(String registryDate){
         this.registryDate = registryDate;
+    }
+
+    public void setAverageRate(int commodityId,float rate){
+       this.commodityRateMap.put(commodityId,rate);
     }
 
 }

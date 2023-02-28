@@ -42,12 +42,18 @@ public class CommodityManager {
         return "commodity added.";
     }
 
-    public boolean buy(int commodityId)throws CustomException{
+    public void buy(int commodityId)throws CustomException{
         if(!isIdExist(commodityId))
             throw new CustomException("commodity does not exist");
         var commodity=commodityHashMap.get(commodityId);
         commodity.buy();
-        return true;
+    }
+
+    public void canselBuying(int commodityId)throws CustomException{
+        if(!isIdExist(commodityId))
+            throw new CustomException("commodity does not exist");
+        var commodity=commodityHashMap.get(commodityId);
+        commodity.canselBuying();
     }
 
     public float addRate(String jsonData) throws JsonProcessingException,CustomException {
@@ -64,6 +70,11 @@ public class CommodityManager {
 
     private boolean isIdExist(int id){
         return commodityHashMap.containsKey(id);
+    }
+    public int getProviderId(String jsonData)throws JsonProcessingException, CustomException{
+        int commodityId = mapper.readTree(jsonData).get("commodityId").asInt();
+        return commodityHashMap.get(commodityId).getProvideId();
+
     }
     public JsonNode getCommoditiesList() throws JsonProcessingException {
 

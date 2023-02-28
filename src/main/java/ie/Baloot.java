@@ -87,9 +87,11 @@ public class Baloot {
         }
 
     }
+
     public boolean isProviderExists(int id){
         return providerManager.isIDValid(id);
     }
+
     public void displayRes(String status,String dataValue, JsonNode j) throws JsonProcessingException {
         ((ObjectNode) jsonResNode).put("status",status);
         if(j==null)
@@ -104,10 +106,17 @@ public class Baloot {
         commodityManager.buy(commodityId);
     }
 
+    public void canselBuying(int commodityId)throws CustomException{
+        commodityManager.canselBuying(commodityId);
+    }
+
     private String addRate(String jsonData)throws JsonProcessingException,CustomException{
         if(!userManager.isUsernameValid(jsonData,true))
             throw new CustomException("username does not exist");
-        commodityManager.addRate(jsonData);
+        float averageRate = commodityManager.addRate(jsonData);
+        int providerId=commodityManager.getProviderId(jsonData);
+        int commodityId=mapper.readTree(jsonData).get("commodityId").asInt();
+        providerManager.setAverageRate(providerId,averageRate,commodityId);
         return "rate added.";
     }
 
