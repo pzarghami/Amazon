@@ -26,6 +26,10 @@ public class ProviderManager {
         return "provider added.";
     }
 
+    public void setAverageRate(int providerId,float rate,int commodityId){
+        var provider=providerMap.get(providerId);
+        provider.setAverageRate(commodityId,rate);
+    }
     private void updateUser(int id, String jsonData) throws JsonProcessingException{
         mapper.readerForUpdating(providerMap.get(id)).readValue(jsonData);
     }

@@ -85,6 +85,6 @@ public class User {
     public void removeFromBuyList(int commodityId)throws CustomException{
         if(!buyList.contains(commodityId))
             throw new CustomException("commodity does not exists.");
-        buyList.remove(commodityId);
+        buyList.remove((Integer) commodityId);
     }
 }

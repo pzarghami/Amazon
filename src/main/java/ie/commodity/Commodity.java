@@ -67,7 +67,7 @@ public class Commodity {
     private String getName() {return this.name;}
 
     @JsonGetter(value = "providerId")
-    private int getProvideId() {return this.provideId;}
+    public int getProvideId() {return this.provideId;}
 
     @JsonGetter(value = "price")
     private float getPrice() {return this.price;}
@@ -89,17 +89,14 @@ public class Commodity {
         return false;
     }
 
-
-
-
-
-
-
-
     public void buy()throws CustomException{
         if(this.inStock<=0)
             throw new CustomException("there is no enough commodity.");
         this.inStock -= 1;
+    }
+
+    public void canselBuying()throws CustomException{
+        inStock +=1;
     }
     public float addRate(String username,int rate){
         this.commodityRateMap.put(username,rate);
