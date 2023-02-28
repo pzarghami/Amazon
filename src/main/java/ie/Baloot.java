@@ -1,5 +1,7 @@
 package ie;
 
+
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,15 +49,15 @@ public class Baloot {
 //todo
             }
             else if(Objects.equals(command,"rateCommodity")){
-                System.out.println(data);
+                res=addRate(data);
 //todo
             }
             else if(Objects.equals(command,"addToBuyList")){
-                System.out.println(data);
-//todo
+                res = userManager.addToBuyList(data);
+
             }
             else if(Objects.equals(command,"removeFromBuyList")){
-                System.out.println(data);
+                res = userManager.removeFromBuyList(data);
 //todo
             }
             else if(Objects.equals(command,"getCommodityById")){
@@ -97,4 +99,17 @@ public class Baloot {
         }
         System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonResNode));
     }
+
+    public void buy(int commodityId)throws CustomException{
+        commodityManager.buy(commodityId);
+    }
+
+    private String addRate(String jsonData)throws JsonProcessingException,CustomException{
+        if(!userManager.isUsernameValid(jsonData,true))
+            throw new CustomException("username does not exist");
+        commodityManager.addRate(jsonData);
+        return "rate added.";
+    }
+
+
 }

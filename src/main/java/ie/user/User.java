@@ -62,4 +62,10 @@ public class User {
             throw new CustomException("already exists in buy list.");
         buyList.add(commodityId);
     }
+
+    public void removeFromBuyList(int commodityId)throws CustomException{
+        if(!buyList.contains(commodityId))
+            throw new CustomException("commodity does not exists.");
+        buyList.remove(commodityId);
+    }
 }
