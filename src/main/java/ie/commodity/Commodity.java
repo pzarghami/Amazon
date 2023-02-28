@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ie.Constant;
 import ie.CustomException;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Commodity {
     private ArrayList<String> categories;
     private float rate;
     private int inStock;
+
     private final HashMap<String, Integer> commodityRateMap;
 
 
@@ -27,6 +29,7 @@ public class Commodity {
     private Commodity(){
         this.categories= new ArrayList<>();
         this.commodityRateMap = new HashMap<>();
+
     }
 
     @JsonProperty(value = "id", required = true)
@@ -91,7 +94,7 @@ public class Commodity {
 
     public void buy()throws CustomException{
         if(this.inStock<=0)
-            throw new CustomException("there is no enough commodity.");
+            throw new CustomException(Constant.LACK_OF_COMMODITY);
         this.inStock -= 1;
     }
 

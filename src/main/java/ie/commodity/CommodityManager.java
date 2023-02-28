@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import ie.Baloot;
+import ie.Constant;
 import ie.CustomException;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class CommodityManager {
     private final Baloot database;
     private final ObjectMapper mapper;
 
+
     @JsonGetter(value = "commoditiesList")
     private ArrayList<String> getCommodities() {return this.commoditiesList;}
 
@@ -27,31 +29,32 @@ public class CommodityManager {
         this.database = database;
         commodityHashMap = new HashMap<>();
         this.commoditiesList=new ArrayList<>();
+
     }
 
     public String addCommodity(String jsonData) throws JsonProcessingException , CustomException{
         int commodityId = mapper.readTree(jsonData).get("id").asInt();
         int providerId = mapper.readTree(jsonData).get("providerId").asInt();
         if(isIdExist(commodityId))
-            throw new CustomException("commodity already exists");
+            throw new CustomException(Constant.NO_NEW_COMMODITY);
         if(!database.isProviderExists(providerId))
-            throw new CustomException("provider does not exists");
+            throw new CustomException(Constant.PROVIDER_NOT_FOUND);
         var newCommodity = mapper.readValue(jsonData, Commodity.class);
         commodityHashMap.put(commodityId,newCommodity);
 
-        return "commodity added.";
+        return Constant.COMMODITY_ADD;
     }
 
     public void buy(int commodityId)throws CustomException{
         if(!isIdExist(commodityId))
-            throw new CustomException("commodity does not exist");
+            throw new CustomException(Constant.CMD_NOT_FOUND);
         var commodity=commodityHashMap.get(commodityId);
         commodity.buy();
     }
 
     public void cancelBuying(int commodityId)throws CustomException{
         if(!isIdExist(commodityId))
-            throw new CustomException("commodity does not exist");
+            throw new CustomException(Constant.CMD_NOT_FOUND);
         var commodity=commodityHashMap.get(commodityId);
         commodity.cancelBuying();
     }
@@ -61,9 +64,9 @@ public class CommodityManager {
         int rate = mapper.readTree(jsonData).get("score").asInt();
         String username = mapper.readTree(jsonData).get("username").asText();
         if(rate >10 || rate <1)
-            throw new CustomException("rate is out of range.");
+            throw new CustomException(Constant.OUT_OF_RANGE_RATE);
         if(!isIdExist(commodityId))
-            throw new CustomException("commodity does not exist");
+            throw new CustomException(Constant.CMD_NOT_FOUND);
 
         return commodityHashMap.get(commodityId).addRate(username,rate);
     }
@@ -92,7 +95,7 @@ public class CommodityManager {
     public JsonNode getCommoditiesIdData(String jsonData) throws JsonProcessingException, CustomException {
         int commodityId=mapper.readTree(jsonData).get("id").asInt();
         if(!isIdExist(commodityId))
-            throw new CustomException("The commodity was not found.");
+            throw new CustomException(Constant.CMD_NOT_FOUND);
         var commodity= commodityHashMap.get(commodityId);
         JsonNode s = (ObjectNode) mapper.valueToTree(commodity);
         ((ObjectNode) s).remove("inStock");

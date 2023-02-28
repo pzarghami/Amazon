@@ -3,6 +3,8 @@ package ie.provider;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ie.Baloot;
+import ie.Constant;
+
 import java.util.HashMap;
 
 public class ProviderManager {
@@ -10,10 +12,12 @@ public class ProviderManager {
     private final Baloot database;
     private final ObjectMapper mapper;
 
+
     public ProviderManager (Baloot database) {
         mapper = new ObjectMapper();
         this.database = database;
         providerMap = new HashMap<>();
+
     }
 
     public String  updateOrAddProvider(String jsonData) throws  JsonProcessingException {
@@ -23,7 +27,7 @@ public class ProviderManager {
         }else{
             addUser(id,jsonData);
         }
-        return "provider added.";
+        return Constant.PROVIDER_ADD;
     }
 
     public void setAverageRate(int providerId,float rate,int commodityId){

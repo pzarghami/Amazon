@@ -10,13 +10,11 @@ import static org.junit.Assert.assertEquals;
 
 public class BalootTest {
     Baloot baloot;
-    private final JsonNode jsonResNode;
-    private final ObjectMapper mapper;
+
 
     public BalootTest() {
         this.baloot = new Baloot();
-        this.mapper=new ObjectMapper();
-        this.jsonResNode=mapper.createObjectNode();
+
     }
 
     @Before
@@ -44,28 +42,28 @@ public class BalootTest {
     public void rateCommodityHappyPathTest() throws JsonProcessingException {
         baloot.RunCommand("rateCommodity", "{\"username\": \"FarzinAsadi\", \"commodityId\": 1, \"score\": 8}");
 
-        String response = "{\n" + "  \"status\" : \"true\",\n" + "  \"data\" : \"rate added.\"\n" + "}";
+        String response = "{\n" + "  \"status\" : \"true\",\n" + "  \"data\" : \""+ Constant.ADD_RATE + "\"\n" + "}";
         assertEquals(response,baloot.getResultCommand());
     }
 
     @Test
     public void rateCommodityOutOfRangeTest() throws JsonProcessingException {
         baloot.RunCommand("rateCommodity", "{\"username\": \"FarzinAsadi\", \"commodityId\": 1, \"score\": 15}");
-        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"rate is out of range.\"\n" + "}";
+        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \""+ Constant.OUT_OF_RANGE_RATE +"\"\n" + "}";
         assertEquals(response,baloot.getResultCommand());
     }
 
     @Test
     public void rateCommodityUserNameNotFoundTest() throws JsonProcessingException {
         baloot.RunCommand("rateCommodity", "{\"username\": \"Arash_sh\", \"commodityId\": 1, \"score\": 1}");
-        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"username does not exist\"\n" + "}";
+        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \""+ Constant.USR_NOT_FOUND +"\"\n" + "}";
         assertEquals(response,baloot.getResultCommand());
     }
 
     @Test
     public void rateCommodityNotFoundTest() throws JsonProcessingException {
         baloot.RunCommand("rateCommodity", "{\"username\": \"FarzinAsadi\", \"commodityId\": 8, \"score\": 1}");
-        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"commodity does not exist\"\n" + "}";
+        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \""+ Constant.CMD_NOT_FOUND +"\"\n" + "}";
         assertEquals(response,baloot.getResultCommand());
     }
     //Test for getCommoditiesByCategory
@@ -87,35 +85,35 @@ public class BalootTest {
     @Test
     public void addToBuyListHappyPathTest() throws JsonProcessingException {
         baloot.RunCommand("addToBuyList", "{\"username\": \"FarzinAsadi\",\"commodityId\": 1 }");
-        String response = "{\n" + "  \"status\" : \"true\",\n" + "  \"data\" : \"added to buy list.\"\n" + "}";
+        String response = "{\n" + "  \"status\" : \"true\",\n" + "  \"data\" : \""+ Constant.ADD_TO_BUYLIST +"\"\n" + "}";
         assertEquals(response,baloot.getResultCommand());
     }
 
     @Test
     public void addToBuyListUserNotFoundTest() throws JsonProcessingException {
         baloot.RunCommand("addToBuyList", "{\"username\": \"Negrmg\",\"commodityId\": 1 }");
-        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"username not valid\"\n" + "}";
+        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \""+ Constant.USR_NOT_FOUND +"\"\n" + "}";
         assertEquals(response,baloot.getResultCommand());
     }
 
     @Test
     public void addToBuyListCommodityNotFoundTest() throws JsonProcessingException {
         baloot.RunCommand("addToBuyList", "{\"username\": \"FarzinAsadi\",\"commodityId\": 10 }");
-        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"commodity does not exist\"\n" + "}";
+        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \""+Constant.CMD_NOT_FOUND+"\"\n" + "}";
         assertEquals(response,baloot.getResultCommand());
     }
     @Test
     public void addToBuyListCommodityNotEnoughTest() throws JsonProcessingException {
         baloot.RunCommand("addToBuyList", "{\"username\": \"FarzinAsadi\",\"commodityId\": 1 }");
         baloot.RunCommand("addToBuyList", "{\"username\": \"Prmidaghm\",\"commodityId\": 1 }");
-        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"there is no enough commodity.\"\n" + "}";
+        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \""+Constant.LACK_OF_COMMODITY+"\"\n" + "}";
         assertEquals(response,baloot.getResultCommand());
     }
     @Test
     public void addToBuyListCommonCommodityTest() throws JsonProcessingException {
         baloot.RunCommand("addToBuyList", "{\"username\": \"Prmidaghm\",\"commodityId\": 2 }");
         baloot.RunCommand("addToBuyList", "{\"username\": \"Prmidaghm\",\"commodityId\": 2 }");
-        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"already exists in buy list.\"\n" + "}";
+        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \""+Constant.DUPLICATE_COMMODITY+"\"\n" + "}";
         assertEquals(response,baloot.getResultCommand());
     }
     //Test for getCommodityById
@@ -128,7 +126,7 @@ public class BalootTest {
     @Test
     public void getCommodityByIdIdNotFound() throws JsonProcessingException {
         baloot.RunCommand("getCommodityById", "{\"id\": 7 }");
-        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"The commodity was not found.\"\n" + "}";
+        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \""+Constant.CMD_NOT_FOUND+"\"\n" + "}";
         assertEquals(response,baloot.getResultCommand());
     }
 

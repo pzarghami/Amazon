@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import ie.Baloot;
 import ie.CustomException;
-
+import ie.Constant;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,20 +17,22 @@ public class UserManager {
     private final Baloot database;
     private final ObjectMapper mapper;
 
+
     public UserManager (Baloot database) {
         mapper = new ObjectMapper();
         this.database = database;
         userMap = new HashMap<>();
+
     }
 
     public String updateOrAddUser(String jsonData) throws  JsonProcessingException {
         String username = mapper.readTree(jsonData).get("username").asText();
         if(isUsernameValid(username,false)){
             updateUser(username,jsonData);
-            return "user updated.";
+            return Constant.USR_UPDATE;
         }else{
             addUser(username,jsonData);
-            return "user added.";
+            return Constant.USR_ADD;
         }
     }
 
@@ -50,7 +52,7 @@ public class UserManager {
         var user =getElement(username);
         user.addToBuyList(commodityId);
         database.buy(commodityId);
-        return "added to buy list.";
+        return Constant.ADD_TO_BUYLIST;
     }
 
     public String removeFromBuyList(String jsonData)throws JsonProcessingException, CustomException{
@@ -60,7 +62,7 @@ public class UserManager {
         var user = getElement(username);
         user.removeFromBuyList(commodityId);
         database.cancelBuying(commodityId);
-        return "removed from watch list.";
+        return Constant.RMV_FROM_BUYLIST;
     }
 
     public boolean isUsernameValid(String username,boolean isJsonFile) throws JsonProcessingException {
@@ -75,13 +77,13 @@ public class UserManager {
         if (userMap.containsKey(username)) {
             return userMap.get(username);
         }
-        throw new CustomException("username not valid");
+        throw new CustomException(Constant.USR_NOT_FOUND);
     }
     public JsonNode getBuyList(String jsonData) throws JsonProcessingException, CustomException {
 
         String username = mapper.readTree(jsonData).get("username").asText();
         if(!isUsernameValid(username,false))
-            throw new CustomException("The username was not found.");
+            throw new CustomException(Constant.USR_NOT_FOUND);
         var userBuyList= userMap.get(username);
         ArrayList<Integer> commodityIdInBuyList= userBuyList.getBuyList();
         JsonNode jsonNode = mapper.createObjectNode();

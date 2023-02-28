@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ie.Constant;
 import ie.CustomException;
-
 import java.util.ArrayList;
 
 public class User {
@@ -16,11 +16,14 @@ public class User {
     private String birthDate;
     private String address;
     private int credit;
+
     private ArrayList<Integer>buyList;
 
     @JsonCreator
     private User(){
+
         this.buyList=new ArrayList<>();
+
     }
 
     @JsonProperty(value = "username", required = true)
@@ -78,13 +81,13 @@ public class User {
 
     public void addToBuyList(int commodityId)throws CustomException {
         if(buyList.contains(commodityId))
-            throw new CustomException("already exists in buy list.");
+            throw new CustomException(Constant.DUPLICATE_COMMODITY);
         buyList.add(commodityId);
     }
 
     public void removeFromBuyList(int commodityId)throws CustomException{
         if(!buyList.contains(commodityId))
-            throw new CustomException("commodity does not exists.");
+            throw new CustomException(Constant.CMD_NOT_FOUND);
         buyList.remove((Integer) commodityId);
     }
 }

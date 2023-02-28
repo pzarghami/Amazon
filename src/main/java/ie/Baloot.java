@@ -22,6 +22,7 @@ public class Baloot {
     private final CommodityManager commodityManager;
     private final ObjectMapper mapper;
     private final JsonNode jsonResNode;
+
     String resultCommand;
 
     public Baloot(){
@@ -30,6 +31,7 @@ public class Baloot {
         this.commodityManager= new CommodityManager(this);
         this.mapper=new ObjectMapper();
         this.jsonResNode=mapper.createObjectNode();
+
 
     }
     public void RunCommand(String command,String data) throws JsonProcessingException {
@@ -116,12 +118,12 @@ public class Baloot {
 
     private String addRate(String jsonData)throws JsonProcessingException,CustomException{
         if(!userManager.isUsernameValid(jsonData,true))
-            throw new CustomException("username does not exist");
+            throw new CustomException(Constant.USR_NOT_FOUND);
         float averageRate = commodityManager.addRate(jsonData);
         int providerId=commodityManager.getProviderId(jsonData);
         int commodityId=mapper.readTree(jsonData).get("commodityId").asInt();
         providerManager.setAverageRate(providerId,averageRate,commodityId);
-        return "rate added.";
+        return Constant.ADD_RATE;
     }
     public ArrayList<JsonNode> getBuyListInfo(ArrayList<Integer> ids) throws CustomException, JsonProcessingException {
         ArrayList<JsonNode> JsonNodesList=new ArrayList<>();
