@@ -37,11 +37,11 @@ public class BalootTest {
 
         baloot.RunCommand("addCommodity", "{\"id\": 1, \"name\": \"Phone\", \"providerId\": 1,\"price\": 350,\"categories\": [\"Phone\",\"Tech\"], \"rating\":0, \"inStock\": 5 }");
         baloot.RunCommand("addCommodity", "{\"id\": 2, \"name\": \"Chocklate\", \"providerId\": 2,\"price\": 3,\"categories\": [\"Food\"], \"rating\":0, \"inStock\": 5 }");
-        baloot.RunCommand("addCommodity", "{\"id\": 3, \"name\": \"Pen\", \"providerId\": 1,\"price\": 30,\"categories\": [\"School\"], \"rating\":0, \"inStock\": 5 }");
+        baloot.RunCommand("addCommodity", "{\"id\": 3, \"name\": \"SmartPen\", \"providerId\": 1,\"price\": 30,\"categories\": [\"School\",\"Tech\"], \"rating\":0, \"inStock\": 5 }");
     }
     //Test for rateCommodity
     @Test
-    public void happyPathTest() throws JsonProcessingException {
+    public void rateCommodityHappyPathTest() throws JsonProcessingException {
         baloot.RunCommand("rateCommodity", "{\"username\": \"FarzinAsadi\", \"commodityId\": 1, \"score\": 8}");
 
         String response = "{\n" + "  \"status\" : \"true\",\n" + "  \"data\" : \"rate added.\"\n" + "}";
@@ -49,26 +49,44 @@ public class BalootTest {
     }
 
     @Test
-    public void rateOutOfRangeTest() throws JsonProcessingException {
+    public void rateCommodityOutOfRangeTest() throws JsonProcessingException {
         baloot.RunCommand("rateCommodity", "{\"username\": \"FarzinAsadi\", \"commodityId\": 1, \"score\": 15}");
         String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"rate is out of range.\"\n" + "}";
         assertEquals(response,baloot.getResultCommand());
     }
 
     @Test
-    public void userNameNotFoundTest() throws JsonProcessingException {
+    public void rateCommodityUserNameNotFoundTest() throws JsonProcessingException {
         baloot.RunCommand("rateCommodity", "{\"username\": \"Arash_sh\", \"commodityId\": 1, \"score\": 1}");
         String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"username does not exist\"\n" + "}";
         assertEquals(response,baloot.getResultCommand());
     }
 
     @Test
-    public void commodityNotFoundTest() throws JsonProcessingException {
+    public void rateCommodityNotFoundTest() throws JsonProcessingException {
         baloot.RunCommand("rateCommodity", "{\"username\": \"FarzinAsadi\", \"commodityId\": 8, \"score\": 1}");
         String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"commodity does not exist\"\n" + "}";
         assertEquals(response,baloot.getResultCommand());
     }
+    //Test for getCommoditiesByCategory
+    @Test
+    public void getCommoditiesBtCatHappyPathTest() throws JsonProcessingException {
+        baloot.RunCommand("getCommoditiesByCategory", "{\"category\": \"Tech\"}");
+        String response = "{\n" + "  \"status\" : \"true\",\n" + "  \"data\" : {\n" + "    \"commoditiesList\" : [ {\n" + "      \"id\" : 1,\n" + "      \"name\" : \"Phone\",\n" + "      \"providerId\" : 1,\n" + "      \"price\" : 350.0,\n" + "      \"categories\" : [ \"Phone\", \"Tech\" ],\n" + "      \"rating\" : 0.0\n" + "    }, {\n" + "      \"id\" : 3,\n" + "      \"name\" : \"SmartPen\",\n" + "      \"providerId\" : 1,\n" + "      \"price\" : 30.0,\n" + "      \"categories\" : [ \"School\", \"Tech\" ],\n" + "      \"rating\" : 0.0\n" + "    } ]\n" + "  }\n" + "}";
+
+        assertEquals(response,baloot.getResultCommand());
+    }
+
+    @Test
+    public void getCommoditiesBtCatEmptyListTest() throws JsonProcessingException {
+        baloot.RunCommand("getCommoditiesByCategory", "{\"category\": \"Bed\"}");
+        String response = "{\n" + "  \"status\" : \"true\",\n" + "  \"data\" : {\n" + "    \"commoditiesList\" : [ ]\n" + "  }\n" + "}";
+        assertEquals(response,baloot.getResultCommand());
+    }
+    //Test for addToBuyList
     
+
+
 
 
 }
