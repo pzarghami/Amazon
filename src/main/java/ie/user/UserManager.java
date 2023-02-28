@@ -44,9 +44,9 @@ public class UserManager {
         var jsonNode=mapper.readTree(jsonData);
         String username = jsonNode.get("username").asText();
         int commodityId = jsonNode.get("commodityId").asInt();
-        database.buy(commodityId);
         var user =getElement(username);
         user.addToBuyList(commodityId);
+        database.buy(commodityId);
         return "added to buy list.";
     }
 

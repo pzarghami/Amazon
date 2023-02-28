@@ -103,7 +103,7 @@ public class Commodity {
     }
     public float addRate(String username,int rate){
         this.commodityRateMap.put(username,rate);
-        int sum = 0;
+        float sum = 0;
         for (Map.Entry<String,Integer>map : this.commodityRateMap.entrySet()){
             sum += map.getValue();
         }

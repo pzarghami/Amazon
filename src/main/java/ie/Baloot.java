@@ -49,15 +49,15 @@ public class Baloot {
 //todo
             }
             else if(Objects.equals(command,"rateCommodity")){
-                res=addRate(data);
+                displayRes("true",addRate(data),null);
 //todo
             }
             else if(Objects.equals(command,"addToBuyList")){
-                res = userManager.addToBuyList(data);
+                displayRes("true",userManager.addToBuyList(data),null);
 
             }
             else if(Objects.equals(command,"removeFromBuyList")){
-                res = userManager.removeFromBuyList(data);
+                displayRes("true",userManager.removeFromBuyList(data),null);
 //todo
             }
             else if(Objects.equals(command,"getCommodityById")){

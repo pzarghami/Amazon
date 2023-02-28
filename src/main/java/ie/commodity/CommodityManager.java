@@ -52,7 +52,7 @@ public class CommodityManager {
 
     public float addRate(String jsonData) throws JsonProcessingException,CustomException {
         int commodityId = mapper.readTree(jsonData).get("commodityId").asInt();
-        int rate = mapper.readTree(jsonData).get("rate").asInt();
+        int rate = mapper.readTree(jsonData).get("score").asInt();
         String username = mapper.readTree(jsonData).get("username").asText();
         if(rate >10 || rate <1)
             throw new CustomException("rate is out of range.");
