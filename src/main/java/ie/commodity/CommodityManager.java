@@ -65,7 +65,6 @@ public class CommodityManager {
         var commodity= commodityHashMap.get(commodityId);
         JsonNode s = (ObjectNode) mapper.valueToTree(commodity);
         ((ObjectNode) s).remove("inStock");
-;
         return s;
     }
     public JsonNode getCommoditiesByCategory(String jsonData) throws JsonProcessingException {
@@ -77,7 +76,6 @@ public class CommodityManager {
                 ((ObjectNode) s).remove("inStock");
                 JsonNodesList.add(s);
             }
-
         }
         JsonNode jsonNode = mapper.createObjectNode();
         ((ObjectNode) jsonNode).set("commoditiesList",mapper.convertValue(mapper.valueToTree(JsonNodesList),JsonNode.class));
