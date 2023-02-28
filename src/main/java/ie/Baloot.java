@@ -22,7 +22,7 @@ public class Baloot {
     private final CommodityManager commodityManager;
     private final ObjectMapper mapper;
     private final JsonNode jsonResNode;
-
+    String resultCommand;
 
     public Baloot(){
         this.userManager = new UserManager(this);
@@ -30,6 +30,7 @@ public class Baloot {
         this.commodityManager= new CommodityManager(this);
         this.mapper=new ObjectMapper();
         this.jsonResNode=mapper.createObjectNode();
+
     }
     public void RunCommand(String command,String data) throws JsonProcessingException {
         try{
@@ -101,7 +102,8 @@ public class Baloot {
         else{
             ((ObjectNode) jsonResNode).put("data",mapper.convertValue(mapper.valueToTree(j),JsonNode.class));
         }
-        System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonResNode));
+        resultCommand=mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonResNode);
+        System.out.println(resultCommand);
     }
 
     public void buy(int commodityId)throws CustomException{
@@ -129,5 +131,6 @@ public class Baloot {
         }
         return JsonNodesList;
     }
+    public String getResultCommand(){return this.resultCommand;}
 
 }
