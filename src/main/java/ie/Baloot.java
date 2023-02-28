@@ -11,6 +11,8 @@ import ie.user.UserManager;
 import ie.provider.ProviderManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Objects;
 
 
@@ -69,7 +71,7 @@ public class Baloot {
 //todo
             }
             else if(Objects.equals(command,"getBuyList")){
-                System.out.println(data);
+                displayRes("true","",userManager.getBuyList(data));
 //todo
             }
             else{
@@ -119,6 +121,13 @@ public class Baloot {
         providerManager.setAverageRate(providerId,averageRate,commodityId);
         return "rate added.";
     }
-
+    public ArrayList<JsonNode> getBuyListInfo(ArrayList<Integer> ids) throws CustomException, JsonProcessingException {
+        ArrayList<JsonNode> JsonNodesList=new ArrayList<>();
+        for(int i: ids){
+            String jsonData= "{ \"id\": " + i + "}";
+            JsonNodesList.add(commodityManager.getCommoditiesIdData(jsonData));
+        }
+        return JsonNodesList;
+    }
 
 }

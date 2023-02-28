@@ -1,6 +1,7 @@
 package ie.user;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ie.CustomException;
@@ -56,6 +57,24 @@ public class User {
     public ArrayList<Integer> getBuyList() {
         return this.buyList;
     }
+
+    @JsonGetter(value = "username")
+    private String getUsername() {return this.username;}
+
+    @JsonGetter(value = "password")
+    private String getPassword() {return this.password;}
+
+    @JsonGetter(value = "email")
+    private String getEmail() {return this.email;}
+
+    @JsonGetter(value = "birthDate")
+    private String getBirthDate() {return this.birthDate;}
+
+    @JsonGetter(value = "address")
+    private String getAddress() {return this.address;}
+
+    @JsonGetter(value = "credit")
+    private int getCredit() {return this.credit;}
 
     public void addToBuyList(int commodityId)throws CustomException {
         if(buyList.contains(commodityId))

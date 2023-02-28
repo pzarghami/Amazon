@@ -1,10 +1,13 @@
 package ie.user;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import ie.Baloot;
 import ie.CustomException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -73,6 +76,17 @@ public class UserManager {
             return userMap.get(username);
         }
         throw new CustomException("username not valid");
+    }
+    public JsonNode getBuyList(String jsonData) throws JsonProcessingException, CustomException {
+
+        String username = mapper.readTree(jsonData).get("username").asText();
+        if(!isUsernameValid(username,false))
+            throw new CustomException("The username was not found.");
+        var userBuyList= userMap.get(username);
+        ArrayList<Integer> commodityIdInBuyList= userBuyList.getBuyList();
+        JsonNode jsonNode = mapper.createObjectNode();
+        ((ObjectNode) jsonNode).set("buyList",mapper.convertValue(database.getBuyListInfo(commodityIdInBuyList),JsonNode.class));
+        return jsonNode;
     }
 
 }
