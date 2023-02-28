@@ -108,8 +108,8 @@ public class Baloot {
         commodityManager.buy(commodityId);
     }
 
-    public void canselBuying(int commodityId)throws CustomException{
-        commodityManager.canselBuying(commodityId);
+    public void cancelBuying(int commodityId)throws CustomException{
+        commodityManager.cancelBuying(commodityId);
     }
 
     private String addRate(String jsonData)throws JsonProcessingException,CustomException{

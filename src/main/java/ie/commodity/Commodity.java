@@ -95,7 +95,7 @@ public class Commodity {
         this.inStock -= 1;
     }
 
-    public void canselBuying()throws CustomException{
+    public void cancelBuying()throws CustomException{
         inStock +=1;
     }
     public float addRate(String username,int rate){

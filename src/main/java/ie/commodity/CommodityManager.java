@@ -49,11 +49,11 @@ public class CommodityManager {
         commodity.buy();
     }
 
-    public void canselBuying(int commodityId)throws CustomException{
+    public void cancelBuying(int commodityId)throws CustomException{
         if(!isIdExist(commodityId))
             throw new CustomException("commodity does not exist");
         var commodity=commodityHashMap.get(commodityId);
-        commodity.canselBuying();
+        commodity.cancelBuying();
     }
 
     public float addRate(String jsonData) throws JsonProcessingException,CustomException {

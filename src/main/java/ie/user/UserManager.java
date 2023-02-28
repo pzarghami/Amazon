@@ -59,7 +59,7 @@ public class UserManager {
         int commodityId = jsonNode.get("commodityId").asInt();
         var user = getElement(username);
         user.removeFromBuyList(commodityId);
-        database.canselBuying(commodityId);
+        database.cancelBuying(commodityId);
         return "removed from watch list.";
     }
 
