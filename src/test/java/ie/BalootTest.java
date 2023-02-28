@@ -118,6 +118,19 @@ public class BalootTest {
         String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"already exists in buy list.\"\n" + "}";
         assertEquals(response,baloot.getResultCommand());
     }
+    //Test for getCommodityById
+    @Test
+    public void getCommodityByIdHappyPathTest() throws JsonProcessingException {
+        baloot.RunCommand("getCommodityById", "{\"id\": 1 }");
+        String response = "{\n" + "  \"status\" : \"true\",\n" + "  \"data\" : {\n" + "    \"id\" : 1,\n" + "    \"name\" : \"Phone\",\n" + "    \"providerId\" : 1,\n" + "    \"price\" : 350.0,\n" + "    \"categories\" : [ \"Phone\", \"Tech\" ],\n" + "    \"rating\" : 0.0\n" + "  }\n" + "}";
+        assertEquals(response,baloot.getResultCommand());
+    }
+    @Test
+    public void getCommodityByIdIdNotFound() throws JsonProcessingException {
+        baloot.RunCommand("getCommodityById", "{\"id\": 7 }");
+        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"The commodity was not found.\"\n" + "}";
+        assertEquals(response,baloot.getResultCommand());
+    }
 
 
 
