@@ -5,7 +5,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ie.CustomException;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Commodity {
     private int id;
@@ -15,11 +19,13 @@ public class Commodity {
     private ArrayList<String> categories;
     private float rate;
     private int inStock;
+    private final HashMap<String, Integer> commodityRateMap;
 
 
     @JsonCreator
     private Commodity(){
         this.categories= new ArrayList<>();
+        this.commodityRateMap = new HashMap<>();
     }
 
     @JsonProperty(value = "id", required = true)
@@ -46,9 +52,7 @@ public class Commodity {
     }
 
     @JsonProperty(value = "rating", required = true)
-    private void setRate(float rate){
-        this.rate = rate;
-    }
+    private void setRate(float rate){ this.rate = rate; }
 
     @JsonProperty(value = "inStock", required = true)
     private void setInStock(int inStock){
@@ -76,11 +80,18 @@ public class Commodity {
     @JsonGetter(value = "inStock")
     private int getInStock() {return this.inStock;}
 
-
-
-
-
-
-
-
+    public void buy()throws CustomException{
+        if(this.inStock<=0)
+            throw new CustomException("there is no enough commodity.");
+        this.inStock -= 1;
+    }
+    public float addRate(String username,int rate){
+        this.commodityRateMap.put(username,rate);
+        int sum = 0;
+        for (Map.Entry<String,Integer>map : this.commodityRateMap.entrySet()){
+            sum += map.getValue();
+        }
+        this.rate = sum / this.commodityRateMap.size();
+        return this.rate;
+    }
 }

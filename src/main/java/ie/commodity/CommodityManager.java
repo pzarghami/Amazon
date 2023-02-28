@@ -35,6 +35,26 @@ public class CommodityManager {
         return "commodity added.";
     }
 
+    public boolean buy(int commodityId)throws CustomException{
+        if(!isIdExist(commodityId))
+            throw new CustomException("commodity does not exist");
+        var commodity=commodityHashMap.get(commodityId);
+        commodity.buy();
+        return true;
+    }
+
+    public float addRate(String jsonData) throws JsonProcessingException,CustomException {
+        int commodityId = mapper.readTree(jsonData).get("commodityId").asInt();
+        int rate = mapper.readTree(jsonData).get("rate").asInt();
+        String username = mapper.readTree(jsonData).get("username").asText();
+        if(rate >10 || rate <1)
+            throw new CustomException("rate is out of range.");
+        if(!isIdExist(commodityId))
+            throw new CustomException("commodity does not exist");
+
+        return commodityHashMap.get(commodityId).addRate(username,rate);
+    }
+
     private boolean isIdExist(int id){
         return commodityHashMap.containsKey(id);
     }
