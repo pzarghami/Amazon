@@ -35,7 +35,7 @@ public class BalootTest {
         baloot.RunCommand("addProvider", "{\"id\": 5, \"name\": \"Thomas Kretschmann\", \"registryDate\": \"1962-09-08\"}");
         baloot.RunCommand("addProvider", "{\"id\": 6, \"name\": \"Frank Finlay\", \"registryDate\": \"1926-08-06\"}");
 
-        baloot.RunCommand("addCommodity", "{\"id\": 1, \"name\": \"Phone\", \"providerId\": 1,\"price\": 350,\"categories\": [\"Phone\",\"Tech\"], \"rating\":0, \"inStock\": 5 }");
+        baloot.RunCommand("addCommodity", "{\"id\": 1, \"name\": \"Phone\", \"providerId\": 1,\"price\": 350,\"categories\": [\"Phone\",\"Tech\"], \"rating\":0, \"inStock\": 1 }");
         baloot.RunCommand("addCommodity", "{\"id\": 2, \"name\": \"Chocklate\", \"providerId\": 2,\"price\": 3,\"categories\": [\"Food\"], \"rating\":0, \"inStock\": 5 }");
         baloot.RunCommand("addCommodity", "{\"id\": 3, \"name\": \"SmartPen\", \"providerId\": 1,\"price\": 30,\"categories\": [\"School\",\"Tech\"], \"rating\":0, \"inStock\": 5 }");
     }
@@ -84,7 +84,40 @@ public class BalootTest {
         assertEquals(response,baloot.getResultCommand());
     }
     //Test for addToBuyList
-    
+    @Test
+    public void addToBuyListHappyPathTest() throws JsonProcessingException {
+        baloot.RunCommand("addToBuyList", "{\"username\": \"FarzinAsadi\",\"commodityId\": 1 }");
+        String response = "{\n" + "  \"status\" : \"true\",\n" + "  \"data\" : \"added to buy list.\"\n" + "}";
+        assertEquals(response,baloot.getResultCommand());
+    }
+
+    @Test
+    public void addToBuyListUserNotFoundTest() throws JsonProcessingException {
+        baloot.RunCommand("addToBuyList", "{\"username\": \"Negrmg\",\"commodityId\": 1 }");
+        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"username not valid\"\n" + "}";
+        assertEquals(response,baloot.getResultCommand());
+    }
+
+    @Test
+    public void addToBuyListCommodityNotFoundTest() throws JsonProcessingException {
+        baloot.RunCommand("addToBuyList", "{\"username\": \"FarzinAsadi\",\"commodityId\": 10 }");
+        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"commodity does not exist\"\n" + "}";
+        assertEquals(response,baloot.getResultCommand());
+    }
+    @Test
+    public void addToBuyListCommodityNotEnoughTest() throws JsonProcessingException {
+        baloot.RunCommand("addToBuyList", "{\"username\": \"FarzinAsadi\",\"commodityId\": 1 }");
+        baloot.RunCommand("addToBuyList", "{\"username\": \"Prmidaghm\",\"commodityId\": 1 }");
+        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"there is no enough commodity.\"\n" + "}";
+        assertEquals(response,baloot.getResultCommand());
+    }
+    @Test
+    public void addToBuyListCommonCommodityTest() throws JsonProcessingException {
+        baloot.RunCommand("addToBuyList", "{\"username\": \"Prmidaghm\",\"commodityId\": 2 }");
+        baloot.RunCommand("addToBuyList", "{\"username\": \"Prmidaghm\",\"commodityId\": 2 }");
+        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \"already exists in buy list.\"\n" + "}";
+        assertEquals(response,baloot.getResultCommand());
+    }
 
 
 
