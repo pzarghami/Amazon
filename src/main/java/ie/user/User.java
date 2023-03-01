@@ -17,7 +17,7 @@ public class User {
     private String address;
     private int credit;
 
-    private ArrayList<Integer>buyList;
+    private final ArrayList<Integer>buyList;
 
     @JsonCreator
     private User(){

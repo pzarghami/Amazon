@@ -1,9 +1,7 @@
 package ie.commodity;
 
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ie.Constant;
 import ie.CustomException;
@@ -24,87 +22,105 @@ public class Commodity {
 
     private final HashMap<String, Integer> commodityRateMap;
 
-
     @JsonCreator
-    private Commodity(){
-        this.categories= new ArrayList<>();
+    private Commodity() {
+        this.categories = new ArrayList<>();
         this.commodityRateMap = new HashMap<>();
 
     }
 
     @JsonProperty(value = "id", required = true)
-    private void setId(int id){
+    private void setId(int id) {
         this.id = id;
     }
 
     @JsonProperty(value = "name", required = true)
-    private void setName(String name){
+    private void setName(String name) {
         this.name = name;
     }
 
     @JsonProperty(value = "providerId", required = true)
-    private void setProvideId(int id){this.provideId = id;}
+    private void setProvideId(int id) {
+        this.provideId = id;
+    }
 
     @JsonProperty(value = "price", required = true)
-    private void setPrice(float price){
+    private void setPrice(float price) {
         this.price = price;
     }
 
     @JsonProperty(value = "categories", required = true)
-    private void setCategories(ArrayList<String> cat){
+    private void setCategories(ArrayList<String> cat) {
         this.categories = cat;
     }
 
     @JsonProperty(value = "rating", required = true)
-    private void setRate(float rate){ this.rate = rate; }
+    private void setRate(float rate) {
+        this.rate = rate;
+    }
 
     @JsonProperty(value = "inStock", required = true)
-    private void setInStock(int inStock){
+    private void setInStock(int inStock) {
         this.inStock = inStock;
     }
 
     @JsonGetter(value = "id")
-    private int getId() {return this.id;}
+    private int getId() {
+        return this.id;
+    }
 
     @JsonGetter(value = "name")
-    private String getName() {return this.name;}
+    private String getName() {
+        return this.name;
+    }
 
     @JsonGetter(value = "providerId")
-    public int getProvideId() {return this.provideId;}
+    public int getProvideId() {
+        return this.provideId;
+    }
 
     @JsonGetter(value = "price")
-    private float getPrice() {return this.price;}
+    private float getPrice() {
+        return this.price;
+    }
 
     @JsonGetter(value = "categories")
-    private ArrayList<String> getCategories() {return this.categories;}
+    private ArrayList<String> getCategories() {
+        return this.categories;
+    }
 
     @JsonGetter(value = "rating")
-    private float getRate() {return this.rate;}
+    private float getRate() {
+        return this.rate;
+    }
 
     @JsonGetter(value = "inStock")
-    private int getInStock() {return this.inStock;}
+    private int getInStock() {
+        return this.inStock;
+    }
 
-    public  boolean isYourCategory(String cat){
-        for(String category: categories){
-            if(Objects.equals(category, cat))
+    public boolean isYourCategory(String cat) {
+        for (String category : categories) {
+            if (Objects.equals(category, cat))
                 return true;
         }
         return false;
     }
 
-    public void buy()throws CustomException{
-        if(this.inStock<=0)
+    public void buy() throws CustomException {
+        if (this.inStock <= 0)
             throw new CustomException(Constant.LACK_OF_COMMODITY);
         this.inStock -= 1;
     }
 
-    public void cancelBuying()throws CustomException{
-        inStock +=1;
+    public void cancelBuying() {
+        inStock += 1;
     }
-    public float addRate(String username,int rate){
-        this.commodityRateMap.put(username,rate);
+
+    public float addRate(String username, int rate) {
+        this.commodityRateMap.put(username, rate);
         float sum = 0;
-        for (Map.Entry<String,Integer>map : this.commodityRateMap.entrySet()){
+        for (Map.Entry<String, Integer> map : this.commodityRateMap.entrySet()) {
             sum += map.getValue();
         }
         this.rate = sum / this.commodityRateMap.size();

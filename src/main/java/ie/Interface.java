@@ -20,7 +20,6 @@ public class Interface {
                 data = input[1];
             }
             baloot.RunCommand(command, data);
-
         }
         terminal.close();
 
