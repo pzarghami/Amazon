@@ -15,6 +15,7 @@ public class Constant {
     public static final String OUT_OF_RANGE_RATE="rate is out of range.";
     public static final String LACK_OF_COMMODITY="there is no enough commodity.";
     public static final String ADD_RATE="rate added.";
+    public static final String COMMENT_ADD="comment added.";
 
 
 

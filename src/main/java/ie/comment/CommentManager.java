@@ -34,6 +34,6 @@ public class CommentManager {
         var newComment = mapper.readValue(jsonData, Comment.class);
         commentMap.put(newComment.getId(),newComment);
 
-        return Constant.COMMODITY_ADD;
+        return Constant.COMMENT_ADD;
     }
 }
