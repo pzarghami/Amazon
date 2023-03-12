@@ -68,7 +68,4 @@ public class Comment {
     String getId() {
         return this.id;
     }
-
-
-
 }

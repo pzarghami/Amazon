@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import ie.Baloot;
+import ie.JsonHandler;
 import ie.CustomException;
 import ie.Constant;
 import java.util.ArrayList;
@@ -16,10 +18,12 @@ public class UserManager {
     private final HashMap<String, User> userMap;
     private final Baloot database;
     private final ObjectMapper mapper;
+    private final JsonHandler <User> jsonMapper;
 
 
     public UserManager (Baloot database) {
         mapper = new ObjectMapper();
+        jsonMapper = new UserJsonHandler();
         this.database = database;
         userMap = new HashMap<>();
 

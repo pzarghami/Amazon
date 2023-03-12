@@ -27,10 +27,10 @@ public class CommentManager {
     public String addComment(String jsonData) throws JsonProcessingException, CustomException {
         String userEmail = mapper.readTree(jsonData).get("userEmail").asText();
         int commodityId = mapper.readTree(jsonData).get("commodityId").asInt();
-        if(!database.isCommodityExits(commodityId))
-            throw new CustomException(Constant.CMD_NOT_FOUND);
-        if(!database.isUserEmailExists(userEmail))
-            throw new CustomException(Constant.PROVIDER_NOT_FOUND);
+        //if(!database.isCommodityExits(commodityId))
+           // throw new CustomException(Constant.CMD_NOT_FOUND);
+       // if(!database.isUserEmailExists(userEmail))
+           // throw new CustomException(Constant.PROVIDER_NOT_FOUND);
         var newComment = mapper.readValue(jsonData, Comment.class);
         commentMap.put(newComment.getId(),newComment);
 

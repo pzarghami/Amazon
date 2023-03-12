@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import ie.comment.CommentRouter;
 import ie.commodity.CommodityManager;
 import ie.commodity.CommodityRouter;
 import ie.provider.ProviderRouter;
@@ -25,7 +26,7 @@ public class Baloot {
     String resultCommand;
 
     public Baloot() {
-        Router[] routers = {new CommodityRouter(),new UserRouter(),new ProviderRouter()};
+        Router[] routers = {new CommodityRouter(),new UserRouter(),new ProviderRouter(),new CommentRouter()};
         this.server = new Server(routers);
         this.userManager = new UserManager(this);
         this.providerManager = new ProviderManager(this);
@@ -34,6 +35,8 @@ public class Baloot {
         this.jsonResNode = mapper.createObjectNode();
 
     }
+
+    public void fetchData(){}
 
     public void RunCommand(String command, String data) throws JsonProcessingException {
         try {
