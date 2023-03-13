@@ -144,5 +144,11 @@ public class Baloot {
     public String getResultCommand() {
         return this.resultCommand;
     }
+    public boolean isCommodityExits(int commodityId){
+        return commodityManager.isIdExist(commodityId);
+    }
+    public boolean isUserEmailExists(String email){
+        return userManager.isEmailExists(email);
+    }
 
 }
