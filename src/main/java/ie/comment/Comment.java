@@ -66,7 +66,7 @@ public class Comment {
     }
 
     String getId() {
-        return this.id;
+        return this.text;
     }
 
 
