@@ -64,7 +64,7 @@ public class Commodity {
     }
 
     @JsonGetter(value = "id")
-    private int getId() {return this.id;}
+    public int getId() {return this.id;}
 
     @JsonGetter(value = "name")
     private String getName() {return this.name;}

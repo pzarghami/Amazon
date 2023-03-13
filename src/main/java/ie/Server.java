@@ -13,4 +13,8 @@ public class Server {
             router.addRoutes(javalinServer);
         }
     }
+
+    public void runServer() {
+        javalinServer.start("localhost", 8080);
+    }
 }

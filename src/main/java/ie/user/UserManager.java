@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import ie.Baloot;
+import ie.Manager;
 import ie.JsonHandler;
 import ie.CustomException;
 import ie.Constant;
@@ -14,7 +15,7 @@ import java.util.HashMap;
 
 
 
-public class UserManager {
+public class UserManager extends  Manager<User>{
     private final HashMap<String, User> userMap;
     private final Baloot database;
     private final ObjectMapper mapper;
@@ -27,6 +28,28 @@ public class UserManager {
         this.database = database;
         userMap = new HashMap<>();
 
+    }
+    @Override
+    public String addElement(User newObject) throws CustomException {
+        var objectId = newObject.getUsername();
+        if (isIdValid(objectId)) {
+            throw new CustomException("ObjectAlreadyExists");
+        }
+        this.objectMap.put(objectId, newObject);
+        return objectId;
+    }
+
+    @Override
+    public String updateElement(User newObject) throws CustomException {
+        return null;
+    }
+
+    public ArrayList<String> addElementsJson(String jsonData) throws JsonProcessingException, CustomException {
+        var objectIds = new ArrayList<String>();
+        for (var deserializedObject : jsonMapper.deserializeList(jsonData)) {
+            objectIds.add(addElement(deserializedObject));
+        }
+        return objectIds;
     }
 
     public String updateOrAddUser(String jsonData) throws  JsonProcessingException {

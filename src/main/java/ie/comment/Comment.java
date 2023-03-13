@@ -51,7 +51,7 @@ public class Comment {
     }
 
     @JsonGetter(value = "commodityId")
-    private int getCommodityId() {
+    public int getCommodityId() {
         return this.commodityId;
     }
 

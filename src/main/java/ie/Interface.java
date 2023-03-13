@@ -8,6 +8,10 @@ public class Interface {
     public static void main(String[] args) throws JsonProcessingException {
 
         Baloot baloot = new Baloot();
-        baloot.fetchData();
+        try {
+            baloot.fetchData();
+        }catch (CustomException e){
+            e.printStackTrace();
+        }
     }
 }

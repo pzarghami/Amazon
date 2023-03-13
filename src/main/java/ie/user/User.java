@@ -63,7 +63,7 @@ public class User {
     }
 
     @JsonGetter(value = "username")
-    private String getUsername() {return this.username;}
+    public String getUsername() {return this.username;}
 
     @JsonGetter(value = "password")
     private String getPassword() {return this.password;}

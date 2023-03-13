@@ -4,15 +4,19 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import ie.comment.CommentManager;
 import ie.comment.CommentRouter;
 import ie.commodity.CommodityManager;
 import ie.commodity.CommodityRouter;
 import ie.provider.ProviderRouter;
 import ie.user.UserManager;
 import ie.provider.ProviderManager;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import ie.user.UserRouter;
+import org.jsoup.Jsoup;
 
 
 public class Baloot {
@@ -20,10 +24,16 @@ public class Baloot {
     private final UserManager userManager;
     private final ProviderManager providerManager;
     private final CommodityManager commodityManager;
+    private final CommentManager commentManager;
     private final ObjectMapper mapper;
     private final JsonNode jsonResNode;
 
     String resultCommand;
+
+    public static ArrayList<String> userIds;
+    public static ArrayList<String> providerIds;
+    public static ArrayList<String> commoditiesIds;
+    public static ArrayList<String> commentIds;
 
     public Baloot() {
         Router[] routers = {new CommodityRouter(),new UserRouter(),new ProviderRouter(),new CommentRouter()};
@@ -31,12 +41,21 @@ public class Baloot {
         this.userManager = new UserManager(this);
         this.providerManager = new ProviderManager(this);
         this.commodityManager = new CommodityManager(this);
+        this.commentManager = new CommentManager(this);
         this.mapper = new ObjectMapper();
         this.jsonResNode = mapper.createObjectNode();
 
     }
 
-    public void fetchData(){}
+    public void fetchData() throws CustomException {
+        try {
+            userIds = userManager.addElementsJson(Jsoup.connect("http://5.253.25.110:5000/api/users").ignoreContentType(true).execute().body());
+            providerIds = providerManager.addElementsJson(Jsoup.connect("http://5.253.25.110:5000/api/providers").ignoreContentType(true).execute().body());
+            commoditiesIds = commodityManager.addElementsJson(Jsoup.connect("http://5.253.25.110:5000/api/commodities").ignoreContentType(true).execute().body());
+            commentIds = commentManager.addElementsJson(Jsoup.connect("http://5.253.25.110:5000/api/comments").ignoreContentType(true).execute().body());
+        } catch (Exception e) {
+            throw new CustomException("DataFetchingFailed");
+        }    }
 
     public void RunCommand(String command, String data) throws JsonProcessingException {
         try {

@@ -1,6 +1,7 @@
 package ie.provider;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashMap;
 
@@ -28,6 +29,9 @@ public class Provider {
     private void setAddress(String registryDate){
         this.registryDate = registryDate;
     }
+
+    @JsonGetter(value = "id")
+    public int getId(){return this.id;}
 
     public void setAverageRate(int commodityId,float rate){
        this.commodityRateMap.put(commodityId,rate);

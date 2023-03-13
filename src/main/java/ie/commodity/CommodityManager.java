@@ -6,19 +6,18 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import ie.Baloot;
-import ie.Constant;
-import ie.CustomException;
+import ie.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CommodityManager {
+public class CommodityManager extends Manager<Commodity> {
 
     private final HashMap<Integer, Commodity> commodityHashMap;
     private final ArrayList<String> commoditiesList;
     private final Baloot database;
     private final ObjectMapper mapper;
+    private final JsonHandler<Commodity> jsonMapper;
 
 
     @JsonGetter(value = "commoditiesList")
@@ -26,10 +25,34 @@ public class CommodityManager {
 
     public CommodityManager (Baloot database) {
         mapper = new ObjectMapper();
+        jsonMapper = new CommodityJsonHandler();
         this.database = database;
         commodityHashMap = new HashMap<>();
         this.commoditiesList=new ArrayList<>();
 
+    }
+
+    @Override
+    public String addElement(Commodity newObject) throws CustomException {
+        var objectId = Integer.toString(newObject.getId());
+        if (isIdValid(objectId)) {
+            throw new CustomException("ObjectAlreadyExists");
+        }
+        this.objectMap.put(objectId, newObject);
+        return objectId;
+    }
+
+    @Override
+    public String updateElement(Commodity newObject) throws CustomException {
+        return null;
+    }
+
+    public ArrayList<String> addElementsJson(String jsonData) throws JsonProcessingException, CustomException {
+        var objectIds = new ArrayList<String>();
+        for (var deserializedObject : jsonMapper.deserializeList(jsonData)) {
+            objectIds.add(addElement(deserializedObject));
+        }
+        return objectIds;
     }
 
     public String addCommodity(String jsonData) throws JsonProcessingException , CustomException{
