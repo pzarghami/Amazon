@@ -17,4 +17,5 @@ public class Server {
     public void runServer() {
         javalinServer.start("localhost", 8080);
     }
+    public void stopServer() { javalinServer.stop(); }
 }

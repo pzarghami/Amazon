@@ -46,7 +46,10 @@ public class Baloot {
         this.jsonResNode = mapper.createObjectNode();
 
     }
-
+    public void startServer() {
+        server.runServer();
+    }
+    public void stopServer() { server.stopServer(); }
     public void fetchData() throws CustomException {
         try {
             userIds = userManager.addElementsJson(Jsoup.connect("http://5.253.25.110:5000/api/users").ignoreContentType(true).execute().body());
@@ -55,7 +58,8 @@ public class Baloot {
             commentIds = commentManager.addElementsJson(Jsoup.connect("http://5.253.25.110:5000/api/comments").ignoreContentType(true).execute().body());
         } catch (Exception e) {
             throw new CustomException("DataFetchingFailed");
-        }    }
+        }
+    }
 
     public void RunCommand(String command, String data) throws JsonProcessingException {
         try {
