@@ -16,6 +16,10 @@ public class Constant {
     public static final String LACK_OF_COMMODITY="there is no enough commodity.";
     public static final String ADD_RATE="rate added.";
     public static final String COMMENT_ADD="comment added.";
+    public class HtmlAddress{
+        public static  final String COMMODITIES_HTML_ADDR="src/main/resources/Commodities.html";
+    }
+
 
 
 

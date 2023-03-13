@@ -17,7 +17,6 @@ public class CommodityRouter extends Router {
         javalin.routes(() -> {
             path("/commodities", () -> {
                 get(controller::commoditiesHandler);
-
             });
         });
     }

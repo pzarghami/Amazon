@@ -10,6 +10,8 @@ import ie.Manager;
 import ie.JsonHandler;
 import ie.CustomException;
 import ie.Constant;
+import ie.commodity.CommodityManager;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,17 +19,21 @@ import java.util.HashMap;
 
 public class UserManager extends  Manager<User>{
     private final HashMap<String, User> userMap;
-    private final Baloot database;
     private final ObjectMapper mapper;
     private final JsonHandler <User> jsonMapper;
+    private static UserManager instance;
 
 
-    public UserManager (Baloot database) {
+    public UserManager () {
         mapper = new ObjectMapper();
         jsonMapper = new UserJsonHandler();
-        this.database = database;
         userMap = new HashMap<>();
 
+    }
+    public static UserManager getInstance(){
+        if(instance==null)
+            instance=new UserManager();
+        return instance;
     }
     @Override
     public String addElement(User newObject) throws CustomException {
@@ -78,7 +84,7 @@ public class UserManager extends  Manager<User>{
         int commodityId = jsonNode.get("commodityId").asInt();
         var user =getElement(username);
         user.addToBuyList(commodityId);
-        database.buy(commodityId);
+        CommodityManager.getInstance().buy(commodityId);
         return Constant.ADD_TO_BUYLIST;
     }
 
@@ -88,7 +94,7 @@ public class UserManager extends  Manager<User>{
         int commodityId = jsonNode.get("commodityId").asInt();
         var user = getElement(username);
         user.removeFromBuyList(commodityId);
-        database.cancelBuying(commodityId);
+        CommodityManager.getInstance().cancelBuying(commodityId);
         return Constant.RMV_FROM_BUYLIST;
     }
 
@@ -114,7 +120,7 @@ public class UserManager extends  Manager<User>{
         var userBuyList= userMap.get(username);
         ArrayList<Integer> commodityIdInBuyList= userBuyList.getBuyList();
         JsonNode jsonNode = mapper.createObjectNode();
-        ((ObjectNode) jsonNode).set("buyList",mapper.convertValue(database.getBuyListInfo(commodityIdInBuyList),JsonNode.class));
+        //((ObjectNode) jsonNode).set("buyList",mapper.convertValue(CommodityManager.getInstance().getBuyListInfo(commodityIdInBuyList),JsonNode.class));
         return jsonNode;
     }
     public boolean isEmailExists(String email){

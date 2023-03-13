@@ -38,10 +38,10 @@ public class Baloot {
     public Baloot() {
         Router[] routers = {new CommodityRouter(),new UserRouter(),new ProviderRouter(),new CommentRouter()};
         this.server = new Server(routers);
-        this.userManager = new UserManager(this);
-        this.providerManager = new ProviderManager(this);
-        this.commodityManager = new CommodityManager(this);
-        this.commentManager = new CommentManager(this);
+        this.userManager = new UserManager();
+        this.providerManager = new ProviderManager();
+        this.commodityManager = new CommodityManager();
+        this.commentManager = new CommentManager();
         this.mapper = new ObjectMapper();
         this.jsonResNode = mapper.createObjectNode();
 
@@ -148,11 +148,6 @@ public class Baloot {
     public String getResultCommand() {
         return this.resultCommand;
     }
-    public boolean isCommodityExits(int commodityId){
-        return commodityManager.isIdExist(commodityId);
-    }
-    public boolean isUserEmailExists(String email){
-        return userManager.isEmailExists(email);
-    }
+
 
 }

@@ -7,27 +7,35 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import ie.*;
+import ie.provider.ProviderManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CommodityManager extends Manager<Commodity> {
 
+    private static CommodityManager instance;
     private final HashMap<Integer, Commodity> commodityHashMap;
     private final ArrayList<String> commoditiesList;
-    private final Baloot database;
+
     private final ObjectMapper mapper;
     private final JsonHandler<Commodity> jsonMapper;
 
 
     @JsonGetter(value = "commoditiesList")
     private ArrayList<String> getCommodities() {return this.commoditiesList;}
-
-    public CommodityManager (Baloot database) {
+    public static CommodityManager getInstance() {
+        if (instance == null) {
+            instance = new CommodityManager();
+        }
+        return instance;
+    }
+    public CommodityManager () {
         mapper = new ObjectMapper();
         jsonMapper = new CommodityJsonHandler();
-        this.database = database;
+
         commodityHashMap = new HashMap<>();
+
         this.commoditiesList=new ArrayList<>();
 
     }
@@ -60,7 +68,7 @@ public class CommodityManager extends Manager<Commodity> {
         int providerId = mapper.readTree(jsonData).get("providerId").asInt();
         if(isIdExist(commodityId))
             throw new CustomException(Constant.NO_NEW_COMMODITY);
-        if(!database.isProviderExists(providerId))
+        if(!ProviderManager.getInstance().isIDValid(providerId))
             throw new CustomException(Constant.PROVIDER_NOT_FOUND);
         var newCommodity = mapper.readValue(jsonData, Commodity.class);
         commodityHashMap.put(commodityId,newCommodity);
@@ -138,5 +146,6 @@ public class CommodityManager extends Manager<Commodity> {
         ((ObjectNode) jsonNode).set("commoditiesList",mapper.convertValue(mapper.valueToTree(JsonNodesList),JsonNode.class));
         return jsonNode;
     }
+
 
 }

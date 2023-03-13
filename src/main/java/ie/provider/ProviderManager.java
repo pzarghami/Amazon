@@ -11,19 +11,24 @@ import java.util.HashMap;
 
 public class ProviderManager extends Manager<Provider>{
     private final HashMap<Integer, Provider> providerMap;
-    private final Baloot database;
+    private static ProviderManager instance = null;
     private final ObjectMapper mapper;
     private final JsonHandler<Provider> jsonMapper;
 
 
-    public ProviderManager (Baloot database) {
+
+    public ProviderManager () {
         mapper = new ObjectMapper();
         jsonMapper = new ProviderJsonHandler();
-        this.database = database;
         providerMap = new HashMap<>();
 
     }
-
+    public static ProviderManager getInstance() {
+        if (instance == null) {
+            instance = new ProviderManager();
+        }
+        return instance;
+    }
     @Override
     public String addElement(Provider newObject) throws CustomException {
         var objectId = Integer.toString(newObject.getId());
