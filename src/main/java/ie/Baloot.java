@@ -38,10 +38,10 @@ public class Baloot {
     public Baloot() {
         Router[] routers = {new CommodityRouter(),new UserRouter(),new ProviderRouter(),new CommentRouter()};
         this.server = new Server(routers);
-        this.userManager = new UserManager();
-        this.providerManager = new ProviderManager();
-        this.commodityManager = new CommodityManager();
-        this.commentManager = new CommentManager();
+        this.userManager = UserManager.getInstance();
+        this.providerManager = ProviderManager.getInstance();
+        this.commodityManager = CommodityManager.getInstance();
+        this.commentManager = CommentManager.getInstance();
         this.mapper = new ObjectMapper();
         this.jsonResNode = mapper.createObjectNode();
 

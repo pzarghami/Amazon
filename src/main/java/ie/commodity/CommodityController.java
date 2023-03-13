@@ -13,7 +13,6 @@ public class CommodityController extends Controller{
     public CommodityController(){this.viewHandler = new CommodityView();}
     public void commoditiesHandler(io.javalin.http.Context ctx) throws CustomException, IOException {
         var commodities = CommodityManager.getInstance().getElementsById(null);
-
         ctx.html(viewHandler.getCommoditiesHtmlList(commodities));
     }
 
