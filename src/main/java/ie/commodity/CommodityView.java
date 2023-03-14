@@ -54,34 +54,38 @@ public class CommodityView extends View{
 
         //Making rate movie form
         var rateForm = template.select("form").get(0);
-        rateForm.attr("action", baseUrl + "rateCommodity");
+        rateForm.attr("action", "/rateCommodity");
         var rateInput = buyListForm.getElementById("commodity_id");
-        commodityInput.attr("value", commodityJson.get("id").asText());
+        rateInput.attr("value", commodityJson.get("id").asText());
 
         //Making comment form
-//        var commentTable = template.select("table").first();
-//        for (String commentId : comments) {
-//            var commentNode = JsonHandler.getNodeOfObject(CommentManager.getInstance().getElementById(commentId));
-//            commentTable.append(makeCommentRow(commentNode, CommentRouter.UrlsPath.VCOMMENT));
-//        }
+        var commentTable = template.select("table").first();
+        for (String commentId : comments) {
+            System.out.println("hi");
+            var commentNode = JsonHandler.getNodeOfObject(CommentManager.getInstance().getElementById(commentId));
+            commentTable.append(makeCommentRow(commentNode,commentTable));
+        }
 
         return template.html();
 
     }
-//    private String makeCommentRow(JsonNode commentNode, String actionUrl) throws IOException {
-//        var commentHtml = new Element("tr");
-//        commentHtml.append(makeTableColumn(commentNode.get("userEmail").asText()));
-//        commentHtml.append(makeTableColumn(commentNode.get("text").asText()));
-//        commentHtml.append(makeTableColumn(commentNode.get(Constant.Comment.DISLIKES).asText()));
-//        commentHtml.append(makeTableColumn(makeVoteCommentForm(actionUrl, commentNode.get(Constant.Comment.ID).asText())));
-//
-//        return commentHtml.html();
-//    }
+    private String makeCommentRow(JsonNode commentNode,Element commentTable) throws IOException {
+        var commentHtml = new Element("tr");
+        commentHtml.append(makeTableColumn(commentNode.get("userEmail").asText()));
+        commentHtml.append(makeTableColumn(commentNode.get("text").asText()));
+        commentHtml.append(makeTableColumn(commentNode.get("date").asText()));
+        commentHtml.append(makeTableColumn(commentNode.get("likes").asText()));
+        commentHtml.append(makeTableColumn(commentNode.get("disLikes").asText()));
+
+        commentHtml.append(makeTableColumn(makeVoteCommentForm(commentNode.get("id").asText(),commentTable)));
+
+        return commentHtml.html();
+    }
     private String makeTableColumn(String value) {
         return "<td>" + value + "</td>";
     }
     public Elements commodityInfo(JsonNode commodityJson, Document template){
-
+        var listItems = template.select("li");
         List<String> values = Arrays.asList(
                 commodityJson.get("id").asText(),
                 commodityJson.get("name").asText(),
@@ -91,12 +95,48 @@ public class CommodityView extends View{
                 commodityJson.get("rating").asText(),
                 commodityJson.get("inStock").asText()
         );
-        var listItems = template.select("li");
+
         for (int i = 0; i < values.size(); i++) {
             listItems.get(i).append(values.get(i));
         }
         return listItems;
     }
+    private String makeVoteCommentForm(String commentId,Element commentTable) throws IOException {
+        var commentForm = String.format("""
+                 <form action="%s" method="POST">
+                              <input
+                                      required
+                                      type="radio"
+                                      id="like"
+                                      name="vote"
+                                      value="1"
+                              >
+                              <label for="like">Like</label>
+                                
+                              <input
+                                      required
+                                      type="radio"
+                                      id="dislike"
+                                      name="vote"
+                                      value="-1"
+                              >
+                              <label for="dislike">Dislike</label>
+                              <input
+                                      required
+                                      name="comment_id"
+                                      id="comment_id"
+                                      type="hidden"
+                                      value="%s"
+                              >
+                              <br>
+                              <label>Your ID:</label>
+                              <input required type="text" name="user_id" value=""/>
+                              <button type="submit">Vote</button>
+                          </form>
+                          <br>
+                ""","/voteComment",commentId );
+        return commentForm;
 
+    }
 
 }

@@ -68,7 +68,14 @@ public class Comment {
     private String getIds() {
         return this.id;
     }
-
+    @JsonGetter(value = "likes")
+    private int getLike() {
+        return this.commentLikes;
+    }
+    @JsonGetter(value = "disLikes")
+    private int getDisLike() {
+        return this.commentDislikes;
+    }
     String getId() {
         return this.id;
     }
