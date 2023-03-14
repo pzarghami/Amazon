@@ -18,7 +18,6 @@ import java.util.HashMap;
 
 
 public class UserManager extends  Manager<User>{
-    private final HashMap<String, User> userMap;
     private final ObjectMapper mapper;
     private final JsonHandler <User> jsonMapper;
     private static UserManager instance;
@@ -27,7 +26,6 @@ public class UserManager extends  Manager<User>{
     public UserManager () {
         mapper = new ObjectMapper();
         jsonMapper = new UserJsonHandler();
-        userMap = new HashMap<>();
 
     }
     public static UserManager getInstance(){
@@ -70,12 +68,12 @@ public class UserManager extends  Manager<User>{
     }
 
     private void updateUser(String username, String jsonData) throws JsonProcessingException{
-        mapper.readerForUpdating(userMap.get(username)).readValue(jsonData);
+        mapper.readerForUpdating(objectMap.get(username)).readValue(jsonData);
     }
 
     private void addUser(String username,String jsonData) throws JsonProcessingException{
         var newUser = mapper.readValue(jsonData, User.class);
-        userMap.put(username,newUser);
+        objectMap.put(username,newUser);
     }
 
     public String addToBuyList(String jsonData)throws JsonProcessingException, CustomException {
@@ -100,15 +98,15 @@ public class UserManager extends  Manager<User>{
 
     public boolean isUsernameValid(String username,boolean isJsonFile) throws JsonProcessingException {
         if(!isJsonFile)
-            return userMap.containsKey(username);
+            return objectMap.containsKey(username);
         String user = mapper.readTree(username).get("username").asText();
-        return userMap.containsKey(user);
+        return objectMap.containsKey(user);
     }
 
 
     public User getElement(String username) throws CustomException {
-        if (userMap.containsKey(username)) {
-            return userMap.get(username);
+        if (objectMap.containsKey(username)) {
+            return objectMap.get(username);
         }
         throw new CustomException(Constant.USR_NOT_FOUND);
     }
@@ -117,14 +115,14 @@ public class UserManager extends  Manager<User>{
         String username = mapper.readTree(jsonData).get("username").asText();
         if(!isUsernameValid(username,false))
             throw new CustomException(Constant.USR_NOT_FOUND);
-        var userBuyList= userMap.get(username);
+        var userBuyList= objectMap.get(username);
         ArrayList<Integer> commodityIdInBuyList= userBuyList.getBuyList();
         JsonNode jsonNode = mapper.createObjectNode();
         //((ObjectNode) jsonNode).set("buyList",mapper.convertValue(CommodityManager.getInstance().getBuyListInfo(commodityIdInBuyList),JsonNode.class));
         return jsonNode;
     }
     public boolean isEmailExists(String email){
-        for(User user: userMap.values()){
+        for(User user: objectMap.values()){
             if(user.isYourEmail(email))
                 return true;
         }

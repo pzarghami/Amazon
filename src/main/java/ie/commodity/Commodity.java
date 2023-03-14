@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ie.Constant;
 import ie.CustomException;
+import ie.comment.Comment;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -23,12 +24,14 @@ public class Commodity {
     private int inStock;
 
     private final HashMap<String, Integer> commodityRateMap;
+    private final ArrayList<String> comments;
 
 
     @JsonCreator
     private Commodity(){
         this.categories= new ArrayList<>();
         this.commodityRateMap = new HashMap<>();
+        this.comments=new ArrayList<>();
 
     }
 
@@ -84,6 +87,8 @@ public class Commodity {
     @JsonGetter(value = "inStock")
     private int getInStock() {return this.inStock;}
 
+    public ArrayList<String> getComments() {return this.comments;}
+
     public  boolean isYourCategory(String cat){
         for(String category: categories){
             if(Objects.equals(category, cat))
@@ -109,5 +114,8 @@ public class Commodity {
         }
         this.rate = sum / this.commodityRateMap.size();
         return this.rate;
+    }
+    public void addComment(String id){
+       comments.add(id);
     }
 }

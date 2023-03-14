@@ -25,16 +25,20 @@
       <li id="inStock">In Stock: 17</li>
     </ul>
 
-    <label>Your ID:</label>
-    <input type="text" name="user_id" value="" />
+
     <br><br>
     <form action="" method="POST">
+      <label>Your ID:</label>
+      <input required type="text" name="user_id" value=""/>
       <label>Rate(between 1 and 10):</label>
-      <input type="number" id="quantity" name="quantity" min="1" max="10">
-      <button type="submit">Rate</button>
+      <input required type="number" id="quantity" name="quantity" min="1" max="10">
+      <button type="submit">rate</button>
     </form>
     <br>
     <form action="" method="POST">
+      <label>Your ID:</label>
+      <input required type="text" name="user_id" value=""/>
+      <input id="commodity_id" type="hidden" name="commodity_id" value=""/>
       <button type="submit">Add to BuyList</button>
     </form>
     <br />

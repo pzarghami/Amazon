@@ -18,6 +18,7 @@ public class Constant {
     public static final String COMMENT_ADD="comment added.";
     public class HtmlAddress{
         public static  final String COMMODITIES_HTML_ADDR="src/main/resources/Commodities.html";
+        public static  final String COMMODITY_HTML_ADDR="src/main/resources/Commodity.html";
     }
 
 

@@ -15,7 +15,6 @@ import java.util.HashMap;
 public class CommodityManager extends Manager<Commodity> {
 
     private static CommodityManager instance;
-    private final HashMap<Integer, Commodity> commodityHashMap;
     private final ArrayList<String> commoditiesList;
 
     private final ObjectMapper mapper;
@@ -33,8 +32,6 @@ public class CommodityManager extends Manager<Commodity> {
     public CommodityManager () {
         mapper = new ObjectMapper();
         jsonMapper = new CommodityJsonHandler();
-
-        commodityHashMap = new HashMap<>();
 
         this.commoditiesList=new ArrayList<>();
 
@@ -66,27 +63,27 @@ public class CommodityManager extends Manager<Commodity> {
     public String addCommodity(String jsonData) throws JsonProcessingException , CustomException{
         int commodityId = mapper.readTree(jsonData).get("id").asInt();
         int providerId = mapper.readTree(jsonData).get("providerId").asInt();
-        if(isIdExist(commodityId))
+        if(!isIdValid(String.valueOf(commodityId)))
             throw new CustomException(Constant.NO_NEW_COMMODITY);
         if(!ProviderManager.getInstance().isIDValid(providerId))
             throw new CustomException(Constant.PROVIDER_NOT_FOUND);
         var newCommodity = mapper.readValue(jsonData, Commodity.class);
-        commodityHashMap.put(commodityId,newCommodity);
+        objectMap.put(String.valueOf(commodityId),newCommodity);
 
         return Constant.COMMODITY_ADD;
     }
 
     public void buy(int commodityId)throws CustomException{
-        if(!isIdExist(commodityId))
+        if(!isIdValid(String.valueOf(commodityId)))
             throw new CustomException(Constant.CMD_NOT_FOUND);
-        var commodity=commodityHashMap.get(commodityId);
+        var commodity=objectMap.get(commodityId);
         commodity.buy();
     }
 
     public void cancelBuying(int commodityId)throws CustomException{
-        if(!isIdExist(commodityId))
+        if(!isIdValid(String.valueOf(commodityId)))
             throw new CustomException(Constant.CMD_NOT_FOUND);
-        var commodity=commodityHashMap.get(commodityId);
+        var commodity=objectMap.get(commodityId);
         commodity.cancelBuying();
     }
 
@@ -96,24 +93,22 @@ public class CommodityManager extends Manager<Commodity> {
         String username = mapper.readTree(jsonData).get("username").asText();
         if(rate >10 || rate <1)
             throw new CustomException(Constant.OUT_OF_RANGE_RATE);
-        if(!isIdExist(commodityId))
+        if(!isIdValid(String.valueOf(commodityId)))
             throw new CustomException(Constant.CMD_NOT_FOUND);
 
-        return commodityHashMap.get(commodityId).addRate(username,rate);
+        return objectMap.get(commodityId).addRate(username,rate);
     }
 
-    public boolean isIdExist(int id){
-        return commodityHashMap.containsKey(id);
-    }
+
     public int getProviderId(String jsonData)throws JsonProcessingException, CustomException{
         int commodityId = mapper.readTree(jsonData).get("commodityId").asInt();
-        return commodityHashMap.get(commodityId).getProvideId();
+        return objectMap.get(commodityId).getProvideId();
 
     }
     public JsonNode getCommoditiesList() throws JsonProcessingException {
 
         ArrayList<JsonNode> JsonNodesList=new ArrayList<>();
-        for(Commodity c: commodityHashMap.values()){
+        for(Commodity c: objectMap.values()){
             JsonNode s = (ObjectNode) mapper.valueToTree(c);
             JsonNodesList.add(s);
 
@@ -125,9 +120,9 @@ public class CommodityManager extends Manager<Commodity> {
     }
     public JsonNode getCommoditiesIdData(String jsonData) throws JsonProcessingException, CustomException {
         int commodityId=mapper.readTree(jsonData).get("id").asInt();
-        if(!isIdExist(commodityId))
+        if(!isIdValid(String.valueOf(commodityId)))
             throw new CustomException(Constant.CMD_NOT_FOUND);
-        var commodity= commodityHashMap.get(commodityId);
+        var commodity= objectMap.get(commodityId);
         JsonNode s = (ObjectNode) mapper.valueToTree(commodity);
         ((ObjectNode) s).remove("inStock");
         return s;
@@ -135,7 +130,7 @@ public class CommodityManager extends Manager<Commodity> {
     public JsonNode getCommoditiesByCategory(String jsonData) throws JsonProcessingException {
         ArrayList<JsonNode> JsonNodesList=new ArrayList<>();
         String category=mapper.readTree(jsonData).get("category").asText();
-        for(Commodity c: commodityHashMap.values()){
+        for(Commodity c: objectMap.values()){
             if(c.isYourCategory(category)){
                 JsonNode s = (ObjectNode) mapper.valueToTree(c);
                 ((ObjectNode) s).remove("inStock");

@@ -15,6 +15,14 @@ public class CommodityController extends Controller{
         var commodities = CommodityManager.getInstance().getElementsById(null);
         ctx.html(viewHandler.getCommoditiesHtmlList(commodities));
     }
+    public void commodityHandler(io.javalin.http.Context ctx) throws CustomException, IOException {
+        var commodityId = ctx.pathParamAsClass("commodity_id", Integer.class).get().toString();
+        var commodity=CommodityManager.getInstance().getElementById(commodityId);
+        var commodityCommentsList=commodity.getComments();
+        ctx.html(viewHandler.getCommodityHtml(commodityCommentsList,commodity));
+
+    }
+
 
 
 }

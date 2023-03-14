@@ -46,7 +46,7 @@ public class Comment {
     }
 
     @JsonGetter(value = "userEmail")
-    private String getUserEmail() {
+    String getUserEmail() {
         return this.commentEmailOwner;
     }
 
@@ -64,8 +64,14 @@ public class Comment {
     private String getDate() {
         return this.date;
     }
+    @JsonGetter(value = "id")
+    private String getIds() {
+        return this.id;
+    }
 
     String getId() {
         return this.id;
     }
+
+
 }

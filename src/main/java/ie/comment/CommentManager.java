@@ -35,9 +35,18 @@ public class CommentManager extends Manager<Comment> {
     @Override
     public String addElement(Comment newObject) throws CustomException {
         var objectId = newObject.getId();
+        System.out.println(objectId);
+        var commodityId=newObject.getCommodityId();
+        var userEmail=newObject.getUserEmail();
+        if(!CommodityManager.getInstance().isIdValid(String.valueOf(commodityId)))
+            throw new CustomException(Constant.CMD_NOT_FOUND);
+        if(!UserManager.getInstance().isEmailExists(userEmail))
+            throw new CustomException(Constant.USR_NOT_FOUND);
         if (isIdValid(objectId)) {
             throw new CustomException("ObjectAlreadyExists");
         }
+        var commodity=CommodityManager.getInstance().getElementById(String.valueOf(commodityId));
+        commodity.addComment(objectId);
         this.objectMap.put(objectId, newObject);
         return objectId;
     }
@@ -58,10 +67,10 @@ public class CommentManager extends Manager<Comment> {
     public String addComment(String jsonData) throws JsonProcessingException, CustomException {
         String userEmail = mapper.readTree(jsonData).get("userEmail").asText();
         int commodityId = mapper.readTree(jsonData).get("commodityId").asInt();
-        if(!CommodityManager.getInstance().isIdExist(commodityId))
+        if(!CommodityManager.getInstance().isIdValid(String.valueOf(commodityId)))
             throw new CustomException(Constant.CMD_NOT_FOUND);
         if(!UserManager.getInstance().isEmailExists(userEmail))
-            throw new CustomException(Constant.PROVIDER_NOT_FOUND);
+            throw new CustomException(Constant.USR_NOT_FOUND);
         var newComment = mapper.readValue(jsonData, Comment.class);
         commentMap.put(newComment.getId(),newComment);
 
