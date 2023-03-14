@@ -6,6 +6,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ie.Constant;
 import ie.CustomException;
+import ie.comment.CommentManager;
+import ie.commodity.Commodity;
+import ie.commodity.CommodityManager;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -18,42 +22,48 @@ public class User {
     private String address;
     private int credit;
 
-    private ArrayList<Integer>buyList;
+    private ArrayList<Integer> buyList;
+
+    private ArrayList<String> userBuyList;
+    private ArrayList<String> userPurchasedList;
 
     @JsonCreator
-    private User(){
+    private User() {
 
-        this.buyList=new ArrayList<>();
+        this.buyList = new ArrayList<>();
+        this.userBuyList = new ArrayList<>();
+        this.userPurchasedList = new ArrayList<>();
+        userBuyList.add("1");
 
     }
 
     @JsonProperty(value = "username", required = true)
-    private void setUsername(String username){
+    private void setUsername(String username) {
         this.username = username;
     }
 
     @JsonProperty(value = "password", required = true)
-    private void setPassword(String password){
+    private void setPassword(String password) {
         this.password = password;
     }
 
     @JsonProperty(value = "email", required = true)
-    private void setEmail(String email){
+    private void setEmail(String email) {
         this.email = email;
     }
 
     @JsonProperty(value = "birthDate", required = true)
-    private void setBirthDate(String birthDate){
+    private void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
     @JsonProperty(value = "address", required = true)
-    private void setAddress(String address){
+    private void setAddress(String address) {
         this.address = address;
     }
 
     @JsonProperty(value = "credit", required = true)
-    private void setUsername(int credit){
+    private void setUsername(int credit) {
         this.credit = credit;
     }
 
@@ -63,35 +73,85 @@ public class User {
     }
 
     @JsonGetter(value = "username")
-    public String getUsername() {return this.username;}
+    public String getUsername() {
+        return this.username;
+    }
 
     @JsonGetter(value = "password")
-    private String getPassword() {return this.password;}
+    private String getPassword() {
+        return this.password;
+    }
 
     @JsonGetter(value = "email")
-    private String getEmail() {return this.email;}
+    private String getEmail() {
+        return this.email;
+    }
 
     @JsonGetter(value = "birthDate")
-    private String getBirthDate() {return this.birthDate;}
+    private String getBirthDate() {
+        return this.birthDate;
+    }
 
     @JsonGetter(value = "address")
-    private String getAddress() {return this.address;}
+    private String getAddress() {
+        return this.address;
+    }
 
     @JsonGetter(value = "credit")
-    private int getCredit() {return this.credit;}
+    private int getCredit() {
+        return this.credit;
+    }
 
-    public void addToBuyList(int commodityId)throws CustomException {
-        if(buyList.contains(commodityId))
+    @JsonIgnore()
+    public ArrayList<String> getUserBuyList() {
+        return this.userBuyList;
+    }
+
+    @JsonIgnore()
+    public ArrayList<String> getUserPurchasedList() {
+        return this.userPurchasedList;
+    }
+
+    public void addToBuyList(int commodityId) throws CustomException {
+        if (buyList.contains(commodityId))
             throw new CustomException(Constant.DUPLICATE_COMMODITY);
         buyList.add(commodityId);
     }
 
-    public void removeFromBuyList(int commodityId)throws CustomException{
-        if(!buyList.contains(commodityId))
+    public void addToUserBuyList(String commodityId) {
+        this.userBuyList.add(commodityId);
+    }
+
+    public void removeFromUserBuyList(String commodityId) throws CustomException {
+
+        this.userPurchasedList.remove(commodityId);
+    }
+
+    public boolean buy() throws CustomException {
+        var commodityManager = CommodityManager.getInstance();
+        float sum = 0;
+        for (var commodityId : this.userBuyList) {
+            var commodity = commodityManager.getElementById(commodityId);
+            sum = sum + commodity.getPrice();
+        }
+        if (sum > this.credit)
+            return false;
+        else {
+            userPurchasedList.addAll(userBuyList);
+            userBuyList.clear();
+            this.credit -= sum;
+            return true;
+        }
+
+    }
+
+    public void removeFromBuyList(int commodityId) throws CustomException {
+        if (!buyList.contains(commodityId))
             throw new CustomException(Constant.CMD_NOT_FOUND);
         buyList.remove((Integer) commodityId);
     }
-    public boolean isYourEmail(String email){
+
+    public boolean isYourEmail(String email) {
         return Objects.equals(this.email, email);
     }
 
