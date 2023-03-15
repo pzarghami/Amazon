@@ -39,8 +39,6 @@ public class CommodityController extends Controller{
             userId = ctx.pathParam("username");
             rate = ctx.pathParamAsClass("rate", Integer.class).get();
         }
-
-
         CommodityManager.getInstance().addRate(commodityId, userId, rate);
         ctx.html(viewHandler.getSuccessHtmlResponse());
 

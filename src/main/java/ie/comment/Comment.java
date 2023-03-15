@@ -3,18 +3,20 @@ package ie.comment;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ie.Constant;
+import ie.CustomException;
 
 import java.util.HashMap;
 
 public class Comment {
-    private String id;
+    private final String id;
     private String commentEmailOwner;
     private String text;
     private Integer commentLikes;
     private Integer commentDislikes;
     private int commodityId;
     private String date;
-    private HashMap<String, Short> userVoteMap;
+    private HashMap<String, Integer> userVoteMap;
     public static Integer lastId = 0;
 
     @JsonCreator
@@ -79,6 +81,21 @@ public class Comment {
     String getId() {
         return this.id;
     }
+    private void updateVote(){
+        this.commentLikes=0;
+        this.commentDislikes=0;
+        for(int vote: userVoteMap.values()){
+            if(vote==1)
+                this.commentLikes+=vote;
+            else if(vote==-1)
+                this.commentDislikes-=vote;
+        }
+    }
+    public void voteComment(String userId,int vote) throws CustomException {
+        userVoteMap.put(userId, vote);
+        updateVote();
+    }
+
 
 
 }

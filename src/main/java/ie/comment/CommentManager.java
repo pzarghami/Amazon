@@ -15,8 +15,6 @@ import java.util.HashMap;
 
 public class CommentManager extends Manager<Comment> {
     ObjectMapper mapper;
-    private Integer lastCommentId;
-    private HashMap<String, Comment> commentMap;
     private final JsonHandler<Comment> jsonMapper;
     private static CommentManager instance;
     public CommentManager() {
@@ -24,8 +22,6 @@ public class CommentManager extends Manager<Comment> {
         mapper = new ObjectMapper();
         jsonMapper = new CommentJsonHandler();
         mapper.enable(DeserializationFeature.FAIL_ON_READING_DUP_TREE_KEY);
-        this.commentMap = new HashMap<>();
-        lastCommentId = 0;
     }
     public static CommentManager getInstance(){
         if(instance == null)
@@ -35,7 +31,6 @@ public class CommentManager extends Manager<Comment> {
     @Override
     public String addElement(Comment newObject) throws CustomException {
         var objectId = newObject.getId();
-        System.out.println(objectId);
         var commodityId=newObject.getCommodityId();
         var userEmail=newObject.getUserEmail();
         if(!CommodityManager.getInstance().isIdValid(String.valueOf(commodityId)))
@@ -72,8 +67,15 @@ public class CommentManager extends Manager<Comment> {
         if(!UserManager.getInstance().isEmailExists(userEmail))
             throw new CustomException(Constant.USR_NOT_FOUND);
         var newComment = mapper.readValue(jsonData, Comment.class);
-        commentMap.put(newComment.getId(),newComment);
+        this.objectMap.put(newComment.getId(),newComment);
 
         return Constant.COMMENT_ADD;
+    }
+    public void addVote(String commentId, String userEmailId, int vote) throws CustomException {
+        if (!isIdValid(commentId)) {
+            throw new CustomException(Constant.COMMENT_NOT_FOUND);
+        }
+        var comment= this.objectMap.get(commentId);
+        comment.voteComment(userEmailId,vote);
     }
 }

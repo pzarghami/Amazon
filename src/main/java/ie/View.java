@@ -10,9 +10,9 @@ public abstract class View {
         return list.substring(1, list.length()-1).trim().replace("\"", "");
     }
     public String getSuccessHtmlResponse() throws IOException {
-        return Jsoup.parse(new File("src/main/resources/200.html"), "UTF-8").html();
+        return Jsoup.parse(new File(Constant.HtmlAddress.SUCCES_MSG_ADDR), "UTF-8").html();
     }
     public String getErrorHtmlResponse() throws IOException {
-        return Jsoup.parse(new File("src/main/resources/400.html"), "UTF-8").html();
+        return Jsoup.parse(new File(Constant.HtmlAddress.ERR_MSG_ADDR), "UTF-8").html();
     }
 }

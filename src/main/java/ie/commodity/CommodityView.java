@@ -109,7 +109,14 @@ public class CommodityView extends View{
                                       value="1"
                               >
                               <label for="like">Like</label>
-                                
+                              <input
+                                      required
+                                      type="radio"
+                                      id="neutral"
+                                      name="vote"
+                                      value="0"
+                              >
+                              <label for="dislike">Neutral</label>                               
                               <input
                                       required
                                       type="radio"

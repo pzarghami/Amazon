@@ -9,6 +9,7 @@ public class Constant {
     public static final String USR_NOT_FOUND="The username was not found.";
     public static final String DUPLICATE_COMMODITY="already exists in buy list.";
     public static final String CMD_NOT_FOUND="commodity does not exists.";
+    public static final String COMMENT_NOT_FOUND="comment does not exists.";
     public static final String PROVIDER_ADD="provider added.";
     public static final String NO_NEW_COMMODITY="commodity already exists";
     public static final String PROVIDER_NOT_FOUND="provider does not exists";
@@ -20,6 +21,8 @@ public class Constant {
     public class HtmlAddress{
         public static  final String COMMODITIES_HTML_ADDR="src/main/resources/Commodities.html";
         public static  final String COMMODITY_HTML_ADDR="src/main/resources/Commodity.html";
+        public static final String SUCCES_MSG_ADDR="src/main/resources/200.html";
+        public static final String ERR_MSG_ADDR="src/main/resources/400.html";
     }
 
 
