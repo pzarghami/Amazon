@@ -76,7 +76,7 @@ public class Commodity {
     public int getProvideId() {return this.provideId;}
 
     @JsonGetter(value = "price")
-    private float getPrice() {return this.price;}
+    public float getPrice() {return this.price;}
 
     @JsonGetter(value = "categories")
     private ArrayList<String> getCategories() {return this.categories;}

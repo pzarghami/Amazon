@@ -12,4 +12,7 @@ public abstract class View {
     public String getSuccessHtmlResponse() throws IOException {
         return Jsoup.parse(new File("src/main/resources/200.html"), "UTF-8").html();
     }
+    public String getErrorHtmlResponse() throws IOException {
+        return Jsoup.parse(new File("src/main/resources/400.html"), "UTF-8").html();
+    }
 }

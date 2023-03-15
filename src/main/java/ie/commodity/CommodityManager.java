@@ -44,6 +44,7 @@ public class CommodityManager extends Manager<Commodity> {
             throw new CustomException("ObjectAlreadyExists");
         }
         this.objectMap.put(objectId, newObject);
+        ProviderManager.getInstance().getElementById(Integer.toString(newObject.getProvideId())).addToCommoditiesList(Integer.toString(newObject.getId()));
         return objectId;
     }
 

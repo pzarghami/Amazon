@@ -22,7 +22,6 @@ public class CommodityView extends View{
     public String getCommoditiesHtmlList(List<Commodity> commodities) throws IOException {
         var template = Jsoup.parse(new File(Constant.HtmlAddress.COMMODITIES_HTML_ADDR), "UTF-8");
         var table = template.select("table").first();
-        var index = 0;
         for (var commodity : commodities) {
             var commodityJson = JsonHandler.getNodeOfObject(commodity);
             var commodityHtml = new Element("tr");
