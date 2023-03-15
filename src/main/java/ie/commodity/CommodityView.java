@@ -51,16 +51,14 @@ public class CommodityView extends View{
         var commodityInput = buyListForm.getElementById("commodity_id");
         commodityInput.attr("value", commodityJson.get("id").asText());
 
-        //Making rate movie form
+        //Making rate commodity form
         var rateForm = template.select("form").get(0);
         rateForm.attr("action", "/rateCommodity");
-        var rateInput = buyListForm.getElementById("commodity_id");
+        var rateInput = rateForm.getElementById("commodity_idRate");
         rateInput.attr("value", commodityJson.get("id").asText());
-
         //Making comment form
         var commentTable = template.select("table").first();
         for (String commentId : comments) {
-            System.out.println("hi");
             var commentNode = JsonHandler.getNodeOfObject(CommentManager.getInstance().getElementById(commentId));
             commentTable.append(makeCommentRow(commentNode,commentTable));
         }

@@ -19,7 +19,10 @@ public class CommodityRouter extends Router {
                 get(controller::commoditiesHandler);
                 path("{commodity_id}", () -> {
                     get(controller::commodityHandler);
+                    });
                 });
+            path("rateCommodity", () -> {
+                post(controller::rateMovieFormHandler);
             });
         });
     }

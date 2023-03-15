@@ -100,7 +100,14 @@ public class CommodityManager extends Manager<Commodity> {
         return objectMap.get(commodityId).addRate(username,rate);
     }
 
+    public float addRate(String commodityId, String username, int rate) throws CustomException {
+        if(rate >10 || rate <1)
+            throw new CustomException(Constant.OUT_OF_RANGE_RATE);
+        if(!isIdValid(String.valueOf(commodityId)))
+            throw new CustomException(Constant.CMD_NOT_FOUND);
 
+        return objectMap.get(commodityId).addRate(username,rate);
+    }
     public int getProviderId(String jsonData)throws JsonProcessingException, CustomException{
         int commodityId = mapper.readTree(jsonData).get("commodityId").asInt();
         return objectMap.get(commodityId).getProvideId();

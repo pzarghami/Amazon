@@ -23,7 +23,7 @@ public class Commodity {
     private float rate;
     private int inStock;
 
-    private final HashMap<String, Integer> commodityRateMap;
+    private final HashMap<String, Float> commodityRateMap;
     private final ArrayList<String> comments;
 
 
@@ -59,7 +59,10 @@ public class Commodity {
     }
 
     @JsonProperty(value = "rating", required = true)
-    private void setRate(float rate){ this.rate = rate; }
+    private void setRate(float rate){
+        commodityRateMap.put(Constant.FIRST_RATE_ID,rate);
+        this.rate = rate;
+    }
 
     @JsonProperty(value = "inStock", required = true)
     private void setInStock(int inStock){
@@ -106,10 +109,10 @@ public class Commodity {
     public void cancelBuying()throws CustomException{
         inStock +=1;
     }
-    public float addRate(String username,int rate){
+    public float addRate(String username,float rate){
         this.commodityRateMap.put(username,rate);
         float sum = 0;
-        for (Map.Entry<String,Integer>map : this.commodityRateMap.entrySet()){
+        for (Map.Entry<String,Float>map : this.commodityRateMap.entrySet()){
             sum += map.getValue();
         }
         this.rate = sum / this.commodityRateMap.size();

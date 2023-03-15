@@ -1,6 +1,7 @@
 package ie;
 
 public class Constant {
+    public static final String FIRST_RATE_ID="FIRST_RATE_ID";
     public static final String USR_UPDATE= "user updated.";
     public static final String USR_ADD="user added.";
     public static final String ADD_TO_BUYLIST="added to buy list.";
