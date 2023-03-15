@@ -31,7 +31,6 @@ public abstract class Manager <T> {
         List<T> objects = new ArrayList<>();
         for (String id : ids) {
             objects.add(getElementById(id));
-            System.out.println(id);
         }
         return objects;
     }

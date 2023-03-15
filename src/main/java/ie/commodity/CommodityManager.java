@@ -7,10 +7,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import ie.*;
+import ie.comment.Comment;
 import ie.provider.ProviderManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class CommodityManager extends Manager<Commodity> {
 
@@ -148,6 +150,14 @@ public class CommodityManager extends Manager<Commodity> {
         JsonNode jsonNode = mapper.createObjectNode();
         ((ObjectNode) jsonNode).set("commoditiesList",mapper.convertValue(mapper.valueToTree(JsonNodesList),JsonNode.class));
         return jsonNode;
+    }
+    public ArrayList<String> getCommoditiesByCategory(String category,int enable ){
+        ArrayList <String> commodityByCatgory = new ArrayList<>();
+            for (var pair : objectMap.entrySet()) {
+                if (pair.getValue().isYourCategory(category))
+                    commodityByCatgory.add(pair.getKey());
+            }
+        return commodityByCatgory;
     }
 
 

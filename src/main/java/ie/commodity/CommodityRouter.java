@@ -19,8 +19,17 @@ public class CommodityRouter extends Router {
                 get(controller::commoditiesHandler);
                 path("{commodity_id}", () -> {
                     get(controller::commodityHandler);
+                });
+                path("search", () -> {
+//                    path("{start_year}/{end_year}", () -> {
+//                        get(controller::filterMoviesHandler);
+//                    });
+                    path ("{categories}", () -> {
+                        get(controller::commoditiesHandlerWithFilter);
                     });
                 });
+
+            });
             path("rateCommodity", () -> {
                 post(controller::rateMovieFormHandler);
                 path("{username}/{commodityId}/{rate}", () -> {
