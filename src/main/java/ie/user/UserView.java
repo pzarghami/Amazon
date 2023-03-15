@@ -46,10 +46,23 @@ public class UserView extends View {
                     </td>
                     """,userJson.get("username").asText(),Integer.toString(commodity.getId()) ,Integer.toString(commodity.getId()));
             commodityHtml.append(removeFormStr);
-//            commodityHtml.getElementById("form_commodity_id").attr("value",Integer.toString(commodity.getId()));
             table.append(commodityHtml.html());
         }
 
+        var table2 = template.select("table").get(1);
+        for (var commodity : UserPurchasedList) {
+            var commodityJson = JsonHandler.getNodeOfObject(commodity);
+            var commodityHtml = new Element("tr");
+            commodityHtml.append("<td>" + commodityJson.get("id").asText());
+            commodityHtml.append("<td>" + commodityJson.get("name").asText());
+            commodityHtml.append("<td>" + commodityJson.get("providerId").asText());
+            commodityHtml.append("<td>" + commodityJson.get("price").asText());
+            commodityHtml.append("<td>" + View.getCSVFromList(commodityJson.get("categories").toPrettyString()));
+            commodityHtml.append("<td>" + commodityJson.get("rating").asText());
+            commodityHtml.append("<td>" + commodityJson.get("inStock").asText());
+            commodityHtml.append("<td><a href=\"" + "/commodities/" + commodityJson.get("id").asText() + "\">Link</a></td>");
+            table2.append(commodityHtml.html());
+        }
 
         return template.html();
     }
