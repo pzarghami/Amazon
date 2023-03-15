@@ -23,14 +23,27 @@ public class CommodityController extends Controller{
 
     }
     public void rateMovieFormHandler(Context ctx) throws CustomException, IOException {
+        var ratePath=ctx.path();
+        ctx.html(ratePath);
+        String commodityId;
+        String userId;
+        Integer rate;
+        if(ratePath.equals("/rateCommodity")){
+
+            commodityId = ctx.formParamAsClass("commodity_idRate", Integer.class).get().toString();
+            userId = ctx.formParam("user_id");
+            rate = ctx.formParamAsClass("quantity", Integer.class).get();
+        }
+        else {
+            commodityId = ctx.pathParamAsClass("commodityId", Integer.class).get().toString();
+            userId = ctx.pathParam("username");
+            rate = ctx.pathParamAsClass("rate", Integer.class).get();
+        }
 
 
-        var commodityId = ctx.formParamAsClass("commodity_idRate", Integer.class).get().toString();
-        var userId = ctx.formParam("user_id");
-
-        var rate = ctx.formParamAsClass("quantity", Integer.class).get();
         CommodityManager.getInstance().addRate(commodityId, userId, rate);
         ctx.html(viewHandler.getSuccessHtmlResponse());
+
     }
 
 
