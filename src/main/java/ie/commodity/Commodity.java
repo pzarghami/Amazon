@@ -3,11 +3,9 @@ package ie.commodity;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ie.Constant;
-import ie.CustomException;
-import ie.comment.Comment;
+import ie.exeption.CustomException;
 
 import java.util.ArrayList;
 import java.util.Objects;

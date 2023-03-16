@@ -8,11 +8,11 @@ import ie.comment.CommentManager;
 import ie.comment.CommentRouter;
 import ie.commodity.CommodityManager;
 import ie.commodity.CommodityRouter;
+import ie.exeption.CustomException;
 import ie.provider.ProviderRouter;
 import ie.user.UserManager;
 import ie.provider.ProviderManager;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import ie.user.UserRouter;
@@ -123,7 +123,7 @@ public class Baloot {
     }
 
     public void cancelBuying(int commodityId) throws CustomException {
-        commodityManager.cancelBuying(commodityId);
+        commodityManager.cancelBuying(String.valueOf(commodityId));
     }
 
     private String addRate(String jsonData) throws JsonProcessingException, CustomException {

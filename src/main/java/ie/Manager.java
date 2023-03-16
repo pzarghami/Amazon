@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import ie.CustomException;
-import ie.commodity.Commodity;
-import ie.user.User;
+import ie.exeption.CustomException;
 
 public abstract class Manager <T> {
     protected Map<String,T> objectMap;

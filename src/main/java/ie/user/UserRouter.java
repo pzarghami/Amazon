@@ -38,9 +38,6 @@ public class UserRouter extends Router {
                 post(controller::removeFromBuyList);
             });
         });
-        //removeFromByList
-        //removeFromBuyList
-        //removeFromBuyList
 
     }
 

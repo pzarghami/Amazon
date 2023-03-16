@@ -3,18 +3,14 @@ package ie.user;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import ie.Baloot;
 import ie.Manager;
 import ie.JsonHandler;
-import ie.CustomException;
+import ie.exeption.CustomException;
 import ie.Constant;
 import ie.commodity.CommodityManager;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 
 
 public class UserManager extends  Manager<User>{
@@ -93,18 +89,19 @@ public class UserManager extends  Manager<User>{
         return Constant.ADD_TO_BUYLIST;
     }
     public String removeFromBuyList(String username, String commodityId) throws CustomException {
+
         var user =getElement(username);
         user.removeFromUserBuyList(commodityId);
-        CommodityManager.getInstance().cancelBuying(Integer.parseInt(commodityId));
-        return Constant.ADD_TO_BUYLIST;
+        CommodityManager.getInstance().cancelBuying(commodityId);
+        return Constant.RMV_FROM_BUYLIST;
     }
 
     public String removeFromBuyList(String jsonData)throws JsonProcessingException, CustomException{
         var jsonNode=mapper.readTree(jsonData);
         String username = jsonNode.get("username").asText();
-        int commodityId = jsonNode.get("commodityId").asInt();
+        String commodityId = jsonNode.get("commodityId").asText();
         var user = getElement(username);
-        user.removeFromBuyList(commodityId);
+        user.removeFromUserBuyList(commodityId);
         CommodityManager.getInstance().cancelBuying(commodityId);
         return Constant.RMV_FROM_BUYLIST;
     }

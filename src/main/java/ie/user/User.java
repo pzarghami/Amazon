@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ie.Constant;
-import ie.CustomException;
-import ie.comment.CommentManager;
-import ie.commodity.Commodity;
+import ie.exeption.CustomException;
 import ie.commodity.CommodityManager;
 
 import java.util.ArrayList;
@@ -148,11 +146,6 @@ public class User {
 
     }
 
-    public void removeFromBuyList(int commodityId) throws CustomException {
-        if (!buyList.contains(commodityId))
-            throw new CustomException(Constant.CMD_NOT_FOUND);
-        buyList.remove((Integer) commodityId);
-    }
 
     public boolean isYourEmail(String email) {
         return Objects.equals(this.email, email);

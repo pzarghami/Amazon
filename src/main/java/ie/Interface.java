@@ -1,8 +1,7 @@
 package ie;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-
-import java.util.Scanner;
+import ie.exeption.CustomException;
 
 public class Interface {
     public static void main(String[] args) throws JsonProcessingException {

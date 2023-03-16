@@ -3,8 +3,7 @@ package ie.provider;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ie.*;
-import ie.user.User;
-import ie.user.UserJsonHandler;
+import ie.exeption.CustomException;
 
 import java.util.ArrayList;
 import java.util.HashMap;

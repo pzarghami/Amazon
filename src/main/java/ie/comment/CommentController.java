@@ -1,8 +1,7 @@
 package ie.comment;
 
 import ie.Controller;
-import ie.CustomException;
-import ie.commodity.CommodityManager;
+import ie.exeption.CustomException;
 
 import java.io.IOException;
 

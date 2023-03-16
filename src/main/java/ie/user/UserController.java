@@ -1,7 +1,7 @@
 package ie.user;
 
 import ie.Controller;
-import ie.CustomException;
+import ie.exeption.CustomException;
 import ie.commodity.CommodityManager;
 import io.javalin.http.Context;
 

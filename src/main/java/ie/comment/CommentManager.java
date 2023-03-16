@@ -4,14 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ie.*;
-import ie.commodity.Commodity;
 import ie.commodity.CommodityManager;
-import ie.user.User;
-import ie.user.UserJsonHandler;
+import ie.exeption.CustomException;
 import ie.user.UserManager;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class CommentManager extends Manager<Comment> {
     ObjectMapper mapper;

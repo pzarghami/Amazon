@@ -1,12 +1,11 @@
 package ie.commodity;
 
 import ie.Controller;
-import ie.CustomException;
+import ie.exeption.CustomException;
 import io.javalin.http.Context;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CommodityController extends Controller{
     private CommodityView viewHandler;

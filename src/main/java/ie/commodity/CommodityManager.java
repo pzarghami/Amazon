@@ -7,12 +7,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import ie.*;
-import ie.comment.Comment;
+import ie.exeption.CustomException;
 import ie.provider.ProviderManager;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class CommodityManager extends Manager<Commodity> {
 
@@ -83,8 +81,8 @@ public class CommodityManager extends Manager<Commodity> {
         commodity.buy();
     }
 
-    public void cancelBuying(int commodityId)throws CustomException{
-        if(!isIdValid(String.valueOf(commodityId)))
+    public void cancelBuying(String commodityId)throws CustomException{
+        if(!isIdValid(commodityId))
             throw new CustomException(Constant.CMD_NOT_FOUND);
         var commodity=objectMap.get(commodityId);
         commodity.cancelBuying();

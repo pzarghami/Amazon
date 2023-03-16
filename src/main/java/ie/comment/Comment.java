@@ -3,8 +3,7 @@ package ie.comment;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import ie.Constant;
-import ie.CustomException;
+import ie.exeption.CustomException;
 
 import java.util.HashMap;
 
