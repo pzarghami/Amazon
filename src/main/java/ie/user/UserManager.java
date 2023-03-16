@@ -79,17 +79,17 @@ public class UserManager extends  Manager<User>{
     public String addToBuyList(String jsonData)throws JsonProcessingException, CustomException {
         var jsonNode=mapper.readTree(jsonData);
         String username = jsonNode.get("username").asText();
-        int commodityId = jsonNode.get("commodityId").asInt();
+        String commodityId = jsonNode.get("commodityId").asText();
         var user =getElement(username);
         CommodityManager.getInstance().buy(commodityId);
-        user.addToBuyList(commodityId);
+        user.addToUserBuyList(commodityId);
         return Constant.ADD_TO_BUYLIST;
     }
 
     public String addToBuyList(String username, String commodityId) throws CustomException {
         var user =getElement(username);
+        CommodityManager.getInstance().buy(commodityId);
         user.addToUserBuyList(commodityId);
-        CommodityManager.getInstance().buy(Integer.parseInt(commodityId));
         return Constant.ADD_TO_BUYLIST;
     }
     public String removeFromBuyList(String username, String commodityId) throws CustomException {

@@ -47,7 +47,7 @@ public class UserController extends Controller{
         else{
             var username = ctx.pathParam("{username}");
             var commodityId = ctx.pathParam("{commodityId}");
-            //UserManager.getInstance().addToBuyList(username,commodityId);
+            UserManager.getInstance().addToBuyList(username,commodityId);
             ctx.html(commodityId + "AND " + username);
         }
     }

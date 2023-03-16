@@ -76,8 +76,8 @@ public class CommodityManager extends Manager<Commodity> {
         return Constant.COMMODITY_ADD;
     }
 
-    public void buy(int commodityId)throws CustomException{
-        if(!isIdValid(String.valueOf(commodityId)))
+    public void buy(String commodityId)throws CustomException{
+        if(!isIdValid(commodityId))
             throw new CustomException(Constant.CMD_NOT_FOUND);
         var commodity=objectMap.get(commodityId);
         commodity.buy();

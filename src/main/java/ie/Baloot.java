@@ -119,7 +119,7 @@ public class Baloot {
     }
 
     public void buy(int commodityId) throws CustomException {
-        commodityManager.buy(commodityId);
+        commodityManager.buy(String.valueOf(commodityId));
     }
 
     public void cancelBuying(int commodityId) throws CustomException {

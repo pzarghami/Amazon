@@ -112,13 +112,11 @@ public class User {
         return this.userPurchasedList;
     }
 
-    public void addToBuyList(int commodityId) throws CustomException {
-        if (buyList.contains(commodityId))
-            throw new CustomException(Constant.DUPLICATE_COMMODITY);
-        buyList.add(commodityId);
-    }
 
-    public void addToUserBuyList(String commodityId) {
+
+    public void addToUserBuyList(String commodityId) throws CustomException {
+        if (userBuyList.contains(commodityId))
+            throw new CustomException(Constant.DUPLICATE_COMMODITY);
         this.userBuyList.add(commodityId);
     }
 
