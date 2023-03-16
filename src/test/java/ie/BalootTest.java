@@ -3,6 +3,9 @@ package ie;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ie.exeption.CustomException;
+import org.jsoup.nodes.Document;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -10,32 +13,25 @@ import static org.junit.Assert.assertEquals;
 
 public class BalootTest {
     Baloot baloot;
-
+    Document responseBody = null;
 
     public BalootTest() {
         this.baloot = new Baloot();
 
     }
-
     @Before
-    public void setup() throws JsonProcessingException {
-        new BalootTest();
-        baloot.RunCommand("addUser", "{\"username\": \"FarzinAsadi\", \"password\": \"1234\", \"email\": \"farzin.ut.ac.ir\", \"birthDate\": \"2000-24-4\", \"address\": \"Janat-Abad\"}");
-        baloot.RunCommand("addUser", "{\"username\": \"Prmidaghm\", \"password\": \"1234\", \"email\": \"parmida.ut.ac.ir\", \"birthDate\": \"2000-24-4\", \"address\": \"AmirAbad\"}");
-        baloot.RunCommand("addUser", "{\"username\": \"srsh\", \"password\": \"1234\", \"email\": \"srsh.ut.ac.ir\", \"birthDate\": \"2000-24-4\", \"address\": \"amiraAbad\"}");
-        baloot.RunCommand("addUser", "{\"username\": \"athena\", \"password\": \"1234\", \"email\": \"ati.ut.ac.ir\", \"birthDate\": \"2000-24-4\", \"address\": \"enghelab\"}");
+    public void setup() throws CustomException {
+        baloot = new Baloot();
+        baloot.fetchData();
+        baloot.startServer();
+    }
 
-
-        baloot.RunCommand("addProvider", "{\"id\": 1, \"name\": \"Marlon Brando\", \"registryDate\": \"1924-04-03\"}");
-        baloot.RunCommand("addProvider", "{\"id\": 2, \"name\": \"Al Pacino\", \"registryDate\": \"1940-04-25\"}");
-        baloot.RunCommand("addProvider", "{\"id\": 3, \"name\": \"ames Caan\", \"registryDate\": \"1940-03-26\"}");
-        baloot.RunCommand("addProvider", "{\"id\": 4, \"name\": \"Adrien Brody\", \"registryDate\": \"1973-04-14\"}");
-        baloot.RunCommand("addProvider", "{\"id\": 5, \"name\": \"Thomas Kretschmann\", \"registryDate\": \"1962-09-08\"}");
-        baloot.RunCommand("addProvider", "{\"id\": 6, \"name\": \"Frank Finlay\", \"registryDate\": \"1926-08-06\"}");
-
-        baloot.RunCommand("addCommodity", "{\"id\": 1, \"name\": \"Phone\", \"providerId\": 1,\"price\": 350,\"categories\": [\"Phone\",\"Tech\"], \"rating\":0, \"inStock\": 1 }");
-        baloot.RunCommand("addCommodity", "{\"id\": 2, \"name\": \"Chocklate\", \"providerId\": 2,\"price\": 3,\"categories\": [\"Food\"], \"rating\":0, \"inStock\": 5 }");
-        baloot.RunCommand("addCommodity", "{\"id\": 3, \"name\": \"SmartPen\", \"providerId\": 1,\"price\": 30,\"categories\": [\"School\",\"Tech\"], \"rating\":0, \"inStock\": 5 }");
+    @After
+    public void tearDown() {
+        baloot.removeDatabase();
+        baloot.stopServer();
+        baloot = null;
+        responseBody = null;
     }
     //Test for rateCommodity
     @Test

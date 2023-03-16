@@ -148,6 +148,12 @@ public class Baloot {
     public String getResultCommand() {
         return this.resultCommand;
     }
+    public void removeDatabase() {
+        commodityManager.removeElements(null);
+        providerManager.removeElements(null);
+        userManager.removeElements(null);
+        commentManager.removeElements(null);
+    }
 
 
 }
