@@ -16,10 +16,19 @@ public class CommodityController extends Controller{
         ctx.html(viewHandler.getCommoditiesHtmlList(commodities));
     }
     public void commoditiesHandlerWithFilter(io.javalin.http.Context ctx) throws IOException, CustomException {
-        var cat = ctx.pathParam("categories");
-        var commoditiesId=CommodityManager.getInstance().getCommoditiesByCategory(cat,1);
+        ArrayList<String> commoditiesId;
+        if(ctx.pathParamMap().size() == 2){
+            var startPrice = ctx.pathParamAsClass("start_price", Float.class).get();
+            var endPrice = ctx.pathParamAsClass("end_price", Float.class).get();
+            commoditiesId= CommodityManager.getInstance().getCommoditiesByPrice(startPrice,endPrice);
+        }
+        else {
+            var cat = ctx.pathParam("categories");
+            commoditiesId = CommodityManager.getInstance().getCommoditiesByCategory(cat, 1);
+        }
         var commodities= CommodityManager.getInstance().getElementsById(commoditiesId);
         ctx.html(viewHandler.getCommoditiesHtmlList(commodities));
+
     }
     public void commodityHandler(io.javalin.http.Context ctx) throws CustomException, IOException {
         var commodityId = ctx.pathParamAsClass("commodity_id", Integer.class).get().toString();

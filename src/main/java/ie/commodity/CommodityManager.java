@@ -159,6 +159,13 @@ public class CommodityManager extends Manager<Commodity> {
             }
         return commodityByCatgory;
     }
-
+    public ArrayList<String> getCommoditiesByPrice(float startPrice, float finishPrice){
+        ArrayList <String> commodityByCatgory = new ArrayList<>();
+        for (var pair : objectMap.entrySet()) {
+            if (pair.getValue().isItInYourPriceRange(startPrice,finishPrice))
+                commodityByCatgory.add(pair.getKey());
+        }
+        return commodityByCatgory;
+    }
 
 }

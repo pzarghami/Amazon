@@ -121,4 +121,9 @@ public class Commodity {
     public void addComment(String id){
        comments.add(id);
     }
+    public boolean isItInYourPriceRange(float startPrice, float finishPrice){
+        if(startPrice <= this.price && this.price <= finishPrice)
+            return true;
+        return false;
+    }
 }

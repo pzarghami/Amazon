@@ -21,9 +21,9 @@ public class CommodityRouter extends Router {
                     get(controller::commodityHandler);
                 });
                 path("search", () -> {
-//                    path("{start_year}/{end_year}", () -> {
-//                        get(controller::filterMoviesHandler);
-//                    });
+                    path("{start_price}/{end_price}", () -> {
+                        get(controller::commoditiesHandlerWithFilter);
+                    });
                     path ("{categories}", () -> {
                         get(controller::commoditiesHandlerWithFilter);
                     });
