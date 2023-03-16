@@ -37,16 +37,18 @@ public class UserController extends Controller{
     public void addToBuyList(Context ctx)throws CustomException,IOException{
         if(ctx.method()=="POST"){
             var username = ctx.formParam("{user_id}");
+            System.out.println(username);
             var commodityId = ctx.formParam("{commodity_id}");
-            UserManager.getInstance().addToBuyList(username,commodityId);
-            ctx.html(viewHandler.getSuccessHtmlResponse());
+            ctx.html(commodityId + "AND " + username);
+//            System.out.println(commodityId);
+//            UserManager.getInstance().addToBuyList(username,commodityId);
+//            ctx.html(viewHandler.getSuccessHtmlResponse());
         }
         else{
-            System.out.println(ctx.pathParamMap().size());
             var username = ctx.pathParam("{username}");
             var commodityId = ctx.pathParam("{commodityId}");
-            UserManager.getInstance().addToBuyList(username,commodityId);
-            ctx.html(viewHandler.getSuccessHtmlResponse());
+            //UserManager.getInstance().addToBuyList(username,commodityId);
+            ctx.html(commodityId + "AND " + username);
         }
     }
     public void removeFromBuyList(Context ctx)throws CustomException,IOException{
