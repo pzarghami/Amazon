@@ -31,7 +31,6 @@ public class User {
         this.buyList = new ArrayList<>();
         this.userBuyList = new ArrayList<>();
         this.userPurchasedList = new ArrayList<>();
-        userBuyList.add("1");
 
     }
 
