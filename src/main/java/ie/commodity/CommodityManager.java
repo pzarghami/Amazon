@@ -7,10 +7,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import ie.*;
+import ie.comment.Comment;
 import ie.provider.ProviderManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class CommodityManager extends Manager<Commodity> {
 
@@ -100,7 +102,14 @@ public class CommodityManager extends Manager<Commodity> {
         return objectMap.get(commodityId).addRate(username,rate);
     }
 
+    public float addRate(String commodityId, String username, int rate) throws CustomException {
+        if(rate >10 || rate <1)
+            throw new CustomException(Constant.OUT_OF_RANGE_RATE);
+        if(!isIdValid(String.valueOf(commodityId)))
+            throw new CustomException(Constant.CMD_NOT_FOUND);
 
+        return objectMap.get(commodityId).addRate(username,rate);
+    }
     public int getProviderId(String jsonData)throws JsonProcessingException, CustomException{
         int commodityId = mapper.readTree(jsonData).get("commodityId").asInt();
         return objectMap.get(commodityId).getProvideId();
@@ -142,6 +151,21 @@ public class CommodityManager extends Manager<Commodity> {
         ((ObjectNode) jsonNode).set("commoditiesList",mapper.convertValue(mapper.valueToTree(JsonNodesList),JsonNode.class));
         return jsonNode;
     }
-
+    public ArrayList<String> getCommoditiesByCategory(String category,int enable ){
+        ArrayList <String> commodityByCatgory = new ArrayList<>();
+            for (var pair : objectMap.entrySet()) {
+                if (pair.getValue().isYourCategory(category))
+                    commodityByCatgory.add(pair.getKey());
+            }
+        return commodityByCatgory;
+    }
+    public ArrayList<String> getCommoditiesByPrice(float startPrice, float finishPrice){
+        ArrayList <String> commodityByCatgory = new ArrayList<>();
+        for (var pair : objectMap.entrySet()) {
+            if (pair.getValue().isItInYourPriceRange(startPrice,finishPrice))
+                commodityByCatgory.add(pair.getKey());
+        }
+        return commodityByCatgory;
+    }
 
 }
