@@ -81,8 +81,21 @@ public class UserManager extends  Manager<User>{
         String username = jsonNode.get("username").asText();
         int commodityId = jsonNode.get("commodityId").asInt();
         var user =getElement(username);
-        user.addToBuyList(commodityId);
         CommodityManager.getInstance().buy(commodityId);
+        user.addToBuyList(commodityId);
+        return Constant.ADD_TO_BUYLIST;
+    }
+
+    public String addToBuyList(String username, String commodityId) throws CustomException {
+        var user =getElement(username);
+        user.addToUserBuyList(commodityId);
+        CommodityManager.getInstance().buy(Integer.parseInt(commodityId));
+        return Constant.ADD_TO_BUYLIST;
+    }
+    public String removeFromBuyList(String username, String commodityId) throws CustomException {
+        var user =getElement(username);
+        user.removeFromUserBuyList(commodityId);
+        CommodityManager.getInstance().cancelBuying(Integer.parseInt(commodityId));
         return Constant.ADD_TO_BUYLIST;
     }
 

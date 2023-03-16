@@ -124,7 +124,12 @@ public class User {
 
     public void removeFromUserBuyList(String commodityId) throws CustomException {
 
-        this.userPurchasedList.remove(commodityId);
+        this.userBuyList.remove(commodityId);
+    }
+
+    public void addCredit(int credit){
+
+        this.credit +=credit;
     }
 
     public boolean buy() throws CustomException {

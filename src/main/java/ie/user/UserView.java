@@ -12,7 +12,7 @@ import java.util.List;
 import ie.View;
 
 public class UserView extends View {
-    public String getUserHtmlResponse(User user, List<Commodity> userBuyList, List<Commodity> UserPurchasedList) throws IOException {
+    public String getUserHtmlResponse(User user, List<Commodity> userBuyList, List<Commodity> userPurchasedList) throws IOException {
         var template = Jsoup.parse(new File("src/main/resources/User.html"), "UTF-8");
         var userJson = JsonHandler.getNodeOfObject(user);
 
@@ -39,7 +39,7 @@ public class UserView extends View {
             commodityHtml.append("<td><a href=\"" + "/commodities/" + commodityJson.get("id").asText() + "\">Link</a></td>");
             var removeFormStr = String.format("""
                     <td>
-                        <form action="/removeFromByList/%s/%s" method="POST" >
+                        <form action="/removeFromBuyList/%s/%s" method="POST" >
                                 <input id="form_commodity_id" type="hidden" name="commodityId" value="%s">
                                 <button type="submit">Remove</button>
                         </form>
@@ -48,9 +48,8 @@ public class UserView extends View {
             commodityHtml.append(removeFormStr);
             table.append(commodityHtml.html());
         }
-
         var table2 = template.select("table").get(1);
-        for (var commodity : UserPurchasedList) {
+        for (var commodity : userPurchasedList) {
             var commodityJson = JsonHandler.getNodeOfObject(commodity);
             var commodityHtml = new Element("tr");
             commodityHtml.append("<td>" + commodityJson.get("id").asText());
@@ -63,6 +62,7 @@ public class UserView extends View {
             commodityHtml.append("<td><a href=\"" + "/commodities/" + commodityJson.get("id").asText() + "\">Link</a></td>");
             table2.append(commodityHtml.html());
         }
+
 
         return template.html();
     }

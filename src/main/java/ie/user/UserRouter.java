@@ -23,7 +23,24 @@ public class UserRouter extends Router {
                     });
                 });
             });
+            path("/addCredit"+"/{user_id}/{credit}",()->{
+                get(controller::addCredit);
+            });
+            path("/addToBuyList",()->{
+               post(controller::addToBuyList);
+               path("{username}/{commodityId}",()->{
+                   get(controller::addToBuyList);
+               });
+
+            });
+            path("removeFromBuyList"+"/{username}/{commodityId}",()->{
+                get(controller::removeFromBuyList);
+                post(controller::removeFromBuyList);
+            });
         });
+        //removeFromByList
+        //removeFromBuyList
+        //removeFromBuyList
 
     }
 

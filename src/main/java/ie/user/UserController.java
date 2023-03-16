@@ -27,4 +27,34 @@ public class UserController extends Controller{
             ctx.html(viewHandler.getErrorHtmlResponse());
     }
 
+    public void addCredit(Context ctx)throws CustomException,IOException{
+        var username = ctx.pathParam("{user_id}");
+        var credit = ctx.pathParamAsClass("{credit}", Integer.class).get();
+        var user = UserManager.getInstance().getElementById(username);
+        user.addCredit(credit);
+        ctx.html(viewHandler.getSuccessHtmlResponse());
+    }
+    public void addToBuyList(Context ctx)throws CustomException,IOException{
+        if(ctx.method()=="POST"){
+            var username = ctx.formParam("{user_id}");
+            var commodityId = ctx.formParam("{commodity_id}");
+            UserManager.getInstance().addToBuyList(username,commodityId);
+            ctx.html(viewHandler.getSuccessHtmlResponse());
+        }
+        else{
+            System.out.println(ctx.pathParamMap().size());
+            var username = ctx.pathParam("{username}");
+            var commodityId = ctx.pathParam("{commodityId}");
+            UserManager.getInstance().addToBuyList(username,commodityId);
+            ctx.html(viewHandler.getSuccessHtmlResponse());
+        }
+    }
+    public void removeFromBuyList(Context ctx)throws CustomException,IOException{
+        var username = ctx.pathParam("{username}");
+        var commodityId = ctx.pathParam("{commodityId}");
+        UserManager.getInstance().removeFromBuyList(username,commodityId);
+        ctx.html(viewHandler.getSuccessHtmlResponse());
+    }
+
+
 }
