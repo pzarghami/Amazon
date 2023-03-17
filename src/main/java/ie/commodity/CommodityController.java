@@ -38,7 +38,7 @@ public class CommodityController extends Controller{
     }
 
 
-    public void rateMovieFormHandler(Context ctx) throws CustomException, IOException {
+    public void rateCommodityHandler(Context ctx) throws CustomException, IOException {
         var ratePath=ctx.path();
         ctx.html(ratePath);
         String commodityId;

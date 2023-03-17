@@ -24,6 +24,11 @@ public class Constant {
         public static final String SUCCES_MSG_ADDR="src/main/resources/200.html";
         public static final String ERR_MSG_ADDR="src/main/resources/400.html";
     }
+    public static class Server {
+        public static final String HOST = "localhost";
+        public static final int PORT = 8080;
+        public static final String BASE = "http://" + HOST + ':' + PORT;
+    }
 
 
 

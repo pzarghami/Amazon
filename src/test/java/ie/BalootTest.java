@@ -4,10 +4,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ie.exeption.CustomException;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 
 
@@ -33,6 +37,46 @@ public class BalootTest {
         baloot = null;
         responseBody = null;
     }
+    public void assert404Response(int code) {
+        assertEquals(404, code);
+    }
+    public void assert403Response(int code) {
+        assertEquals(403, code);
+    }
+    public void assertHtmlValue(String htmlElementId, String expectedText) throws IOException {
+        assertEquals(expectedText, responseBody.getElementById(htmlElementId).text());
+    }
+    public void assertHtmlValue(String htmlElementName, int elementIndex, String expectedText) throws IOException {
+        assertEquals(expectedText, responseBody.select(htmlElementName).get(elementIndex).text());
+    }
+    //Test for rating commodities.
+    @Test
+    public void AddRateCommoditySuccessTest() throws IOException {
+        var users = Baloot.userIds;
+        var commodity = Baloot.commoditiesIds;
+        Jsoup.connect(Constant.Server.BASE + "/rateCommodity/" + users.get(0) + '/' + commodity.get(1) + "/8").execute();
+        Jsoup.connect(Constant.Server.BASE + "/rateCommodity/" + users.get(1) + '/' + commodity.get(1) + "/9").execute();
+        responseBody = Jsoup.connect(Constant.Server.BASE + "/commodities/" + commodity.get(1)).execute().parse();
+        assertHtmlValue("rating", "Rating: 8");
+
+        // updating rate
+        Jsoup.connect(Constant.Server.BASE + "/rateMovie/" + users.get(1) + '/' + commodity.get(1) + "/9").execute();
+        responseBody = Jsoup.connect(Constant.Server.BASE + "/movies/" + commodity.get(1)).execute().parse();
+        assertHtmlValue("rating", "rating:8.5");
+    }
+    @Test
+    public void UpdateSameUserRateCommoditySuccessTest() throws IOException {
+        var users = Baloot.userIds;
+        var commodity = Baloot.commoditiesIds;
+        Jsoup.connect(Constant.Server.BASE + "/rateCommodity/" + users.get(0) + '/' + commodity.get(1) + "/8").execute();
+        Jsoup.connect(Constant.Server.BASE + "/rateCommodity/" + users.get(1) + '/' + commodity.get(1) + "/9").execute();
+        // updating rate
+        Jsoup.connect(Constant.Server.BASE + "/rateMovie/" + users.get(1) + '/' + commodity.get(1) + "/3").execute();
+        responseBody = Jsoup.connect(Constant.Server.BASE + "/commodities/" + commodity.get(1)).execute().parse();
+        assertHtmlValue("rating", "Rating: 6");
+
+    }
+
     //Test for rateCommodity
     @Test
     public void rateCommodityHappyPathTest() throws JsonProcessingException {

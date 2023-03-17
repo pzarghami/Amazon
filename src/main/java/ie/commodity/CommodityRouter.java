@@ -31,9 +31,9 @@ public class CommodityRouter extends Router {
 
             });
             path("/rateCommodity", () -> {
-                post(controller::rateMovieFormHandler);
+                post(controller::rateCommodityHandler);
                 path("{username}/{commodityId}/{rate}", () -> {
-                    get(controller::rateMovieFormHandler);
+                    get(controller::rateCommodityHandler);
                 });
             });
         });

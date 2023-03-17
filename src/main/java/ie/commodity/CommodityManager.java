@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import ie.*;
 import ie.exeption.CustomException;
 import ie.provider.ProviderManager;
+import ie.user.UserManager;
 
 import java.util.ArrayList;
 
@@ -105,6 +106,8 @@ public class CommodityManager extends Manager<Commodity> {
             throw new CustomException(Constant.OUT_OF_RANGE_RATE);
         if(!isIdValid(String.valueOf(commodityId)))
             throw new CustomException(Constant.CMD_NOT_FOUND);
+        if(!UserManager.getInstance().isIdValid(username))
+            throw new CustomException(Constant.USR_NOT_FOUND);
 
         return objectMap.get(commodityId).addRate(username,rate);
     }
