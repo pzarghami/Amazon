@@ -29,6 +29,9 @@ public class Constant {
         public static final int PORT = 8080;
         public static final String BASE = "http://" + HOST + ':' + PORT;
     }
+    public static class Testing {
+        public static final String UNKNOWN= "UnKnown";
+    }
 
 
 
