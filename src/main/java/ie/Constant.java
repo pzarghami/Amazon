@@ -29,6 +29,12 @@ public class Constant {
         public static final int PORT = 8080;
         public static final String BASE = "http://" + HOST + ':' + PORT;
     }
+    public static class FETCH_DATA_ADDR{
+        public static  final String USER="http://5.253.25.110:5000/api/users";
+        public static  final String PROVIDER="http://5.253.25.110:5000/api/providers";
+        public static  final String COMMODITIES="http://5.253.25.110:5000/api/commodities";
+        public static  final String COMMENTS="http://5.253.25.110:5000/api/comments";
+    }
     public static class Testing {
         public static final String UNKNOWN= "UnKnown";
     }

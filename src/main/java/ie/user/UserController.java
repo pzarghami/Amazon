@@ -28,11 +28,21 @@ public class UserController extends Controller{
     }
 
     public void addCredit(Context ctx)throws CustomException,IOException{
+        if(ctx.method()=="GET"){
         var username = ctx.pathParam("{user_id}");
         var credit = ctx.pathParamAsClass("{credit}", Integer.class).get();
         var user = UserManager.getInstance().getElementById(username);
         user.addCredit(credit);
         ctx.html(viewHandler.getSuccessHtmlResponse());
+        }
+        else{
+            var username = ctx.formParam("user_id");
+            var credit = ctx.formParamAsClass("credit",Integer.class).get();
+            var user = UserManager.getInstance().getElementById(username);
+            user.addCredit(credit);
+            ctx.html(viewHandler.getSuccessHtmlResponse());
+        }
+
     }
     public void addToBuyList(Context ctx)throws CustomException,IOException{
         if(ctx.method()=="POST"){

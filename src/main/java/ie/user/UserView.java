@@ -24,6 +24,8 @@ public class UserView extends View {
         listItems.get(4).append(userJson.get("credit").asText());
         var paymentFormAction = String.format("/users/%s/payment",userJson.get("username").asText());
         listItems.get(5).getElementById("payment_form").attr("action",paymentFormAction);
+        listItems.get(6).getElementById("addCredit").attr("action","/addCredit");
+        listItems.get(6).getElementById("user_id").attr("value",userJson.get("username").asText());
 
         var table = template.select("table").first();
         for (var commodity : userBuyList) {

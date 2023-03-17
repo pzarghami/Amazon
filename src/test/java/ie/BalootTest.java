@@ -148,6 +148,34 @@ public class BalootTest {
         assert403Response(e.getStatusCode());
     }
 
+    @Test
+    public void testShowBuyListSuccesfully() throws IOException,CustomException {
+        Jsoup.connect(Constant.Server.BASE + "/addToBuyList/amir/1").execute().parse();
+        Jsoup.connect(Constant.Server.BASE + "/addToBuyList/amir/2").execute().parse();
+        Jsoup.connect(Constant.Server.BASE + "/addToBuyList/amir/3").execute().parse();
+        Jsoup.connect(Constant.Server.BASE + "/addToBuyList/amir/4").execute().parse();
+        Jsoup.connect(Constant.Server.BASE + "/addToBuyList/amir/5").execute().parse();
+        responseBody = Jsoup.connect(Constant.Server.BASE + "/users/amir").execute().parse();
+        Element table = responseBody.select("table").get(0);
+        Elements rows = table.select("tr");
+        for (int i = 1; i<rows.size(); i++) {
+            String commodityId = rows.get(i).select("td").get(0).html();
+            assertEquals(Integer.toString(i),commodityId);
+        }
+    }
+
+    public void showBuyListForInvalidUser() throws IOException {
+
+        Jsoup.connect(Constant.Server.BASE + "/users/" + Constant.Testing.UNKNOWN).execute();
+    }
+    @Test
+    public void testShowBuyListFail(){
+        HttpStatusException e = assertThrows(HttpStatusException.class, this::showBuyListForInvalidUser);
+        assert403Response(e.getStatusCode());
+    }
+
+
+
 
 
 }

@@ -52,10 +52,10 @@ public class Baloot {
     public void stopServer() { server.stopServer(); }
     public void fetchData() throws CustomException {
         try {
-            userIds = userManager.addElementsJson(Jsoup.connect("http://5.253.25.110:5000/api/users").ignoreContentType(true).execute().body());
-            providerIds = providerManager.addElementsJson(Jsoup.connect("http://5.253.25.110:5000/api/providers").ignoreContentType(true).execute().body());
-            commoditiesIds = commodityManager.addElementsJson(Jsoup.connect("http://5.253.25.110:5000/api/commodities").ignoreContentType(true).execute().body());
-            commentIds = commentManager.addElementsJson(Jsoup.connect("http://5.253.25.110:5000/api/comments").ignoreContentType(true).execute().body());
+            userIds = userManager.addElementsJson(Jsoup.connect(Constant.FETCH_DATA_ADDR.USER).ignoreContentType(true).execute().body());
+            providerIds = providerManager.addElementsJson(Jsoup.connect(Constant.FETCH_DATA_ADDR.PROVIDER).ignoreContentType(true).execute().body());
+            commoditiesIds = commodityManager.addElementsJson(Jsoup.connect(Constant.FETCH_DATA_ADDR.COMMODITIES).ignoreContentType(true).execute().body());
+            commentIds = commentManager.addElementsJson(Jsoup.connect(Constant.FETCH_DATA_ADDR.COMMENTS).ignoreContentType(true).execute().body());
         } catch (Exception e) {
             throw new CustomException("DataFetchingFailed");
         }
