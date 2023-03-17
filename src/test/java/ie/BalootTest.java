@@ -3,18 +3,23 @@ package ie;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ie.commodity.CommodityManager;
 import ie.exeption.CustomException;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Objects;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 
 public class BalootTest {
@@ -54,6 +59,11 @@ public class BalootTest {
     public void hadUnknownPage() throws IOException {
         Jsoup.connect(Constant.Server.BASE + "/"+Constant.Testing.UNKNOWN).execute();
 
+    }
+    @Test
+    public void hadUnknownPageTest(){
+        HttpStatusException e = assertThrows(HttpStatusException.class, this::hadUnknownPage);
+        assert404Response(e.getStatusCode());
     }
     //Test for rating commodities.
     @Test
@@ -110,105 +120,33 @@ public class BalootTest {
         HttpStatusException e = assertThrows(HttpStatusException.class, this::rateCommodityWithInvalidRate);
         assert403Response(e.getStatusCode());
     }
+
+    //Test for searching commodities according to price
     @Test
-    public void hadUnknownPageTest(){
-        HttpStatusException e = assertThrows(HttpStatusException.class, this::hadUnknownPage);
-        assert404Response(e.getStatusCode());
+    public void searchCommodityByPriceSuccessTest() throws CustomException, IOException {
+        float startPrice= 1000;
+        float endPrice=70000;
+
+        var commoditiesId = CommodityManager.getInstance().getCommoditiesByPrice(startPrice, endPrice);
+        var commodities = CommodityManager.getInstance().getElementsById(commoditiesId);
+        responseBody = Jsoup.connect(Constant.Server.BASE + "/commodities/" + "search/" + startPrice + "/" + endPrice).execute().parse();
+        Element table = responseBody.select("table").get(0);
+        Elements rows = table.select("tr");
+        for (int i=1;i<rows.size();i++) {
+            String commodityId = rows.get(i).select("td").get(0).html();
+            var commodity = CommodityManager.getInstance().getElementById(commodityId);
+            assertTrue(startPrice <= commodity.getPrice() && commodity.getPrice() <= endPrice);
+        }
     }
-
-//    //Test for rateCommodity
-//    @Test
-//    public void rateCommodityHappyPathTest() throws JsonProcessingException {
-//        baloot.RunCommand("rateCommodity", "{\"username\": \"FarzinAsadi\", \"commodityId\": 1, \"score\": 8}");
-//
-//        String response = "{\n" + "  \"status\" : \"true\",\n" + "  \"data\" : \""+ Constant.ADD_RATE + "\"\n" + "}";
-//        assertEquals(response,baloot.getResultCommand());
-//    }
-//
-//    @Test
-//    public void rateCommodityOutOfRangeTest() throws JsonProcessingException {
-//        baloot.RunCommand("rateCommodity", "{\"username\": \"FarzinAsadi\", \"commodityId\": 1, \"score\": 15}");
-//        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \""+ Constant.OUT_OF_RANGE_RATE +"\"\n" + "}";
-//        assertEquals(response,baloot.getResultCommand());
-//    }
-//
-//    @Test
-//    public void rateCommodityUserNameNotFoundTest() throws JsonProcessingException {
-//        baloot.RunCommand("rateCommodity", "{\"username\": \"Arash_sh\", \"commodityId\": 1, \"score\": 1}");
-//        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \""+ Constant.USR_NOT_FOUND +"\"\n" + "}";
-//        assertEquals(response,baloot.getResultCommand());
-//    }
-//
-//    @Test
-//    public void rateCommodityNotFoundTest() throws JsonProcessingException {
-//        baloot.RunCommand("rateCommodity", "{\"username\": \"FarzinAsadi\", \"commodityId\": 8, \"score\": 1}");
-//        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \""+ Constant.CMD_NOT_FOUND +"\"\n" + "}";
-//        assertEquals(response,baloot.getResultCommand());
-//    }
-//    //Test for getCommoditiesByCategory
-//    @Test
-//    public void getCommoditiesBtCatHappyPathTest() throws JsonProcessingException {
-//        baloot.RunCommand("getCommoditiesByCategory", "{\"category\": \"Tech\"}");
-//        String response = "{\n" + "  \"status\" : \"true\",\n" + "  \"data\" : {\n" + "    \"commoditiesList\" : [ {\n" + "      \"id\" : 1,\n" + "      \"name\" : \"Phone\",\n" + "      \"providerId\" : 1,\n" + "      \"price\" : 350.0,\n" + "      \"categories\" : [ \"Phone\", \"Tech\" ],\n" + "      \"rating\" : 0.0\n" + "    }, {\n" + "      \"id\" : 3,\n" + "      \"name\" : \"SmartPen\",\n" + "      \"providerId\" : 1,\n" + "      \"price\" : 30.0,\n" + "      \"categories\" : [ \"School\", \"Tech\" ],\n" + "      \"rating\" : 0.0\n" + "    } ]\n" + "  }\n" + "}";
-//
-//        assertEquals(response,baloot.getResultCommand());
-//    }
-//
-//    @Test
-//    public void getCommoditiesBtCatEmptyListTest() throws JsonProcessingException {
-//        baloot.RunCommand("getCommoditiesByCategory", "{\"category\": \"Bed\"}");
-//        String response = "{\n" + "  \"status\" : \"true\",\n" + "  \"data\" : {\n" + "    \"commoditiesList\" : [ ]\n" + "  }\n" + "}";
-//        assertEquals(response,baloot.getResultCommand());
-//    }
-//    //Test for addToBuyList
-//    @Test
-//    public void addToBuyListHappyPathTest() throws JsonProcessingException {
-//        baloot.RunCommand("addToBuyList", "{\"username\": \"FarzinAsadi\",\"commodityId\": 1 }");
-//        String response = "{\n" + "  \"status\" : \"true\",\n" + "  \"data\" : \""+ Constant.ADD_TO_BUYLIST +"\"\n" + "}";
-//        assertEquals(response,baloot.getResultCommand());
-//    }
-//
-//    @Test
-//    public void addToBuyListUserNotFoundTest() throws JsonProcessingException {
-//        baloot.RunCommand("addToBuyList", "{\"username\": \"Negrmg\",\"commodityId\": 1 }");
-//        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \""+ Constant.USR_NOT_FOUND +"\"\n" + "}";
-//        assertEquals(response,baloot.getResultCommand());
-//    }
-//
-//    @Test
-//    public void addToBuyListCommodityNotFoundTest() throws JsonProcessingException {
-//        baloot.RunCommand("addToBuyList", "{\"username\": \"FarzinAsadi\",\"commodityId\": 10 }");
-//        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \""+Constant.CMD_NOT_FOUND+"\"\n" + "}";
-//        assertEquals(response,baloot.getResultCommand());
-//    }
-//    @Test
-//    public void addToBuyListCommodityNotEnoughTest() throws JsonProcessingException {
-//        baloot.RunCommand("addToBuyList", "{\"username\": \"FarzinAsadi\",\"commodityId\": 1 }");
-//        baloot.RunCommand("addToBuyList", "{\"username\": \"Prmidaghm\",\"commodityId\": 1 }");
-//        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \""+Constant.LACK_OF_COMMODITY+"\"\n" + "}";
-//        assertEquals(response,baloot.getResultCommand());
-//    }
-//    @Test
-//    public void addToBuyListCommonCommodityTest() throws JsonProcessingException {
-//        baloot.RunCommand("addToBuyList", "{\"username\": \"Prmidaghm\",\"commodityId\": 2 }");
-//        baloot.RunCommand("addToBuyList", "{\"username\": \"Prmidaghm\",\"commodityId\": 2 }");
-//        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \""+Constant.DUPLICATE_COMMODITY+"\"\n" + "}";
-//        assertEquals(response,baloot.getResultCommand());
-//    }
-//    //Test for getCommodityById
-//    @Test
-//    public void getCommodityByIdHappyPathTest() throws JsonProcessingException {
-//        baloot.RunCommand("getCommodityById", "{\"id\": 1 }");
-//        String response = "{\n" + "  \"status\" : \"true\",\n" + "  \"data\" : {\n" + "    \"id\" : 1,\n" + "    \"name\" : \"Phone\",\n" + "    \"providerId\" : 1,\n" + "    \"price\" : 350.0,\n" + "    \"categories\" : [ \"Phone\", \"Tech\" ],\n" + "    \"rating\" : 0.0\n" + "  }\n" + "}";
-//        assertEquals(response,baloot.getResultCommand());
-//    }
-//    @Test
-//    public void getCommodityByIdIdNotFound() throws JsonProcessingException {
-//        baloot.RunCommand("getCommodityById", "{\"id\": 7 }");
-//        String response = "{\n" + "  \"status\" : \"false\",\n" + "  \"data\" : \""+Constant.CMD_NOT_FOUND+"\"\n" + "}";
-//        assertEquals(response,baloot.getResultCommand());
-//    }
-
+    public void searchCommodityByPriceBadFormat() throws IOException {
+        String startPrice = "hello"; String endPrice = "goodBye";
+        Jsoup.connect(Constant.Server.BASE + "/commodities/" + "search/" + startPrice + "/" + endPrice).execute().parse();
+    }
+    @Test
+    public void testSearchMovieByYearFail(){
+        HttpStatusException e = assertThrows(HttpStatusException.class, this::searchCommodityByPriceBadFormat);
+        assert403Response(e.getStatusCode());
+    }
 
 
 
