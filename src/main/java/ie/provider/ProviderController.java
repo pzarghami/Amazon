@@ -14,6 +14,7 @@ public class ProviderController extends Controller{
     public void providerHandler(Context ctx)throws CustomException,IOException {
         var providerId = ctx.pathParamAsClass("{provider_id}",Integer.class).get();
         var provider = ProviderManager.getInstance().getElementById(providerId.toString());
+        provider.calculateAvrageRate();
         var commodotiesList = CommodityManager.getInstance().getElementsById(provider.getCommoditiesList());
         ctx.html(viewHandler.getProviderHtmlResponse(provider,commodotiesList));
     }

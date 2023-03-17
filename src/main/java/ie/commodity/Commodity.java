@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ie.Constant;
 import ie.exeption.CustomException;
+import ie.provider.ProviderManager;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -83,7 +84,7 @@ public class Commodity {
     private ArrayList<String> getCategories() {return this.categories;}
 
     @JsonGetter(value = "rating")
-    private float getRate() {return this.rate;}
+    public float getRate() {return this.rate;}
 
     @JsonGetter(value = "inStock")
     private int getInStock() {return this.inStock;}
@@ -107,15 +108,18 @@ public class Commodity {
     public void cancelBuying()throws CustomException{
         inStock +=1;
     }
-    public float addRate(String username,float rate){
+    public float addRate(String username,float rate) throws CustomException {
         this.commodityRateMap.put(username,rate);
         float sum = 0;
         for (Map.Entry<String,Float>map : this.commodityRateMap.entrySet()){
             sum += map.getValue();
         }
         this.rate = sum / this.commodityRateMap.size();
+        var provider= ProviderManager.getInstance().getElementById(String.valueOf(provideId));
         return this.rate;
+
     }
+
     public void addComment(String id){
        comments.add(id);
     }

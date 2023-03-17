@@ -21,6 +21,7 @@ public class ProviderView extends View{
         listItems.get(0).append(providerJson.get("id").asText());
         listItems.get(1).append(providerJson.get("name").asText());
         listItems.get(2).append(providerJson.get("registryDate").asText());
+        listItems.get(3).append(providerJson.get("avrageRate").asText());
         for (var commodity :commodities){
             var commodityJson = JsonHandler.getNodeOfObject(commodity);
             var commodityHtml = new Element("tr");

@@ -61,10 +61,13 @@ public class ProviderManager extends Manager<Provider>{
         return Constant.PROVIDER_ADD;
     }
 
-    public void setAverageRate(int providerId,float rate,int commodityId){
+    public void setAverageRate(int providerId,float rate,int commodityId) throws CustomException {
         var provider=providerMap.get(providerId);
-        provider.setAverageRate(commodityId,rate);
+        provider.addToCommoditiesList(String.valueOf(commodityId));
     }
+
+
+
     private void updateUser(int id, String jsonData) throws JsonProcessingException{
         mapper.readerForUpdating(providerMap.get(id)).readValue(jsonData);
     }
