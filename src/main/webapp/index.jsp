@@ -20,6 +20,9 @@
         <li>
             <a href="/logout">Log Out</a>
         </li>
+        <li>
+            <a href="/login">Log In</a>
+        </li>
     </ul>
 </body>
 </html>
