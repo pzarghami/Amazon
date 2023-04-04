@@ -9,7 +9,6 @@ public class Interface {
         Baloot baloot = new Baloot();
         try {
             baloot.fetchData();
-            baloot.startServer();
         }catch (CustomException e){
             e.printStackTrace();
         }
