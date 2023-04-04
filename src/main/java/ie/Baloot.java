@@ -45,7 +45,9 @@ public class Baloot {
         loggedInUser= UserManager.getInstance().getElementById(username);
     }
 
-
+    public static void logoutUser(){
+        loggedInUser=null;
+    }
     public void fetchData() throws CustomException {
         try {
             userIds = userManager.addElementsJson(Jsoup.connect(Constant.FETCH_DATA_ADDR.USER).ignoreContentType(true).execute().body());
