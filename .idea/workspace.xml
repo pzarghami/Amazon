@@ -9,11 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8ad945-d01f-466d-b9d9-454d70e2a0af" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ie/Baloot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/Baloot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-    </list>
+    <list default="true" id="1f8ad945-d01f-466d-b9d9-454d70e2a0af" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -188,7 +184,7 @@
       <workItem from="1680613111259" duration="750000" />
       <workItem from="1680614665161" duration="28000" />
       <workItem from="1680616722242" duration="5449000" />
-      <workItem from="1680644567288" duration="788000" />
+      <workItem from="1680644567288" duration="1255000" />
     </task>
     <servers />
   </component>
