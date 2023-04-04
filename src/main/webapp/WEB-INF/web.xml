@@ -3,5 +3,5 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <!-- TODO : we have URL strings in two places in project; here and Constant class. can we gather them one place ?-->
 <web-app>
-    <display-name>IEMDB</display-name>
+    <display-name>Baloot</display-name>
 </web-app>

@@ -10,67 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f8ad945-d01f-466d-b9d9-454d70e2a0af" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/baloot_war.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/baloot_war_exploded.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_13_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_13_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_13_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_servlet_jakarta_servlet_api_5_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_13_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jsoup_jsoup_1_14_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_2_0_0_alpha6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_simple_2_0_0_alpha6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baloot.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ie/provider/ProviderRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/provider/ProviderRouter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/Baloot.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/Constant$HtmlAddress.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/Constant.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/Controller.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/Interface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/JsonHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/Manager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/Router.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/Server.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/View.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/comment/Comment.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/comment/CommentController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/comment/CommentJsonHandler$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/comment/CommentJsonHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/comment/CommentManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/comment/CommentRouter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/comment/CommentView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/commodity/Commodity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/commodity/CommodityController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/commodity/CommodityJsonHandler$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/commodity/CommodityJsonHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/commodity/CommodityManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/commodity/CommodityRouter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/commodity/CommodityView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/provider/Provider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/provider/ProviderController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/provider/ProviderJsonHandler$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/provider/ProviderJsonHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/provider/ProviderManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/provider/ProviderRouter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/provider/ProviderView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/user/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/user/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/user/UserJsonHandler$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/user/UserJsonHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/user/UserManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/user/UserRouter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ie/user/UserView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/ie/BalootTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/ie/BalootTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/header.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,7 +154,7 @@
       <workItem from="1680516388314" duration="469000" />
       <workItem from="1680516892192" duration="813000" />
       <workItem from="1680597801637" duration="990000" />
-      <workItem from="1680599733821" duration="220000" />
+      <workItem from="1680599733821" duration="442000" />
     </task>
     <servers />
   </component>

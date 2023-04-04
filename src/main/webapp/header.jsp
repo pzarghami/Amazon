@@ -3,4 +3,4 @@
 
 
   <a href="<%="/"%>">Home</a>
-  <p id="email">email: <%= "hi"%></p>
+  <p id="username">email: <%= "username"%></p>
