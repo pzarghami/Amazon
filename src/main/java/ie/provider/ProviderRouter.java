@@ -1,9 +1,6 @@
 package ie.provider;
 
 import ie.Router;
-import io.javalin.Javalin;
-import static io.javalin.apibuilder.ApiBuilder.get;
-import static io.javalin.apibuilder.ApiBuilder.path;
 
 public class ProviderRouter extends Router{
     private ProviderController controller ;

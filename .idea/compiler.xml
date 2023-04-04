@@ -9,11 +9,8 @@
         <module name="baloot" />
       </profile>
     </annotationProcessing>
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_STRING" value="--enable-preview" />
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="baloot" options="" />
-    </option>
+    <bytecodeTargetLevel>
+      <module name="baloot" target="15" />
+    </bytecodeTargetLevel>
   </component>
 </project>

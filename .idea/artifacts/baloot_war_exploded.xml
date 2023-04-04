@@ -1,0 +1,53 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="baloot:war exploded">
+    <output-path>$PROJECT_DIR$/target/iemdb-1.0-SNAPSHOT</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>baloot</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="baloot" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.13.0" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.13.0" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.13.0" />
+          <element id="library" level="project" name="Maven: org.jsoup:jsoup:1.14.3" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:2.0.0-alpha6" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:2.0.0-alpha6" />
+          <element id="library" level="project" name="Maven: io.javalin:javalin:4.3.0" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-server:9.4.44.v20210927" />
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-http:9.4.44.v20210927" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-util:9.4.44.v20210927" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-io:9.4.44.v20210927" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-webapp:9.4.44.v20210927" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-xml:9.4.44.v20210927" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-servlet:9.4.44.v20210927" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-security:9.4.44.v20210927" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-util-ajax:9.4.44.v20210927" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.websocket:websocket-server:9.4.44.v20210927" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.websocket:websocket-common:9.4.44.v20210927" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.websocket:websocket-api:9.4.44.v20210927" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.websocket:websocket-client:9.4.44.v20210927" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-client:9.4.44.v20210927" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.websocket:websocket-servlet:9.4.44.v20210927" />
+          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31" />
+          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.5.31" />
+          <element id="library" level="project" name="Maven: org.jetbrains:annotations:13.0" />
+          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.5.31" />
+          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.31" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/iemdb-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="baloot/web/Web" />
+    </root>
+  </artifact>
+</component>
