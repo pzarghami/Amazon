@@ -80,7 +80,7 @@ public class User {
     }
 
     @JsonGetter(value = "email")
-    private String getEmail() {
+    public String getEmail() {
         return this.email;
     }
 

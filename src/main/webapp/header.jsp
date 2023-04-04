@@ -3,4 +3,17 @@
 
 
   <a href="<%="/"%>">Home</a>
-  <p id="username">email: <%= "username"%></p>
+  <%
+    String email;
+    String username;
+    if(Baloot.loggedInUser==null){
+      email="";
+      username="";
+    }
+    else {
+      email = Baloot.loggedInUser.getEmail();
+      username=Baloot.loggedInUser.getUsername();
+    }
+  %>
+  <p id="email">Email: <%= email%></p>
+  <p id="username">Username: <%= username%></p>

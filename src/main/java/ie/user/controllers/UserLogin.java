@@ -44,7 +44,6 @@ public class UserLogin  extends Controller {
         }
         // results
         if(!errorMessages.isEmpty()) {
-            System.out.print("HHHHHHH");
             send404Response(request, response, errorMessages);
         }
         else {
