@@ -8,7 +8,6 @@
 <body>
     <jsp:include page="/header.jsp" />
     <ul>
-        <li id="username">username: siri</li>
         <li>
             <a href="/commodities">Commodities</a>
         </li>
