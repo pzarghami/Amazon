@@ -1,24 +1,32 @@
 package ie;
 
-import io.javalin.http.Context;
+import ie.Constant;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.Map;
 
-public abstract class Controller {
-    public static void Exception404Handler(Exception e, Context ctx) {
-        try {
-            ctx.html(new String(Files.readAllBytes(Paths.get("src/main/resources/404.html")))).status(404);
-        } catch (IOException ex) {
-            ctx.html("<h1>404 Page not found</h1>").status(404);
-        }
+public abstract class Controller extends HttpServlet {
+
+    public String[] splitPathParams(String pathInfo) {
+        if (pathInfo == null || pathInfo.equals("/"))
+            return null;
+        return pathInfo.replace("/", " ").trim().split(" ");
     }
-    public static void Exception403Handler(Exception e, Context ctx) {
-        try {
-            ctx.html(new String(Files.readAllBytes(Paths.get("src/main/resources/403.html")))).status(403);
-        } catch (IOException ex) {
-            ctx.html("<h1>404 Page not found</h1>").status(403);
-        }
+
+    public void send404Response(HttpServletRequest request, HttpServletResponse response, Map<String, String> errorMessages)
+            throws ServletException, IOException {
+        request.setAttribute("errors", View.getHtmlList(errorMessages));
+        response.setStatus(404);
+        request.getRequestDispatcher(Constant.JSP._404_).forward(request, response);
+    }
+    public void sendBadRequestResponse(HttpServletRequest request, HttpServletResponse response, Map<String, String> errorMessages)
+            throws ServletException, IOException {
+        request.setAttribute("errors", View.getHtmlList(errorMessages));
+        response.setStatus(400);
+        request.getRequestDispatcher(Constant.JSP.ERROR).forward(request, response);
     }
 }
