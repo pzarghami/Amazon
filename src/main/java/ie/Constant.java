@@ -1,5 +1,7 @@
 package ie;
 
+import java.util.Set;
+
 public class Constant {
     public static final String FIRST_RATE_ID="FIRST_RATE_ID";
     public static final String USR_UPDATE= "user updated.";
@@ -35,6 +37,7 @@ public class Constant {
         public static  final String COMMODITIES="http://5.253.25.110:5000/api/commodities";
         public static  final String COMMENTS="http://5.253.25.110:5000/api/comments";
     }
+
     public static class Testing {
         public static final String UNKNOWN= "UnKnown";
     }
@@ -46,6 +49,12 @@ public class Constant {
         public static final String MOVIES = "/movie-views/movies.jsp";
         public static final String MOVIE = "/movie-views/movie.jsp";
         public static final String W_LIST  = "/user-views/watchList.jsp";
+    }
+    public static class URLS {
+        public static final String ROOT = "/";
+        public static final String LOGIN = "/login";
+        public static final String LOGOUT = "/logout";
+        public static final Set<String> NonAuthURLs = Set.of(LOGIN, LOGOUT);
     }
 
 

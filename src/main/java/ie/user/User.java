@@ -116,7 +116,11 @@ public class User {
             throw new CustomException(Constant.DUPLICATE_COMMODITY);
         this.userBuyList.add(commodityId);
     }
-
+    public void isYourPassword(String pass) throws CustomException {
+        if(pass.equals(this.password))
+            return;
+        throw new CustomException("passWordNotFound");
+    }
     public void removeFromUserBuyList(String commodityId) throws CustomException {
 
         this.userBuyList.remove(commodityId);

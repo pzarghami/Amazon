@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import ie.comment.CommentManager;
 import ie.commodity.CommodityManager;
 import ie.exeption.CustomException;
+import ie.user.User;
 import ie.user.UserManager;
 import ie.provider.ProviderManager;
 
@@ -29,8 +30,9 @@ public class Baloot {
     public static ArrayList<String> providerIds;
     public static ArrayList<String> commoditiesIds;
     public static ArrayList<String> commentIds;
-
+    public static User loggedInUser;
     public Baloot() {
+        loggedInUser=null;
         this.userManager = UserManager.getInstance();
         this.providerManager = ProviderManager.getInstance();
         this.commodityManager = CommodityManager.getInstance();
@@ -39,6 +41,11 @@ public class Baloot {
         this.jsonResNode = mapper.createObjectNode();
 
     }
+    public static void loginUser(String username) throws CustomException {
+        loggedInUser= UserManager.getInstance().getElementById(username);
+    }
+
+
     public void fetchData() throws CustomException {
         try {
             userIds = userManager.addElementsJson(Jsoup.connect(Constant.FETCH_DATA_ADDR.USER).ignoreContentType(true).execute().body());

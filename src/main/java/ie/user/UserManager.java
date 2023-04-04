@@ -76,21 +76,21 @@ public class UserManager extends  Manager<User>{
         var jsonNode=mapper.readTree(jsonData);
         String username = jsonNode.get("username").asText();
         String commodityId = jsonNode.get("commodityId").asText();
-        var user =getElement(username);
+        var user =getElementById(username);
         CommodityManager.getInstance().buy(commodityId);
         user.addToUserBuyList(commodityId);
         return Constant.ADD_TO_BUYLIST;
     }
 
     public String addToBuyList(String username, String commodityId) throws CustomException {
-        var user =getElement(username);
+        var user =getElementById(username);
         CommodityManager.getInstance().buy(commodityId);
         user.addToUserBuyList(commodityId);
         return Constant.ADD_TO_BUYLIST;
     }
     public String removeFromBuyList(String username, String commodityId) throws CustomException {
 
-        var user =getElement(username);
+        var user =getElementById(username);
         user.removeFromUserBuyList(commodityId);
         CommodityManager.getInstance().cancelBuying(commodityId);
         return Constant.RMV_FROM_BUYLIST;
@@ -100,7 +100,7 @@ public class UserManager extends  Manager<User>{
         var jsonNode=mapper.readTree(jsonData);
         String username = jsonNode.get("username").asText();
         String commodityId = jsonNode.get("commodityId").asText();
-        var user = getElement(username);
+        var user = getElementById(username);
         user.removeFromUserBuyList(commodityId);
         CommodityManager.getInstance().cancelBuying(commodityId);
         return Constant.RMV_FROM_BUYLIST;
@@ -114,12 +114,6 @@ public class UserManager extends  Manager<User>{
     }
 
 
-    public User getElement(String username) throws CustomException {
-        if (objectMap.containsKey(username)) {
-            return objectMap.get(username);
-        }
-        throw new CustomException(Constant.USR_NOT_FOUND);
-    }
     public JsonNode getBuyList(String jsonData) throws JsonProcessingException, CustomException {
 
         String username = mapper.readTree(jsonData).get("username").asText();

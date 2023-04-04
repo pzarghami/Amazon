@@ -10,6 +10,8 @@
     <form action="" method="POST">
         <label>Username:</label>
         <input required type="text" name="username" value="">
+        <label>Password:</label>
+        <input required type="text" name="password" value="">
         <button type="submit">Login</button>
     </form>
 </body>

@@ -19,6 +19,7 @@ public abstract class Controller extends HttpServlet {
 
     public void send404Response(HttpServletRequest request, HttpServletResponse response, Map<String, String> errorMessages)
             throws ServletException, IOException {
+
         request.setAttribute("errors", View.getHtmlList(errorMessages));
         response.setStatus(404);
         request.getRequestDispatcher(Constant.JSP._404_).forward(request, response);
