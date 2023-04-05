@@ -1,4 +1,4 @@
 target
 apache-tomcat-10.1.7
-.idea
-.idea/workspace.xml
+.*
+!/.gitignore
