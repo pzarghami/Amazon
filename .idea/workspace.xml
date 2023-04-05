@@ -61,7 +61,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/ie" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../BalootAOI/pom.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -181,10 +181,25 @@
       <workItem from="1680599733821" duration="9105000" />
       <workItem from="1680613111259" duration="750000" />
       <workItem from="1680614665161" duration="28000" />
-      <workItem from="1680616722242" duration="5449000" />
-      <workItem from="1680644567288" duration="1255000" />
-      <workItem from="1680699407260" duration="704000" />
+      <workItem from="1680616722242" duration="4795000" />
+      <workItem from="1680624752787" duration="2632000" />
+      <workItem from="1680690407977" duration="298000" />
     </task>
+    <task id="LOCAL-00001" summary="change git ignore">
+      <created>1680692717127</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1680692717127</updated>
+    </task>
+    <task id="LOCAL-00002" summary="change git ignore">
+      <created>1680692803465</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1680692803465</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,5 +216,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="change git ignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="change git ignore" />
   </component>
 </project>

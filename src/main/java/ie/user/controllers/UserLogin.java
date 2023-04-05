@@ -24,7 +24,7 @@ public class UserLogin  extends Controller {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-            request.getRequestDispatcher(Constant.JSP.LOGIN).forward(request, response);
+        request.getRequestDispatcher(Constant.JSP.LOGIN).forward(request, response);
     }
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -51,4 +51,3 @@ public class UserLogin  extends Controller {
 
     }
 }
-

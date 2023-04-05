@@ -72,7 +72,7 @@ public class Commodity {
     public int getId() {return this.id;}
 
     @JsonGetter(value = "name")
-    private String getName() {return this.name;}
+    public String getName() {return this.name;}
 
     @JsonGetter(value = "providerId")
     public int getProvideId() {return this.provideId;}
@@ -81,13 +81,13 @@ public class Commodity {
     public float getPrice() {return this.price;}
 
     @JsonGetter(value = "categories")
-    private ArrayList<String> getCategories() {return this.categories;}
+    public ArrayList<String> getCategories() {return this.categories;}
 
     @JsonGetter(value = "rating")
     public float getRate() {return this.rate;}
 
     @JsonGetter(value = "inStock")
-    private int getInStock() {return this.inStock;}
+    public int getInStock() {return this.inStock;}
 
     public ArrayList<String> getComments() {return this.comments;}
 
@@ -98,7 +98,11 @@ public class Commodity {
         }
         return false;
     }
-
+    public  boolean isPrefixOfYourName(String name){
+            if(this.name.startsWith(name))
+                return true;
+        return false;
+    }
     public void buy()throws CustomException{
         if(this.inStock<=0)
             throw new CustomException(Constant.LACK_OF_COMMODITY);
