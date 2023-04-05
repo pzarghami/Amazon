@@ -17,8 +17,7 @@ import java.util.Map;
 
 import static java.util.Map.entry;
 @WebServlet(
-        name = "MyOwnServlet",
-        description = "This is my first annotated servlet",
+        name = "UserLoginServlet",
         urlPatterns = Constant.URLS.LOGIN
 )
 public class UserLogin  extends Controller {

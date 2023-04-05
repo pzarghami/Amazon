@@ -9,7 +9,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(Constant.URLS.LOGOUT)
+@WebServlet(
+        name = "UserLogoutServlet",
+        urlPatterns = Constant.URLS.LOGOUT
+)
 public class UserLogout extends Controller {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
