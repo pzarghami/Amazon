@@ -82,25 +82,6 @@ public class Baloot {
         commodityManager.cancelBuying(String.valueOf(commodityId));
     }
 
-    private String addRate(String jsonData) throws JsonProcessingException, CustomException {
-        if (!userManager.isUsernameValid(jsonData, true))
-            throw new CustomException(Constant.USR_NOT_FOUND);
-        float averageRate = commodityManager.addRate(jsonData);
-        int providerId = commodityManager.getProviderId(jsonData);
-        int commodityId = mapper.readTree(jsonData).get("commodityId").asInt();
-        providerManager.setAverageRate(providerId, averageRate, commodityId);
-        return Constant.ADD_RATE;
-    }
-
-    public ArrayList<JsonNode> getBuyListInfo(ArrayList<Integer> ids) throws CustomException, JsonProcessingException {
-        ArrayList<JsonNode> JsonNodesList = new ArrayList<>();
-        for (int i : ids) {
-            String jsonData = "{ \"id\": " + i + "}";
-            JsonNodesList.add(commodityManager.getCommoditiesIdData(jsonData));
-        }
-        return JsonNodesList;
-    }
-
     public String getResultCommand() {
         return this.resultCommand;
     }

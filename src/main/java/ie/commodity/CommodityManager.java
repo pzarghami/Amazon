@@ -16,14 +16,13 @@ import java.util.ArrayList;
 public class CommodityManager extends Manager<Commodity> {
 
     private static CommodityManager instance;
-    private final ArrayList<String> commoditiesList;
-
-    private final ObjectMapper mapper;
+    public ArrayList<String> commoditiesListWithFilters;
     private final JsonHandler<Commodity> jsonMapper;
 
 
+
     @JsonGetter(value = "commoditiesList")
-    private ArrayList<String> getCommodities() {return this.commoditiesList;}
+
     public static CommodityManager getInstance() {
         if (instance == null) {
             instance = new CommodityManager();
@@ -31,10 +30,8 @@ public class CommodityManager extends Manager<Commodity> {
         return instance;
     }
     public CommodityManager () {
-        mapper = new ObjectMapper();
+        this.commoditiesListWithFilters=new ArrayList<>();
         jsonMapper = new CommodityJsonHandler();
-
-        this.commoditiesList=new ArrayList<>();
 
     }
 
@@ -53,7 +50,6 @@ public class CommodityManager extends Manager<Commodity> {
     public String updateElement(Commodity newObject) throws CustomException {
         return null;
     }
-
     public ArrayList<String> addElementsJson(String jsonData) throws JsonProcessingException, CustomException {
         var objectIds = new ArrayList<String>();
         for (var deserializedObject : jsonMapper.deserializeList(jsonData)) {
@@ -62,18 +58,8 @@ public class CommodityManager extends Manager<Commodity> {
         return objectIds;
     }
 
-    public String addCommodity(String jsonData) throws JsonProcessingException , CustomException{
-        int commodityId = mapper.readTree(jsonData).get("id").asInt();
-        int providerId = mapper.readTree(jsonData).get("providerId").asInt();
-        if(!isIdValid(String.valueOf(commodityId)))
-            throw new CustomException(Constant.NO_NEW_COMMODITY);
-        if(!ProviderManager.getInstance().isIDValid(providerId))
-            throw new CustomException(Constant.PROVIDER_NOT_FOUND);
-        var newCommodity = mapper.readValue(jsonData, Commodity.class);
-        objectMap.put(String.valueOf(commodityId),newCommodity);
 
-        return Constant.COMMODITY_ADD;
-    }
+
 
     public void buy(String commodityId)throws CustomException{
         if(!isIdValid(commodityId))
@@ -89,17 +75,7 @@ public class CommodityManager extends Manager<Commodity> {
         commodity.cancelBuying();
     }
 
-    public float addRate(String jsonData) throws JsonProcessingException,CustomException {
-        int commodityId = mapper.readTree(jsonData).get("commodityId").asInt();
-        int rate = mapper.readTree(jsonData).get("score").asInt();
-        String username = mapper.readTree(jsonData).get("username").asText();
-        if(rate >10 || rate <1)
-            throw new CustomException(Constant.OUT_OF_RANGE_RATE);
-        if(!isIdValid(String.valueOf(commodityId)))
-            throw new CustomException(Constant.CMD_NOT_FOUND);
 
-        return objectMap.get(commodityId).addRate(username,rate);
-    }
 
     public float addRate(String commodityId, String username, int rate) throws CustomException {
         if(rate >10 || rate <1)
@@ -111,54 +87,23 @@ public class CommodityManager extends Manager<Commodity> {
 
         return objectMap.get(commodityId).addRate(username,rate);
     }
-    public int getProviderId(String jsonData)throws JsonProcessingException, CustomException{
-        int commodityId = mapper.readTree(jsonData).get("commodityId").asInt();
-        return objectMap.get(commodityId).getProvideId();
 
-    }
-    public JsonNode getCommoditiesList() throws JsonProcessingException {
-
-        ArrayList<JsonNode> JsonNodesList=new ArrayList<>();
-        for(Commodity c: objectMap.values()){
-            JsonNode s = (ObjectNode) mapper.valueToTree(c);
-            JsonNodesList.add(s);
-
+    public ArrayList<String> getCommoditiesListByName(String prefix){
+        ArrayList <String> commoditiesListByName = new ArrayList<>();
+        for (var pair : objectMap.entrySet()) {
+            if (pair.getValue().isPrefixOfYourName(prefix))
+                commoditiesListByName.add(pair.getKey());
         }
-        JsonNode jsonNode = mapper.createObjectNode();
-        ((ObjectNode) jsonNode).set("commoditiesList",mapper.convertValue(mapper.valueToTree(JsonNodesList),JsonNode.class));
+        return commoditiesListByName;
+    }
 
-        return jsonNode;
-    }
-    public JsonNode getCommoditiesIdData(String jsonData) throws JsonProcessingException, CustomException {
-        int commodityId=mapper.readTree(jsonData).get("id").asInt();
-        if(!isIdValid(String.valueOf(commodityId)))
-            throw new CustomException(Constant.CMD_NOT_FOUND);
-        var commodity= objectMap.get(commodityId);
-        JsonNode s = (ObjectNode) mapper.valueToTree(commodity);
-        ((ObjectNode) s).remove("inStock");
-        return s;
-    }
-    public JsonNode getCommoditiesByCategory(String jsonData) throws JsonProcessingException {
-        ArrayList<JsonNode> JsonNodesList=new ArrayList<>();
-        String category=mapper.readTree(jsonData).get("category").asText();
-        for(Commodity c: objectMap.values()){
-            if(c.isYourCategory(category)){
-                JsonNode s = (ObjectNode) mapper.valueToTree(c);
-                ((ObjectNode) s).remove("inStock");
-                JsonNodesList.add(s);
-            }
-        }
-        JsonNode jsonNode = mapper.createObjectNode();
-        ((ObjectNode) jsonNode).set("commoditiesList",mapper.convertValue(mapper.valueToTree(JsonNodesList),JsonNode.class));
-        return jsonNode;
-    }
-    public ArrayList<String> getCommoditiesByCategory(String category,int enable ){
-        ArrayList <String> commodityByCatgory = new ArrayList<>();
+    public ArrayList<String> getCommoditiesByCategory(String category){
+        ArrayList <String> commodityByCategory = new ArrayList<>();
             for (var pair : objectMap.entrySet()) {
                 if (pair.getValue().isYourCategory(category))
-                    commodityByCatgory.add(pair.getKey());
+                    commodityByCategory.add(pair.getKey());
             }
-        return commodityByCatgory;
+        return commodityByCategory;
     }
     public ArrayList<String> getCommoditiesByPrice(float startPrice, float finishPrice){
         ArrayList <String> commodityByCatgory = new ArrayList<>();
@@ -168,5 +113,22 @@ public class CommodityManager extends Manager<Commodity> {
         }
         return commodityByCatgory;
     }
+    public void addFilters(String filterName,String value) throws CustomException {
+        ArrayList<String> commoditiesId=new ArrayList<>();
+        if(filterName.equals(Constant.ActionType.SEARCH_BY_NAME))
+            commoditiesId=getCommoditiesListByName(value);
+        else if(filterName.equals(Constant.ActionType.SEARCH_BY_CAT))
+            commoditiesId=getCommoditiesByCategory(value);
+        if(commoditiesListWithFilters==null)
+            commoditiesListWithFilters=commoditiesId;
+        else{
+            commoditiesListWithFilters.retainAll(commoditiesId);
+        }
+
+    }
+    public void clearFilters(){
+        commoditiesListWithFilters=null;
+    }
+
 
 }

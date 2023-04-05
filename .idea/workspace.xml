@@ -10,7 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f8ad945-d01f-466d-b9d9-454d70e2a0af" name="Default Changelist" comment="change git ignore">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ie/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/Constant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ie/commodity/Commodity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/commodity/Commodity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ie/commodity/CommodityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/commodity/CommodityManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/movie-views/movie.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/commodity-views/movie.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/movie-views/movies.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/commodity-views/commodities.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +82,17 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

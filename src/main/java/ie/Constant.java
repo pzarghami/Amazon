@@ -46,7 +46,7 @@ public class Constant {
         public static final String ERROR = "/error-views/error.jsp";
         public static final String _404_ = "/error-views/404.jsp";
         public static final String ACTOR = "/actor-views/actor.jsp";
-        public static final String MOVIES = "/movie-views/movies.jsp";
+        public static final String COMMODITIES = "/commodity-views/commodities.jsp";
         public static final String MOVIE = "/movie-views/movie.jsp";
         public static final String W_LIST  = "/user-views/watchList.jsp";
     }
@@ -54,9 +54,20 @@ public class Constant {
         public static final String ROOT = "/";
         public static final String LOGIN = "/login";
         public static final String LOGOUT = "/logout";
+        public static final String COMMODITIES = "/commodities";
         public static final Set<String> NonAuthURLs = Set.of(LOGIN, LOGOUT);
     }
-
+    public static class ActionType {
+        public static final String CLEAR = "clear";
+        public static final String SEARCH_BY_CAT = "search_by_category";
+        public static final String SEARCH_BY_NAME = "search_by_name";
+        public static final String RATE = "rate";
+        public static final String ADD_TO_WL = "add";
+        public static final String LIKE = "like";
+        public static final String DISLIKE = "dislike";
+        public static final String COMMENT = "comment";
+        public static final String DELETE = "delete";
+    }
 
 
 
