@@ -6,6 +6,8 @@
 <%@ page import="ie.commodity.CommodityManager" %>
 <%@ page import="ie.commodity.Commodity" %>
 <%@ page import="ie.View" %>
+<%@ page import="java.util.Collections" %>
+<%@ page import="ie.commodity.sorts.SortById" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +23,8 @@
     </style>
 </head>
 <%
-    List commoditiesList= CommodityManager.getInstance().getElementsById(CommodityManager.getInstance().commoditiesListWithFilters);
+    List<Commodity> commoditiesList= CommodityManager.getInstance().getElementsById(CommodityManager.getInstance().commoditiesListWithFilters);
+    Collections.sort(commoditiesList, new SortById());
 %>
 <body>
     <jsp:include page="/header.jsp" />

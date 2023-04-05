@@ -12,6 +12,7 @@ import ie.provider.ProviderManager;
 import ie.user.UserManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CommodityManager extends Manager<Commodity> {
 
@@ -30,7 +31,7 @@ public class CommodityManager extends Manager<Commodity> {
         return instance;
     }
     public CommodityManager () {
-        this.commoditiesListWithFilters=new ArrayList<>();
+        this.commoditiesListWithFilters=null;
         jsonMapper = new CommodityJsonHandler();
 
     }

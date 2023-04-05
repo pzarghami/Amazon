@@ -17,15 +17,14 @@ import java.util.Map;
 
 import static java.util.Map.entry;
 @WebServlet(
-        name = "MyOwnServlet",
-        description = "This is my first annotated servlet",
+        name = "UserLoginServlet",
         urlPatterns = Constant.URLS.LOGIN
 )
 public class UserLogin  extends Controller {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-            request.getRequestDispatcher(Constant.JSP.LOGIN).forward(request, response);
+        request.getRequestDispatcher(Constant.JSP.LOGIN).forward(request, response);
     }
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -52,4 +51,3 @@ public class UserLogin  extends Controller {
 
     }
 }
-

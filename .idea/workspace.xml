@@ -11,11 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1f8ad945-d01f-466d-b9d9-454d70e2a0af" name="Default Changelist" comment="change git ignore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ie/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/Constant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ie/commodity/Commodity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/commodity/Commodity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ie/commodity/CommodityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/commodity/CommodityManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/movie-views/movie.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/commodity-views/movie.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/movie-views/movies.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/commodity-views/commodities.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ie/user/controllers/UserLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/user/controllers/UserLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/commodity-views/commodities.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/commodity-views/commodities.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
