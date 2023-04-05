@@ -19,6 +19,7 @@ public class CommodityManager extends Manager<Commodity> {
     private static CommodityManager instance;
     public ArrayList<String> commoditiesListWithFilters;
     private final JsonHandler<Commodity> jsonMapper;
+    public boolean sortByPriceFlag=false;
 
 
 
@@ -130,6 +131,10 @@ public class CommodityManager extends Manager<Commodity> {
     public void clearFilters(){
         commoditiesListWithFilters=null;
     }
+    public void activeSortingByPrice(){
+        sortByPriceFlag=true;
+    }
+
 
 
 }

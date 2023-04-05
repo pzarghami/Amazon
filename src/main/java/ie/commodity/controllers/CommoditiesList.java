@@ -40,6 +40,12 @@ public class CommoditiesList extends Controller {
                 case Constant.ActionType.CLEAR:
                     CommodityManager.getInstance().clearFilters();
                     break;
+                case Constant.ActionType.SORT_BY_PRICE:
+                    CommodityManager.getInstance().activeSortingByPrice();
+                    break;
+                case Constant.ActionType.CLEAR_SORT:
+                    CommodityManager.getInstance().sortByPriceFlag=false;
+                    break;
                 default:
                     sendBadRequestResponse(request, response, Map.ofEntries(entry("action", "Action is not proper")));
                     break;

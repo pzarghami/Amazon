@@ -61,6 +61,8 @@ public class Constant {
         public static final String CLEAR = "clear";
         public static final String SEARCH_BY_CAT = "search_by_category";
         public static final String SEARCH_BY_NAME = "search_by_name";
+        public static final String SORT_BY_PRICE="sort_by_rate";
+        public static final String CLEAR_SORT="clear_sort";
         public static final String RATE = "rate";
         public static final String ADD_TO_WL = "add";
         public static final String LIKE = "like";

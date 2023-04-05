@@ -8,6 +8,7 @@
 <%@ page import="ie.View" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="ie.commodity.sorts.SortById" %>
+<%@ page import="ie.commodity.sorts.SortByPrice" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,8 +23,12 @@
     </style>
 </head>
 <%
-    List<Commodity> commoditiesList= CommodityManager.getInstance().getElementsById(CommodityManager.getInstance().commoditiesListWithFilters);
+    var commodityManger=CommodityManager.getInstance();
+    List<Commodity> commoditiesList= commodityManger.getElementsById(commodityManger.commoditiesListWithFilters);
     Collections.sort(commoditiesList, new SortById());
+    if(commodityManger.sortByPriceFlag)
+        Collections.sort(commoditiesList,new SortByPrice());
+
 %>
 <body>
     <jsp:include page="/header.jsp" />
@@ -39,6 +44,7 @@
     <form action="" method="POST">
         <label>Sort By:</label>
         <button type="submit" name="action" value="sort_by_rate">Rate</button>
+        <button type="submit" name="action" value="clear_sort">Clear Sort</button>
     </form>
     <br><br>
     <table>
