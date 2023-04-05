@@ -15,11 +15,10 @@
     <meta charset="UTF-8">
     <title>Commodities</title>
     <style>
-      li, td, th {
-          padding: 5px;
-          width: 100%;
-          text-align: center
-      }
+        table{
+            width: 100%;
+            text-align: center;
+        }
     </style>
 </head>
 <%
