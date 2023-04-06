@@ -27,7 +27,7 @@ public class Commodity {
 
 
     @JsonCreator
-    private Commodity(){
+    public Commodity(){
         this.categories= new ArrayList<>();
         this.commodityRateMap = new HashMap<>();
         this.comments=new ArrayList<>();

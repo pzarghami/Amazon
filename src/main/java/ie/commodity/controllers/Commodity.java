@@ -25,15 +25,21 @@ public class Commodity extends Controller {
             throws IOException, ServletException {
 
         var pathParts = splitPathParams(request.getPathInfo());
+
         if(pathParts!=null) {
             var commodityId=pathParts[0];
+            request.setAttribute("commodityId", commodityId);
             request.getRequestDispatcher(Constant.JSP.COMMODITY).forward(request, response);
         }
+        else
+            request.getRequestDispatcher(Constant.JSP.COMMODITIES).forward(request, response);
     }
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         var action = request.getParameter("action");
+        var pathParts = splitPathParams(request.getPathInfo());
+        var commodityId=pathParts[0];
         try {
             switch (action) {
                 case Constant.ActionType.SEARCH_BY_NAME:
