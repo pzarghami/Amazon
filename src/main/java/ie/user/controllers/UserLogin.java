@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.util.Map.entry;
 @WebServlet(
         name = "MyOwnServlet",
         description = "This is my first annotated servlet",
