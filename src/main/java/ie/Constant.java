@@ -47,7 +47,7 @@ public class Constant {
         public static final String _404_ = "/error-views/404.jsp";
         public static final String ACTOR = "/actor-views/actor.jsp";
         public static final String COMMODITIES = "/commodity-views/commodities.jsp";
-        public static final String MOVIE = "/movie-views/movie.jsp";
+        public static final String COMMODITY = "/commodity-views/commodity.jsp";
         public static final String W_LIST  = "/user-views/watchList.jsp";
     }
     public static class URLS {

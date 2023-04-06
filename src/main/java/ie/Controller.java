@@ -30,4 +30,5 @@ public abstract class Controller extends HttpServlet {
         response.setStatus(400);
         request.getRequestDispatcher(Constant.JSP.ERROR).forward(request, response);
     }
+
 }
