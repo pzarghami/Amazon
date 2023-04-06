@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ie.exeption.CustomException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class Comment {
@@ -17,7 +19,7 @@ public class Comment {
     private String date;
     private HashMap<String, Integer> userVoteMap;
     public static Integer lastId = 0;
-
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     @JsonCreator
     public Comment(String commodityId, String username, String text) {
         this.id = String.valueOf(++lastId);
@@ -27,6 +29,7 @@ public class Comment {
         commentUsernameOwner=username;
         this.commodityId=commodityId;
         this.text=text;
+        this.date= dtf.format(LocalDateTime.now());
     }
 
     @JsonProperty(value = "userEmail", required = true)
@@ -50,7 +53,7 @@ public class Comment {
     }
 
     @JsonGetter(value = "userEmail")
-    String getCommentUsernameOwner() {
+    public String getCommentUsernameOwner() {
         return this.commentUsernameOwner;
     }
 
@@ -60,24 +63,24 @@ public class Comment {
     }
 
     @JsonGetter(value = "text")
-    private String getText() {
+    public String getText() {
         return this.text;
     }
 
     @JsonGetter(value = "date")
-    private String getDate() {
+    public String getDate() {
         return this.date;
     }
     @JsonGetter(value = "id")
-    private String getIds() {
+    public String getIds() {
         return this.id;
     }
     @JsonGetter(value = "likes")
-    private int getLike() {
+    public int getLike() {
         return this.commentLikes;
     }
     @JsonGetter(value = "disLikes")
-    private int getDisLike() {
+    public int getDisLike() {
         return this.commentDislikes;
     }
     String getId() {

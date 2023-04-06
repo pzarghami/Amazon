@@ -29,10 +29,10 @@ public class CommentManager extends Manager<Comment> {
     public String addElement(Comment newObject) throws CustomException {
         var objectId = newObject.getId();
         var commodityId=newObject.getCommodityId();
-        var userEmail=newObject.getCommentUsernameOwner();
+        var username=newObject.getCommentUsernameOwner();
         if(!CommodityManager.getInstance().isIdValid(String.valueOf(commodityId)))
             throw new CustomException(Constant.CMD_NOT_FOUND);
-        if(!UserManager.getInstance().isEmailExists(userEmail))
+        if(!UserManager.getInstance().isIdValid(username))
             throw new CustomException(Constant.USR_NOT_FOUND);
         if (isIdValid(objectId)) {
             throw new CustomException("ObjectAlreadyExists");

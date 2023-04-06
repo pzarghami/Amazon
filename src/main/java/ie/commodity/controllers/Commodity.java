@@ -50,7 +50,6 @@ public class Commodity extends Controller {
                 case Constant.ActionType.COMMENT:
                     var commentText = request.getParameter("comment");
                     CommentManager.getInstance().addElement(new Comment(commodityId, Baloot.loggedInUser.getUsername(), commentText));
-                    commodity.addComment(String.valueOf(Comment.lastId));
                     break;
                 case Constant.ActionType.RATE:
                     var rate = Integer.parseInt(request.getParameter("quantity"));
@@ -59,11 +58,19 @@ public class Commodity extends Controller {
                 case Constant.ActionType.ADD_TO_BUY:
                     Baloot.loggedInUser.addToUserBuyList(commodityId);
                     break;
+                case Constant.ActionType.LIKE:
+                    var comment= CommentManager.getInstance().getElementById(request.getParameter("comment_id"));
+                    comment.voteComment(Baloot.loggedInUser.getUsername(),1);
+                    break;
+                case Constant.ActionType.DISLIKE:
+                    var commentDis= CommentManager.getInstance().getElementById(request.getParameter("comment_id"));
+                    commentDis.voteComment(Baloot.loggedInUser.getUsername(),-1);
+                    break;
                 default:
                     sendBadRequestResponse(request, response, Map.ofEntries(entry("action", "Action is not proper")));
                     break;
             }
-            response.sendRedirect(Constant.URLS.COMMODITIES+"/*");
+            response.sendRedirect(Constant.URLS.COMMODITIES+"/" + commodityId);
         }
         catch (CustomException e){
 

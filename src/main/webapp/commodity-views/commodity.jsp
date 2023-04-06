@@ -8,6 +8,8 @@
 <%@ page import="ie.View" %>
 <%@ page import="ie.commodity.Commodity" %>
 <%@ page import="ie.exeption.CustomException" %>
+<%@ page import="ie.comment.CommentManager" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +29,7 @@
 <%
     var commodityId= (String)request.getAttribute("commodityId");
     Commodity   commodity = CommodityManager.getInstance().getElementById(commodityId);
+    List<Comment> comments= CommentManager.getInstance().getElementsById(commodity.getComments());
 
 %>
 <body>
@@ -61,21 +64,53 @@
   <form action="" method="POST">
       <label>Rate(between 1 and 10):</label>
       <input type="number" id="quantity" name="quantity" min="1" max="10">
-      <button type="submit" naem="action" value="rate">Rate</button>
+      <button type="submit" name="action" value="rate">Rate</button>
   </form>
   <br>
   <form action="" method="POST">
       <button type="submit" name="action" value="addToBuyList">Add to BuyList</button>
   </form>
   <table>
-      <caption><h2>Comments</h2></caption>
       <tr>
-          <th>username</th>
-          <th>comment</th>
-          <th>date</th>
-          <th>likes</th>
-          <th>dislikes</th>
+          <th>Username</th>
+          <th>Comment</th>
+          <th>Date</th>
+          <th></th>
+          <th></th>
       </tr>
+      <% for (Comment comment : comments){%>
+      <tr>
+          <td>@<%= comment.getCommentUsernameOwner() %></td>
+          <td><%= comment.getText()%></td>
+          <td><%= comment.getDate()%></td>
+          <td>
+              <form action="" method="POST">
+                  <label for=""><%= comment.getLike()%></label>
+                  <input
+                          id="form_comment_id"
+                          type="hidden"
+                          name="comment_id"
+                          value="<%= comment.getIds()%>"
+                  />
+                  <input type="hidden" id="form_action" name="action" value="like">
+                  <button type="submit" name="action" value="like">like</button>
+              </form>
+          </td>
+          <td>
+              <form action="" method="POST">
+                  <label for=""><%= comment.getDisLike()%></label>
+                  <input
+                          id="form_comment_id"
+                          type="hidden"
+                          name="comment_id"
+                          value="<%= comment.getIds()%>"
+                  />
+                  <input type="hidden" id="form_action" name="action" value="dislike">
+                  <button type="submit" name="action" value="dislike">dislike</button>
+              </form>
+          </td>
+      </tr>
+      <%}%>
   </table>
 
 </body>
