@@ -17,8 +17,6 @@ public class UserLogout extends Controller {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         Baloot.logoutUser();
-//        FilmManager.getInstance().setSortType(null);
-//        FilmManager.getInstance().setNameFilter(null);
         response.sendRedirect(Constant.URLS.ROOT);
     }
 }

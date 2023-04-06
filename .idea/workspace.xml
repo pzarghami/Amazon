@@ -9,12 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8ad945-d01f-466d-b9d9-454d70e2a0af" name="Default Changelist" comment="">
+    <list default="true" id="1f8ad945-d01f-466d-b9d9-454d70e2a0af" name="Default Changelist" comment="delete hidden files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ie/Baloot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/Baloot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ie/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/Constant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ie/commodity/CommodityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/commodity/CommodityManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ie/commodity/controllers/CommoditiesList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/commodity/controllers/CommoditiesList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/commodity-views/commodities.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/commodity-views/commodities.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ie/user/controllers/UserLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/user/controllers/UserLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ie/user/controllers/UserLogout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/user/controllers/UserLogout.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +25,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Jsp File" />
         <option value="Class" />
       </list>
     </option>
@@ -52,6 +54,9 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectId" id="2Nt3tPClUyjeZ6KOPB8Vnq84V6m" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -197,7 +202,7 @@
       <workItem from="1680616722242" duration="4795000" />
       <workItem from="1680624752787" duration="2632000" />
       <workItem from="1680690407977" duration="298000" />
-      <workItem from="1680732766660" duration="1739000" />
+      <workItem from="1680774850014" duration="1367000" />
     </task>
     <task id="LOCAL-00001" summary="change git ignore">
       <created>1680692717127</created>
