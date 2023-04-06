@@ -43,7 +43,7 @@
     <br><br>
     <form action="" method="POST">
         <label>Sort By:</label>
-        <button type="submit" name="action" value="sort_by_rate">Rate</button>
+        <button type="submit" name="action" value="sort_by_price">Price</button>
         <button type="submit" name="action" value="clear_sort">Clear Sort</button>
     </form>
     <br><br>
