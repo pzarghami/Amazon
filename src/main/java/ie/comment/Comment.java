@@ -9,30 +9,33 @@ import java.util.HashMap;
 
 public class Comment {
     private final String id;
-    private String commentEmailOwner;
+    private String commentUsernameOwner;
     private String text;
     private Integer commentLikes;
     private Integer commentDislikes;
-    private int commodityId;
+    private String commodityId;
     private String date;
     private HashMap<String, Integer> userVoteMap;
     public static Integer lastId = 0;
 
     @JsonCreator
-    private Comment() {
+    public Comment(String commodityId, String username, String text) {
         this.id = String.valueOf(++lastId);
         this.userVoteMap = new HashMap<>();
         this.commentLikes = 0;
         this.commentDislikes = 0;
+        commentUsernameOwner=username;
+        this.commodityId=commodityId;
+        this.text=text;
     }
 
     @JsonProperty(value = "userEmail", required = true)
     private void setEmailUser(String email) {
-        this.commentEmailOwner = email;
+        this.commentUsernameOwner = email;
     }
 
     @JsonProperty(value = "commodityId", required = true)
-    private void setCommodityId(int commodityId) {
+    private void setCommodityId(String commodityId) {
         this.commodityId = commodityId;
     }
 
@@ -47,12 +50,12 @@ public class Comment {
     }
 
     @JsonGetter(value = "userEmail")
-    String getUserEmail() {
-        return this.commentEmailOwner;
+    String getCommentUsernameOwner() {
+        return this.commentUsernameOwner;
     }
 
     @JsonGetter(value = "commodityId")
-    public int getCommodityId() {
+    public String getCommodityId() {
         return this.commodityId;
     }
 

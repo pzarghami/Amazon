@@ -69,7 +69,7 @@ public class Constant {
         public static final String SORT_BY_PRICE="sort_by_price";
         public static final String CLEAR_SORT="clear_sort";
         public static final String RATE = "rate";
-        public static final String ADD_TO_WL = "add";
+        public static final String ADD_TO_BUY = "addToBuyList";
         public static final String LIKE = "like";
         public static final String DISLIKE = "dislike";
         public static final String COMMENT = "comment";
