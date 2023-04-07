@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import ie.comment.CommentManager;
 import ie.commodity.CommodityManager;
+import ie.discount.DiscountManager;
 import ie.exeption.CustomException;
 import ie.user.User;
 import ie.user.UserManager;
@@ -21,6 +22,7 @@ public class Baloot {
     private final ProviderManager providerManager;
     private final CommodityManager commodityManager;
     private final CommentManager commentManager;
+    private final DiscountManager discountManager;
     private final ObjectMapper mapper;
     private final JsonNode jsonResNode;
 
@@ -30,6 +32,7 @@ public class Baloot {
     public static ArrayList<String> providerIds;
     public static ArrayList<String> commoditiesIds;
     public static ArrayList<String> commentIds;
+    public static ArrayList<String> discountIds;
     public static User loggedInUser;
     public Baloot() {
         loggedInUser=null;
@@ -37,6 +40,8 @@ public class Baloot {
         this.providerManager = ProviderManager.getInstance();
         this.commodityManager = CommodityManager.getInstance();
         this.commentManager = CommentManager.getInstance();
+        this.discountManager = DiscountManager.getInstance();
+
         this.mapper = new ObjectMapper();
         this.jsonResNode = mapper.createObjectNode();
 
@@ -63,6 +68,7 @@ public class Baloot {
             providerIds = providerManager.addElementsJson(Jsoup.connect(Constant.FETCH_DATA_ADDR.PROVIDER).ignoreContentType(true).execute().body());
             commoditiesIds = commodityManager.addElementsJson(Jsoup.connect(Constant.FETCH_DATA_ADDR.COMMODITIES).ignoreContentType(true).execute().body());
             commentIds = commentManager.addElementsJson(Jsoup.connect(Constant.FETCH_DATA_ADDR.COMMENTS).ignoreContentType(true).execute().body());
+            discountIds = discountManager.addElementsJson(Jsoup.connect(Constant.FETCH_DATA_ADDR.DISCOUNT).ignoreContentType(true).execute().body());
         } catch (Exception e) {
             throw new CustomException("DataFetchingFailed");
         }

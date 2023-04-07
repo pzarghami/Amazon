@@ -36,6 +36,7 @@ public class Constant {
         public static  final String PROVIDER="http://5.253.25.110:5000/api/providers";
         public static  final String COMMODITIES="http://5.253.25.110:5000/api/commodities";
         public static  final String COMMENTS="http://5.253.25.110:5000/api/comments";
+        public static  final String DISCOUNT= "http://5.253.25.110:5000/api/discount";
     }
 
     public static class Testing {
@@ -45,10 +46,17 @@ public class Constant {
         public static final String LOGIN = "/auth-views/login.jsp";
         public static final String ERROR = "/error-views/error.jsp";
         public static final String _404_ = "/error-views/404.jsp";
+        public static final String _200 = "200.jsp";
+
+        public static final String ACTOR = "/actor-views/actor.jsp";
         public static final String COMMODITIES = "/commodity-views/commodities.jsp";
         public static final String COMMODITY = "/commodity-views/commodity.jsp";
         public static final String CREDIT = "/credit/credit.jsp";
 
+        public static final String CREDIT = "/credit-views/credit.jsp";
+        public static final String BUYLIST = "/user-views/buyList.jsp";
+        public static final String MOVIES = "/movie-views/movies.jsp";
+        public static final String MOVIE = "/movie-views/movie.jsp";
     }
     public static class URLS {
         public static final String ROOT = "/";
@@ -56,9 +64,12 @@ public class Constant {
         public static final String LOGOUT = "/logout";
         public static final String COMMODITIES = "/commodities";
         public static final String CREDIT = "/credit";
+        public static final String BUYLIST = "/buyList";
 
     }
     public static class ActionType {
+        public static final String DISCOUNT = "discount";
+        public static final String PAYMENT = "payment";
         public static final String CLEAR = "clear";
         public static final String SEARCH_BY_CAT = "search_by_category";
         public static final String SEARCH_BY_NAME = "search_by_name";
@@ -71,6 +82,7 @@ public class Constant {
         public static final String COMMENT = "comment";
         public static final String DELETE = "delete";
         public static final Integer TOP_SCORE=5;
+
     }
 
 

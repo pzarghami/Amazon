@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ie.Constant;
+import ie.discount.DiscountManager;
 import ie.commodity.Commodity;
 import ie.exeption.CustomException;
 import ie.commodity.CommodityManager;
@@ -19,12 +20,13 @@ public class User {
     private String email;
     private String birthDate;
     private String address;
+    private String discountCode;
     private int credit;
 
-    private ArrayList<Integer> buyList;
-
-    private ArrayList<String> userBuyList;
-    private ArrayList<String> userPurchasedList;
+    private final ArrayList<Integer> buyList;
+    private final ArrayList<String> discountCodeUsed;
+    private final ArrayList<String> userBuyList;
+    private final ArrayList<String> userPurchasedList;
 
     @JsonCreator
     private User() {
@@ -32,7 +34,11 @@ public class User {
         this.buyList = new ArrayList<>();
         this.userBuyList = new ArrayList<>();
         this.userPurchasedList = new ArrayList<>();
-
+        this.discountCodeUsed = new ArrayList<>();
+        this.discountCode = "";
+        this.userBuyList.add("1");
+        this.userBuyList.add("2");
+        this.userBuyList.add("3");
     }
 
     @JsonProperty(value = "username", required = true)
@@ -86,17 +92,17 @@ public class User {
     }
 
     @JsonGetter(value = "birthDate")
-    private String getBirthDate() {
+    public String getBirthDate() {
         return this.birthDate;
     }
 
     @JsonGetter(value = "address")
-    private String getAddress() {
+    public String getAddress() {
         return this.address;
     }
 
     @JsonGetter(value = "credit")
-    private int getCredit() {
+    public int getCredit() {
         return this.credit;
     }
 
@@ -115,11 +121,29 @@ public class User {
         CommodityManager.getInstance().getElementById(commodityId).buy();
         this.userBuyList.add(commodityId);
     }
+
+    public float getCurrentBuyListPrice() throws CustomException {
+        var commodityManager = CommodityManager.getInstance();
+        float sum = 0;
+        for (var commodityId : this.userBuyList) {
+            var commodity = commodityManager.getElementById(commodityId);
+            sum = sum + commodity.getPrice();
+        }
+        if(!discountCode.equals("")){
+        var discount = DiscountManager.getInstance().getElementById(discountCode).getDiscountAmount();
+        var discountAmount = (sum/100)*discount;
+        return sum - discountAmount;
+        }
+        return sum;
+
+    }
+
     public void isYourPassword(String pass) throws CustomException {
         if(pass.equals(this.password))
             return;
         throw new CustomException("passWordNotFound");
     }
+
     public void removeFromUserBuyList(String commodityId) throws CustomException {
         CommodityManager.getInstance().getElementById(commodityId).cancelBuying();
         this.userBuyList.remove(commodityId);
@@ -131,22 +155,29 @@ public class User {
     }
 
     public boolean buy() throws CustomException {
-        var commodityManager = CommodityManager.getInstance();
-        float sum = 0;
-        for (var commodityId : this.userBuyList) {
-            var commodity = commodityManager.getElementById(commodityId);
-            sum = sum + commodity.getPrice();
-        }
+        var sum = this.getCurrentBuyListPrice();
         if (sum > this.credit)
             return false;
         else {
             userPurchasedList.addAll(userBuyList);
             userBuyList.clear();
             this.credit -= sum;
+            if(!discountCode.equals("")) {
+                this.discountCodeUsed.add(discountCode);
+                discountCode = "";
+            }
             return true;
         }
     }
 
+    public void setDiscount(String discountCode) throws CustomException {
+
+        if(!DiscountManager.getInstance().isIdValid(discountCode))
+            throw new CustomException("discount not found.");
+
+        if(!discountCodeUsed.contains(discountCode))
+            this.discountCode = discountCode;
+    }
 
     public boolean isYourEmail(String email) {
         return Objects.equals(this.email, email);
