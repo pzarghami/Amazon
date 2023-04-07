@@ -45,7 +45,7 @@ public class UserBuyList extends Controller {
             switch (action) {
                 case Constant.ActionType.DELETE:
                     var commodityId = request.getParameter("commodity_id");
-                    UserManager.getInstance().removeFromBuyList(Baloot.loggedInUser.getUsername(), commodityId);
+                    Baloot.loggedInUser.removeFromUserBuyList(commodityId);
                     response.sendRedirect(Constant.URLS.BUYLIST);
                     break;
                 case Constant.ActionType.DISCOUNT:

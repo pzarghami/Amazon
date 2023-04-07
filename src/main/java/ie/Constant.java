@@ -51,8 +51,6 @@ public class Constant {
         public static final String ACTOR = "/actor-views/actor.jsp";
         public static final String COMMODITIES = "/commodity-views/commodities.jsp";
         public static final String COMMODITY = "/commodity-views/commodity.jsp";
-        public static final String CREDIT = "/credit/credit.jsp";
-
         public static final String CREDIT = "/credit-views/credit.jsp";
         public static final String BUYLIST = "/user-views/buyList.jsp";
         public static final String MOVIES = "/movie-views/movies.jsp";

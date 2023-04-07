@@ -12,12 +12,7 @@
     <list default="true" id="1f8ad945-d01f-466d-b9d9-454d70e2a0af" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ie/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/Constant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ie/comment/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/comment/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ie/comment/CommentManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/comment/CommentManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ie/commodity/controllers/CommoditiesList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/commodity/controllers/CommoditiesList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ie/commodity/controllers/Commodity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/commodity/controllers/Commodity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/actor-views/actor.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/commodity-views/commodity.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/commodity-views/commodity.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ie/user/controllers/UserBuyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/user/controllers/UserBuyList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +186,7 @@
       <workItem from="1680690407977" duration="298000" />
       <workItem from="1680732766660" duration="18188000" />
       <workItem from="1680862432934" duration="5791000" />
-      <workItem from="1680872187315" duration="2564000" />
+      <workItem from="1680872187315" duration="3861000" />
     </task>
     <task id="LOCAL-00001" summary="change git ignore">
       <created>1680692717127</created>
@@ -236,11 +231,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/ie/commodity/CommodityManager.java</url>
           <line>157</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ie/comment/CommentManager.java</url>
-          <line>49</line>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
