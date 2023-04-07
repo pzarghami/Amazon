@@ -52,16 +52,7 @@ public class UserManager extends  Manager<User>{
         return objectIds;
     }
 
-    public String updateOrAddUser(String jsonData) throws  JsonProcessingException {
-        String username = mapper.readTree(jsonData).get("username").asText();
-        if(isUsernameValid(username,false)){
-            updateUser(username,jsonData);
-            return Constant.USR_UPDATE;
-        }else{
-            addUser(username,jsonData);
-            return Constant.USR_ADD;
-        }
-    }
+
 
     private void updateUser(String username, String jsonData) throws JsonProcessingException{
         mapper.readerForUpdating(objectMap.get(username)).readValue(jsonData);
@@ -106,25 +97,9 @@ public class UserManager extends  Manager<User>{
         return Constant.RMV_FROM_BUYLIST;
     }
 
-    public boolean isUsernameValid(String username,boolean isJsonFile) throws JsonProcessingException {
-        if(!isJsonFile)
-            return objectMap.containsKey(username);
-        String user = mapper.readTree(username).get("username").asText();
-        return objectMap.containsKey(user);
-    }
 
 
-    public JsonNode getBuyList(String jsonData) throws JsonProcessingException, CustomException {
 
-        String username = mapper.readTree(jsonData).get("username").asText();
-        if(!isUsernameValid(username,false))
-            throw new CustomException(Constant.USR_NOT_FOUND);
-        var userBuyList= objectMap.get(username);
-        ArrayList<Integer> commodityIdInBuyList= userBuyList.getBuyList();
-        JsonNode jsonNode = mapper.createObjectNode();
-        //((ObjectNode) jsonNode).set("buyList",mapper.convertValue(CommodityManager.getInstance().getBuyListInfo(commodityIdInBuyList),JsonNode.class));
-        return jsonNode;
-    }
     public boolean isEmailExists(String email){
         for(User user: objectMap.values()){
             if(user.isYourEmail(email))

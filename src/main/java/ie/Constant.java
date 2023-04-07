@@ -50,6 +50,7 @@ public class Constant {
 
         public static final String ACTOR = "/actor-views/actor.jsp";
         public static final String COMMODITIES = "/commodity-views/commodities.jsp";
+        public static final String COMMODITY = "/commodity-views/commodity.jsp";
         public static final String CREDIT = "/credit-views/credit.jsp";
         public static final String BUYLIST = "/user-views/buyList.jsp";
         public static final String MOVIES = "/movie-views/movies.jsp";
@@ -71,14 +72,15 @@ public class Constant {
         public static final String CLEAR = "clear";
         public static final String SEARCH_BY_CAT = "search_by_category";
         public static final String SEARCH_BY_NAME = "search_by_name";
-        public static final String SORT_BY_PRICE="sort_by_rate";
+        public static final String SORT_BY_PRICE="sort_by_price";
         public static final String CLEAR_SORT="clear_sort";
         public static final String RATE = "rate";
-        public static final String ADD_TO_WL = "add";
+        public static final String ADD_TO_BUY = "addToBuyList";
         public static final String LIKE = "like";
         public static final String DISLIKE = "dislike";
         public static final String COMMENT = "comment";
         public static final String DELETE = "delete";
+        public static final Integer TOP_SCORE=5;
 
     }
 

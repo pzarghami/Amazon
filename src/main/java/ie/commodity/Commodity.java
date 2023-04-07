@@ -27,7 +27,7 @@ public class Commodity {
 
 
     @JsonCreator
-    private Commodity(){
+    public Commodity(){
         this.categories= new ArrayList<>();
         this.commodityRateMap = new HashMap<>();
         this.comments=new ArrayList<>();
@@ -95,6 +95,15 @@ public class Commodity {
         for(String category: categories){
             if(Objects.equals(category, cat))
                 return true;
+        }
+        return false;
+    }
+    public  boolean isYourCategory(ArrayList<String> cats){
+        for(String cat: cats){
+            for(String category: categories){
+                if(Objects.equals(category, cat))
+                    return true;
+            }
         }
         return false;
     }

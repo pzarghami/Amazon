@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ie.Constant;
 import ie.discount.DiscountManager;
+import ie.commodity.Commodity;
 import ie.exeption.CustomException;
 import ie.commodity.CommodityManager;
 
@@ -115,9 +116,9 @@ public class User {
         return this.userPurchasedList;
     }
 
+
     public void addToUserBuyList(String commodityId) throws CustomException {
-        if (userBuyList.contains(commodityId))
-            throw new CustomException(Constant.DUPLICATE_COMMODITY);
+        CommodityManager.getInstance().getElementById(commodityId).buy();
         this.userBuyList.add(commodityId);
     }
 
@@ -144,7 +145,7 @@ public class User {
     }
 
     public void removeFromUserBuyList(String commodityId) throws CustomException {
-
+        CommodityManager.getInstance().getElementById(commodityId).cancelBuying();
         this.userBuyList.remove(commodityId);
     }
 
