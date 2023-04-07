@@ -68,7 +68,7 @@ public class Baloot {
             providerIds = providerManager.addElementsJson(Jsoup.connect(Constant.FETCH_DATA_ADDR.PROVIDER).ignoreContentType(true).execute().body());
             commoditiesIds = commodityManager.addElementsJson(Jsoup.connect(Constant.FETCH_DATA_ADDR.COMMODITIES).ignoreContentType(true).execute().body());
             commentIds = commentManager.addElementsJson(Jsoup.connect(Constant.FETCH_DATA_ADDR.COMMENTS).ignoreContentType(true).execute().body());
-            discountIds = discountManager.addElementsJson(Jsoup.connect("http://5.253.25.110:5000/api/discount").ignoreContentType(true).execute().body());
+            discountIds = discountManager.addElementsJson(Jsoup.connect(Constant.FETCH_DATA_ADDR.DISCOUNT).ignoreContentType(true).execute().body());
         } catch (Exception e) {
             throw new CustomException("DataFetchingFailed");
         }

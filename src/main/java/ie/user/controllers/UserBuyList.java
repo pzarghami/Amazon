@@ -43,17 +43,17 @@ public class UserBuyList extends Controller {
         Map<String,String> errorMessages = new HashMap<>();
         try{
             switch (action) {
-                case "delete":
+                case Constant.ActionType.DELETE:
                     var commodityId = request.getParameter("commodity_id");
                     UserManager.getInstance().removeFromBuyList(Baloot.loggedInUser.getUsername(), commodityId);
                     response.sendRedirect(Constant.URLS.BUYLIST);
                     break;
-                case "discount":
+                case Constant.ActionType.DISCOUNT:
                     var discountCode = request.getParameter("discount_code");
                     Baloot.loggedInUser.setDiscount(discountCode);
                     response.sendRedirect(Constant.URLS.BUYLIST);
                     break;
-                case "payment":
+                case Constant.ActionType.PAYMENT:
                     if(Baloot.loggedInUser.buy()){
                         request.getRequestDispatcher(Constant.JSP._200).forward(request,response);
                     }
@@ -64,7 +64,8 @@ public class UserBuyList extends Controller {
                     break;
             }
         }catch (CustomException e){
-            sendBadRequestResponse(request,response,null);
+            errorMessages.put("Failed","Discount not found.");
+            send404Response(request, response, errorMessages);
         }
     }
 }

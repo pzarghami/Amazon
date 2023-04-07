@@ -36,6 +36,7 @@ public class Constant {
         public static  final String PROVIDER="http://5.253.25.110:5000/api/providers";
         public static  final String COMMODITIES="http://5.253.25.110:5000/api/commodities";
         public static  final String COMMENTS="http://5.253.25.110:5000/api/comments";
+        public static  final String DISCOUNT= "http://5.253.25.110:5000/api/discount";
     }
 
     public static class Testing {
@@ -65,6 +66,8 @@ public class Constant {
         public static final Set<String> NonAuthURLs = Set.of(LOGIN, LOGOUT);
     }
     public static class ActionType {
+        public static final String DISCOUNT = "discount";
+        public static final String PAYMENT = "payment";
         public static final String CLEAR = "clear";
         public static final String SEARCH_BY_CAT = "search_by_category";
         public static final String SEARCH_BY_NAME = "search_by_name";
@@ -76,6 +79,7 @@ public class Constant {
         public static final String DISLIKE = "dislike";
         public static final String COMMENT = "comment";
         public static final String DELETE = "delete";
+
     }
 
 

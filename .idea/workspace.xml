@@ -9,10 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8ad945-d01f-466d-b9d9-454d70e2a0af" name="Default Changelist" comment="add discount class">
+    <list default="true" id="1f8ad945-d01f-466d-b9d9-454d70e2a0af" name="Default Changelist" comment="add discount manager class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ie/Baloot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/Baloot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ie/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ie/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/Constant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ie/user/controllers/UserBuyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/user/controllers/UserBuyList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -206,7 +206,7 @@
       <workItem from="1680690407977" duration="298000" />
       <workItem from="1680774850014" duration="1367000" />
       <workItem from="1680828523478" duration="3596000" />
-      <workItem from="1680862976252" duration="7389000" />
+      <workItem from="1680862976252" duration="8325000" />
     </task>
     <task id="LOCAL-00001" summary="change git ignore">
       <created>1680692717127</created>
@@ -250,7 +250,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680864739585</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="add discount manager class">
+      <created>1680872843182</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1680872843182</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,6 +281,7 @@
     <MESSAGE value="add buy list" />
     <MESSAGE value="add payment action" />
     <MESSAGE value="add discount class" />
-    <option name="LAST_COMMIT_MESSAGE" value="add discount class" />
+    <MESSAGE value="add discount manager class" />
+    <option name="LAST_COMMIT_MESSAGE" value="add discount manager class" />
   </component>
 </project>
