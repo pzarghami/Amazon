@@ -66,7 +66,7 @@
             <td><%= commodity.getId()%></td>
             <td><%= commodity.getName()%></td>
             <td><%= commodity.getProvideId()%></td>
-            <td><%= commodity.getPrice()%></td>
+            <td><%= (int)commodity.getPrice()%></td>
             <td><%= View.getCSVFromList(commodity.getCategories())%></td>
             <td><%= commodity.getRate()%></td>
             <td><%= commodity.getInStock()%></td>

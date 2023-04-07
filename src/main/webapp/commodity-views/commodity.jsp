@@ -43,7 +43,7 @@
               ProviderManager.getInstance().getElementById(String.valueOf(commodity.getProvideId())).getName()
       %></li>
       <li id="price">Price: <%=
-          commodity.getPrice()
+      (int) commodity.getPrice()
       %></li>
       <li id="categories">Categories: <%=
           View.getCSVFromList(commodity.getCategories())
