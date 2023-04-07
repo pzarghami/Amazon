@@ -98,6 +98,15 @@ public class Commodity {
         }
         return false;
     }
+    public  boolean isYourCategory(ArrayList<String> cats){
+        for(String cat: cats){
+            for(String category: categories){
+                if(Objects.equals(category, cat))
+                    return true;
+            }
+        }
+        return false;
+    }
     public  boolean isPrefixOfYourName(String name){
             if(this.name.startsWith(name))
                 return true;

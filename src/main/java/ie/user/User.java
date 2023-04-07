@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ie.Constant;
+import ie.commodity.Commodity;
 import ie.exeption.CustomException;
 import ie.commodity.CommodityManager;
 
@@ -110,10 +111,8 @@ public class User {
     }
 
 
-
     public void addToUserBuyList(String commodityId) throws CustomException {
-        if (userBuyList.contains(commodityId))
-            throw new CustomException(Constant.DUPLICATE_COMMODITY);
+        CommodityManager.getInstance().getElementById(commodityId).buy();
         this.userBuyList.add(commodityId);
     }
     public void isYourPassword(String pass) throws CustomException {
@@ -122,7 +121,7 @@ public class User {
         throw new CustomException("passWordNotFound");
     }
     public void removeFromUserBuyList(String commodityId) throws CustomException {
-
+        CommodityManager.getInstance().getElementById(commodityId).cancelBuying();
         this.userBuyList.remove(commodityId);
     }
 
@@ -146,7 +145,6 @@ public class User {
             this.credit -= sum;
             return true;
         }
-
     }
 
 

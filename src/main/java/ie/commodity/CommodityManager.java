@@ -7,12 +7,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import ie.*;
+import ie.commodity.sorts.SortByScore;
 import ie.exeption.CustomException;
 import ie.provider.ProviderManager;
 import ie.user.UserManager;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 public class CommodityManager extends Manager<Commodity> {
 
@@ -134,7 +134,45 @@ public class CommodityManager extends Manager<Commodity> {
     public void activeSortingByPrice(){
         sortByPriceFlag=true;
     }
+    public static ArrayList<String> sortByValue(HashMap<String, Float> hm) {
+        // Create a list from elements of HashMap
+        List<Map.Entry<String, Float> > list =
+                new LinkedList<Map.Entry<String, Float> >(hm.entrySet());
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<String, Float> >() {
+            public int compare(Map.Entry<String, Float> o1,
+                               Map.Entry<String, Float> o2)
+            {
+                return (o2.getValue()).compareTo(o1.getValue());
+            }
+        });
 
+        // put data from sorted list to hashmap
+        ArrayList <String> temp=new ArrayList<>();
+        for (Map.Entry<String, Float> aa : list) {
+            temp.add(aa.getKey());
+        }
+        return temp;
+    }
+    public ArrayList<String> calculateSuggestedProducts(String commodityId) throws CustomException {
+        var commodity=getElementById(commodityId);
+        var commodityCategorys= commodity.getCategories();
+        HashMap<String,Float> suggestedCommoditiesId=new HashMap<>();
+        for (var pair : objectMap.entrySet()){
+            if(String.valueOf(pair.getValue().getId()).equals(commodityId))
+                continue;
+            if(pair.getValue().isYourCategory(commodityCategorys))
+                suggestedCommoditiesId.put(pair.getKey(), 11+ pair.getValue().getRate());
+            else
+                suggestedCommoditiesId.put(pair.getKey(), pair.getValue().getRate());
+        }
+        var commodityIdWithTopScores=sortByValue(suggestedCommoditiesId);
+        ArrayList<String> fiveCommodityIdWithTopScores=new ArrayList<>();
+        for(int i=0;i<Constant.ActionType.TOP_SCORE;i++){
+            fiveCommodityIdWithTopScores.add(commodityIdWithTopScores.get(i));
+        }
+        return fiveCommodityIdWithTopScores;
 
+    }
 
 }

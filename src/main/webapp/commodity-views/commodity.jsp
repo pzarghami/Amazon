@@ -30,6 +30,7 @@
     var commodityId= (String)request.getAttribute("commodityId");
     Commodity   commodity = CommodityManager.getInstance().getElementById(commodityId);
     List<Comment> comments= CommentManager.getInstance().getElementsById(commodity.getComments());
+    List<Commodity> SuggestedCommodities=CommodityManager.getInstance().getElementsById(CommodityManager.getInstance().calculateSuggestedProducts(commodityId));
 
 %>
 <body>
@@ -109,6 +110,32 @@
                   <button type="submit" name="action" value="dislike">dislike</button>
               </form>
           </td>
+      </tr>
+      <%}%>
+  </table>
+  <br><br>
+  <table>
+      <caption><h2>Suggested Commodities</h2></caption>
+      <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Provider Name</th>
+          <th>Price</th>
+          <th>Categories</th>
+          <th>Rating</th>
+          <th>In Stock</th>
+          <th>Links</th>
+      </tr>
+      <% for (Commodity sugCommodity : SuggestedCommodities){%>
+      <tr>
+          <td><%= sugCommodity.getId() %></td>
+          <td><%= sugCommodity.getName()%></td>
+          <td><%= ProviderManager.getInstance().getElementById(String.valueOf(sugCommodity.getProvideId())).getName()%></td>
+          <td><%= sugCommodity.getPrice()%></td>
+          <td><%= View.getCSVFromList(sugCommodity.getCategories())%></td>
+          <td><%= sugCommodity.getRate()%></td>
+          <td><%= sugCommodity.getInStock()%></td>
+          <td><a href="/commodities/<%= sugCommodity.getId() %>">Link</a></td>
       </tr>
       <%}%>
   </table>

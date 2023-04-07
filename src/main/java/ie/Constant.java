@@ -74,6 +74,7 @@ public class Constant {
         public static final String DISLIKE = "dislike";
         public static final String COMMENT = "comment";
         public static final String DELETE = "delete";
+        public static final Integer TOP_SCORE=5;
     }
 
 
