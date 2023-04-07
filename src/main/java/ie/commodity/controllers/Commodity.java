@@ -27,14 +27,17 @@ public class Commodity extends Controller {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         var pathParts = splitPathParams(request.getPathInfo());
-
-        if(pathParts!=null) {
-            var commodityId=pathParts[0];
-            request.setAttribute("commodityId", commodityId);
-            request.getRequestDispatcher(Constant.JSP.COMMODITY).forward(request, response);
+        if(!Baloot.isLoggedIn())
+            response.sendRedirect(Constant.URLS.LOGIN);
+        else{
+            if(pathParts!=null) {
+                var commodityId=pathParts[0];
+                request.setAttribute("commodityId", commodityId);
+                request.getRequestDispatcher(Constant.JSP.COMMODITY).forward(request, response);
+            }
+            else
+                request.getRequestDispatcher(Constant.JSP.COMMODITIES).forward(request, response);
         }
-        else
-            request.getRequestDispatcher(Constant.JSP.COMMODITIES).forward(request, response);
     }
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)

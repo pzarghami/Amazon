@@ -1,7 +1,6 @@
 package ie.user;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ie.Manager;
@@ -51,36 +50,6 @@ public class UserManager extends  Manager<User>{
         }
         return objectIds;
     }
-
-
-
-    private void updateUser(String username, String jsonData) throws JsonProcessingException{
-        mapper.readerForUpdating(objectMap.get(username)).readValue(jsonData);
-    }
-
-    private void addUser(String username,String jsonData) throws JsonProcessingException{
-        var newUser = mapper.readValue(jsonData, User.class);
-        objectMap.put(username,newUser);
-    }
-
-    public String addToBuyList(String jsonData)throws JsonProcessingException, CustomException {
-        var jsonNode=mapper.readTree(jsonData);
-        String username = jsonNode.get("username").asText();
-        String commodityId = jsonNode.get("commodityId").asText();
-        var user =getElementById(username);
-        CommodityManager.getInstance().buy(commodityId);
-        user.addToUserBuyList(commodityId);
-        return Constant.ADD_TO_BUYLIST;
-    }
-
-    public String addToBuyList(String username, String commodityId) throws CustomException {
-        var user =getElementById(username);
-        CommodityManager.getInstance().buy(commodityId);
-        user.addToUserBuyList(commodityId);
-        return Constant.ADD_TO_BUYLIST;
-    }
-
-
 
     public boolean isEmailExists(String email){
         for(User user: objectMap.values()){

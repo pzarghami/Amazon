@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ie.Constant;
 import ie.exeption.CustomException;
-import ie.provider.ProviderManager;
+
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -108,9 +108,7 @@ public class Commodity {
         return false;
     }
     public  boolean isPrefixOfYourName(String name){
-            if(this.name.startsWith(name))
-                return true;
-        return false;
+        return this.name.contains(name);
     }
     public void buy()throws CustomException{
         if(this.inStock<=0)
@@ -118,7 +116,7 @@ public class Commodity {
         this.inStock -= 1;
     }
 
-    public void cancelBuying()throws CustomException{
+    public void cancelBuying(){
         inStock +=1;
     }
     public float addRate(String username,float rate) throws CustomException {
@@ -128,7 +126,6 @@ public class Commodity {
             sum += map.getValue();
         }
         this.rate = sum / this.commodityRateMap.size();
-        var provider= ProviderManager.getInstance().getElementById(String.valueOf(provideId));
         return this.rate;
 
     }
@@ -137,9 +134,7 @@ public class Commodity {
        comments.add(id);
     }
     public boolean isItInYourPriceRange(float startPrice, float finishPrice){
-        if(startPrice <= this.price && this.price <= finishPrice)
-            return true;
-        return false;
+        return startPrice <= this.price && this.price <= finishPrice;
     }
 
 }

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ie.*;
 import ie.commodity.CommodityManager;
 import ie.exeption.CustomException;
-import ie.user.UserManager;
+
 
 import java.util.ArrayList;
 
@@ -29,7 +29,6 @@ public class CommentManager extends Manager<Comment> {
     public String addElement(Comment newObject) throws CustomException {
         var objectId = newObject.getId();
         var commodityId=newObject.getCommodityId();
-        var username=newObject.getCommentUsernameOwner();
         if(!CommodityManager.getInstance().isIdValid(String.valueOf(commodityId)))
             throw new CustomException(Constant.CMD_NOT_FOUND);
         if (isIdValid(objectId)) {
@@ -52,25 +51,5 @@ public class CommentManager extends Manager<Comment> {
             objectIds.add(addElement(deserializedObject));
         }
         return objectIds;
-    }
-
-    public String addComment(String jsonData) throws JsonProcessingException, CustomException {
-        String userEmail = mapper.readTree(jsonData).get("userEmail").asText();
-        int commodityId = mapper.readTree(jsonData).get("commodityId").asInt();
-        if(!CommodityManager.getInstance().isIdValid(String.valueOf(commodityId)))
-            throw new CustomException(Constant.CMD_NOT_FOUND);
-        if(!UserManager.getInstance().isEmailExists(userEmail))
-            throw new CustomException(Constant.USR_NOT_FOUND);
-        var newComment = mapper.readValue(jsonData, Comment.class);
-        this.objectMap.put(newComment.getId(),newComment);
-
-        return Constant.COMMENT_ADD;
-    }
-    public void addVote(String commentId, String userEmailId, int vote) throws CustomException {
-        if (!isIdValid(commentId)) {
-            throw new CustomException(Constant.COMMENT_NOT_FOUND);
-        }
-        var comment= this.objectMap.get(commentId);
-        comment.voteComment(userEmailId,vote);
     }
 }

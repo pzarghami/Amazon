@@ -24,7 +24,10 @@ public class CommoditiesList extends Controller {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        request.getRequestDispatcher(Constant.JSP.COMMODITIES).forward(request, response);
+        if(!Baloot.isLoggedIn())
+            response.sendRedirect(Constant.URLS.LOGIN);
+        else
+            request.getRequestDispatcher(Constant.JSP.COMMODITIES).forward(request, response);
     }
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)

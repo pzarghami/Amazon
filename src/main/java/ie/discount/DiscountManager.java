@@ -1,7 +1,6 @@
 package ie.discount;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import ie.JsonHandler;
 import ie.Manager;
 import ie.exeption.CustomException;
@@ -11,12 +10,10 @@ import java.util.ArrayList;
 public class DiscountManager extends Manager<Discount>{
 
     private final JsonHandler<Discount> jsonMapper;
-    private final ObjectMapper mapper;
     private static DiscountManager instance;
 
     public DiscountManager () {
         jsonMapper = new DiscountJsonHandler();
-        mapper = new ObjectMapper();
     }
 
     public static DiscountManager getInstance(){

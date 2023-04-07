@@ -3,11 +3,7 @@ package ie.commodity;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import ie.*;
-import ie.commodity.sorts.SortByScore;
 import ie.exeption.CustomException;
 import ie.provider.ProviderManager;
 import ie.user.UserManager;
@@ -70,26 +66,6 @@ public class CommodityManager extends Manager<Commodity> {
         commodity.buy();
     }
 
-    public void cancelBuying(String commodityId)throws CustomException{
-        if(!isIdValid(commodityId))
-            throw new CustomException(Constant.CMD_NOT_FOUND);
-        var commodity=objectMap.get(commodityId);
-        commodity.cancelBuying();
-    }
-
-
-
-    public float addRate(String commodityId, String username, int rate) throws CustomException {
-        if(rate >10 || rate <1)
-            throw new CustomException(Constant.OUT_OF_RANGE_RATE);
-        if(!isIdValid(String.valueOf(commodityId)))
-            throw new CustomException(Constant.CMD_NOT_FOUND);
-        if(!UserManager.getInstance().isIdValid(username))
-            throw new CustomException(Constant.USR_NOT_FOUND);
-
-        return objectMap.get(commodityId).addRate(username,rate);
-    }
-
     public ArrayList<String> getCommoditiesListByName(String prefix){
         ArrayList <String> commoditiesListByName = new ArrayList<>();
         for (var pair : objectMap.entrySet()) {
@@ -106,14 +82,6 @@ public class CommodityManager extends Manager<Commodity> {
                     commodityByCategory.add(pair.getKey());
             }
         return commodityByCategory;
-    }
-    public ArrayList<String> getCommoditiesByPrice(float startPrice, float finishPrice){
-        ArrayList <String> commodityByCatgory = new ArrayList<>();
-        for (var pair : objectMap.entrySet()) {
-            if (pair.getValue().isItInYourPriceRange(startPrice,finishPrice))
-                commodityByCatgory.add(pair.getKey());
-        }
-        return commodityByCatgory;
     }
     public void addFilters(String filterName,String value) throws CustomException {
         ArrayList<String> commoditiesId=new ArrayList<>();
@@ -156,12 +124,12 @@ public class CommodityManager extends Manager<Commodity> {
     }
     public ArrayList<String> calculateSuggestedProducts(String commodityId) throws CustomException {
         var commodity=getElementById(commodityId);
-        var commodityCategorys= commodity.getCategories();
+        var commodityCategory= commodity.getCategories();
         HashMap<String,Float> suggestedCommoditiesId=new HashMap<>();
         for (var pair : objectMap.entrySet()){
             if(String.valueOf(pair.getValue().getId()).equals(commodityId))
                 continue;
-            if(pair.getValue().isYourCategory(commodityCategorys))
+            if(pair.getValue().isYourCategory(commodityCategory))
                 suggestedCommoditiesId.put(pair.getKey(), 11+ pair.getValue().getRate());
             else
                 suggestedCommoditiesId.put(pair.getKey(), pair.getValue().getRate());
