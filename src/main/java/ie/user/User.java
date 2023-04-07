@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ie.Constant;
+import ie.discount.DiscountManager;
 import ie.exeption.CustomException;
 import ie.commodity.CommodityManager;
 
@@ -18,11 +19,11 @@ public class User {
     private String email;
     private String birthDate;
     private String address;
+    private String discountCode;
     private int credit;
-    private final int discount;
 
     private final ArrayList<Integer> buyList;
-
+    private final ArrayList<String> discountCodeUsed;
     private final ArrayList<String> userBuyList;
     private final ArrayList<String> userPurchasedList;
 
@@ -32,7 +33,11 @@ public class User {
         this.buyList = new ArrayList<>();
         this.userBuyList = new ArrayList<>();
         this.userPurchasedList = new ArrayList<>();
-        this.discount = 0;
+        this.discountCodeUsed = new ArrayList<>();
+        this.discountCode = "";
+        this.userBuyList.add("1");
+        this.userBuyList.add("2");
+        this.userBuyList.add("3");
     }
 
     @JsonProperty(value = "username", required = true)
@@ -123,8 +128,12 @@ public class User {
             var commodity = commodityManager.getElementById(commodityId);
             sum = sum + commodity.getPrice();
         }
+        if(!discountCode.equals("")){
+        var discount = DiscountManager.getInstance().getElementById(discountCode).getDiscountAmount();
         var discountAmount = (sum/100)*discount;
         return sum - discountAmount;
+        }
+        return sum;
 
     }
 
@@ -152,9 +161,21 @@ public class User {
             userPurchasedList.addAll(userBuyList);
             userBuyList.clear();
             this.credit -= sum;
+            if(!discountCode.equals("")) {
+                this.discountCodeUsed.add(discountCode);
+                discountCode = "";
+            }
             return true;
         }
+    }
 
+    public void setDiscount(String discountCode) throws CustomException {
+
+        if(!DiscountManager.getInstance().isIdValid(discountCode))
+            throw new CustomException("discount not found.");
+
+        if(!discountCodeUsed.contains(discountCode))
+            this.discountCode = discountCode;
     }
 
     public boolean isYourEmail(String email) {

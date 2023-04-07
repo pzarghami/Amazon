@@ -49,7 +49,9 @@ public class UserBuyList extends Controller {
                     response.sendRedirect(Constant.URLS.BUYLIST);
                     break;
                 case "discount":
-                    response.sendRedirect(Constant.URLS.ROOT);
+                    var discountCode = request.getParameter("discount_code");
+                    Baloot.loggedInUser.setDiscount(discountCode);
+                    response.sendRedirect(Constant.URLS.BUYLIST);
                     break;
                 case "payment":
                     if(Baloot.loggedInUser.buy()){
