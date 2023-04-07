@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.ObjectStreamException;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet(Constant.URLS.BUYLIST)
 public class UserBuyList extends Controller {
@@ -38,13 +40,27 @@ public class UserBuyList extends Controller {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
         var action = request.getParameter("action");
-        var commodityId = request.getParameter("commodity_id");
+        Map<String,String> errorMessages = new HashMap<>();
         try{
-            if(action.equals("delete")){
-                UserManager.getInstance().removeFromBuyList(Baloot.loggedInUser.getUsername(),commodityId);
-                response.sendRedirect(Constant.URLS.BUYLIST);
+            switch (action) {
+                case "delete":
+                    var commodityId = request.getParameter("commodity_id");
+                    UserManager.getInstance().removeFromBuyList(Baloot.loggedInUser.getUsername(), commodityId);
+                    response.sendRedirect(Constant.URLS.BUYLIST);
+                    break;
+                case "discount":
+                    response.sendRedirect(Constant.URLS.ROOT);
+                    break;
+                case "payment":
+                    if(Baloot.loggedInUser.buy()){
+                        request.getRequestDispatcher(Constant.JSP._200).forward(request,response);
+                    }
+                    else {
+                        errorMessages.put("Payment failed", "credit is not enough");
+                        send404Response(request, response, errorMessages);
+                    }
+                    break;
             }
-
         }catch (CustomException e){
             sendBadRequestResponse(request,response,null);
         }

@@ -50,8 +50,8 @@
     </li>
     <li>
         <form action="" method="POST">
-            <label>Submit & Pay</label>
-            <input id="form_payment" type="hidden" name="userId" value="Farhad">
+            <input id="form_payment" type="hidden" name="username" value="<%= username %>">
+            <input type="hidden" id="payment_form_action" name="action" value="payment">
             <button type="submit">Payment</button>
         </form>
     </li>
@@ -100,4 +100,10 @@
     </tr>
     <%}%>
     </tbody></table>
+<br><br>
+<form action="" method="POST">
+    <label>Inter discount code</label>
+    <input type="text" name="discount_code" value="">
+    <button type="submit" name="action" value="discount">apply</button>
+</form>
 </body></html>

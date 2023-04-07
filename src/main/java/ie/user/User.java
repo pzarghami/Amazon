@@ -32,10 +32,7 @@ public class User {
         this.buyList = new ArrayList<>();
         this.userBuyList = new ArrayList<>();
         this.userPurchasedList = new ArrayList<>();
-        this.discount = 10;
-        userBuyList.add("1");
-        userBuyList.add("2");
-        userBuyList.add("3");
+        this.discount = 0;
     }
 
     @JsonProperty(value = "username", required = true)
@@ -148,12 +145,7 @@ public class User {
     }
 
     public boolean buy() throws CustomException {
-        var commodityManager = CommodityManager.getInstance();
-        float sum = 0;
-        for (var commodityId : this.userBuyList) {
-            var commodity = commodityManager.getElementById(commodityId);
-            sum = sum + commodity.getPrice();
-        }
+        var sum = this.getCurrentBuyListPrice();
         if (sum > this.credit)
             return false;
         else {
