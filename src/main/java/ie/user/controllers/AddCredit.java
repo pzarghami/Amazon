@@ -17,7 +17,10 @@ import java.util.Map;
 public class AddCredit extends Controller{
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)throws IOException, ServletException{
-        request.getRequestDispatcher(Constant.JSP.CREDIT).forward(request,response);
+        if(Baloot.isLoggedIn())
+            request.getRequestDispatcher(Constant.JSP.CREDIT).forward(request,response);
+        else
+            response.sendRedirect(Constant.URLS.LOGIN);
     }
 
     @Override
@@ -39,7 +42,7 @@ public class AddCredit extends Controller{
             send404Response(request, response, errorMessages);
         }
         else {
-            response.sendRedirect(Constant.URLS.ROOT);
+            request.getRequestDispatcher(Constant.JSP._200).forward(request,response);
         }
 
     }

@@ -19,11 +19,12 @@ public class User {
     private String birthDate;
     private String address;
     private int credit;
+    private final int discount;
 
-    private ArrayList<Integer> buyList;
+    private final ArrayList<Integer> buyList;
 
-    private ArrayList<String> userBuyList;
-    private ArrayList<String> userPurchasedList;
+    private final ArrayList<String> userBuyList;
+    private final ArrayList<String> userPurchasedList;
 
     @JsonCreator
     private User() {
@@ -31,7 +32,10 @@ public class User {
         this.buyList = new ArrayList<>();
         this.userBuyList = new ArrayList<>();
         this.userPurchasedList = new ArrayList<>();
-
+        this.discount = 10;
+        userBuyList.add("1");
+        userBuyList.add("2");
+        userBuyList.add("3");
     }
 
     @JsonProperty(value = "username", required = true)
@@ -85,17 +89,17 @@ public class User {
     }
 
     @JsonGetter(value = "birthDate")
-    private String getBirthDate() {
+    public String getBirthDate() {
         return this.birthDate;
     }
 
     @JsonGetter(value = "address")
-    private String getAddress() {
+    public String getAddress() {
         return this.address;
     }
 
     @JsonGetter(value = "credit")
-    private int getCredit() {
+    public int getCredit() {
         return this.credit;
     }
 
@@ -109,18 +113,30 @@ public class User {
         return this.userPurchasedList;
     }
 
-
-
     public void addToUserBuyList(String commodityId) throws CustomException {
         if (userBuyList.contains(commodityId))
             throw new CustomException(Constant.DUPLICATE_COMMODITY);
         this.userBuyList.add(commodityId);
     }
+
+    public float getCurrentBuyListPrice() throws CustomException {
+        var commodityManager = CommodityManager.getInstance();
+        float sum = 0;
+        for (var commodityId : this.userBuyList) {
+            var commodity = commodityManager.getElementById(commodityId);
+            sum = sum + commodity.getPrice();
+        }
+        var discountAmount = (sum/100)*discount;
+        return sum - discountAmount;
+
+    }
+
     public void isYourPassword(String pass) throws CustomException {
         if(pass.equals(this.password))
             return;
         throw new CustomException("passWordNotFound");
     }
+
     public void removeFromUserBuyList(String commodityId) throws CustomException {
 
         this.userBuyList.remove(commodityId);
@@ -148,7 +164,6 @@ public class User {
         }
 
     }
-
 
     public boolean isYourEmail(String email) {
         return Objects.equals(this.email, email);

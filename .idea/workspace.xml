@@ -10,8 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f8ad945-d01f-466d-b9d9-454d70e2a0af" name="Default Changelist" comment="delete hidden files">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ie/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/Constant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ie/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ie/user/controllers/AddCredit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/user/controllers/AddCredit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/credit/credit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/credit-views/credit.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/user-views/watchList.jsp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,15 +25,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="farzin" />
+        <entry key="$PROJECT_DIR$" value="Phase_3" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -83,17 +87,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -180,6 +173,7 @@
         <item itemvalue="Application.Interface" />
         <item itemvalue="Application.Interface" />
         <item itemvalue="Application.Interface" />
+        <item itemvalue="Application.Interface" />
       </list>
     </recent_temporary>
   </component>
@@ -202,6 +196,7 @@
       <workItem from="1680624752787" duration="2632000" />
       <workItem from="1680690407977" duration="298000" />
       <workItem from="1680774850014" duration="1367000" />
+      <workItem from="1680828523478" duration="371000" />
     </task>
     <task id="LOCAL-00001" summary="change git ignore">
       <created>1680692717127</created>
@@ -217,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680692803465</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="delete hidden files">
+      <created>1680780318551</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1680780318551</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -237,6 +239,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="change git ignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="change git ignore" />
+    <MESSAGE value="delete hidden files" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete hidden files" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ie/user/controllers/UserBuyList.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
