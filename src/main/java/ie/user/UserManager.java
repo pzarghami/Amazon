@@ -79,24 +79,6 @@ public class UserManager extends  Manager<User>{
         user.addToUserBuyList(commodityId);
         return Constant.ADD_TO_BUYLIST;
     }
-    public String removeFromBuyList(String username, String commodityId) throws CustomException {
-
-        var user =getElementById(username);
-        user.removeFromUserBuyList(commodityId);
-        CommodityManager.getInstance().cancelBuying(commodityId);
-        return Constant.RMV_FROM_BUYLIST;
-    }
-
-    public String removeFromBuyList(String jsonData)throws JsonProcessingException, CustomException{
-        var jsonNode=mapper.readTree(jsonData);
-        String username = jsonNode.get("username").asText();
-        String commodityId = jsonNode.get("commodityId").asText();
-        var user = getElementById(username);
-        user.removeFromUserBuyList(commodityId);
-        CommodityManager.getInstance().cancelBuying(commodityId);
-        return Constant.RMV_FROM_BUYLIST;
-    }
-
 
 
 

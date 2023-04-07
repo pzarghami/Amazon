@@ -26,7 +26,6 @@ public class Commodity extends Controller {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-
         var pathParts = splitPathParams(request.getPathInfo());
 
         if(pathParts!=null) {

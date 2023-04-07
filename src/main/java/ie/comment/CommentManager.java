@@ -32,8 +32,6 @@ public class CommentManager extends Manager<Comment> {
         var username=newObject.getCommentUsernameOwner();
         if(!CommodityManager.getInstance().isIdValid(String.valueOf(commodityId)))
             throw new CustomException(Constant.CMD_NOT_FOUND);
-        if(!UserManager.getInstance().isIdValid(username))
-            throw new CustomException(Constant.USR_NOT_FOUND);
         if (isIdValid(objectId)) {
             throw new CustomException("ObjectAlreadyExists");
         }

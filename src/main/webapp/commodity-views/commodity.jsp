@@ -81,7 +81,7 @@
       </tr>
       <% for (Comment comment : comments){%>
       <tr>
-          <td>@<%= comment.getCommentUsernameOwner() %></td>
+          <td><%= comment.getCommentUsernameOwner() %></td>
           <td><%= comment.getText()%></td>
           <td><%= comment.getDate()%></td>
           <td>

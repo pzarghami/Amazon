@@ -20,7 +20,14 @@ public class Comment {
     private HashMap<String, Integer> userVoteMap;
     public static Integer lastId = 0;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+
     @JsonCreator
+    private Comment() {
+        this.id = String.valueOf(++lastId);
+        this.userVoteMap = new HashMap<>();
+        this.commentLikes = 0;
+        this.commentDislikes = 0;
+    }
     public Comment(String commodityId, String username, String text) {
         this.id = String.valueOf(++lastId);
         this.userVoteMap = new HashMap<>();

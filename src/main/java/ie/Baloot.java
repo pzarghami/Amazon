@@ -87,9 +87,6 @@ public class Baloot {
         commodityManager.buy(String.valueOf(commodityId));
     }
 
-    public void cancelBuying(int commodityId) throws CustomException {
-        commodityManager.cancelBuying(String.valueOf(commodityId));
-    }
 
     public String getResultCommand() {
         return this.resultCommand;
