@@ -1,0 +1,125 @@
+.product-box {
+    background-color: #F5F5F5;
+    margin: 0;
+    padding: 0 2%;
+    width: 100%;
+
+}
+
+.product-container {
+    width: 100%;
+    margin: 0;
+    background-color: #F5F5F5;
+
+}
+
+.product-img {
+    width: 46.4vw;
+    height: 60.62vh;
+
+
+    /* position: relative; */
+}
+
+.product-img img {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+
+}
+
+.info-header {
+    font-size: 3.62rem;
+    line-height: 70px;
+    text-align: center;
+
+
+    color: #593C1C;
+}
+
+.info-stock {
+
+    font-size: 1rem;
+    line-height: 2.01vh;
+
+    margin-top: 0.4vh;
+
+    color: #C82525;
+}
+
+.info-container span {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    margin-left: 1.5vw;
+}
+
+.info-container .info-provider {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+
+}
+
+.product-category-text {
+    font-size: 1.5rem;
+    margin-left: 1, 5vw;
+
+    color: #593C1C;
+}
+
+.product-cat-showmore {
+    font-size: 1.5rem;
+    margin-left: 1, 5vw;
+
+    color: #A97B47;
+    ;
+}
+
+.add-to-card-box {
+    height: 9.8vh;
+    width: 38.2vw;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    border-radius: 6px;
+    margin-top: 5vh;
+    margin-left: 3vw;
+    display: flex;
+    align-items: center;
+}
+
+.add-to-card-box .credit {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.25rem;
+    line-height: 44px;
+    /* identical to box height */
+
+
+
+    color: #593C1C;
+
+}
+
+.add-to-card {
+    width: 10vw;
+    height: 3.2vh;
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border: 1px solid #593C1C;
+    border-radius: 15px;
+}
+
+.add-to-card span {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 2.18vh;
+    text-align: center;
+    margin-left: 5vw;
+
+    color: #593C1C;
+}
