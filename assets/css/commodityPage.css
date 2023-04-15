@@ -14,8 +14,9 @@
 }
 
 .product-img {
-    width: 46.4vw;
-    height: 60.62vh;
+    width: 48.35vw;
+    height: 84.83vh;
+    margin-top: 2vh;
 
 
     /* position: relative; */
@@ -38,14 +39,50 @@
     color: #593C1C;
 }
 
-.info-stock {
+.info-star-img {
+    width: 5.2vw;
+    height: 5.09vh;
+    position: absolute;
+}
 
+.info-stock {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    margin-left: 1.5vw;
     font-size: 1rem;
     line-height: 2.01vh;
 
     margin-top: 0.4vh;
 
     color: #C82525;
+}
+
+.info-star {
+    margin-left: 25vw;
+}
+
+.star-img {
+    width: 2.6vw;
+    height: 5.4vh;
+}
+
+.star-num {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2rem;
+    color: #593C1C;
+
+}
+
+.star-count {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.5rem;
+
+    color: #909090
 }
 
 .info-container span {
@@ -103,23 +140,287 @@
 
 }
 
-.add-to-card {
-    width: 10vw;
-    height: 3.2vh;
-    box-sizing: border-box;
-    background: #FFFFFF;
-    border: 1px solid #593C1C;
-    border-radius: 15px;
-}
 
-.add-to-card span {
+.add-to-card button {
+    border-radius: 13px;
+    border: 1px solid #593C1C;
+    padding: 4px 8px;
+    background: FFFFFF;
+    font-size: 1.5rem;
+    cursor: pointer;
+    text-align: center;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 1.5rem;
-    line-height: 2.18vh;
-    text-align: center;
-    margin-left: 5vw;
+    color: #593C1C;
+    margin-left: 8vw;
+}
 
+.info-container .rating span {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 3.07vh;
+    /* identical to box height */
+
+    text-align: center;
+    color: #000000;
+}
+
+.info-container .submit button {
+    background: #593C1C;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+    cursor: pointer;
+    padding: 6.9px 10px;
+    text-align: center;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    color: #F7F0E9;
+}
+
+.comments {
+    background: #F5F5F5;
+}
+
+.comment-text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.75rem;
+    padding-top: 8vh;
+    margin-left: 4vw;
+
+    color: #593C1C;
+}
+
+.comment-num {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.75rem;
+    margin-left: 0.5vw;
+    padding-top: 8vh;
+
+    color: #909090;
+}
+
+.comment-container {
+
+
+    background: #FFFFFF;
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    /* border: 1px solid #593C1C; */
+    margin-left: 4vw;
+    width: 700vw;
+
+
+}
+
+.user-comment-text {
+    /* 32px */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2rem;
+    /* identical to box height */
+
+    color: #000000;
+
+}
+
+.user-comment-date {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.25rem;
+    /* 18px */
+
+    color: #909090;
+}
+
+.user-comment-username {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.5rem;
+    /* 22px */
+    margin-left: 0.5vw;
+
+    color: #909090;
+}
+
+.comment-rate-text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.3rem;
+    /* 22px */
+
+    color: #593C1C;
+}
+
+.comment-rate-num {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    /* 16px */
+    margin-left: 0.5vw;
+}
+
+.comment-box {
+
+    margin-left: 4vw;
+    border-radius: 15px;
+    margin-top: 1vh;
+    background-color: white;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+}
+
+.comment-text-box {
+    height: 10vh;
+    width: 74.4vw;
+    background-color: #F5F5F5;
+    ;
+    border-radius: 15px;
+    margin: 2rem;
+}
+
+.comment-box-header {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.75rem;
+    margin-left: 0.5vw;
+    padding-top: 0.5vh;
+
+    color: #593C1C;
+}
+
+.submit-button {
+    background: #593C1C;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+    cursor: pointer;
+    padding: 6.9px 10px;
+    text-align: center;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    color: #F7F0E9;
+}
+
+.recomendation-box {
+    background: #F5F5F5;
+
+}
+
+.recomm-text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2rem;
+    line-height: 4.42vh;
+    /* identical to box height */
+    margin-left: 4vw;
+    background: #F5F5F5;
+
+    color: #593C1C;
+}
+
+.products-container {
+    margin-top: 1vh;
+}
+
+.products-container .row {
+    margin: 0;
+    margin-bottom: 2.5vh;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    background: #FFFFFF;
+    border-radius: 15px;
+    margin: 1rem;
+    margin-left: 3vw;
+
+}
+
+
+
+.product .title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 3.6;
+    /* identical to box height */
+
+    margin-top: 0.5vh;
+    margin-left: 0.7vw;
+
+
+    color: #593C1C;
+}
+
+.product .stock {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 2.01vh;
+
+    margin-top: 0.4vh;
+    margin-left: 1.5vw;
+    color: #C82525;
+}
+
+.product img {
+    width: 17.1vw;
+    height: 29.6vh;
+}
+
+.product .actions {
+    display: flex;
+    margin-top: 1.8vh;
+
+}
+
+.product .price {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 29px;
+    /* identical to box height */
+
+    text-align: center;
+
+    margin-left: 1.9vw;
+    color: #593C1C;
+}
+
+.product .add-to-cart {
+    width: 7.8vw;
+    height: 4.6vh;
+    border: 1px solid #593C1C;
+    border-radius: 15px;
+
+    margin-left: 3.8vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 24px;
+    text-align: center;
     color: #593C1C;
 }
