@@ -1,0 +1,11 @@
+.page-container {}
+
+.info {
+    width: 83.1vw;
+    height: 32.3vh;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    border-radius: 15px;
+    margin-top: 8.2rem;
+    margin-left: 7.1rem;
+}
