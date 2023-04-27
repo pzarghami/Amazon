@@ -5,23 +5,23 @@ target
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+Front/baloot/node_modules
+Front/baloot/.pnp
+Front/baloot/.pnp.js
 
 # testing
-/coverage
+Front/baloot/coverage
 
 # production
-/build
+Front/baloot/build
 
 # misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+Front/baloot.DS_Store
+Front/baloot.env.local
+Front/baloot.env.development.local
+Front/baloot.env.test.local
+Front/baloot.env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+Front/baloot/npm-debug.log*
+Front/baloot/yarn-debug.log*
+Front/baloot/yarn-error.log*
