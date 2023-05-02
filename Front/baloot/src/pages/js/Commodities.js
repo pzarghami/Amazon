@@ -1,7 +1,4 @@
 
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 import logo from '../../images/toggle.png'
 import '../css/commodities.css'
 import '../css/root.css'
@@ -10,6 +7,7 @@ import '../css/footer.css'
 
 export default function Commodities() {
     return (
+        <>
             <div class="page-container">
                 <div class="sort-container">
                     <span class="available-sort-container">Available commodities</span>
@@ -25,7 +23,7 @@ export default function Commodities() {
                         <div class=" ml-0 product">
                             <span class="title">Huawei nova 9</span>
                             <span class="stock">1 left in stock</span>
-                            <img src=".../../images/product.png" />
+                            <img src="../../images/product.png" />
                             <div class="actions">
                                 <span class="price">
                                     300$
@@ -139,6 +137,7 @@ export default function Commodities() {
                     </div>
                 </div>
             </div>
+        </>
     )
 }
 

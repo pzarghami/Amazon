@@ -1,4 +1,6 @@
 @import 'bootstrap';
+
+
 .floating-card {
   display: flex;
   justify-content: center;

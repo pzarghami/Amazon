@@ -1,11 +1,10 @@
 
 @import 'bootstrap';
-body {
+.body {
     background: #A97B47;
     color: #fff;
     font-family: 'Open Sans', sans-serif;
-    max-height: 700px;
-    overflow: hidden;
+    height: 100vh;
 }
 
 .c {

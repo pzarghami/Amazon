@@ -6,7 +6,7 @@ import 'bootstrap'
 export default function NotFound404() {
 
     return (
-        <div>
+        <div className="body">
             <div id="clouds">
                 <div class="cloud x1"></div>
                 <div class="cloud x1_5"></div>
