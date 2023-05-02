@@ -1,0 +1,22 @@
+.footer {
+  margin-top: 1.5vh;
+  width: 100vw;
+  height: 5.5vh;
+  background-color: #593C1C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 7.7rem;
+}
+
+.footer span {
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 29px;
+  /* identical to box height */
+
+  color: #FFFFFF;
+}
