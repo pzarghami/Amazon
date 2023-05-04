@@ -55,7 +55,7 @@ export default function Login() {
                 type="username"
                 id="form2Example11"
                 className="form-control"
-                onChange={e=> {setUser(e.target.value)}}
+                onChange={e => {setUser(e.target.value)}}
                 />
             </div>
 
@@ -65,7 +65,6 @@ export default function Login() {
                 type="password"
                 id="form2Example22"
                 className="form-control"
-                
                 onChange={e => { setPassword(e.target.value) }}
                  />
 

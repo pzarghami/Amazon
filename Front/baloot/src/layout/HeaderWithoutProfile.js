@@ -19,7 +19,7 @@ export default function HeaderWithoutProfile() {
                             <option value="cat">Category</option>
                         </select>
                         <input type="text" className='search-for' ></input>
-                        <img src={magnifier} alt="magnifier" />
+                        <img src={magnifier} alt="magnifier" type="submit" />
                     </form>
                 </>
             }
