@@ -15,45 +15,26 @@ public class CommodityDTO {
     private HashMap<String, Float> commodityRateMap;
     private ArrayList<String> comments;
 
-    public void setId(int id) {
-        this.id = id;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setProvideId(int provideId) {
-        this.provideId = provideId;
-    }
-    public void setPrice(float price) {
-        this.price = price;
-    }
-    public void setCategories(ArrayList<String> categories) {
-        this.categories = categories;
-    }
-    public void setRate(float rate) {
-        this.rate = rate;
-    }
-    public void setInStock(int inStock) {
-        this.inStock = inStock;
-    }
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-    public void setCommodityRateMap(HashMap<String, Float> commodityRateMap) {
-        this.commodityRateMap = commodityRateMap;
-    }
+    public void setId(int id) {this.id = id;}
+    public void setName(String name) {this.name = name;}
+    public void setProvideId(int provideId) {this.provideId = provideId;}
+    public void setPrice(float price) {this.price = price;}
+    public void setCategories(ArrayList<String> categories) {this.categories = categories;}
+    public void setRate(float rate) {this.rate = rate;}
+    public void setInStock(int inStock) {this.inStock = inStock;}
+    public void setImgUrl(String imgUrl) {this.imgUrl = imgUrl;}
+    public void setCommodityRateMap(HashMap<String, Float> commodityRateMap) {this.commodityRateMap = commodityRateMap;}
     public void setComments(ArrayList<String> comments) {
         this.comments = comments;
     }
+
     public int getId() {
         return id;
     }
     public String getName() {
         return name;
     }
-    public int getProvideId() {
-        return provideId;
-    }
+    public int getProvideId() {return provideId;}
     public float getPrice() {
         return price;
     }

@@ -1,5 +1,7 @@
 package Baloot.model.DTO;
 
+import Baloot.model.Commodity;
+
 import java.util.ArrayList;
 
 public class UserDTO {
@@ -10,10 +12,9 @@ public class UserDTO {
     private String address;
     private String discountCode;
     private int credit;
-    private ArrayList<Integer> buyList;
+    private ArrayList<Commodity> buyList;
     private ArrayList<String> discountCodeUsed;
-    private ArrayList<String> userBuyList;
-    private ArrayList<String> userPurchasedList;
+    private ArrayList<Commodity> userPurchasedList;
 
     public void setUsername(String username){
         this.username = username;
@@ -21,39 +22,22 @@ public class UserDTO {
     public void setPassword(String password){
         this.password = password;
     }
-    public void setEmail(String email){
-        this.email = email;
-    }
+    public void setEmail(String email){this.email = email;}
     public void setBirthDate(String birthDate){
         this.birthDate = birthDate;
     }
-    public void setAddress(String address){
-        this.address = address;
-    }
+    public void setAddress(String address){this.address = address;}
     public void setDiscountCode(String discountCode){
         this.discountCode = discountCode;
     }
     public void setCredit(int credit){
         this.credit = credit;
     }
-    public void setBuyList(ArrayList<Integer>buyList){
-        this.buyList = buyList;
-    }
-    public void setDiscountCodeUsed(ArrayList<String>discountCodeUsed){
-        this.discountCodeUsed = discountCodeUsed;
-    }
-    public void setUserBuyList(ArrayList<String>userBuyList){
-        this.userBuyList = userBuyList;
-    }
-    public void setUserPurchasedList(ArrayList<String>userPurchasedList){
-        this.userPurchasedList = userPurchasedList;
-    }
-    public String getUsername(){
-        return this.username;
-    }
-    public String getPassword(){
-        return this.password;
-    }
+    public void setBuyList(ArrayList<Commodity>buyList){this.buyList = buyList;}
+    public void setDiscountCodeUsed(ArrayList<String>discountCodeUsed){this.discountCodeUsed = discountCodeUsed;}
+    public void setUserPurchasedList(ArrayList<Commodity>userPurchasedList){this.userPurchasedList = userPurchasedList;}
+    public String getUsername(){return this.username;}
+    public String getPassword(){return this.password;}
     public String getEmail(){
         return this.email;
     }
@@ -69,18 +53,8 @@ public class UserDTO {
     public int getCredit(){
         return this.credit;
     }
-    public ArrayList<Integer>getBuyList(){
-        return this.buyList;
-    }
-
-    public ArrayList<String> getUserBuyList() {
-        return this.userBuyList;
-    }
-
-    public ArrayList<String> getUserPurchasedList() {
-        return this.userPurchasedList;
-    }
-
+    public ArrayList<Commodity>getBuyList(){return this.buyList;}
+    public ArrayList<Commodity> getUserPurchasedList() {return this.userPurchasedList;}
     public ArrayList<String> getDiscountCodeUsed() {
         return this.discountCodeUsed;
     }
