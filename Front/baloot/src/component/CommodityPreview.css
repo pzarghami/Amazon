@@ -1,7 +1,7 @@
 
 .product {
     width: 18.2vw;
-    height: 44.4vh;
+    height: 47.4vh;
     display: flex;
     background-color: #F5F5F5;
     flex-direction: column;
@@ -41,7 +41,7 @@
   
   .product img {
     width: 17.1vw;
-    height: 29.6vh;
+    height: 25.6vh;
   }
   
   .product .actions {
@@ -84,6 +84,6 @@
     font-size: 1.25rem;
     line-height: 24px;
     text-align: center;
-  
+    outline-color: #593C1C;
     color: #593C1C;
   }
