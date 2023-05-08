@@ -19,7 +19,7 @@ export default function NotFound404() {
                 <div class='_404'>400</div>
                     <div class='_1'>BAD</div>
                     <div class='_2'>REQUEST</div>
-                    <a class='btn' href='#'>BACK TO COMMODITIES</a>
+                    <a class='btn' href='/'>BACK TO COMMODITIES</a>
             </div>
         </div>
 

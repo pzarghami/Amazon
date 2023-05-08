@@ -34,12 +34,19 @@
     line-height: 29px;
     text-align: center;
     margin-left: 0.9vw;
-    border-radius: 60px;
+    border-radius: 50%;
     color: #593C1C;
     border:1px solid red;
 
 }
-
+.search-for {
+    background-color: #F7F0E9;
+    border-radius: 3%;
+    width: 100%;
+    border-color: #F7F0E9;
+    margin-left: 1vw;
+    height: 5vh;
+}
 
 .search-box img {
     width: 1.6vw;

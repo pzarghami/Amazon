@@ -16,7 +16,7 @@ export default function Header() {
         <img src={logo} alt="logo" />
         <span>Baloot</span>
       </div>
-      {location.pathname == "/commodities" ?
+      {localStorage.getItem('userLoggedIn') ?
         <HeaderWithoutProfile />
         :
         <HeaderProfile />

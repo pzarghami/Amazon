@@ -1,24 +1,55 @@
 
-.profile-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  cursor: pointer;
+.user-container {
+  display: flex;
+  align-items: center;
+
+  margin-left: 11.5vw;
+  margin-right: 2.1vw;
 }
 
-.porfile-dropdown-contianer {
-  width: 500px;
+.user-container .user-button {
+  width: 8.3vw;
+  height: 6.0vh;
+
+  background-color: #F7F0E9;
+  border-radius: 15px;
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin-right: 40px;
-  padding: 0;
+
+  margin-right: 0.7vw;
 }
 
-.show .profile-menu {
-  background-color: var(--transparent-primary-color);
-  display: flex;
-  flex-direction: column;
-  border-radius: 20px;
-  top: 70px;
-  right: 0;
+.user-container .user-button button {
+  border-radius: 13px;
+  border: 1px solid #F7F0E9;
+  padding: 4px 8px;
+  background: #F7F0E9;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-align: center;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  color: #A97B47;
+  margin-right: 0.7vw;
 }
+
+.user-container .user-button span {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.75rem;
+  line-height: 34px;
+  /* identical to box height */
+
+
+  color: #A97B47;
+
+}
+
+
+
+
+
+

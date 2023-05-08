@@ -12,7 +12,7 @@ export default function Login() {
 
   const [error, setError] = useState('');
 
-  const [username, setUser] = useState('');
+  const [username, setUser] = useState('Parmida');
   const [password, setPassword] = useState('');
 
   const handleLogin = async (e) => {
@@ -20,15 +20,16 @@ export default function Login() {
     setError('');
     const from = location.state?.from || '/commodities';
     try {
-      const data = { username, password };
+      localStorage.setItem('userId', username);
+      // const data = { username, password };
 
-      const response = await axios.post('/auth/login/', data);
+      // const response = await axios.post('/auth/login/', data);
 
-      if (response.data.status) {
-        localStorage.setItem('userLoggedIn', true);
-        localStorage.setItem('userId', username);
-        navigate(from, { replace: true });
-      }
+      // if (response.data.status) {
+      //   localStorage.setItem('userLoggedIn', true);
+      //   localStorage.setItem('userId', username);
+      //   navigate(from, { replace: true });
+      // }
 
     } catch (e) {
       setError('ایمیل یا رمز عبور صحیح نیست')
