@@ -22,9 +22,9 @@ export default function SearchBarHeader() {
     return (
         <>
             <form class="search-box" onSubmit={handleSearchSubmit}>
-                <select class="category">
-                    <option value="name" onClick={() => setFilterBy('name')}>Name</option>
-                    <option value="category" onClick={() => setFilterBy('category')}>Category </option>
+                <select value={filterBy} onChange={event => setFilterBy(event.target.value)} class="category">
+                    <option value="name" >Name</option>
+                    <option value="category" >Category </option>
                 </select>
                 <input type="text" className='search-for' placeholder="Search your product..."
                     aria-label="Search..."

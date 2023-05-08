@@ -1,5 +1,6 @@
 
-import logo from '../../images/toggle.png'
+import toggleOff from '../../images/toggle.png'
+import toggleOn from '../../images/toggle-on.png'
 import axios from "axios";
 import { useEffect, useInsertionEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -7,6 +8,7 @@ import CommodityPreview from '../../component/CommodityPreview';
 import '../css/commodities.css'
 import '../css/root.css'
 import '../css/footer.css'
+import userEvent from '@testing-library/user-event';
 
 const nameCompare = (a, b) => {
     if (a.name > b.name) return 1;
@@ -27,21 +29,74 @@ export default function Commodities() {
     const [filterBy, setFilterBy] = useState();
     const [searchValue, setSearchValue] = useState("");
     const [activeSorting, setSortingActive] = useState(0);
+    const [availableCommodities, setAvailableCommodities] = useState(0);
 
     const location = useLocation();
+
+    const filterName = (item) => {
+        return item.name.includes(searchValue);
+    };
+
+    const filterCat = (item) => {
+        for (var cat in item.categories) {
+            if (item.categories[cat].includes(searchValue)) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    const filterProvider = (item) => {
+        return item.providerId.includes(searchValue);
+    };
+    const filterAvailableCommodities = (item) => {
+        if (item.inStock != 0){
+
+            return true;
+        }
+        return false;
+    }
+    const getFilterFunc = (filterMode) => {
+        if (filterMode === "name") return filterName;
+
+        if (filterMode === "category") return filterCat;
+
+        if (filterMode == "inStock") return filterAvailableCommodities;
+
+    };
+
+    useEffect(() => {
+        if (location.search) {
+            const searchText = location.search;
+            const params = new URLSearchParams(searchText);
+
+            const filter = params.get("filterBy");
+            const value = params.get("searchValue");
+
+            setFilterBy(filter);
+            setSearchValue(value);
+        }
+    }, [location.search]);
+
+    useEffect(() => {
+
+        if (!commoditiesFetch || !commodities) return;
+        let newComm = commoditiesFetch.slice();
+        newComm = newComm.filter(getFilterFunc(filterBy));
+
+        setCommodities(newComm);
+    }, [filterBy, searchValue]);
 
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const response = await axios.get("commodities");
-                console.log(response);
                 const commoditiesList = response.data;
 
-                console.log(commoditiesList);
+
                 setFetchCommodities(commoditiesList);
                 setCommodities(commoditiesList);
-                console.log(commodities);
             } catch (e) {
                 console.log(e);
             }
@@ -65,13 +120,22 @@ export default function Commodities() {
         }
 
     }, [activeSorting]);
+    useEffect(() => {
+        if (!commoditiesFetch || !commodities) return;
+        let newComm = commoditiesFetch.slice();
+        newComm = newComm.filter(getFilterFunc("inStock"));
+        setCommodities(newComm);
+
+    }, [availableCommodities]);
 
     return (
         <>
             <div class="page-container">
                 <div class="sort-container">
                     <span class="available-sort-container">Available commodities</span>
-                    <img class="toggle-sort-container" src={logo} alt="toggle" />
+                    <img class="toggle-sort-container" onClick={() => setAvailableCommodities(~availableCommodities)}
+                        src={availableCommodities ? toggleOn : toggleOff}
+                        alt="toggle" />
                     <span class="sort-by-sort-container">sort by:</span>
                     {activeSorting ?
                         <>

@@ -518,5 +518,44 @@
             "inStock": 30,
             "image": "https://www.macmillandictionary.com/external/slideshow/thumb/36724_thumb.jpg"
         }
+    ],
+    "providers": [
+        {
+            "id": 1,
+            "name": "Vegetable Provider",
+            "registryDate": "2023-01-01",
+            "image": "https://www.macmillandictionaryblog.com/wp-content/uploads/2020/01/140887-1024x683.jpg"
+        },
+        {
+            "id": 2,
+            "name": "Phone Provider",
+            "registryDate": "2022-11-10",
+            "image": "https://images.anandtech.com/doci/9770/X-T30_DSF5320_678x452.jpg"
+        },
+        {
+            "id": 3,
+            "name": "Phone Accessory Provider",
+            "registryDate": "2020-02-25",
+            "image": "https://guide-images.cdn.ifixit.com/igi/j2OrUlQygRT6wRaY.large"
+        },
+        {
+            "id": 4,
+            "name": "Fruit Provider",
+            "registryDate": "2022-12-15",
+            "image": "https://www.macmillandictionaryblog.com/wp-content/uploads/2018/12/55153-810x535.jpg"
+        },
+        {
+            "id": 5,
+            "name": "Home and Kitchen Appliances Provider",
+            "registryDate": "2021-10-01",
+            "image": "https://vaya.in/wp-content/uploads/2021/05/10-Must-Have-Appliances-for-Easy-Kitchen-Chores.jpg"
+        },
+        {
+            "id": 6,
+            "name": "Dairy Provider",
+            "registryDate": "2022-11-11",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/0/00/%D0%A0%D1%96%D0%B7%D0%BD%D1%96_%D0%B2%D0%B8%D0%B4%D0%B8_%D0%BC%D0%BE%D0%BB%D0%BE%D1%87%D0%BD%D0%B8%D1%85_%D0%BF%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D1%96%D0%B2_%D1%83%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D1%81%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B2%D0%B8%D1%80%D0%BE%D0%B1%D0%BD%D0%B8%D1%86%D1%82%D0%B2%D0%B0.jpg"
+        }
     ]
+
 }
