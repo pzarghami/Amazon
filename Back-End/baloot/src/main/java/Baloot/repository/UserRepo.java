@@ -20,7 +20,6 @@ public class UserRepo extends Repo<User> {
             throw new CustomException("Object exist");
         }
         this.objectMap.put(objectId,newObject);
-        return;
     }
 
     @Override

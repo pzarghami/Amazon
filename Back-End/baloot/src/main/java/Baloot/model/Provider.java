@@ -18,6 +18,8 @@ public class Provider {
         this.commoditiesList = new ArrayList<>();
     }
 
+    public int getId(){return this.id;}
+
     public void addCommodity(Commodity commodity) {
         commoditiesList.add(commodity);
     }
