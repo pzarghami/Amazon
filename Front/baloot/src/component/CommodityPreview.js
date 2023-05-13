@@ -33,7 +33,7 @@ export default function CommodityPreview(props) {
         }
     }
     const handleLinkToUser =  async () => {
-        navigate('/users/' + id);
+        navigate('/commodities/' + id);
     }
     return (
         <div class=" ml-0 product">

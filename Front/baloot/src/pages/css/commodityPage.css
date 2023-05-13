@@ -23,8 +23,6 @@
 }
 
 .product-img img {
-    width: 100%;
-    height: 100%;
     overflow: hidden;
     position: absolute;
 
@@ -155,7 +153,27 @@
     color: #593C1C;
     margin-left: 8vw;
 }
-
+.add-to-card .box-of-card {
+    border-radius: 13px;
+    border: 1px solid #593C1C;
+    padding: 4px 8px;
+    background: FFFFFF;
+    font-size: 1.5rem;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    color: #593C1C;
+    margin-left: 8vw;
+}
+.popup-content {
+    padding: 30px;
+    color: #787878;
+    background-color: #fcf7f8;
+    border: 1px solid rgba(0,0,0,.05);
+    border-radius: 15px;
+}
 .info-container .rating span {
     font-family: 'Inter';
     font-style: normal;

@@ -8,7 +8,6 @@ import CommodityPreview from '../../component/CommodityPreview';
 import '../css/commodities.css'
 import '../css/root.css'
 import '../css/footer.css'
-import userEvent from '@testing-library/user-event';
 
 const nameCompare = (a, b) => {
     if (a.name > b.name) return 1;
