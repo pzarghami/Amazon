@@ -32,7 +32,7 @@ export default function CommentForm(props) {
             Comments
           </div>
           <div class="comment-num">
-            ({commodity.comments.size})
+            ({Object.keys(commodity.comments).length})
           </div><br /><br />
         </div>
         {commodity &&

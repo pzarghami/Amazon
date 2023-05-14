@@ -14,7 +14,7 @@ export default function CommodityPreview(props) {
         try {
             setError('');
             const data = { commodityId: id }
-            const response = await axios.post('/users/' + userId + '/watchlist/', data);
+            const response = await axios.post('/users/' + userId + '/buylist/', data);
         } catch (e) {
             console.log(e);
             if (e.response.data.message === "inStock") {

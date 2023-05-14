@@ -8,6 +8,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import RateCommodity from '../../component/RateCommodtiy'
 import AddToBuyListBox from '../../component/AddToBuyListBox'
 import CommentForm from '../../component/CommentForm';
+import CommodityPreview from '../../component/CommodityPreview'
 
 
 export default function Commodity() {
@@ -118,8 +119,21 @@ export default function Commodity() {
                             </div>
                         </div>
                     </div>
-                    <CommentForm  commodity={commodity}/>
-                    
+                    <CommentForm commodity={commodity} />
+                    <br />
+                    <div class="recomm-text">You also might like...</div>
+                    <div className="row p-5">
+                        {
+                            commodity.reccommendList.map((recCommodity) => (
+                                <CommodityPreview
+                                    id={recCommodity.id}
+                                    image={recCommodity.image}
+                                    name={recCommodity.name}
+                                    inStock={recCommodity.inStock}
+                                    price={recCommodity.price}
+                                />
+                            ))}
+                    </div>
                 </>
                 :
                 <div class="text-center mt-5">

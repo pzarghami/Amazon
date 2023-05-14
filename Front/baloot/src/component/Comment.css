@@ -4,10 +4,11 @@
 
     background: #FFFFFF;
     border-radius: 15px;
-    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    box-shadow: 0px 4px 4px rgba(65, 42, 42, 0.25);
     /* border: 1px solid #593C1C; */
     margin-left: 4vw;
-    width: 700vw;
+    margin-bottom: 1vh;
+
 
 
 }
