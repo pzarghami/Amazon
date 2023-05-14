@@ -6,27 +6,27 @@ import java.util.HashMap;
 public class CommodityDTO {
     private int id;
     private String name;
-    private int provideId;
+    private String provideName;
     private float price;
     private ArrayList<String> categories;
     private float rate;
     private int inStock;
     private  String imgUrl;
-    private HashMap<String, Float> commodityRateMap;
     private ArrayList<String> comments;
+    private Integer UserRate;
 
     public void setId(int id) {this.id = id;}
     public void setName(String name) {this.name = name;}
-    public void setProvideId(int provideId) {this.provideId = provideId;}
+    public void setProvideName(String provideName) {this.provideName = provideName;}
     public void setPrice(float price) {this.price = price;}
     public void setCategories(ArrayList<String> categories) {this.categories = categories;}
     public void setRate(float rate) {this.rate = rate;}
     public void setInStock(int inStock) {this.inStock = inStock;}
     public void setImgUrl(String imgUrl) {this.imgUrl = imgUrl;}
-    public void setCommodityRateMap(HashMap<String, Float> commodityRateMap) {this.commodityRateMap = commodityRateMap;}
     public void setComments(ArrayList<String> comments) {
         this.comments = comments;
     }
+    public void setUserRate(Integer userRate){this.UserRate = userRate;}
 
     public int getId() {
         return id;
@@ -34,7 +34,7 @@ public class CommodityDTO {
     public String getName() {
         return name;
     }
-    public int getProvideId() {return provideId;}
+    public String getProvideName() {return provideName;}
     public float getPrice() {
         return price;
     }
@@ -50,10 +50,8 @@ public class CommodityDTO {
     public String getImgUrl() {
         return imgUrl;
     }
-    public HashMap<String, Float> getCommodityRateMap() {
-        return commodityRateMap;
-    }
     public ArrayList<String> getComments() {
         return comments;
     }
+    public Integer getUserRate() {return UserRate; }
 }

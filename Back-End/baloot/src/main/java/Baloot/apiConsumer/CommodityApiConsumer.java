@@ -14,7 +14,6 @@ public class CommodityApiConsumer extends APIConsumer{
 
     @Override
     protected void loadRepo(JsonNode nodeArray) {
-
         var repo = CommodityRepo.getInstance();
         for(var node : nodeArray){
             try {
@@ -27,7 +26,7 @@ public class CommodityApiConsumer extends APIConsumer{
     }
 
     private Commodity makeNewCommodity(JsonNode node) throws CustomException {
-        int id = node.get("id").asInt();
+        String id = node.get("id").asText();
         String name = node.get("name").asText();
         String providerId = node.get("providerId").asText();
         var repo = ProviderRepo.getInstance();

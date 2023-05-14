@@ -25,7 +25,7 @@ public class UserAPIConsumer extends APIConsumer {
         String username = node.get("username").asText();
         String password = node.get("password").asText();
         String email = node.get("email").asText();
-        String birthdate = node.get("birthdate").asText();
+        String birthdate = node.get("birthDate").asText();
         String address = node.get("address").asText();
         int credit = node.get("credit").asInt();
         return new User(username,password,email,birthdate,address,credit);

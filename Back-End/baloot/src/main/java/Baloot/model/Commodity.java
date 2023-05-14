@@ -1,11 +1,15 @@
 package Baloot.model;
 
 import Baloot.model.DTO.CommentDTO;
+import Baloot.model.DTO.CommodityDTO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Commodity {
-    private int id;
+
+
+    private String id;
     private String name;
     private Provider provider;
     private float price;
@@ -14,8 +18,9 @@ public class Commodity {
     private int inStock;
     private String image;
     private ArrayList<Comment> comments;
+    private HashMap<String, Integer> userRateMap;
 
-    public Commodity(int id, String name, Provider provider,float price, ArrayList<String>categories, float rate, int inStock, String image){
+    public Commodity(String id, String name, Provider provider,float price, ArrayList<String>categories, float rate, int inStock, String image){
         this.id = id;
         this.name = name;
         this.provider = provider;
@@ -27,11 +32,33 @@ public class Commodity {
         this.comments = new ArrayList<>();
     }
 
-    public int getId(){return id;}
+    public String getId(){return id;}
     public float getPrice() {return price;}
+    public Provider getProvider(){return this.provider;}
 
     public void addComment(Comment comment){
         comments.add(comment);
+    }
+
+    public Integer getUserRate(String userId) {
+        if(!userRateMap.containsKey(userId)) {
+            return null;
+        }
+        return userRateMap.get(userId);
+    }
+
+    public CommodityDTO getDTO(){
+        var DTO = new CommodityDTO();
+        DTO.setId(Integer.parseInt(id));
+        DTO.setName(name);
+        DTO.setProvideName(provider.getName());
+        DTO.setPrice(price);
+        DTO.setCategories(categories);
+        DTO.setRate(rate);
+        DTO.setInStock(inStock);
+        DTO.setImgUrl(image);
+
+        return DTO;
     }
 
 

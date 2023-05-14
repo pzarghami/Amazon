@@ -19,6 +19,7 @@ public class Provider {
     }
 
     public int getId(){return this.id;}
+    public String getName(){return this.name;}
 
     public void addCommodity(Commodity commodity) {
         commoditiesList.add(commodity);
