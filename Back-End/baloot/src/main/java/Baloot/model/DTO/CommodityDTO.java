@@ -9,7 +9,7 @@ public class CommodityDTO {
     private String provideName;
     private float price;
     private ArrayList<String> categories;
-    private float rate;
+    private double rate;
     private int inStock;
     private  String imgUrl;
     private ArrayList<String> comments;
@@ -20,7 +20,7 @@ public class CommodityDTO {
     public void setProvideName(String provideName) {this.provideName = provideName;}
     public void setPrice(float price) {this.price = price;}
     public void setCategories(ArrayList<String> categories) {this.categories = categories;}
-    public void setRate(float rate) {this.rate = rate;}
+    public void setRate(double rate) {this.rate = rate;}
     public void setInStock(int inStock) {this.inStock = inStock;}
     public void setImgUrl(String imgUrl) {this.imgUrl = imgUrl;}
     public void setComments(ArrayList<String> comments) {
@@ -41,7 +41,7 @@ public class CommodityDTO {
     public ArrayList<String> getCategories() {
         return categories;
     }
-    public float getRate() {
+    public double getRate() {
         return rate;
     }
     public int getInStock() {

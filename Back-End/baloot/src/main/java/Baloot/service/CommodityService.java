@@ -9,13 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CommodityService {
-
 
     @RequestMapping(value = "/commodities/{id}", method = RequestMethod.GET, produces =  MediaType.APPLICATION_JSON_VALUE)
     public Response getCommodityInfo(@PathVariable(value = "id") String commodityId){
@@ -27,4 +25,13 @@ public class CommodityService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
     }
+    @RequestMapping(value = "/commodities/{id}/rate/{data}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response postCommodityRate(@PathVariable(value = "id") String commodityId,@PathVariable(value = "data") int rate){
+        try {
+            return new Response(true, "OK", CommodityDomainManager.getInstance().rateCommodity(commodityId,rate));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
+        }
+    }
+
 }

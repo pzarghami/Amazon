@@ -20,6 +20,12 @@ public class CommodityDomainManager {
         var commodity = CommodityRepo.getInstance().getElementById(commodityId);
         return getCommodityDTO(commodity);
     }
+    public CommodityDTO rateCommodity(String commodityId, int rate)throws CustomException{
+        var ratingUser = UserRepo.loggedInUser;
+        var commodity = CommodityRepo.getInstance().getElementById(commodityId);
+        commodity.updateCommodityRating(ratingUser.getUsername(),rate);
+        return getCommodityDTO(commodityId);
+    }
     private CommodityDTO getCommodityDTO(Commodity commodity){
         var DTO = commodity.getDTO();
         if(UserRepo.loggedInUser != null)
