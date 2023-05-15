@@ -77,7 +77,7 @@ export default function Commodity() {
                                     </div>
                                 </div>
                                 <span>by</span>
-                                <a href={"providers/" + commodity.id} class="info-provider">{commodity.providerId}</a>
+                                <a href={"/provider/" + 1} class="info-provider">{commodity.providerId}</a>
                                 <br />
                                 <span class="product-category-text">
                                     Category(s)

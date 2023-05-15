@@ -1,0 +1,16 @@
+.provider-container {
+    background-color: #FFFF;
+}
+.info-provider-container {
+    background-color: aqua;
+    width: 70vw;
+    height: 70vh;
+
+}
+.imp-provider{
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px rgba(65, 42, 42, 0.25);
+    width: 36.7vw;
+    height: 53.02vh;
+    position: center;
+}

@@ -5,6 +5,7 @@ import NotFound404 from "./pages/js/NotFound404";
 import Commodities from "./pages/js/Commodities";
 import Layout from "./layout/Layout";
 import Commodity from "./pages/js/Commodity";
+import  Provider  from "./pages/js/Provider";
 
 
 export default function Router() {
@@ -17,6 +18,7 @@ export default function Router() {
       <Route element={<Layout />}>
         <Route path='/commodities' element={<Commodities />} />
         <Route path='/commodities/:id' element={<Commodity/>}/>
+        <Route path='/provider/:id' element={<Provider/>}/>
       </Route>
     </Routes>
   )
