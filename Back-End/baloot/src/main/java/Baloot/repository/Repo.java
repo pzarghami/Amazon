@@ -48,8 +48,4 @@ public abstract class Repo<T> {
             objectMap.clear();
         }
     }
-
-    public abstract void addElement(User newObject) throws CustomException;
-
-    public abstract void updateElement(User newObject) throws CustomException;
 }

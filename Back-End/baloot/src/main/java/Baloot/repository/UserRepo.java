@@ -6,6 +6,8 @@ import Baloot.model.User;
 public class UserRepo extends Repo<User> {
     private static UserRepo instance = null;
 
+    public static User loggedInUser = null;
+
     public static UserRepo getInstance() {
         if (instance == null) {
             instance = new UserRepo();
@@ -20,7 +22,6 @@ public class UserRepo extends Repo<User> {
             throw new CustomException("Object exist");
         }
         this.objectMap.put(objectId,newObject);
-        return;
     }
 
     @Override
