@@ -32,11 +32,9 @@
                 }
             ],
             "reccommendList": [
-
                 {
                     "id": 2,
                     "name": "Potato",
-                    
                     "providerId": 1,
                     "price": 14000,
                     "categories": [
@@ -84,7 +82,6 @@
                     "inStock": 10,
                     "image": "https://nextrift.com/wp-content/uploads/2022/04/samsung-galaxy-a73-unboxing-5.jpg"
                 }
-
             ]
         },
         {
@@ -599,7 +596,69 @@
             "id": 1,
             "name": "Vegetable Provider",
             "registryDate": "2023-01-01",
-            "image": "https://www.macmillandictionaryblog.com/wp-content/uploads/2020/01/140887-1024x683.jpg"
+            "image": "https://www.macmillandictionaryblog.com/wp-content/uploads/2020/01/140887-1024x683.jpg",
+            "commodities": [
+                {
+                    "id": 37,
+                    "name": "Pear",
+                    "providerId": 4,
+                    "price": 80000,
+                    "categories": [
+                        "Fruits"
+                    ],
+                    "rating": 7.0,
+                    "inStock": 50,
+                    "image": "https://www.macmillandictionary.com/external/slideshow/thumb/158459_thumb.jpg"
+                },
+                {
+                    "id": 38,
+                    "name": "Passionfruit",
+                    "providerId": 4,
+                    "price": 240000,
+                    "categories": [
+                        "Fruits"
+                    ],
+                    "rating": 7.0,
+                    "inStock": 60,
+                    "image": "https://www.macmillandictionary.com/external/slideshow/full/Passion%20Fruit_full.jpg"
+                },
+                {
+                    "id": 39,
+                    "name": "Plum",
+                    "providerId": 4,
+                    "price": 50000,
+                    "categories": [
+                        "Fruits"
+                    ],
+                    "rating": 7.0,
+                    "inStock": 50,
+                    "image": "https://www.macmillandictionary.com/external/slideshow/full/plums_full.jpg"
+                },
+                {
+                    "id": 40,
+                    "name": "Water Melon",
+                    "providerId": 4,
+                    "price": 30000,
+                    "categories": [
+                        "Fruits"
+                    ],
+                    "rating": 6.5,
+                    "inStock": 20,
+                    "image": "https://www.macmillandictionary.com/external/slideshow/full/151041_full.jpg"
+                },
+                {
+                    "id": 41,
+                    "name": "Coconut",
+                    "providerId": 4,
+                    "price": 150000,
+                    "categories": [
+                        "Fruits"
+                    ],
+                    "rating": 7.0,
+                    "inStock": 20,
+                    "image": "https://www.collinsdictionary.com/images/full/coconut_111802346.jpg"
+                }
+            ]
         },
         {
             "id": 2,
@@ -632,6 +691,4 @@
             "image": "https://upload.wikimedia.org/wikipedia/commons/0/00/%D0%A0%D1%96%D0%B7%D0%BD%D1%96_%D0%B2%D0%B8%D0%B4%D0%B8_%D0%BC%D0%BE%D0%BB%D0%BE%D1%87%D0%BD%D0%B8%D1%85_%D0%BF%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D1%96%D0%B2_%D1%83%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D1%81%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B2%D0%B8%D1%80%D0%BE%D0%B1%D0%BD%D0%B8%D1%86%D1%82%D0%B2%D0%B0.jpg"
         }
     ]
-
-    
 }

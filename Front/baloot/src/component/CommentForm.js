@@ -25,17 +25,26 @@ export default function CommentForm(props) {
 
 
   return (
-    <div className='commoent-box'>
+
+    < div className='commoent-box'>
       <div class="comments">
         <div class=" d-flex align-items-center ">
           <div class="comment-text">
             Comments
           </div>
-          <div class="comment-num">
-            ({Object.keys(commodity.comments).length})
-          </div><br /><br />
+
+          {commodity.comment ?
+            <div class="comment-num">
+              ({Object.keys(commodity.comments).length})
+            </div>
+            :
+            <div class="comment-num">
+              0
+            </div>}
+
+          <br /><br />
         </div>
-        {commodity &&
+        {commodity.comment &&
           commodity.comments.map((comment) => (
             <Comment key={comment.id} comment={comment} />
           ))}
@@ -52,5 +61,6 @@ export default function CommentForm(props) {
         </div>
       </div>
     </div>
+
   )
 }

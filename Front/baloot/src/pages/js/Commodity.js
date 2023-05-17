@@ -24,11 +24,12 @@ export default function Commodity() {
         async function fetchData() {
             try {
                 const response = await axios.get('commodities/' + id);
+                console.log(response);
+                const commodityRes = response.data.content;
 
-                const commodityRes = response.data;
-                console.log(commodityRes);
 
                 setCommodity(commodityRes);
+                console.log(commodity);
             } catch (e) {
                 if (e.response.status === 404) {
                     navigate('/404');
@@ -58,7 +59,7 @@ export default function Commodity() {
 
                             <div class="col-6 picture-container  text-primary">
                                 <div class="product-img">
-                                    <img src={commodity.image} alt="sample-product" />
+                                    <img src={commodity.imgUrl} alt="sample-product" />
                                 </div>
                             </div>
                             <div class="col-6 info-container ">
@@ -69,7 +70,7 @@ export default function Commodity() {
                                     <div class="col-sm-3 d-flex align-items-center info-star">
                                         <img class="star-img img-responsive" src={star} alt="star" />
                                         <div class="star-num">
-                                            {commodity.rating}
+                                            {commodity.rate}
                                         </div>
                                         <div class="star-count">
                                             {'(' + commodity.countOfRating + ')'}
@@ -77,7 +78,7 @@ export default function Commodity() {
                                     </div>
                                 </div>
                                 <span>by</span>
-                                <a href={"/provider/" + 1} class="info-provider">{commodity.providerId}</a>
+                                <a href={"/provider/" + 1} class="info-provider">{commodity.provideName}</a>
                                 <br />
                                 <span class="product-category-text">
                                     Category(s)
@@ -123,7 +124,7 @@ export default function Commodity() {
                     <br />
                     <div class="recomm-text">You also might like...</div>
                     <div className="row p-5">
-                        {
+                        {commodity.reccommendList &&
                             commodity.reccommendList.map((recCommodity) => (
                                 <CommodityPreview
                                     id={recCommodity.id}

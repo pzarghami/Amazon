@@ -20,7 +20,7 @@ export default function Provider(props) {
                 const commodityRes = response.data;
                 console.log(commodityRes);
 
-                
+
                 setProvider(commodityRes);
             } catch (e) {
                 if (e.response.status === 404) {
@@ -39,7 +39,9 @@ export default function Provider(props) {
 
                 <div className='provider-container'>
                     <div className='info-provider-container'>
-                        <imp className='img-provider' src={provider.image} alt='provider img' />
+                        <img className='img-provider' src={provider.image} alt='provider img' />
+                        <div className='date-provider'>{"Since "+provider.registryDate}</div>
+                        <div className='name-provider'>{provider.name}</div>
                     </div>
                     {provider.commodities &&
                         <>
