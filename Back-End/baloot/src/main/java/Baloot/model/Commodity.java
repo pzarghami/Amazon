@@ -1,7 +1,7 @@
 package Baloot.model;
 
 import Baloot.Exeption.CustomException;
-import Baloot.model.DTO.CommentDTO;
+import Baloot.model.DTO.CommodityBriefDTO;
 import Baloot.model.DTO.CommodityDTO;
 
 import java.util.ArrayList;
@@ -78,6 +78,16 @@ public class Commodity {
         DTO.setInStock(inStock);
         DTO.setImgUrl(image);
 
+        return DTO;
+    }
+
+    public CommodityBriefDTO getBriefDTO(){
+        var DTO = new CommodityBriefDTO();
+        DTO.setId(Integer.parseInt(id));
+        DTO.setName(name);
+        DTO.setPrice(price);
+        DTO.setInStock(inStock);
+        DTO.setImgUrl(image);
         return DTO;
     }
 

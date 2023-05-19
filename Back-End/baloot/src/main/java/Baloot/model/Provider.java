@@ -1,5 +1,8 @@
 package Baloot.model;
 
+import Baloot.model.DTO.CommodityBriefDTO;
+import Baloot.model.DTO.ProviderDTO;
+
 import java.util.ArrayList;
 
 public class Provider {
@@ -23,5 +26,16 @@ public class Provider {
 
     public void addCommodity(Commodity commodity) {
         commoditiesList.add(commodity);
+    }
+
+    public ProviderDTO getDTO(){
+        var providerDTO = new ProviderDTO();
+        providerDTO.setId(this.id);
+        providerDTO.setName(this.name);
+        providerDTO.setRegistryDate(this.registryDate);
+        var providersCommodityDTO = new ArrayList<CommodityBriefDTO>();
+        commoditiesList.forEach(commodity -> providersCommodityDTO.add(commodity.getBriefDTO()));
+        providerDTO.setCommoditiesList(providersCommodityDTO);
+        return providerDTO;
     }
 }

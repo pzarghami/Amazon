@@ -21,7 +21,7 @@ public class CommodityRepo extends Repo<Commodity> {
             throw new CustomException("Object exist");
         }
         this.objectMap.put(objectId,newObject);
-
+        newObject.getProvider().addCommodity(newObject);
     }
 
     @Override
