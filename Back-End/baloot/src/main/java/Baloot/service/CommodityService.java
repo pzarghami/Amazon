@@ -14,7 +14,14 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CommodityService {
-
+    @RequestMapping(value = "/commodities", method = RequestMethod.GET, produces =  MediaType.APPLICATION_JSON_VALUE)
+    public Response getCommodities(){
+        try {
+            return new Response(true, "OK", CommodityDomainManager.getInstance().getCommodityDTOList());
+        } catch (CustomException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
+        }
+    }
     @RequestMapping(value = "/commodities/{id}", method = RequestMethod.GET, produces =  MediaType.APPLICATION_JSON_VALUE)
     public Response getCommodityInfo(@PathVariable(value = "id") String commodityId){
         try{

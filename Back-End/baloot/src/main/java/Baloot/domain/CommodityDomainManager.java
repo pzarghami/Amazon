@@ -2,9 +2,13 @@ package Baloot.domain;
 
 import Baloot.Exeption.CustomException;
 import Baloot.model.Commodity;
+import Baloot.model.DTO.CommodityBriefDTO;
 import Baloot.model.DTO.CommodityDTO;
 import Baloot.repository.CommodityRepo;
 import Baloot.repository.UserRepo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommodityDomainManager {
     private static CommodityDomainManager instance;
@@ -15,7 +19,12 @@ public class CommodityDomainManager {
         }
         return instance;
     }
-
+    public List<CommodityBriefDTO> getCommodityDTOList() throws CustomException {
+        var commodities = CommodityRepo.getInstance().getElementsById(null);
+        List<CommodityBriefDTO> commoditiesDTO = new ArrayList<>();
+        commodities.forEach(commodity -> commoditiesDTO.add(commodity.getBriefDTO()));
+        return commoditiesDTO;
+    }
     public CommodityDTO getCommodityDTO(String commodityId)throws CustomException{
         var commodity = CommodityRepo.getInstance().getElementById(commodityId);
         return getCommodityDTO(commodity);

@@ -1,5 +1,6 @@
 package Baloot.domain;
 
+import Baloot.model.User;
 import Baloot.repository.UserRepo;
 import Baloot.Exeption.CustomException;
 
@@ -16,6 +17,16 @@ public class UserDomainManager {
         if(!user.checkPassword(Password)) {
             throw new CustomException("password is wrong");
         }
+        UserRepo.getInstance().loginUser(user);
+    }
+
+    public void logoutUser(){
+        UserRepo.getInstance().logoutUser();
+    }
+
+    public void registerUser(String username, String password, String email, String birthdate, String address) throws CustomException {
+        var user = new User(username, password, email, birthdate, address, 0);
+        UserRepo.getInstance().addElement(user);
         UserRepo.getInstance().loginUser(user);
     }
 }
