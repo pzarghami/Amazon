@@ -16,7 +16,8 @@
 
     width: 40.1vw;
     height: 32.3vh;
-    background: #FFFFFF;
+    margin-right: 8vw;
+    background: #ffffff;
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
     border-radius: 15px;
 
@@ -37,15 +38,15 @@
     font-size: 1.75rem;
     line-height: 34px;
     margin-left: 2.1vw;
-
-    color: #593C1C;
+    color: #493117;
 }
 
 .info .credit {
 
     width: 43vw;
     height: 32.3vh;
-    background: #FFFFFF;
+    margin-right:15vh;
+    background: #ffffff;
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
     border-radius: 15px;
 
@@ -56,8 +57,8 @@
     height: 14.3vh;
     font-family: 'Inter';
     font-style: normal;
-    font-weight: 600;
-    font-size: 8rem;
+    font-weight: 400;
+    font-size: 6rem;
     line-height: 155px;
     margin-left: 7vw;
     color: #593C1C;
@@ -114,7 +115,8 @@
     width: 83.1vw;
     height: 1.3vh;
     margin-top: 8.2rem;
-    margin-left: 7.1rem;
+
+
 
 }
 
@@ -127,7 +129,7 @@
     font-size: 2.5rem;
     line-height: 48px;
     text-align: center;
-    margin-left: 0.4vw;
+    margin-right: 4vw;
     margin-top: 90vh;
     color: #593C1C;
 
@@ -140,7 +142,6 @@
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
     border-radius: 15px;
     margin-top: 4.2vh;
-    margin-left: 6.1vw;
 
     display: flex;
     align-items: center;
@@ -269,7 +270,7 @@
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
     border-radius: 15px;
-    margin-left: 6.1vw;
+
     margin-top: 3.3vh;
     display: flex;
     align-items: center;
@@ -279,7 +280,8 @@
 .buylist img {
     width: 6.5vh;
     height: 9.2vh;
-    background: url(image.png);
+    background: #FFFFFF;
+    /* background: url(image.png); */
     margin-left: 1.6vw;
 }
 
@@ -375,7 +377,7 @@
     background: #FFFFFF;
     border: 1px solid #593C1C;
     border-radius: 15px;
-    margin-left: 5.6vw;
+    margin-left: 8.6vw;
     display: flex;
     align-items: center;
 }
@@ -399,7 +401,7 @@
     background: #593C1C;
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
     border-radius: 15px;
-    margin-left: 29.8vw;
+    margin-left: 20.8vw;
     margin-top: 5.2vh;
     display: flex;
     align-items: center;
@@ -424,7 +426,7 @@
     width: 83.1vw;
     height: 1.3vh;
     margin-top: 8.2rem;
-    margin-left: 7.1rem;
+
 
 }
 
@@ -449,7 +451,7 @@
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
     border-radius: 15px;
-    margin-left: 6.1vw;
+    margin-left: 4.1vw;
     margin-top: 3.3vh;
     display: flex;
     align-items: center;
@@ -459,7 +461,8 @@
 .history img {
     width: 6.5vh;
     height: 9.2vh;
-    background: url(image.png);
+    /* background: url(image.png); */
+    background: #FFFFFF;
     margin-left: 1.6vw;
 }
 
@@ -567,7 +570,7 @@
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
     border-radius: 15px;
-    margin-left: 6.1vw;
+    margin-left: 4.1vw;
     margin-top: 3.3vh;
     display: flex;
     align-items: center;
@@ -577,7 +580,8 @@
 .history2 img {
     width: 6.5vh;
     height: 9.2vh;
-    background: url(image.png);
+    background: #FFFFFF;
+    /* background: url(image.png); */
     margin-left: 1.6vw;
 }
 
