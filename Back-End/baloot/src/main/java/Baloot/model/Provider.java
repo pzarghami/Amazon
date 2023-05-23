@@ -34,7 +34,7 @@ public class Provider {
         providerDTO.setName(this.name);
         providerDTO.setRegistryDate(this.registryDate);
         var providersCommodityDTO = new ArrayList<CommodityBriefDTO>();
-        commoditiesList.forEach(commodity -> providersCommodityDTO.add(commodity.getBriefDTO()));
+        commoditiesList.forEach(commodity -> providersCommodityDTO.add(commodity.getBriefDTO(0)));
         providerDTO.setCommoditiesList(providersCommodityDTO);
         return providerDTO;
     }

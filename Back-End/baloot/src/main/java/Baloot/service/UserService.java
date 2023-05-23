@@ -13,6 +13,12 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserService {
+
+    @RequestMapping(value = "/user",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response getUserDTO(){
+        return new Response(true,"OK",UserDomainManager.getInstance().getUserDTO());
+    }
+
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public Response loginUser(@RequestBody String loginForm){
 
@@ -52,5 +58,31 @@ public class UserService {
         catch (JsonProcessingException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @RequestMapping(value = "/user/buylist/{commodityId}",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response addToBuyList(@PathVariable(value = "commodityId") int commodityId){
+        try{
+            UserDomainManager.getInstance().addToBuyList(commodityId);
+            return new Response(true,"OK","successfully added");
+        }catch (CustomException e){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "InvalidCredential", e);
+        }
+    }
+
+    @RequestMapping(value = "/user/buylist/{commodityId}",method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response removeFromBuyList(@PathVariable(value = "commodityId") int commodityId){
+        try{
+            UserDomainManager.getInstance().removeFromBuyList(commodityId);
+            return new Response(true,"OK","successfully removed");
+        }catch (CustomException e){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "InvalidCredential", e);
+        }
+    }
+
+    @RequestMapping(value = "/addCredit",method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response addCredit(@RequestBody int amount){
+        UserDomainManager.getInstance().addCredit(amount);
+        return new Response(true,"OK","successfully add credit");
     }
 }

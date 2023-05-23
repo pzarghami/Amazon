@@ -22,7 +22,7 @@ public class CommodityDomainManager {
     public List<CommodityBriefDTO> getCommodityDTOList() throws CustomException {
         var commodities = CommodityRepo.getInstance().getElementsById(null);
         List<CommodityBriefDTO> commoditiesDTO = new ArrayList<>();
-        commodities.forEach(commodity -> commoditiesDTO.add(commodity.getBriefDTO()));
+        commodities.forEach(commodity -> commoditiesDTO.add(commodity.getBriefDTO(0)));
         return commoditiesDTO;
     }
     public CommodityDTO getCommodityDTO(String commodityId)throws CustomException{

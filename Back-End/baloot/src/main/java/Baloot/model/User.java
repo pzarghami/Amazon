@@ -1,6 +1,8 @@
 package Baloot.model;
 
 import Baloot.Exeption.CustomException;
+import Baloot.model.DTO.CommodityBriefDTO;
+import Baloot.model.DTO.UserDTO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +18,6 @@ public class User {
     private String address;
     private Discount discount;
     private int credit;
-
     private  Map<Commodity,Integer> buyList;
     private  Map<Commodity,Integer> userPurchasedList;
     private  ArrayList<Discount> discountCodeUsed;
@@ -79,5 +80,27 @@ public class User {
             sumPrice += commodity.getPrice();
         }
         return sumPrice;
+    }
+    public UserDTO getDTO(){
+        var DTO = new UserDTO();
+        DTO.setUsername(username);
+        DTO.setEmail(email);
+        DTO.setBirthDate(birthDate);
+        DTO.setAddress(address);
+        DTO.setCredit(credit);
+
+        var buyListDTO = new ArrayList<CommodityBriefDTO>();
+        for (Map.Entry<Commodity,Integer> entry : buyList.entrySet()){
+            buyListDTO.add(entry.getKey().getBriefDTO(entry.getValue()));
+        }
+        DTO.setBuyList(buyListDTO);
+
+        var purchasedListDTO = new ArrayList<CommodityBriefDTO>();
+        for (Map.Entry<Commodity,Integer> entry : userPurchasedList.entrySet()){
+            purchasedListDTO.add(entry.getKey().getBriefDTO(entry.getValue()));
+        }
+        DTO.setUserPurchasedList(purchasedListDTO);
+
+        return DTO;
     }
 }

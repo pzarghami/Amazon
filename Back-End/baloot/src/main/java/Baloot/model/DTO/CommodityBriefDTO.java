@@ -6,12 +6,14 @@ public class CommodityBriefDTO {
     private float price;
     private int inStock;
     private  String imgUrl;
+    private int quantity;
 
     public void setId(int id) {this.id = id;}
     public void setName(String name) {this.name = name;}
     public void setPrice(float price) {this.price = price;}
     public void setInStock(int inStock) {this.inStock = inStock;}
     public void setImgUrl(String imgUrl) {this.imgUrl = imgUrl;}
+    public void setQuantity(int quantity){this.quantity = quantity;}
     public int getId() {
         return id;
     }
@@ -27,6 +29,7 @@ public class CommodityBriefDTO {
     public String getImgUrl() {
         return imgUrl;
     }
+    public int getQuantity(){return quantity;}
 
 
 }

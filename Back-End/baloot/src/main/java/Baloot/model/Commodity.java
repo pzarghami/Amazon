@@ -81,13 +81,14 @@ public class Commodity {
         return DTO;
     }
 
-    public CommodityBriefDTO getBriefDTO(){
+    public CommodityBriefDTO getBriefDTO(int quantity){
         var DTO = new CommodityBriefDTO();
         DTO.setId(Integer.parseInt(id));
         DTO.setName(name);
         DTO.setPrice(price);
         DTO.setInStock(inStock);
         DTO.setImgUrl(image);
+        DTO.setQuantity(quantity);
         return DTO;
     }
 
