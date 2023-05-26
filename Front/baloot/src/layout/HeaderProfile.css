@@ -1,0 +1,24 @@
+
+.profile-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.porfile-dropdown-contianer {
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  margin-right: 40px;
+  padding: 0;
+}
+
+.show .profile-menu {
+  background-color: var(--transparent-primary-color);
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  top: 70px;
+  right: 0;
+}

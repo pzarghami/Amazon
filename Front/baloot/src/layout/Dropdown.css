@@ -1,0 +1,15 @@
+
+.show .menu-item {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  display: inherit;
+  justify-content: center;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.show .menu-item:hover {
+  background-color: var(--transparent-secondary-color);
+
+}
