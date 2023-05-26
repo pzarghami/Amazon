@@ -11,47 +11,96 @@ public class CommodityDTO {
     private ArrayList<String> categories;
     private double rate;
     private int inStock;
-    private  String imgUrl;
-    private ArrayList<String> comments;
+    private String imgUrl;
+    private ArrayList<CommentDTO> comments;
     private Integer UserRate;
-
-    public void setId(int id) {this.id = id;}
-    public void setName(String name) {this.name = name;}
-    public void setProvideName(String provideName) {this.provideName = provideName;}
-    public void setPrice(float price) {this.price = price;}
-    public void setCategories(ArrayList<String> categories) {this.categories = categories;}
-    public void setRate(double rate) {this.rate = rate;}
-    public void setInStock(int inStock) {this.inStock = inStock;}
-    public void setImgUrl(String imgUrl) {this.imgUrl = imgUrl;}
-    public void setComments(ArrayList<String> comments) {
-        this.comments = comments;
-    }
-    public void setUserRate(Integer userRate){this.UserRate = userRate;}
+    private ArrayList<CommodityBriefDTO> suggestionCommodity;
 
     public int getId() {
         return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
-    public String getProvideName() {return provideName;}
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getProvideName() {
+        return provideName;
+    }
+
+    public void setProvideName(String provideName) {
+        this.provideName = provideName;
+    }
+
     public float getPrice() {
         return price;
     }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
     public ArrayList<String> getCategories() {
         return categories;
     }
+
+    public void setCategories(ArrayList<String> categories) {
+        this.categories = categories;
+    }
+
     public double getRate() {
         return rate;
     }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
     public int getInStock() {
         return inStock;
     }
+
+    public void setInStock(int inStock) {
+        this.inStock = inStock;
+    }
+
     public String getImgUrl() {
         return imgUrl;
     }
-    public ArrayList<String> getComments() {
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public ArrayList<CommentDTO> getComments() {
         return comments;
     }
-    public Integer getUserRate() {return UserRate; }
+
+    public void setComments(ArrayList<CommentDTO> comments) {
+        this.comments = comments;
+    }
+
+    public Integer getUserRate() {
+        return UserRate;
+    }
+
+    public void setUserRate(Integer userRate) {
+        this.UserRate = userRate;
+    }
+
+    public ArrayList<CommodityBriefDTO> getSuggestionCommodity() {
+        return suggestionCommodity;
+    }
+
+    public void setSuggestionCommodity(ArrayList<CommodityBriefDTO> suggestionCommodity) {
+        this.suggestionCommodity = suggestionCommodity;
+    }
 }

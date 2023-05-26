@@ -1,33 +1,69 @@
 package Baloot.model.DTO;
 
-import Baloot.model.Commodity;
-import Baloot.model.User;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-
-import javax.xml.stream.events.Comment;
+import java.time.LocalDate;
 
 public class CommentDTO {
-    private Integer id;
-    private  String commentOwner;
-    private  String text;
-    private  Integer likeNumber;
+    private String id;
+    private String commentOwner;
+    private String text;
+    private Integer likeNumber;
     private Integer dislikeNumber;
-    private  Integer createDate;
-    private   Integer commodityOfComment;
+    private LocalDate createDate;
+    private Integer commentCommodityId;
 
-    public Integer getId(){return id;}
-    public String getCommentOwner(){return commentOwner;}
-    public String getText(){return text;}
-    public Integer getLikeNumber(){return likeNumber;}
-    public Integer getDislikeNumber(){return dislikeNumber;}
-    public Integer getCreateDate(){return createDate;}
-    public Integer getCommodityOfComment(){return commodityOfComment;}
+    public String getId() {
+        return id;
+    }
 
-    public void setId(int id){this.id = id;}
-    public void setCommentOwner(String commentOwner){this.commentOwner = commentOwner;}
-    public void setText(String text){this.text = text;}
-    public void setLikeNumber(int likeNumber){this.likeNumber = likeNumber;}
-    public void setDislikeNumber(int dislikeNumber){this.dislikeNumber = dislikeNumber;}
-    public void setCreateDate(int createDate){this.createDate = createDate;}
-    public void setCommodityOfComment(Integer commodityOfComment){this.commodityOfComment = commodityOfComment;}
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCommentOwner() {
+        return commentOwner;
+    }
+
+    public void setCommentOwner(String commentOwner) {
+        this.commentOwner = commentOwner;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Integer getLikeNumber() {
+        return likeNumber;
+    }
+
+    public void setLikeNumber(int likeNumber) {
+        this.likeNumber = likeNumber;
+    }
+
+    public Integer getDislikeNumber() {
+        return dislikeNumber;
+    }
+
+    public void setDislikeNumber(int dislikeNumber) {
+        this.dislikeNumber = dislikeNumber;
+    }
+
+    public LocalDate getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
+    }
+
+    public Integer getCommentCommodityId() {
+        return commentCommodityId;
+    }
+
+    public void setCommentCommodityId(Integer commentMovieId) {
+        this.commentCommodityId = commentMovieId;
+    }
 }
