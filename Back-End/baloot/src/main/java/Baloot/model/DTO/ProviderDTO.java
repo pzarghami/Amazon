@@ -1,14 +1,12 @@
 package Baloot.model.DTO;
 
-import Baloot.model.Commodity;
-
 import java.util.ArrayList;
 
 public class ProviderDTO {
     private int id;
     private String name;
     private String registryDate;
-    private ArrayList<Commodity> commoditiesList;
+    private ArrayList<CommodityBriefDTO> commoditiesList;
 
     public void setId(int id) {
         this.id = id;
@@ -19,14 +17,14 @@ public class ProviderDTO {
     public void setRegistryDate(String registryDate) {
         this.registryDate = registryDate;
     }
-    public void setCommoditiesList(ArrayList<Commodity> commoditiesList) {this.commoditiesList = commoditiesList;}
+    public void setCommoditiesList(ArrayList<CommodityBriefDTO> commoditiesList) {this.commoditiesList = commoditiesList;}
 
     public int getId() {return this.id;}
     public String getName() {
         return name;
     }
     public String getRegistryDate() {return registryDate;}
-    public ArrayList<Commodity> getCommoditiesList() {
+    public ArrayList<CommodityBriefDTO> getCommoditiesList() {
         return commoditiesList;
     }
 }
