@@ -8,27 +8,30 @@ import './AddToBuyListBox.css'
 
 export default function AddToBuyListBox(props) {
   const { commodity,setCommodity } = props;
-  var [quantity, setQuantity] = useState(0);
+  var [quantity, setQuantity] = useState(commodity.quantity);
   const navigate = useNavigate();
 
-const removeFromBuylist= async () => {
-  try {
-    if (quantity == 0)
-    setQuantity(quantity);
-  else
-    setQuantity(quantity-1)
-    const response = await axios.delete('/user/buylist/'+ commodity.id);
+  const removeFromBuylist = async () => {
+    try {
+      if (quantity == 0)
+        setQuantity(quantity);
+      else
+        setQuantity(quantity - 1)
+      const response = await axios.delete('/user/buylist/' + commodity.id);
+      if (response.data.status)
+        setCommodity(response.data.content);
+      console.log(response);
 
-    console.log(response);
+    } catch (e) {
 
-  } catch (e) {
-
+    }
   }
-}
   const addToBuylist = async () => {
     try {
-      setQuantity(quantity+1);
-      const response = await axios.post('/user/buylist/'+ commodity.id);
+      setQuantity(quantity + 1);
+      const response = await axios.post('/user/buylist/' + commodity.id);
+      if (response.data.status)
+      setCommodity(response.data.content);
       console.log(response);
 
     } catch (e) {

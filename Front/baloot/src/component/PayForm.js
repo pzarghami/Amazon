@@ -5,7 +5,9 @@ import "./PayForm.css";
 
 export default function PayForm(props) {
     const { setShowPopupPayingForm, user } = props;
-    const { discount, setDiscount } = useState('');
+    
+
+    const { discount, setDiscount } = useState(user.discount);
     const { totalCost, setTotalCost } = useState(0);
     const { discountValue, setDiscountValue } = useState(0);
     const { error, setError } = useState(false);
@@ -50,9 +52,8 @@ export default function PayForm(props) {
                     &times;
                 </span>
                 <div className="buylist-list">
-                    {user["buylist"].map((item) => (
+                    {user["buyList"].map((item) => (
                         <>
-                            {setTotalCost(item.price + totalCost)}
 
                             <div >
                                 <span class="item-in-buylist">
@@ -82,7 +83,7 @@ export default function PayForm(props) {
                 {error &&
                     <div>Error</div> 
                 }
-                        <div className="total-cost-with-discount">{totalCost - discountValue}</div>
+                        <div className="total-cost-with-discount">{discountValue}</div>
                         <button className="pay-button" onClick={handlePay}></button>
 
                     </div>

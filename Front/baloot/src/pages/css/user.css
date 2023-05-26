@@ -107,21 +107,7 @@
     color: #FFFFFF;
 }
 
-/* .info .credit .add-credit {
-    width: 37.8vw;
-    height: 5.2vh;
-    font-family: 'Inter';
-    font-style: normal;
-    position: 'center';
-    font-weight: 600;
-    font-size: 1.5rem;
-    line-height: 29px;
-    margin-bottom: 6vh !important;
-    /* identical to box height 
-    margin-left: 13.5vw;
 
-    color: #FFFFFF;
-} */
 
 .cart-box {
 
@@ -148,291 +134,28 @@
 
 }
 
-.topic-box {
-    width: 83.1vw;
-    height: 6.9vh;
-    background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
-    border-radius: 15px;
-    margin-top: 4.2vh;
-
-    display: flex;
-    align-items: center;
-}
-
-.topic-box .image span {
-    width: 4.3vw;
-    height: 3.1vh;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.75rem;
-    line-height: 34px;
-    text-align: center;
-    color: #000000;
-    margin-left: 2.8vw;
-}
-
-.topic-box .name span {
-    width: 4.3vw;
-    height: 3.1vh;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.75rem;
-    line-height: 34px;
-    text-align: center;
-    color: #000000;
-    margin-left: 4vw;
-}
-
-.topic-box .cate span {
-    width: 4.3vw;
-    height: 3.1vh;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.75rem;
-    line-height: 34px;
-    text-align: center;
-    color: #000000;
-    margin-left: 6.4vw;
-}
-
-.topic-box .price span {
-    width: 4.3vw;
-    height: 3.1vh;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.75rem;
-    line-height: 34px;
-    text-align: center;
-    color: #000000;
-    margin-left: 7.8vw;
-}
-
-.topic-box .provider span {
-    width: 4.3vw;
-    height: 3.1vh;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.75rem;
-    line-height: 34px;
-    text-align: center;
-    color: #000000;
-    margin-left: 3.9vw;
-}
-
-.topic-box .rating span {
-    width: 4.3vw;
-    height: 3.1vh;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.75rem;
-    line-height: 34px;
-    text-align: center;
-    color: #000000;
-    margin-left: 2.7vw;
-}
-
-.topic-box .stock span {
-    width: 4.3vw;
-    height: 3.1vh;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.75rem;
-    line-height: 34px;
-    text-align: center;
-    color: #000000;
-    margin-left: 4.4vw;
-}
-
-.topic-box .in-cart span {
-    width: 4.3vw;
-    height: 3.1vh;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.75rem;
-    line-height: 34px;
-    text-align: center;
-    color: #000000;
-    margin-left: 6.2vw;
-}
-
-.topic-box .quantity span {
-    width: 4.3vw;
-    height: 3.1vh;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.75rem;
-    line-height: 34px;
-    text-align: center;
-    color: #000000;
-    margin-left: 6.2vw;
-}
-
-.buylist {
-    width: 83vw;
-    height: 13.8vh;
-    background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
-    border-radius: 15px;
-
-    margin-top: 3.3vh;
-    display: flex;
-    align-items: center;
-
-}
-
-.buylist img {
-    width: 6.5vh;
-    height: 9.2vh;
-    background: #FFFFFF;
-    /* background: url(image.png); */
-    margin-left: 1.6vw;
-}
-
-.buylist .name span {
-    width: 7.7vw;
-    height: 3.1vh;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.75rem;
-    line-height: 34px;
-    text-align: center;
-    color: #919191;
-    margin-left: 1.4vw;
-}
-
-.buylist .cate span {
-    width: 13.4vw;
-    height: 3.1vh;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.75rem;
-    line-height: 34px;
-    text-align: center;
-    color: #919191;
-    margin-left: 3.4vw;
-}
-
-.buylist .price span {
-    width: 8.4vw;
-    height: 3.1vh;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.75rem;
-    line-height: 34px;
-    text-align: center;
-    color: #919191;
-    margin-left: 3.6vw;
-}
-
-.buylist .provider span {
-    width: 3.5vw;
-    height: 3.1vh;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.75rem;
-    line-height: 34px;
-    text-align: center;
-    color: #919191;
-    margin-left: 3.6vw;
-}
-
-.buylist .rating span {
-    width: 2.9vw;
-    height: 4vh;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 2.25rem;
-    line-height: 44px;
-    /* identical to box height */
-
-    text-align: center;
-
-    color: #FFC700;
-    margin-left: 6vw;
-}
-
-.buylist .in-stock span {
-    width: 1.8vw;
-    height: 4vh;
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 2.25rem;
-    line-height: 44px;
-    text-align: center;
-
-    color: #C82525;
-    margin-left: 6.8vw;
-}
-
-.buylist .in-cart {
-    box-sizing: border-box;
-
-
-    width: 10.4vw;
-    height: 7.4vh;
-    background: #FFFFFF;
-    border: 1px solid #593C1C;
-    border-radius: 15px;
-    margin-left: 8.6vw;
-    display: flex;
-    align-items: center;
-}
-
-.buylist .in-cart span {
-    width: 0.6vw;
-    height: 3.5vh;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 3rem;
-    line-height: 29px;
-    text-align: center;
-    color: #000000;
-    margin-left: 2vw;
-}
 
 .pay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 37.8vw;
     height: 5.2vh;
     background: #593C1C;
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
     border-radius: 15px;
-    margin-left: 20.8vw;
-    margin-top: 5.2vh;
-    display: flex;
+    margin-left: 23vw;
 
-}
-
-.pay span {
-    width: 5.4vw;
-    height: 2.6vh;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 1.5rem;
     line-height: 29px;
-    /* identical to box height */
     color: #FFFFFF;
-    margin-left: 16.3vw;
-    margin-bottom: 1.2vh;
+
 }
+
+
 
 .history-box {
 
@@ -694,4 +417,26 @@
     text-align: center;
     color: #919191;
     margin-left: 10.1vw;
+}
+
+.logout {
+
+    position: absolute;
+    top: 50%;
+    left: 17%;
+
+
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    background-color: #f44336;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+    font-family: 'Inter';
+    font-style: normal;
+    text-align: center;
+    font-weight: 400;
+    font-size: 2rem;
+
 }

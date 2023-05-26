@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import person from "../../images/person.png";
 import mail from "../../images/mail.png";
 import date from "../../images/date.png";
@@ -10,9 +10,11 @@ import history from "../../images/history.png";
 import "../css/user.css";
 import AddCreditPopup from "../../component/AddCreditPopup";
 import PayForm from "../../component/PayForm"
+import BuylistList from "../../component/BuylistList";
 
 export default function User() {
     const [showPopup, setShowPopup] = useState(false);
+    const navigate = useNavigate();
     const [showPopupPayingForm, setShowPopupPayingForm] = useState(false);
     const [creditValue, setCreditValue] = useState(null);
     const [user, setUser] = useState(null);
@@ -21,9 +23,8 @@ export default function User() {
     const userId = localStorage.getItem('userId');
     const handleAddAmount = (event) => {
         event.preventDefault();
-        console.log("handleamount");
         setShowPopup(true);
-        console.log(showPopup)
+
     };
 
     const handleCreditSubmit = (event) => {
@@ -64,6 +65,18 @@ export default function User() {
         fetchData();
 
     }, [creditValue]);
+    const handleLogout = async () => {
+        try {
+          localStorage.removeItem('userLoggedIn');
+          localStorage.removeItem('userId');
+          const response = await axios.post('/auth/logout');
+          if (response.data.status) {
+            navigate('/commodities');
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
     return (
         <>
             {user &&
@@ -82,6 +95,7 @@ export default function User() {
                             <img src={location} alt="location" />
                             <span>{user.address}</span>
                         </div>
+                        <button className="logout" onClick={handleLogout}>Logout</button>
                         <form id="credit" className="credit" onSubmit={handleAddAmount}>
                             <span>${user.credit}</span>
                             <button className="add-credit" type="submit">
@@ -96,65 +110,10 @@ export default function User() {
                         <img src={buylist} alt="buylist" />
                         <span>Cart</span>
                     </div>
-                    <div class="topic-box">
-                        <div class="image">
-                            <span>Image</span>
-                        </div>
-                        <div class="name">
-                            <span>Name</span>
-                        </div>
-                        <div class="cate">
-                            <span>Categories</span>
-                        </div>
-                        <div class="price">
-                            <span>price</span>
-                        </div>
-                        <div class="provider">
-                            <span>Provider ID</span>
-                        </div>
-                        <div class="rating">
-                            <span>Rating</span>
-                        </div>
-                        <div class="stock">
-                            <span>In Stock</span>
-                        </div>
-                        <div class="in-cart">
-                            <span>In Cart</span>
-                        </div>
+                    <BuylistList user={user} setUser={setUser}/>
 
-                    </div>
-
-                    {user["buyList"].map(item => (
-                        <div class="buylist">
-                            <img src="../assets/images/s21.png" alt="s21" />
-                            <div class="name">
-                                <span>galaxy S21</span>
-                            </div>
-                            <div class="cate">
-                                <span>Technology,Phone</span>
-                            </div>
-                            <div class="price">
-                                <span>$21000000</span>
-                            </div>
-                            <div class="provider">
-                                <span>1234</span>
-                            </div>
-                            <div class="rating">
-                                <span>8.3</span>
-                            </div>
-                            <div class="in-stock">
-                                <span>17</span>
-                            </div>
-                            <div class="in-cart">
-                                <span> - </span>
-                                <span> 1 </span>
-                                <span> + </span>
-                            </div>
-                        </div>
-                    ))}
-
-                    <button class="pay" onClick={e => setShowPopupPayingForm(true)}>
-                        <span>Pay now!</span>
+                    <button class="pay" onClick={e => setShowPopupPayingForm(true)} type="submit">
+                        Pay now!
                     </button>
                     {showPopupPayingForm &&
                         <PayForm setShowPopupPayingForm={setShowPopupPayingForm} user={user} />

@@ -17,18 +17,7 @@ export default function HeaderProfile() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    try {
-      localStorage.removeItem('userLoggedIn');
-      localStorage.removeItem('userId');
-      const response = await axios.post('/auth/logout');
-      if (response.data.status) {
-        navigate('/movies');
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
+
 
 
   useEffect(() => {
