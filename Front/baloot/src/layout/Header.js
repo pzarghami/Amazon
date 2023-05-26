@@ -17,9 +17,10 @@ export default function Header() {
         <span>Baloot</span>
       </div>
       {localStorage.getItem('userLoggedIn') ?
-        <HeaderWithoutProfile />
-        :
         <HeaderProfile />
+
+        :
+        <HeaderWithoutProfile />
       }
 
 

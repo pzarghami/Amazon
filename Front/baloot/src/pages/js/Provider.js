@@ -14,14 +14,15 @@ export default function Provider(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                console.log(providerId);
+
                 const response = await axios.get('providers/' + 1);
 
-                const commodityRes = response.data;
-                console.log(commodityRes);
+                const providerRes = response.data.content;
+               
 
 
-                setProvider(commodityRes);
+                setProvider(providerRes);
+                console.log(provider);
             } catch (e) {
                 if (e.response.status === 404) {
                     console.log(providerId);
@@ -43,16 +44,16 @@ export default function Provider(props) {
                         <div className='date-provider'>{"Since "+provider.registryDate}</div>
                         <div className='name-provider'>{provider.name}</div>
                     </div>
-                    {provider.commodities &&
+                    {provider.commoditiesList &&
                         <>
                             <div class="recomm-text">All provided commodities</div>
                             <div className="row p-3">
                                 {
-                                    provider.commodities.map((commodity) => (
+                                    provider.commoditiesList.map((commodity) => (
                                         <div className="col-3 mb-3" key={commodity.id}>
                                             <CommodityPreview
                                                 id={commodity.id}
-                                                image={commodity.image}
+                                                imgUrl={commodity.imgUrl}
                                                 name={commodity.name}
                                                 inStock={commodity.inStock}
                                                 price={commodity.price}

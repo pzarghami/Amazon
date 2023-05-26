@@ -24,9 +24,9 @@ export default function Commodity() {
         async function fetchData() {
             try {
                 const response = await axios.get('commodities/' + id);
-                console.log(response);
-                const commodityRes = response.data;
 
+                const commodityRes = response.data.content;
+                console.log(commodityRes);
 
                 setCommodity(commodityRes);
                 console.log(commodity);
@@ -59,7 +59,7 @@ export default function Commodity() {
 
                             <div class="col-6 picture-container  text-primary">
                                 <div class="product-img">
-                                    <img src={commodity.image} alt="sample-product" />
+                                    <img src={commodity.imgUrl} alt="sample-product" />
                                 </div>
                             </div>
                             <div class="col-6 info-container ">
@@ -77,7 +77,7 @@ export default function Commodity() {
                                         </div>
                                     </div>
                                 </div>
-                                <span>by</span>
+                                <span>by </span>
                                 <a href={"/provider/" + 1} class="info-provider">{commodity.provideName}</a>
                                 <br />
                                 <span class="product-category-text">
@@ -124,11 +124,11 @@ export default function Commodity() {
                     <br />
                     <div class="recomm-text">You also might like...</div>
                     <div className="row p-5">
-                        {commodity.reccommendList &&
-                            commodity.reccommendList.map((recCommodity) => (
+                        {commodity.suggestionCommodity &&
+                            commodity.suggestionCommodity.map((recCommodity) => (
                                 <CommodityPreview
                                     id={recCommodity.id}
-                                    image={recCommodity.image}
+                                    imgUrl={recCommodity.imgUrl}
                                     name={recCommodity.name}
                                     inStock={recCommodity.inStock}
                                     price={recCommodity.price}

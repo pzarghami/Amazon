@@ -22,7 +22,7 @@ export default function Signup() {
 
         e.preventDefault();
         setError('');
-        const from = location.state?.from || '/commodities';
+        const from = location.state?.from || '/login';
         try {
             if(password != passwordAuth){
                 setError("Your password is not the same.");

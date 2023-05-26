@@ -5,16 +5,19 @@ import { Link, useLocation ,useNavigate} from "react-router-dom";
 import { useEffect, useInsertionEffect, useState } from "react";
 
 export default function CommodityPreview(props) {
-    const { id, image, name, inStock, price } = props;
+    const { id, imgUrl, name, inStock, price } = props;
     const userId = localStorage.getItem('userId');
+    const [numOfCartStorage,setStorage]= useState(0);
     const navigate = useNavigate();
 
     const [error, setError] = useState('');
     const handleAddToBuylist = async () => {
         try {
             setError('');
-            const data = { commodityId: id }
-            const response = await axios.post('/users/' + userId + '/buylist/', data);
+            const response = await axios.post('/user/buylist/'+ id);
+            setStorage(numOfCartStorage+1);
+            localStorage.setItem('numOfCartStorage',numOfCartStorage);
+
         } catch (e) {
             console.log(e);
             if (e.response.data.message === "inStock") {
@@ -36,18 +39,18 @@ export default function CommodityPreview(props) {
         navigate('/commodities/' + id);
     }
     return (
-        <div class=" ml-0 product">
+        <div class="  product">
             <span class="title">{name}</span>
             <span class="stock">{inStock + " left in stock"}</span>
 
-            <img onClick={ handleLinkToUser} src={image} />
+            <img className="image"onClick={ handleLinkToUser} src={imgUrl} />
             <div class="actions">
                 <span class="price">
                     {price + "$"}
                 </span>
-                <div class="add-to-cart">
-                    <span onClick={handleAddToBuylist} type="button" className="btn ">Add to cart</span>
-                </div>
+                <button className="add-to-cart" onClick={handleAddToBuylist} type="button" >
+                    Add to cart
+                </button>
             </div>
 
             {error &&

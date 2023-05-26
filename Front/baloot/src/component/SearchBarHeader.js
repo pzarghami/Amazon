@@ -25,6 +25,7 @@ export default function SearchBarHeader() {
                 <select value={filterBy} onChange={event => setFilterBy(event.target.value)} class="category">
                     <option value="name" >Name</option>
                     <option value="category" >Category </option>
+                    <option value="provider">Provider</option>
                 </select>
                 <input type="text" className='search-for' placeholder="Search your product..."
                     aria-label="Search..."

@@ -11,17 +11,24 @@ export default function AddToBuyListBox(props) {
   var [quantity, setQuantity] = useState(0);
   const navigate = useNavigate();
 
+const removeFromBuylist= async () => {
+  try {
+    if (quantity == 0)
+    setQuantity(quantity);
+  else
+    setQuantity(quantity-1)
+    const response = await axios.delete('/user/buylist/'+ commodity.id);
+    console.log(response);
 
+  } catch (e) {
+
+  }
+}
   const addToBuylist = async () => {
     try {
-      //when backend is ready
-      // const data = { quantity }
-      // const userId = localStorage.getItem('userId');
-
-      // const response = await axios.post('/users/' + userId + '/buylist/' + commodity.id);
-      // if (response.data.status)
-      //   navigate('/commodities/' + commodity.id);
-
+      setQuantity(quantity+1);
+      const response = await axios.post('/user/buylist/'+ commodity.id);
+      console.log(response);
 
     } catch (e) {
 
@@ -30,20 +37,14 @@ export default function AddToBuyListBox(props) {
   return (
     <>
       <div className='quantity-box'>
-        <span className="minus" onClick={() => {
-          if (quantity == 0)
-            setQuantity(quantity);
-          else
-            setQuantity(quantity--)
-        }}>
+        <span className="minus" onClick={removeFromBuylist}>
           -
         </span>
         <span className="number"> {quantity} </span>
-        <span className="plus" onClick={() => setQuantity(quantity++)}>
+        <span className="plus" onClick={addToBuylist}>
           +
         </span>
       </div>
-      <button onClick={addToBuylist}>Sumbit</button>
     </>
 
   )

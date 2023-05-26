@@ -1,7 +1,8 @@
 
 .product {
-  width: 18.2vw;
-  height: 47.4vh;
+
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   background-color: #FFFF ;
@@ -39,9 +40,10 @@
     color: #C82525;
   }
   
-  .product img {
-    width: 17.1vw;
-    height: 25.6vh;
+  .product .image {
+    width: 100%;
+    height: 20vh;
+
   }
   
   .product .actions {
@@ -66,24 +68,27 @@
   
   .product .add-to-cart {
     width: 7.8vw;
-    height: 4.6vh;
+    height: 100%;
     border: 1px solid #593C1C;
     border-radius: 15px;
-  
+    margin: 2vh;
     margin-left: 3.8vw;
   
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
-  .product .add-to-cart span {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.25rem;
-    line-height: 24px;
-    text-align: center;
-    outline-color: #593C1C;
-    color: #593C1C;
+  .product .add-to-cart:hover{
+    width: 7.8vw;
+    height: 100%;
+    border: 1px solid #593C1C;
+    border-radius: 15px;
+    margin: 2vh;
+    margin-left: 3.8vw;
+    color: #FFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+  
+ 

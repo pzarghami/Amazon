@@ -19,28 +19,69 @@
 
   margin-right: 0.7vw;
 }
-
 .user-container .user-button button {
-  border-radius: 13px;
+  width: 8.3vw;
+  height: 6.0vh;
+
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid #F7F0E9;
   padding: 4px 8px;
-  background: #F7F0E9;
   font-size: 1.5rem;
   cursor: pointer;
   text-align: center;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 600;
-  color: #A97B47;
+  margin-right: 0.7vw;
+  color: #A97B47 ;
+  background: #F7F0E9;
+}
+.user-container .user-cart-button button {
+  width: 8.3vw;
+  height: 6.0vh;
+
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #F7F0E9;
+  padding: 4px 8px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-align: center;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
   margin-right: 0.7vw;
 }
-
+.full-cart{
+  width: 100%;
+  height: 100%;
+  color:white !important;
+  background: #3a2206 !important;
+}
+.empty-cart{
+  width: 100%;
+  height: 100%;
+  color: #A97B47 !important;
+  background: #F7F0E9 !important;
+}
 .user-container .user-button span {
+  width: 8.3vw;
+  height: 6.0vh;
+
   font-family: 'Inter';
   font-style: normal;
   font-weight: 600;
   font-size: 1.75rem;
   line-height: 34px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   /* identical to box height */
 
 
