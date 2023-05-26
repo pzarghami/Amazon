@@ -66,6 +66,31 @@ export default function Signup() {
                         />
                     </div>
 
+
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example22">Email</label>
+                        <input type="email"
+                            id="form2Example22"
+                            class="form-control"
+                            onChange={e => { setEmail(e.target.value) }} />
+
+                    </div>
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example22">Address</label>
+                        <input type="address"
+                            id="form2Example22"
+                            class="form-control"
+                            onChange={e => { setAddress(e.target.value) }} />
+
+                    </div>
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example22">Birth date</label>
+                        <input type="date"
+                            id="form2Example22"
+                            class="form-control"
+                            onChange={e => { setBithDate(e.target.value) }} />
+
+                    </div>
                     <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example22">Password</label>
                         <input
@@ -82,30 +107,6 @@ export default function Signup() {
                             id="form2Example22"
                             class="form-control"
                             onChange={e => { setPasswordAuth(e.target.value) }} />
-
-                    </div>
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example22">Email</label>
-                        <input type="password"
-                            id="form2Example22"
-                            class="form-control"
-                            onChange={e => { setEmail(e.target.value) }} />
-
-                    </div>
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example22">Address</label>
-                        <input type="password"
-                            id="form2Example22"
-                            class="form-control"
-                            onChange={e => { setAddress(e.target.value) }} />
-
-                    </div>
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example22">Address</label>
-                        <input type="password"
-                            id="form2Example22"
-                            class="form-control"
-                            onChange={e => { setBithDate(e.target.value) }} />
 
                     </div>
                     {error &&
