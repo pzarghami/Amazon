@@ -120,6 +120,7 @@ public class Commodity {
         DTO.setInStock(inStock);
         DTO.setImgUrl(image);
         DTO.setQuantity(quantity);
+        DTO.setProviderName(provider.getName());
         return DTO;
     }
 
