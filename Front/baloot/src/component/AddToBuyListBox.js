@@ -7,7 +7,7 @@ import './AddToBuyListBox.css'
 
 
 export default function AddToBuyListBox(props) {
-  const { commodity } = props;
+  const { commodity,setCommodity } = props;
   var [quantity, setQuantity] = useState(0);
   const navigate = useNavigate();
 
@@ -18,6 +18,7 @@ const removeFromBuylist= async () => {
   else
     setQuantity(quantity-1)
     const response = await axios.delete('/user/buylist/'+ commodity.id);
+
     console.log(response);
 
   } catch (e) {

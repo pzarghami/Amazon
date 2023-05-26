@@ -17,6 +17,7 @@ export default function Commodity() {
 
     const isLoggedIn = localStorage.getItem('userLoggedIn');
     const userId = localStorage.getItem('userId');
+    const [showMOre, setShowMoreFlage] = useState(false);
     const navigate = useNavigate();
 
 
@@ -47,7 +48,6 @@ export default function Commodity() {
 
         setCommodity({ ...commodity });
     }
-
 
     return (
         <>
@@ -84,24 +84,42 @@ export default function Commodity() {
                                     Category(s)
                                 </span><br />
                                 {
-                                    commodity &&
-                                    commodity["categories"].map((item) => (
-                                        <div >
-                                            <span class="product-category-text">
-                                                &#x2022; {item}
-                                            </span><br />
+                                    showMOre || commodity["categories"].length <= 2 ?
+                                        commodity["categories"].map((item) => (
+                                            <div >
+                                                <span class="product-category-text">
+                                                    &#x2022; {item}
+                                                </span><br />
 
-                                        </div>
+                                            </div>
 
-                                    ))
+                                        ))
+                                        :
+                                        <>
+                                            <div >
+                                                <span class="product-category-text">
+                                                    &#x2022; {commodity["categories"][0]}
+                                                </span><br />
+
+                                            </div>
+                                            <div >
+                                                <span class="product-category-text">
+                                                    &#x2022; {commodity["categories"][1]}
+                                                </span><br />
+
+                                            </div>
+                                            <span class="product-cat-showmore" onClick={()=> setShowMoreFlage(true)}>Show more...</span>
+                                        </>
+
+
                                 }
-                                <span class="product-cat-showmore">Show more...</span>
+
                                 <div class="container-fluid card-box">
                                     <div class="row add-to-card-box">
                                         <div class="col-6 credit">300 $</div>
                                         <div class="col-6 add-to-card">
                                             <Popup trigger={<button >Add to card</button>} popupClass={"popup-content"}>
-                                                <AddToBuyListBox commodity={commodity} />
+                                                <AddToBuyListBox commodity={commodity} setCommodity={setCommodity} />
                                             </Popup>
 
                                         </div>
