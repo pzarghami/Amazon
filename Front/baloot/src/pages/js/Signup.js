@@ -62,6 +62,7 @@ export default function Signup() {
                         <input type="username"
                             id="form2Example11"
                             class="form-control"
+                            required="true"
                             onChange={e => { setUser(e.target.value) }}
                         />
                     </div>
@@ -72,6 +73,7 @@ export default function Signup() {
                         <input type="email"
                             id="form2Example22"
                             class="form-control"
+                            required="true"
                             onChange={e => { setEmail(e.target.value) }} />
 
                     </div>
@@ -80,6 +82,7 @@ export default function Signup() {
                         <input type="address"
                             id="form2Example22"
                             class="form-control"
+                            required="true"
                             onChange={e => { setAddress(e.target.value) }} />
 
                     </div>
@@ -88,6 +91,7 @@ export default function Signup() {
                         <input type="date"
                             id="form2Example22"
                             class="form-control"
+                            required="true"
                             onChange={e => { setBithDate(e.target.value) }} />
 
                     </div>
@@ -97,6 +101,7 @@ export default function Signup() {
                             type="password"
                             id="form2Example22"
                             class="form-control"
+                            required="true"
                             onChange={e => { setPassword(e.target.value) }} />
 
                     </div>
@@ -106,6 +111,7 @@ export default function Signup() {
                         <input type="password"
                             id="form2Example22"
                             class="form-control"
+                            required="true"
                             onChange={e => { setPasswordAuth(e.target.value) }} />
 
                     </div>
