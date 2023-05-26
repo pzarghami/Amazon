@@ -38,13 +38,13 @@ export default function HeaderProfile() {
         <div class="user-container">
 
           <div class="user-button">
-            <Link to='/users'>
+            <Link to='/user'>
               <button type="button" >{localStorage.getItem('userId')}</button>
             </Link>
           </div>
 
           <div class="user-button">
-            <Link to='/users'>
+            <Link to='/user'>
               <button type="button" >{"Cart  " + numOfCartStorage[0]}</button>
             </Link>
           </div>

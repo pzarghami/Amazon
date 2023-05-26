@@ -45,7 +45,7 @@
 
     width: 43vw;
     height: 32.3vh;
-    margin-right:15vh;
+    margin-right: 15vh;
     background: #ffffff;
     box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
     border-radius: 15px;
@@ -83,11 +83,14 @@
     font-weight: 600;
     font-size: 1.5rem;
     line-height: 29px;
-    margin-left: 16vw;
+    margin-left: 14vw;
     color: #919191;
 }
 
 .info .credit .add-credit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 37.8vw;
     height: 5.2vh;
     background: #593C1C;
@@ -95,20 +98,29 @@
     border-radius: 15px;
     margin-left: 2.9vw;
     margin-top: 1.2vh;
-}
-
-.info .credit .add-credit span {
-    width: 9.9vw;
-    height: 2.6vh;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 1.5rem;
     line-height: 29px;
-    /* identical to box height */
-    margin-left: 13.5vw;
     color: #FFFFFF;
 }
+
+/* .info .credit .add-credit {
+    width: 37.8vw;
+    height: 5.2vh;
+    font-family: 'Inter';
+    font-style: normal;
+    position: 'center';
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 29px;
+    margin-bottom: 6vh !important;
+    /* identical to box height 
+    margin-left: 13.5vw;
+
+    color: #FFFFFF;
+} */
 
 .cart-box {
 
@@ -404,7 +416,7 @@
     margin-left: 20.8vw;
     margin-top: 5.2vh;
     display: flex;
-    align-items: center;
+
 }
 
 .pay span {

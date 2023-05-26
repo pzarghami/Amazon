@@ -1,0 +1,77 @@
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    width: 500px;
+
+
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(217, 217, 217, 0.25);
+    border-radius: 15px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.credit-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.credit-form label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.credit-form input {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.button-container button:first-of-type {
+    background: #593C1C;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+}
+
+.button-container button:last-of-type {
+    background-color: #f44336;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+}
+

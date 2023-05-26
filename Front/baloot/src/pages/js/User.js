@@ -1,33 +1,82 @@
-import '../css/user.css'
+import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import person from "../../images/person.png";
+import mail from "../../images/mail.png";
+import date from "../../images/date.png";
+import location from "../../images/location.png";
+import buylist from "../../images/buylist.png";
+import history from "../../images/history.png";
+import "../css/user.css";
+import AddCreditPopup from "../../component/AddCreditPopup";
+
 export default function User() {
-    return (
-        <div class="page-container">
-        <div class="info">
-            <div class="information">
-                <img src="../assets/images/person.png" alt="person"/>
-                <span>Marshal</span>
-                <br/>
-                <img src="../assets/images/mail.png" alt="mail"/>
-                <span>Marshal.Mathers@gmail.com</span>
-                <br/>
-                <img src="../assets/images/date.png" alt="mail"/>
-                <span>1972/10/17</span>
-                <br/>
-                <img src="../assets/images/location.png" alt="mail"/>
-                <span>20785 Schultes Avenue, warren,MI 48091</span>
-            </div>
-            <div class="credit">
-                <span>$10000000</span>
-                <div class="amount">
-                    <span>$Amount</span>
-                </div>
-                <div class="add-credit">
-                    <span> Add More Credit</span>
-                </div>
-            </div>
+  const [amountValue, setAmount] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const [showPopupPayingForm, setShowPopupPayingForm] =useState(false);
+  const [creditValue, setCreditValue] = useState(null);
+  const [user, setUser]=useState(null);
+
+  const isLoggedIn = localStorage.getItem('userLoggedIn');
+  const userId = localStorage.getItem('userId');
+  const handleAddAmount = (event) => {
+    event.preventDefault();
+    console.log("handleamount");
+    setShowPopup(true);
+    console.log(showPopup)
+  };
+
+  const handleCreditSubmit = (event) => {
+    event.preventDefault();
+    setAmount(creditValue);
+    setShowPopup(false);
+  };
+
+  const handleCreditChange = (event) => {
+    setCreditValue(event.target.value);
+  };
+
+  useEffect(() => {
+    async function fetchData() {
+        try {
+            const data = { username: userId }
+            const response = await axios.get("user", data);
+            const userTemp = response.data.content;
+            setUser(userTemp);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    fetchData();
+
+}, []);
+  return (
+    <div className="page-container">
+      <div className="info">
+        <div className="information">
+          <img src={person} alt="person" />
+          <span>Marshal</span>
+          <br />
+          <img src={mail} alt="mail" />
+          <span>Marshal.Mathers@gmail.com</span>
+          <br />
+          <img src={date} alt="date" />
+          <span>1972/10/17</span>
+          <br />
+          <img src={location} alt="location" />
+          <span>20785 Schultes Avenue, warren,MI 48091</span>
         </div>
+        <form id="credit" className="credit" onSubmit={handleAddAmount}>
+          <span>${1000}</span>
+          <button className="add-credit" type="submit">
+            Add More Credit
+          </button>
+        </form>
+        {showPopup && (
+            <AddCreditPopup creditValue={creditValue} setShowPopup={setShowPopup} handleCreditSubmit={handleCreditSubmit} handleCreditChange={handleCreditChange}/>
+        )}
+      </div>
         <div class="cart-box">
-            <img src="../assets/images/buylist.png" alt="buylist"/>
+            <img src={buylist} alt="buylist"/>
             <span>Cart</span>
         </div>
         <div class="topic-box">
@@ -83,11 +132,14 @@ export default function User() {
                 <span> + </span>
             </div>
         </div>
-        <div class="pay">
+        <button class="pay" onClick={e => setShowPopupPayingForm(true)}>
             <span>Pay now!</span>
-        </div>
+        </button>
+        {showPopupPayingForm &&
+            <PayForm setShowPopupPayingForm={setShowPopupPayingForm} user={user}/>
+        }
         <div class="history-box">
-            <img src="../assets/images/history.png" alt="history"/>
+            <img src={history} alt="history"/>
             <span>History</span>
         </div>
         <div class="topic-box">

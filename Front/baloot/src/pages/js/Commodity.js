@@ -25,7 +25,7 @@ export default function Commodity() {
             try {
                 const response = await axios.get('commodities/' + id);
                 console.log(response);
-                const commodityRes = response.data.content;
+                const commodityRes = response.data;
 
 
                 setCommodity(commodityRes);
@@ -59,7 +59,7 @@ export default function Commodity() {
 
                             <div class="col-6 picture-container  text-primary">
                                 <div class="product-img">
-                                    <img src={commodity.imgUrl} alt="sample-product" />
+                                    <img src={commodity.image} alt="sample-product" />
                                 </div>
                             </div>
                             <div class="col-6 info-container ">
@@ -120,7 +120,7 @@ export default function Commodity() {
                             </div>
                         </div>
                     </div>
-                    <CommentForm commodity={commodity} />
+                    <CommentForm commodity={commodity} setCommodity={setCommodity} />
                     <br />
                     <div class="recomm-text">You also might like...</div>
                     <div className="row p-5">
