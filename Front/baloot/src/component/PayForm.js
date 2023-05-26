@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import axios from "axios";
 
 import "./PayForm.css";
 
@@ -32,7 +33,7 @@ export default function PayForm(props) {
     }
     useEffect(() => {
         async function fetchData() {
-            const data = { username: user.username, discount: discount }
+            const data = {  discount: discount }
             const response = await axios.get('discount/', data);
             const discountTemp = response.data.content;
             setDiscountValue(discountTemp);

@@ -43,7 +43,7 @@ export default function Commodity() {
     const updateRate = newCommodtiy => {
         commodity.userRate = newCommodtiy.userRate;
         commodity.countOfRating = newCommodtiy.countOfRating;
-        commodity.rating = newCommodtiy.rating;
+        commodity.rate = newCommodtiy.rate;
 
         setCommodity({ ...commodity });
     }

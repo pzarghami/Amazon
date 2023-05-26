@@ -13,11 +13,12 @@ export default function CommentForm(props) {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      console.log("HII");
-      // const data = { commentCommodityId: commodity.id, text: commentText };
-      // const response = await axios.post('/comments/', data);
-      // const newComment = response.data.content;
-      // addComment(newComment);
+
+      const data = { commentCommodityId: commodity.id, text: commentText };
+      const response = await axios.post('/comments/', data);
+      console.log(response);
+      const newComment = response.data.content;
+      addComment(newComment);
       setCommentText('');
     } catch (e) {
       console.log(e);
@@ -25,10 +26,16 @@ export default function CommentForm(props) {
   }
   const addComment = newComment => {
     commodity.comments.push(newComment);
+    
     setCommodity({ ...commodity });
+    console.log(commodity);
   }
 
-
+  const updateComment = editedComment => {
+    const commentIndex = commodity.comments.findIndex(x => x.id === editedComment.id);
+    commodity.comments[commentIndex] = editedComment;
+    setCommodity({ ...commodity });
+  }
   return (
 
     < div className='commoent-box'>
@@ -38,7 +45,7 @@ export default function CommentForm(props) {
             Comments
           </div>
 
-          {commodity.comment ?
+          {commodity.comments ?
             <div class="comment-num">
               ({Object.keys(commodity.comments).length})
             </div>
@@ -50,9 +57,9 @@ export default function CommentForm(props) {
 
           <br /><br />
         </div>
-        {commodity.comment &&
+        {commodity.comments &&
           commodity.comments.map((comment) => (
-            <Comment key={comment.id} comment={comment} />
+            <Comment key={comment.id} comment={comment} updateComment={updateComment}/>
           ))}
         <div class="container comment-box ">
           <div class="comment-box-header">
