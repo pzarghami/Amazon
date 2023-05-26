@@ -71,7 +71,7 @@ public class Comment {
         DTO.setCreateDate(createDate);
         DTO.setLikeNumber(likeNumber);
         DTO.setDislikeNumber(dislikeNumber);
-        DTO.setCommentMovieId(Integer.parseInt(commentCommodity.getId()));
+        DTO.setCommentCommodityId(Integer.parseInt(commentCommodity.getId()));
         return DTO;
     }
 }
