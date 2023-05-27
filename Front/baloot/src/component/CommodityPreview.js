@@ -19,6 +19,7 @@ export default function CommodityPreview(props) {
 
             if(response.data.status){
                 console.log(response);
+                setNumOfCart();
                 setPopupBuylist(true);
 
             }

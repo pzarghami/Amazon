@@ -15,8 +15,8 @@ export default function Router() {
   const [numOfCart, setCart]=useState(0);
   const setNumOfCart = async () => {
     try {
-      
-      const response = await axios.post('/user/buylist/');
+    
+      const response = await axios.post('buyListSize');
       if (response.data.status) {
         console.log(response);
         setCart(response.data.content);

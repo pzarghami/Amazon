@@ -14,7 +14,7 @@ import HistoryList from "../../component/HistoryList";
 
 export default function User(props) {
 
-    const {setNumOfCart}=props;
+    const { setNumOfCart } = props;
     const [showPopup, setShowPopup] = useState(false);
     const navigate = useNavigate();
     const [showPopupPayingForm, setShowPopupPayingForm] = useState(false);
@@ -30,22 +30,22 @@ export default function User(props) {
     };
     const handleCreditSubmit = async event => {
         event.preventDefault();
-        try{
+        try {
             setCreditValue(creditValue);
             setShowPopup(false);
             const data = { amount: creditValue }
             const response = await axios.post("addCredit", data);
             const amount = parseInt(creditValue);
             setCreditValue(0);
-            if(response.data.status){
+            if (response.data.status) {
                 setUser(prevUser => ({
                     ...prevUser,
                     credit: prevUser.credit + amount
-                  }));
+                }));
                 setCreditValue(0);
             }
 
-        }catch(e){
+        } catch (e) {
 
         }
 
@@ -72,17 +72,16 @@ export default function User(props) {
     }, []);
     const handleLogout = async () => {
         try {
-          localStorage.removeItem('userLoggedIn');
-          localStorage.removeItem('userId');
-          const response = await axios.post('/auth/logout');
-          if (response.data.status) {
-            navigate('/commodities');
-          }
+            localStorage.removeItem('userLoggedIn');
+            localStorage.removeItem('userId');
+            const response = await axios.post('/auth/logout');
+            if (response.data.status) {
+                navigate('/commodities');
+            }
         } catch (e) {
-          console.log(e);
+            console.log(e);
         }
-      }
-      console.log(user);
+    }
     return (
         <>
             {user &&
@@ -113,15 +112,15 @@ export default function User(props) {
                         )}
                     </div>
 
-                    <BuylistList user={user} setUser={setUser} setNumOfCart={setNumOfCart}/>
+                    <BuylistList user={user} setUser={setUser} setNumOfCart={setNumOfCart} />
 
                     <button class="pay" onClick={e => setShowPopupPayingForm(true)} type="submit">
                         Pay now!
                     </button>
                     {showPopupPayingForm &&
-                        <PayForm setShowPopupPayingForm={setShowPopupPayingForm} user={user} setUser={setUser}/>
+                        <PayForm setShowPopupPayingForm={setShowPopupPayingForm} user={user} setUser={setUser} />
                     }
-                    <HistoryList user={user} setUser={setUser}/>
+                    <HistoryList user={user} setUser={setUser} />
                 </div>
             }
         </>

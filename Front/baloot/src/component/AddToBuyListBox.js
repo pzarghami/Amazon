@@ -17,6 +17,7 @@ export default function AddToBuyListBox(props) {
       const response = await axios.delete('/user/buylist/' + commodity.id);
       if (response.data.status) {
         setCommodity(response.data.content);
+        setNumOfCart();
         if (quantity == 0)
           setQuantity(quantity);
         else
@@ -34,6 +35,7 @@ export default function AddToBuyListBox(props) {
       const response = await axios.post('/user/buylist/' + commodity.id);
       if (response.data.status) {
         setCommodity(response.data.content);
+        setNumOfCart();
         setQuantity(quantity + 1);
       }
 
