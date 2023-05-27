@@ -88,12 +88,21 @@ public class User {
         this.discount = discount;
     }
 
+    public void removeDiscount() {
+        discount = null;
+    }
+
     public float getBuyListPrice() {
         float sumPrice = 0;
         for (Commodity commodity : buyList.keySet()) {
             sumPrice += commodity.getPrice();
         }
-        return sumPrice;
+        if (discount == null)
+            return sumPrice;
+        else {
+            var discountAmount = (sumPrice / 100) * discount.getDiscountAmount();
+            return sumPrice - discountAmount;
+        }
     }
 
     public UserDTO getDTO() throws CustomException {

@@ -96,5 +96,34 @@ public class UserService {
         }
     }
 
+    @RequestMapping(value = "/price", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response getPrice() {
+        return new Response(true, "OK", UserDomainManager.getInstance().getPrice());
+    }
 
+    @RequestMapping(value = "/discount", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response setDiscount(@RequestBody String discountForm) {
+        try {
+            var discountJson = new ObjectMapper().readTree(discountForm);
+            var discountCode = discountJson.get("discountCode").asText();
+            return new Response(true, "OK", UserDomainManager.getInstance().setDiscount(discountCode));
+        } catch (CustomException | JsonProcessingException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(value = "/discount", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response removeDiscount() {
+        UserDomainManager.getInstance().removeDiscount();
+        return new Response(true, "OK", "discount successfully removed");
+    }
+
+    @RequestMapping(value = "/pay", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response payNow() {
+        try {
+            return new Response(true, "OK", UserDomainManager.getInstance().finalizeThePurchase());
+        } catch (CustomException e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "InvalidCredential", e);
+        }
+    }
 }

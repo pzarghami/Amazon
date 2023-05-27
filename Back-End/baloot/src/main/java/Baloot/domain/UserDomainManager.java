@@ -4,6 +4,7 @@ import Baloot.model.DTO.CommodityDTO;
 import Baloot.model.DTO.UserDTO;
 import Baloot.model.User;
 import Baloot.repository.CommodityRepo;
+import Baloot.repository.DiscountRepo;
 import Baloot.repository.UserRepo;
 import Baloot.Exeption.CustomException;
 
@@ -51,5 +52,24 @@ public class UserDomainManager {
 
     public void addCredit(int amount) {
         UserRepo.loggedInUser.addCredit(amount);
+    }
+
+    public float getPrice() {
+        return UserRepo.loggedInUser.getBuyListPrice();
+    }
+
+    public float setDiscount(String discountCode) throws CustomException {
+        var discount = DiscountRepo.getInstance().getElementById(discountCode);
+        UserRepo.loggedInUser.setDiscount(discount);
+        return UserRepo.loggedInUser.getBuyListPrice();
+    }
+
+    public void removeDiscount() {
+        UserRepo.loggedInUser.removeDiscount();
+    }
+
+    public UserDTO finalizeThePurchase() throws CustomException {
+        UserRepo.loggedInUser.finalizeThePurchase();
+        return UserRepo.loggedInUser.getDTO();
     }
 }
