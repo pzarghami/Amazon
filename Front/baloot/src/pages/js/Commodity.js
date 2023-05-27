@@ -15,7 +15,6 @@ export default function Commodity(props) {
     const {setNumOfCart}=props;
     const [commodity, setCommodity] = useState(null);
     const { id } = useParams();
-    console.log(commodity);
     const isLoggedIn = localStorage.getItem('userLoggedIn');
     const userId = localStorage.getItem('userId');
     const [showMOre, setShowMoreFlage] = useState(false);
@@ -26,11 +25,9 @@ export default function Commodity(props) {
         async function fetchData() {
             try {
                 const response = await axios.get('commodities/' + id);
-
                 const commodityRes = response.data.content;
-
-
                 setCommodity(commodityRes);
+
 
             } catch (e) {
                 if (e.response.status === 404) {
@@ -44,7 +41,7 @@ export default function Commodity(props) {
     }, [])
     const updateRate = newCommodtiy => {
         commodity.userRate = newCommodtiy.userRate;
-        commodity.countOfRating = newCommodtiy.countOfRating;
+        commodity.numOfRate = newCommodtiy.numOfRate;
         commodity.rate = newCommodtiy.rate;
 
         setCommodity({ ...commodity });
@@ -74,17 +71,17 @@ export default function Commodity(props) {
                                             {commodity.rate}
                                         </div>
                                         <div class="star-count">
-                                            {'(' + commodity.countOfRating + ')'}
+                                            {'(' + commodity.numOfRate + ')'}
                                         </div>
                                     </div>
                                 </div>
                                 <span>by </span>
-                                <a href={"/provider/" + 1} class="info-provider">{commodity.provideName}</a>
+                                <Link className="info-provider" key={commodity.providerId} to={'/provider/' + commodity.providerId}>{commodity.provideName}</Link>
                                 <br />
                                 <span class="product-category-text">
                                     Category(s)
                                 </span><br />
-                                {/* {
+                                {
                                     showMOre || commodity["categories"].length <= 2 ?
                                         commodity["categories"].map((item) => (
                                             <div >
@@ -113,11 +110,11 @@ export default function Commodity(props) {
                                         </>
 
 
-                                } */}
+                                }
 
                                 <div class="container-fluid card-box">
                                     <div class="row add-to-card-box">
-                                        <div class="col-6 credit">300 $</div>
+                                        <div class="col-6 credit">{commodity.price+'$'}</div>
                                         <div class="col-6 add-to-card">
                                             <Popup trigger={<button >Add to card</button>} popupClass={"popup-content"}>
                                                 <AddToBuyListBox commodity={commodity} setCommodity={setCommodity} setNumOfCart={setNumOfCart} />

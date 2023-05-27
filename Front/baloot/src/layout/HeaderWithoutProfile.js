@@ -8,7 +8,7 @@ export default function HeaderWithoutProfile() {
     const location = useLocation();
     return (
         <>
-            {location.pathname == "/commodities/" &&
+            {location.pathname == "/commodities/" || location.pathname == "/commodities" &&
                 <SearchBarHeader/>
             }
             <LoginButton />

@@ -13,6 +13,7 @@ import BuylistList from "../../component/BuylistList";
 import HistoryList from "../../component/HistoryList";
 
 export default function User(props) {
+
     const {setNumOfCart}=props;
     const [showPopup, setShowPopup] = useState(false);
     const navigate = useNavigate();
@@ -27,11 +28,27 @@ export default function User(props) {
         setShowPopup(true);
 
     };
-
-    const handleCreditSubmit = (event) => {
+    const handleCreditSubmit = async event => {
         event.preventDefault();
-        setCreditValue(creditValue);
-        setShowPopup(false);
+        try{
+            setCreditValue(creditValue);
+            setShowPopup(false);
+            const data = { amount: creditValue }
+            const response = await axios.post("addCredit", data);
+            const amount = parseInt(creditValue);
+            setCreditValue(0);
+            if(response.data.status){
+                setUser(prevUser => ({
+                    ...prevUser,
+                    credit: prevUser.credit + amount
+                  }));
+                setCreditValue(0);
+            }
+
+        }catch(e){
+
+        }
+
     };
 
     const handleCreditChange = (event) => {
@@ -53,20 +70,6 @@ export default function User(props) {
         fetchData();
 
     }, []);
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const data = { amount: creditValue }
-                const response = await axios.get("addCredit", data);
-                if(response.data.status)
-                    setCreditValue()
-            } catch (e) {
-                console.log(e);
-            }
-        }
-        fetchData();
-
-    }, [creditValue]);
     const handleLogout = async () => {
         try {
           localStorage.removeItem('userLoggedIn');
@@ -79,6 +82,7 @@ export default function User(props) {
           console.log(e);
         }
       }
+      console.log(user);
     return (
         <>
             {user &&
@@ -115,7 +119,7 @@ export default function User(props) {
                         Pay now!
                     </button>
                     {showPopupPayingForm &&
-                        <PayForm setShowPopupPayingForm={setShowPopupPayingForm} user={user} />
+                        <PayForm setShowPopupPayingForm={setShowPopupPayingForm} user={user} setUser={setUser}/>
                     }
                     <HistoryList user={user} setUser={setUser}/>
                 </div>

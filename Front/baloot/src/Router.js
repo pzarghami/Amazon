@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import React, { useState } from "react";
+import axios from "axios";
 import Login from "./pages/js/Login";
 import Signup from "./pages/js/Signup"
 import NotFound404 from "./pages/js/NotFound404";
@@ -11,8 +12,21 @@ import User from "./pages/js/User";
 
 
 export default function Router() {
-  const [numOfCart, setNumOfCart]=useState(0);
-  
+  const [numOfCart, setCart]=useState(0);
+  const setNumOfCart = async () => {
+    try {
+      
+      const response = await axios.post('/user/buylist/');
+      if (response.data.status) {
+        console.log(response);
+        setCart(response.data.content);
+      }
+
+
+    } catch (e) {
+
+    }
+  }
   return (
     <Routes>
       <Route path='/' element={<Navigate to='/commodities' />} />
@@ -22,7 +36,7 @@ export default function Router() {
       <Route element={<Layout numOfCart={numOfCart}/>}>
         <Route path='/commodities' element={<Commodities setNumOfCart={setNumOfCart}/>} />
         <Route path='/commodities/:id' element={<Commodity/>}/>
-        <Route path='/provider/:id' element={<Provider/>}/>
+        <Route path='/provider/:providerId' element={<Provider/>}/>
         <Route path='/user' element ={<User/>}/>
       </Route>
     </Routes>

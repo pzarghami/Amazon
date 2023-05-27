@@ -4,29 +4,23 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 import CommodityPreview from '../../component/CommodityPreview';
 
-export default function Provider(props) {
+export default function Provider() {
 
     const { providerId } = useParams();
     const [provider, setProvider] = useState();
     const navigate = useNavigate();
 
-
     useEffect(() => {
         async function fetchData() {
             try {
 
-                const response = await axios.get('providers/' + 1);
-
+                const response = await axios.get('/providers/' + providerId);
                 const providerRes = response.data.content;
-               
-
-
                 setProvider(providerRes);
 
             } catch (e) {
                 if (e.response.status === 404) {
                     console.log(providerId);
-                    //navigate('/404');
                 }
             }
         }

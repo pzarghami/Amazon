@@ -100,7 +100,6 @@ export default function Commodities(props) {
             try {
                 const response = await axios.get("commodities");
                 const commoditiesList = response.data.content;
-
                 setFetchCommodities(commoditiesList);
                 setCommodities(commoditiesList);
             } catch (e) {

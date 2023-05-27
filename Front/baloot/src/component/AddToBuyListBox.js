@@ -8,21 +8,20 @@ import './AddToBuyListBox.css'
 
 export default function AddToBuyListBox(props) {
   const { commodity, setCommodity, setNumOfCart } = props;
-  console.log(commodity);
-  var [quantity, setQuantity] = useState(0);
+  var [quantity, setQuantity] = useState(commodity.quantity);
   const navigate = useNavigate();
 
   const removeFromBuylist = async () => {
     try {
-      if (quantity == 0)
-        setQuantity(quantity);
-      else
-        setQuantity(quantity - 1)
+
       const response = await axios.delete('/user/buylist/' + commodity.id);
       if (response.data.status) {
-        console.log(response);
         setCommodity(response.data.content);
-        setNumOfCart(prevCount => prevCount - 1);
+        if (quantity == 0)
+          setQuantity(quantity);
+        else
+          setQuantity(quantity - 1)
+
       }
 
     } catch (e) {
@@ -31,12 +30,11 @@ export default function AddToBuyListBox(props) {
   }
   const addToBuylist = async () => {
     try {
-      setQuantity(quantity + 1);
+
       const response = await axios.post('/user/buylist/' + commodity.id);
       if (response.data.status) {
-        console.log(response);
         setCommodity(response.data.content);
-        setNumOfCart(prevCount => prevCount + 1);
+        setQuantity(quantity + 1);
       }
 
 

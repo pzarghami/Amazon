@@ -15,10 +15,12 @@ export default function CommodityPreview(props) {
         try {
             setError('');
             const response = await axios.post('/user/buylist/' + id);
+            console.log(id);
 
             if(response.data.status){
+                console.log(response);
                 setPopupBuylist(true);
-                setNumOfCart(prevCount => prevCount + 1);
+
             }
 
 
