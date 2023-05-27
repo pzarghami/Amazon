@@ -10,32 +10,31 @@ import org.springframework.http.MediaType;
 import org.springframework.web.server.ResponseStatusException;
 
 
-
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CommodityService {
-    @RequestMapping(value = "/commodities", method = RequestMethod.GET, produces =  MediaType.APPLICATION_JSON_VALUE)
-    public Response getCommodities(){
+    @RequestMapping(value = "/commodities", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response getCommodities() {
         try {
             return new Response(true, "OK", CommodityDomainManager.getInstance().getCommodityDTOList());
         } catch (CustomException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
     }
-    @RequestMapping(value = "/commodities/{id}", method = RequestMethod.GET, produces =  MediaType.APPLICATION_JSON_VALUE)
-    public Response getCommodityInfo(@PathVariable(value = "id") String commodityId){
-        try{
-            var test = CommodityDomainManager.getInstance().getCommodityDTO(commodityId);
-            System.out.println(test);
-            return new Response(true,"OK", CommodityDomainManager.getInstance().getCommodityDTO(commodityId));
-        }catch (CustomException e){
+
+    @RequestMapping(value = "/commodities/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response getCommodityInfo(@PathVariable(value = "id") String commodityId) {
+        try {
+            return new Response(true, "OK", CommodityDomainManager.getInstance().getCommodityDTO(commodityId));
+        } catch (CustomException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
     }
+
     @RequestMapping(value = "/commodities/{id}/rate/{data}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Response postCommodityRate(@PathVariable(value = "id") String commodityId,@PathVariable(value = "data") int rate){
+    public Response postCommodityRate(@PathVariable(value = "id") String commodityId, @PathVariable(value = "data") int rate) {
         try {
-            return new Response(true, "OK", CommodityDomainManager.getInstance().rateCommodity(commodityId,rate));
+            return new Response(true, "OK", CommodityDomainManager.getInstance().rateCommodity(commodityId, rate));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
