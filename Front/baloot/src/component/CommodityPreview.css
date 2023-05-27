@@ -90,5 +90,28 @@
     align-items: center;
     justify-content: center;
   }
-  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 29px;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    
+
+}
+.button-container button:first-of-type {
+  background: #593C1C;
+  mix-blend-mode: normal;
+  border-radius: 15px;
+}
  

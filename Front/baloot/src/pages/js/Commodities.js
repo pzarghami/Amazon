@@ -128,7 +128,7 @@ export default function Commodities() {
     }, [activeSorting]);
     useEffect(() => {
         if (!commoditiesFetch || !commodities) return;
-        let newComm = commoditiesFetch.slice;
+        let newComm = commoditiesFetch.slice();
         newComm = newComm.filter(getFilterFunc("inStock"));
         setCommodities(newComm);
 

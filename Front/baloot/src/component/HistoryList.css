@@ -1,0 +1,157 @@
+.history-box {
+
+    width: 83.1vw;
+    height: 1.3vh;
+    margin-top: 8.2rem;
+
+
+}
+
+.history-box span {
+    width: 4.4vw;
+    height: 4.4vh;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.5rem;
+    line-height: 48px;
+    text-align: center;
+    margin-left: 0.4vw;
+    margin-top: 90vh;
+    color: #593C1C;
+
+}
+
+.history {
+    width: 83vw;
+    height: 13.8vh;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    border-radius: 15px;
+    margin-left: 4.1vw;
+    margin-top: 3.3vh;
+    display: flex;
+    align-items: center;
+
+}
+
+.history img {
+    width: 6.5vh;
+    height: 9.2vh;
+    /* background: url(image.png); */
+    background: #FFFFFF;
+    margin-left: 1.6vw;
+}
+
+.history .name span {
+    width: 7.7vw;
+    height: 3.1vh;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 34px;
+    text-align: center;
+    color: #919191;
+    margin-left: 2.6vw;
+}
+
+.history .cate span {
+    width: 13.4vw;
+    height: 3.1vh;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 34px;
+    text-align: center;
+    color: #919191;
+    margin-left: 6vw;
+}
+
+.history .price span {
+    width: 8.4vw;
+    height: 3.1vh;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 34px;
+    text-align: center;
+    color: #919191;
+    margin-left: 8.8vw;
+}
+
+.history .provider span {
+    width: 3.5vw;
+    height: 3.1vh;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 34px;
+    text-align: center;
+    color: #919191;
+    margin-left: 5.6vw;
+}
+
+.history .rating span {
+    width: 2.9vw;
+    height: 4vh;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.25rem;
+    line-height: 44px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #FFC700;
+    margin-left: 7.5vw;
+}
+
+.history .in-stock span {
+    width: 1.8vw;
+    height: 4vh;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.25rem;
+    line-height: 44px;
+    text-align: center;
+
+    color: #C82525;
+    margin-left: 7.2vw;
+}
+
+.history .quantity span {
+
+    width: 1vw;
+    height: 4vh44px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.25rem;
+    line-height: 44px;
+    text-align: center;
+    color: #919191;
+    margin-left: 10.8vw;
+}
+
+.empty-box {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    /* identical to box height */
+
+    margin: 6vh;
+    text-align: center;
+
+    color: #A97B47;
+
+}

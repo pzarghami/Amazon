@@ -5,12 +5,12 @@ import person from "../../images/person.png";
 import mail from "../../images/mail.png";
 import date from "../../images/date.png";
 import location from "../../images/location.png";
-import buylist from "../../images/buylist.png";
-import history from "../../images/history.png";
+
 import "../css/user.css";
 import AddCreditPopup from "../../component/AddCreditPopup";
 import PayForm from "../../component/PayForm"
 import BuylistList from "../../component/BuylistList";
+import HistoryList from "../../component/HistoryList";
 
 export default function User() {
     const [showPopup, setShowPopup] = useState(false);
@@ -106,10 +106,7 @@ export default function User() {
                             <AddCreditPopup creditValue={creditValue} setShowPopup={setShowPopup} handleCreditSubmit={handleCreditSubmit} handleCreditChange={handleCreditChange} />
                         )}
                     </div>
-                    <div class="cart-box">
-                        <img src={buylist} alt="buylist" />
-                        <span>Cart</span>
-                    </div>
+
                     <BuylistList user={user} setUser={setUser}/>
 
                     <button class="pay" onClick={e => setShowPopupPayingForm(true)} type="submit">
@@ -118,91 +115,7 @@ export default function User() {
                     {showPopupPayingForm &&
                         <PayForm setShowPopupPayingForm={setShowPopupPayingForm} user={user} />
                     }
-                    <div class="history-box">
-                        <img src={history} alt="history" />
-                        <span>History</span>
-                    </div>
-                    <div class="topic-box">
-                        <div class="image">
-                            <span>Image</span>
-                        </div>
-                        <div class="name">
-                            <span>Name</span>
-                        </div>
-                        <div class="cate">
-                            <span>Categories</span>
-                        </div>
-                        <div class="price">
-                            <span>price</span>
-                        </div>
-                        <div class="provider">
-                            <span>Provider ID</span>
-                        </div>
-                        <div class="rating">
-                            <span>Rating</span>
-                        </div>
-                        <div class="stock">
-                            <span>In Stock</span>
-                        </div>
-                        <div class="quantity">
-                            <span>quantity</span>
-                        </div>
-                    </div>
-                    <div class="history">
-                        <img src="../assets/images/s21.png" alt="s21" />
-                        <div class="name">
-                            <span>Mom's
-                            </span>
-                            <br />
-                            <span>spaghetti</span>
-                        </div>
-                        <div class="cate">
-                            <span>food</span>
-                        </div>
-                        <div class="price">
-                            <span>$60000</span>
-                        </div>
-                        <div class="provider">
-                            <span>313</span>
-                        </div>
-                        <div class="rating">
-                            <span>10</span>
-                        </div>
-                        <div class="in-stock">
-                            <span>0</span>
-                        </div>
-                        <div class="quantity">
-                            <span>3</span>
-                        </div>
-                    </div>
-                    <div class="history2">
-                        <img src="../assets/images/mic.png" alt="mic" />
-                        <div class="name">
-                            <span>Dre's
-                            </span>
-                            <br />
-                            <span>Microphone</span>
-                        </div>
-                        <div class="cate">
-                            <span>Technology</span>
-                        </div>
-                        <div class="price">
-                            <span>$4200000</span>
-                        </div>
-                        <div class="provider">
-                            <span>4321</span>
-                        </div>
-                        <div class="rating">
-                            <span>8.5</span>
-                        </div>
-                        <div class="in-stock">
-                            <span>22</span>
-                        </div>
-                        <div class="quantity">
-                            <span>1</span>
-                        </div>
-                    </div>
-
+                    <HistoryList user={user} setUser={setUser}/>
                 </div>
             }
         </>

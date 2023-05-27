@@ -1,35 +1,19 @@
 import React, { useState, useEffect } from "react";
-import './BuylistList.css'
 
-import AddToBuyListBox from "./AddToBuyListBox";
-import buylist from "../images/buylist.png";
+import history from "../images/history.png";
+import "./HistoryList.css";
 
-export default function BuylistList(props) {
+
+export default function HistoryList(props) {
     const { user, setUser } = props;
-    const [userBuylist, setUserBuylist] = useState(user["buyList"])
-    console.log(user);
-
-    const deleteByIndex = index => {
-        setUserBuylist(oldValues => {
-            return oldValues.filter((_, i) => i !== index)
-        })
-        user["buyList"] = userBuylist;
-    }
-    const updateBuylistHandeling = editedCommodity => {
-
-        const commodityIndex = user["buyList"].findIndex(x => x.id === editedCommodity.id);
-        if (editedCommodity.quantity == 0)
-            deleteByIndex(commodityIndex);
-        else
-            user["buyList"][commodityIndex] = editedCommodity;
-        setUser({ ...user });
-    }
+    const [historyList, setHistoryList] = useState(user.userPurchasedList);
+    console.log(historyList);
 
     return (
         <>
-            <div class="cart-box">
-                <img src={buylist} alt="buylist" />
-                <span>Cart</span>
+            <div class="history-box">
+                <img src={history} alt="history" />
+                <span>History</span>
             </div>
             <div class="topic-box">
                 <div class="image">
@@ -53,18 +37,17 @@ export default function BuylistList(props) {
                 <div class="stock">
                     <span>In Stock</span>
                 </div>
-                <div class="in-cart">
-                    <span>In Cart</span>
+                <div class="quantity">
+                    <span>quantity</span>
                 </div>
-
             </div>
-            {userBuylist.lenght ?
-                userBuylist.map(item => (
-
-                    <div class="buylist">
+            {historyList.length ?
+                historyList.map(item => (
+                    <div class="history">
                         <img src={item.imgUrl} alt="s21" />
                         <div class="name">
-                            <span>{item.name}</span>
+                            <span>{item.name}
+                            </span>
                         </div>
                         {/* <div class="cate">
                         {item["categories"].map(item => (
@@ -83,16 +66,15 @@ export default function BuylistList(props) {
                         <div class="in-stock">
                             <span>{item.inStock}</span>
                         </div>
-                        <AddToBuyListBox commodity={item} setCommodity={updateBuylistHandeling} />
-                    </div>
-                ))
+                        <div class="quantity">
+                            <span>{item.quantity}</span>
+                        </div>
+                    </div>))
+
                 :
-                <div className="empty-box">Your cart is empty</div>
+                <div className="empty-box">Your history is empty</div>
+
             }
-
-
-
-
 
         </>
     )

@@ -1,4 +1,29 @@
 
+.cart-box {
+
+    width: 83.1vw;
+    height: 1.3vh;
+    margin-top: 8.2rem;
+
+
+
+}
+
+.cart-box span {
+    width: 4.4vw;
+    height: 4.4vh;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.5rem;
+    line-height: 48px;
+    text-align: center;
+    margin-right: 4vw;
+    margin-top: 90vh;
+    color: #593C1C;
+
+}
+
 .topic-box {
     width: 83.1vw;
     height: 6.9vh;
@@ -257,4 +282,18 @@
     text-align: center;
     color: #000000;
     margin-left: 2vw;
+}
+.empty-box {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    /* identical to box height */
+
+    margin: 6vh;
+    text-align: center;
+
+    color: #A97B47;
+
 }
