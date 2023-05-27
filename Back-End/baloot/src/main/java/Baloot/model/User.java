@@ -74,6 +74,10 @@ public class User {
         }
     }
 
+    public int getBuyListSize() {
+        return buyList.size();
+    }
+
     public void addCredit(int amount) {
         this.credit += amount;
     }

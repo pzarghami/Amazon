@@ -72,4 +72,8 @@ public class UserDomainManager {
         UserRepo.loggedInUser.finalizeThePurchase();
         return UserRepo.loggedInUser.getDTO();
     }
+
+    public int getBuyListSize() {
+        return UserRepo.loggedInUser.getBuyListSize();
+    }
 }

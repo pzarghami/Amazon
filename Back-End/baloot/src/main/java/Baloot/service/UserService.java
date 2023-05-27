@@ -126,4 +126,9 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "InvalidCredential", e);
         }
     }
+
+    @RequestMapping(value = "/buyListSize", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response getBuyListSize() {
+        return new Response(true, "OK", UserDomainManager.getInstance().getBuyListSize());
+    }
 }
