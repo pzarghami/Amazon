@@ -41,6 +41,9 @@ public class User {
     }
 
     public CommodityDTO addToBuyList(Commodity commodity) throws CustomException {
+        if(commodity.getInStock()<1)
+            throw new CustomException("there is not enough commodity");
+        commodity.decreaseInStock();
         if (buyList.containsKey(commodity)) {
             buyList.put(commodity, buyList.get(commodity) + 1);
         } else {
@@ -60,6 +63,7 @@ public class User {
             buyList.remove(commodity);
             quantity = 0;
         }
+        commodity.increaseInStock();
         return commodity.getDTO(quantity);
     }
 
@@ -72,6 +76,7 @@ public class User {
         if (buyListPrice > this.credit)
             throw new CustomException("credit is not enough");
         userPurchasedList.putAll(buyList);
+        buyList.clear();
         if (discount != null) {
             this.discountCodeUsed.add(discount);
             this.discount = null;
