@@ -1,5 +1,7 @@
 package Baloot.model.DTO;
 
+import java.util.ArrayList;
+
 public class CommodityBriefDTO {
     private int id;
     private String name;
@@ -8,6 +10,7 @@ public class CommodityBriefDTO {
     private String imgUrl;
     private int quantity;
     private String providerName;
+    private ArrayList<String> categories;
 
     public int getId() {
         return id;
@@ -63,5 +66,13 @@ public class CommodityBriefDTO {
 
     public void setProviderName(String providerName) {
         this.providerName = providerName;
+    }
+
+    public ArrayList<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(ArrayList<String> categories) {
+        this.categories = categories;
     }
 }

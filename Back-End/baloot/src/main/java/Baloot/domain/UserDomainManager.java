@@ -1,5 +1,6 @@
 package Baloot.domain;
 
+import Baloot.model.DTO.CommodityDTO;
 import Baloot.model.DTO.UserDTO;
 import Baloot.model.User;
 import Baloot.repository.CommodityRepo;
@@ -16,7 +17,7 @@ public class UserDomainManager {
         return instance;
     }
 
-    public UserDTO getUserDTO() {
+    public UserDTO getUserDTO() throws CustomException {
         return UserRepo.loggedInUser.getDTO();
     }
 
@@ -38,14 +39,14 @@ public class UserDomainManager {
         // UserRepo.getInstance().loginUser(user);
     }
 
-    public void addToBuyList(int commodityId) throws CustomException {
+    public CommodityDTO addToBuyList(int commodityId) throws CustomException {
         var commodity = CommodityRepo.getInstance().getElementById(String.valueOf(commodityId));
-        UserRepo.loggedInUser.addToBuyList(commodity);
+        return UserRepo.loggedInUser.addToBuyList(commodity);
     }
 
-    public void removeFromBuyList(int commodityId) throws CustomException {
+    public CommodityDTO removeFromBuyList(int commodityId) throws CustomException {
         var commodity = CommodityRepo.getInstance().getElementById(String.valueOf(commodityId));
-        UserRepo.loggedInUser.removeFromBuyList(commodity);
+        return UserRepo.loggedInUser.removeFromBuyList(commodity);
     }
 
     public void addCredit(int amount) {

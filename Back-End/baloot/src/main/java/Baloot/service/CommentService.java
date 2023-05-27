@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -20,6 +21,16 @@ public class CommentService {
             return new Response(true, "OK", CommentDomainManager.getInstance().postNewComment(newComment));
         } catch (CustomException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Related Source Not Found", e);
+        }
+    }
+
+    @RequestMapping(value = "/comments/{id}/vote", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response voteComment(@PathVariable(value = "id") Integer commentId, @RequestBody String voteObj) {
+        try {
+            var voteValue = new ObjectMapper().readTree(voteObj).get("vote").asInt();
+            return new Response(true, "OK", CommentDomainManager.getInstance().voteComment(commentId.toString(), voteValue));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
 }

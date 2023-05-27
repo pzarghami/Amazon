@@ -40,7 +40,7 @@ public class CommodityDomainManager {
     }
 
     private CommodityDTO getCommodityDTO(Commodity commodity) throws CustomException {
-        var DTO = commodity.getDTO();
+        var DTO = commodity.getDTO(0);
         if (UserRepo.loggedInUser != null)
             DTO.setUserRate(commodity.getUserRate(UserRepo.loggedInUser.getUsername()));
         return DTO;
