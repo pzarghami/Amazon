@@ -21,7 +21,8 @@ const priceCompare = (a, b) => {
     else if (a.price === b.price) return 0;
     else return -1;
 };
-export default function Commodities() {
+export default function Commodities(props) {
+    const {setNumOfCart}=props;
     const [commodities, setCommodities] = useState(null);
 
     const [commoditiesFetch, setFetchCommodities] = useState(null);
@@ -38,10 +39,10 @@ export default function Commodities() {
     };
 
     const filterCat = (item) => {
-        console.log(item);
+
         for (var cat in item.categories) {
             if (item.categories[cat].includes(searchValue)) {
-                console.log(item.categories);
+
                 return true;
             }
         }
@@ -83,12 +84,11 @@ export default function Commodities() {
     }, [location.search]);
 
     useEffect(() => {
-        console.log(filterBy);
-        console.log(searchValue);
+
 
         if (!commoditiesFetch || !commodities) return;
         let newComm = commoditiesFetch.slice();
-        console.log(newComm);
+
         newComm = newComm.filter(getFilterFunc(filterBy));
 
         setCommodities(newComm);
@@ -168,6 +168,7 @@ export default function Commodities() {
                                         name={commodities[item].name}
                                         inStock={commodities[item].inStock}
                                         price={commodities[item].price}
+                                        setNumOfCart={setNumOfCart}
                                     />
 
                                 </div>

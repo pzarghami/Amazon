@@ -23,7 +23,7 @@ export default function Login() {
       const data = { username: username ,password: password };
 
       const response = await axios.post('/auth/login/', data);
-      console.log(response)
+
       if (response.data.status) {
         localStorage.setItem('userLoggedIn', true);
         localStorage.setItem('userId', username);

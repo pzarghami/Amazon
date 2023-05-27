@@ -22,7 +22,7 @@ export default function Provider(props) {
 
 
                 setProvider(providerRes);
-                console.log(provider);
+
             } catch (e) {
                 if (e.response.status === 404) {
                     console.log(providerId);

@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useInsertionEffect, useState } from "react";
 
 export default function CommodityPreview(props) {
-    const { id, imgUrl, name, inStock, price } = props;
+    const { id, imgUrl, name, inStock, price ,setNumOfCart} = props;
     const userId = localStorage.getItem('userId');
     const [popupBuylist, setPopupBuylist] = useState(false);
     const navigate = useNavigate();
@@ -15,9 +15,11 @@ export default function CommodityPreview(props) {
         try {
             setError('');
             const response = await axios.post('/user/buylist/' + id);
-            console.log(response);
-            if(response.data.status)
+
+            if(response.data.status){
                 setPopupBuylist(true);
+                setNumOfCart(prevCount => prevCount + 1);
+            }
 
 
         } catch (e) {

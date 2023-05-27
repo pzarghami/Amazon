@@ -12,9 +12,9 @@ export default function RateCommodity(props) {
   const handleRate = async rate => {
     try {
 
-      console.log(rate);
+
       const response = await axios.post('/commodities/' + commodityId + '/rate/'+rate);
-      console.log(response);
+
 
       if(response.data.status){
         updateRate(response.data.content);

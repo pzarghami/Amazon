@@ -8,24 +8,21 @@ import LoginButton from './LoginButton';
 
 
 
-export default function HeaderProfile() {
+export default function HeaderProfile(props) {
+  const {numOfCart}=props;
+
   var isLoggedIn = localStorage.getItem('userLoggedIn');
   var userId = localStorage.getItem('userId');
-  const [numOfCartStorage, setStorage]=useState(0);
+//   useEffect(() => {
+//     console.log(numOfcart);
+
+// }, [numOfcart]);
+
 
 
   const location = useLocation();
   const navigate = useNavigate();
 
-
-
-
-  useEffect(() => {
-    console.log("HDHODIHSOFH");
-    var numOfcart = localStorage.getItem('numOfCartStorage');
-    setStorage(numOfcart);
-
-}, []);
   return (
     <>
       {
@@ -43,10 +40,10 @@ export default function HeaderProfile() {
 
           <div class="user-cart-button">
             <Link to='/user'>
-              {numOfCartStorage ?
-                <button type="button" className='full-cart'>{"Cart  " + numOfCartStorage}</button>
+              {numOfCart ?
+                <button type="button" className='full-cart'>{"Cart  " + numOfCart}</button>
                 :
-                <button type="button" className='empty-cart'>{"Cart  " + numOfCartStorage}</button>
+                <button type="button" className='empty-cart'>{"Cart  " + numOfCart}</button>
               }
 
             </Link>

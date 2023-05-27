@@ -11,10 +11,11 @@ import CommentForm from '../../component/CommentForm';
 import CommodityPreview from '../../component/CommodityPreview'
 
 
-export default function Commodity() {
+export default function Commodity(props) {
+    const {setNumOfCart}=props;
     const [commodity, setCommodity] = useState(null);
     const { id } = useParams();
-
+    console.log(commodity);
     const isLoggedIn = localStorage.getItem('userLoggedIn');
     const userId = localStorage.getItem('userId');
     const [showMOre, setShowMoreFlage] = useState(false);
@@ -27,10 +28,10 @@ export default function Commodity() {
                 const response = await axios.get('commodities/' + id);
 
                 const commodityRes = response.data.content;
-                console.log(commodityRes);
+
 
                 setCommodity(commodityRes);
-                console.log(commodity);
+
             } catch (e) {
                 if (e.response.status === 404) {
                     navigate('/404');
@@ -83,7 +84,7 @@ export default function Commodity() {
                                 <span class="product-category-text">
                                     Category(s)
                                 </span><br />
-                                {
+                                {/* {
                                     showMOre || commodity["categories"].length <= 2 ?
                                         commodity["categories"].map((item) => (
                                             <div >
@@ -112,14 +113,14 @@ export default function Commodity() {
                                         </>
 
 
-                                }
+                                } */}
 
                                 <div class="container-fluid card-box">
                                     <div class="row add-to-card-box">
                                         <div class="col-6 credit">300 $</div>
                                         <div class="col-6 add-to-card">
                                             <Popup trigger={<button >Add to card</button>} popupClass={"popup-content"}>
-                                                <AddToBuyListBox commodity={commodity} setCommodity={setCommodity} />
+                                                <AddToBuyListBox commodity={commodity} setCommodity={setCommodity} setNumOfCart={setNumOfCart} />
                                             </Popup>
 
                                         </div>

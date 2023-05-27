@@ -7,7 +7,7 @@ import "./HistoryList.css";
 export default function HistoryList(props) {
     const { user, setUser } = props;
     const [historyList, setHistoryList] = useState(user.userPurchasedList);
-    console.log(historyList);
+
 
     return (
         <>

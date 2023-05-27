@@ -12,7 +12,8 @@ import PayForm from "../../component/PayForm"
 import BuylistList from "../../component/BuylistList";
 import HistoryList from "../../component/HistoryList";
 
-export default function User() {
+export default function User(props) {
+    const {setNumOfCart}=props;
     const [showPopup, setShowPopup] = useState(false);
     const navigate = useNavigate();
     const [showPopupPayingForm, setShowPopupPayingForm] = useState(false);
@@ -44,7 +45,7 @@ export default function User() {
                 const response = await axios.get("user", data);
                 const userTemp = response.data.content;
                 setUser(userTemp);
-                console.log(user);
+
             } catch (e) {
                 console.log(e);
             }
@@ -57,7 +58,8 @@ export default function User() {
             try {
                 const data = { amount: creditValue }
                 const response = await axios.get("addCredit", data);
-
+                if(response.data.status)
+                    setCreditValue()
             } catch (e) {
                 console.log(e);
             }
@@ -107,7 +109,7 @@ export default function User() {
                         )}
                     </div>
 
-                    <BuylistList user={user} setUser={setUser}/>
+                    <BuylistList user={user} setUser={setUser} setNumOfCart={setNumOfCart}/>
 
                     <button class="pay" onClick={e => setShowPopupPayingForm(true)} type="submit">
                         Pay now!

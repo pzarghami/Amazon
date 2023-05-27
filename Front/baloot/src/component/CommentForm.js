@@ -16,7 +16,7 @@ export default function CommentForm(props) {
 
       const data = { commentCommodityId: commodity.id, text: commentText };
       const response = await axios.post('/comments/', data);
-      console.log(response);
+
       const newComment = response.data.content;
       addComment(newComment);
       setCommentText('');
@@ -27,8 +27,7 @@ export default function CommentForm(props) {
   const addComment = newComment => {
     commodity.comments.push(newComment);
     
-    setCommodity({ ...commodity });
-    console.log(commodity);
+
   }
 
   const updateComment = editedComment => {

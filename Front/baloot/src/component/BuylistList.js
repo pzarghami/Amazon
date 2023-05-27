@@ -5,9 +5,9 @@ import AddToBuyListBox from "./AddToBuyListBox";
 import buylist from "../images/buylist.png";
 
 export default function BuylistList(props) {
-    const { user, setUser } = props;
+    const { user, setUser,setNumOfCart } = props;
     const [userBuylist, setUserBuylist] = useState(user["buyList"])
-    console.log(user);
+
 
     const deleteByIndex = index => {
         setUserBuylist(oldValues => {
