@@ -78,7 +78,7 @@ public class Commodity {
 
     public Integer getUserRate(String userId) {
         if (!userRateMap.containsKey(userId)) {
-            return null;
+            return 0;
         }
         return (Integer) userRateMap.get(userId);
     }

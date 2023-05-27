@@ -63,6 +63,10 @@ public class User {
         return commodity.getDTO(quantity);
     }
 
+    public int getQuantityOfCommodity(Commodity commodity) {
+        return buyList.getOrDefault(commodity, 0);
+    }
+
     public void finalizeThePurchase() throws CustomException {
         var buyListPrice = getBuyListPrice();
         if (buyListPrice > this.credit)
@@ -72,6 +76,10 @@ public class User {
             this.discountCodeUsed.add(discount);
             this.discount = null;
         }
+    }
+
+    public int getBuyListSize() {
+        return buyList.size();
     }
 
     public void addCredit(int amount) {
