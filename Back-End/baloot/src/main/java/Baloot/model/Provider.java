@@ -21,18 +21,24 @@ public class Provider {
         this.commoditiesList = new ArrayList<>();
     }
 
-    public int getId(){return this.id;}
-    public String getName(){return this.name;}
+    public int getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
 
     public void addCommodity(Commodity commodity) {
         commoditiesList.add(commodity);
     }
 
-    public ProviderDTO getDTO(){
+    public ProviderDTO getDTO() {
         var providerDTO = new ProviderDTO();
         providerDTO.setId(this.id);
         providerDTO.setName(this.name);
         providerDTO.setRegistryDate(this.registryDate);
+        providerDTO.setImage(image);
         var providersCommodityDTO = new ArrayList<CommodityBriefDTO>();
         commoditiesList.forEach(commodity -> providersCommodityDTO.add(commodity.getBriefDTO(0)));
         providerDTO.setCommoditiesList(providersCommodityDTO);

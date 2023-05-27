@@ -7,6 +7,7 @@ public class CommodityDTO {
     private int id;
     private String name;
     private String provideName;
+    private int providerId;
     private float price;
     private ArrayList<String> categories;
     private double rate;
@@ -15,6 +16,8 @@ public class CommodityDTO {
     private ArrayList<CommentDTO> comments;
     private Integer UserRate;
     private ArrayList<CommodityBriefDTO> suggestionCommodity;
+    private int numOfRate;
+    private int quantity;
 
     public int getId() {
         return id;
@@ -102,5 +105,29 @@ public class CommodityDTO {
 
     public void setSuggestionCommodity(ArrayList<CommodityBriefDTO> suggestionCommodity) {
         this.suggestionCommodity = suggestionCommodity;
+    }
+
+    public int getNumOfRate() {
+        return numOfRate;
+    }
+
+    public void setNumOfRate(int numOfRate) {
+        this.numOfRate = numOfRate;
+    }
+
+    public int getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(int providerId) {
+        this.providerId = providerId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

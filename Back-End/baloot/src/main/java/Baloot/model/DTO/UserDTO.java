@@ -10,35 +10,62 @@ public class UserDTO {
     private String birthDate;
     private String address;
     private int credit;
-    private ArrayList<CommodityBriefDTO> buyList;
-    private ArrayList<CommodityBriefDTO> userPurchasedList;
+    private ArrayList<CommodityDTO> buyList;
+    private ArrayList<CommodityDTO> userPurchasedList;
 
-    public void setUsername(String username){
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
         this.username = username;
     }
-    public void setEmail(String email){this.email = email;}
-    public void setBirthDate(String birthDate){
-        this.birthDate = birthDate;
-    }
-    public void setAddress(String address){this.address = address;}
-    public void setCredit(int credit){
-        this.credit = credit;
-    }
-    public void setBuyList(ArrayList<CommodityBriefDTO>buyList){this.buyList = buyList;}
-    public void setUserPurchasedList(ArrayList<CommodityBriefDTO>userPurchasedList){this.userPurchasedList = userPurchasedList;}
-    public String getUsername(){return this.username;}
-    public String getEmail(){
+
+    public String getEmail() {
         return this.email;
     }
-    public String getBirthDate(){
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getBirthDate() {
         return this.birthDate;
     }
-    public String getAddress(){
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getAddress() {
         return this.address;
     }
-    public int getCredit(){
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getCredit() {
         return this.credit;
     }
-    public ArrayList<CommodityBriefDTO>getBuyList(){return this.buyList;}
-    public ArrayList<CommodityBriefDTO> getUserPurchasedList() {return this.userPurchasedList;}
+
+    public void setCredit(int credit) {
+        this.credit = credit;
+    }
+
+    public ArrayList<CommodityDTO> getBuyList() {
+        return this.buyList;
+    }
+
+    public void setBuyList(ArrayList<CommodityDTO> buyList) {
+        this.buyList = buyList;
+    }
+
+    public ArrayList<CommodityDTO> getUserPurchasedList() {
+        return this.userPurchasedList;
+    }
+
+    public void setUserPurchasedList(ArrayList<CommodityDTO> userPurchasedList) {
+        this.userPurchasedList = userPurchasedList;
+    }
 }

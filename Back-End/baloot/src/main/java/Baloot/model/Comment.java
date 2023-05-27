@@ -14,7 +14,7 @@ public class Comment {
     private int likeNumber;
     private int dislikeNumber;
     private Commodity commentCommodity;
-    private HashMap<User, Integer> userVoteMap;
+    private HashMap<String, Short> userVoteMap;
 
     public Comment(User commentOwner, String text, Commodity commentCommodity) {
         this.id = null;
@@ -58,8 +58,8 @@ public class Comment {
         }
     }
 
-    public void voteComment(User user, int vote) throws CustomException {
-        userVoteMap.put(user, vote);
+    public void voteComment(String user, Integer vote) {
+        userVoteMap.put(user, vote.shortValue());
         updateVote();
     }
 
