@@ -57,6 +57,12 @@ public class Commodity {
         return categories;
     }
 
+    public int getInStock(){return inStock;}
+
+    public void decreaseInStock(){inStock = inStock - 1;}
+
+    public void increaseInStock(){inStock = inStock + 1;}
+
     public boolean isYourCategory(ArrayList<String> cats) {
         for (String cat : cats) {
             for (String category : categories) {
