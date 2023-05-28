@@ -15,16 +15,18 @@ export default function BuylistList(props) {
         setUserBuylist(oldValues => {
             return oldValues.filter((_, i) => i !== index)
         })
-        user["buyList"] = userBuylist;
     }
     const updateBuylistHandeling = editedCommodity => {
-
+        
         const commodityIndex = user["buyList"].findIndex(x => x.id === editedCommodity.id);
         if (editedCommodity.quantity == 0)
             deleteByIndex(commodityIndex);
         else
-            user["buyList"][commodityIndex] = editedCommodity;
+            userBuylist[commodityIndex]=editedCommodity;
+        console.log(userBuylist);
+        user["buylist"]=userBuylist;
         setUser({ ...user });
+        console.log(user);
     }
     const handleLinkToUser =  id => {
         navigate('/commodities/' + id);
@@ -65,7 +67,7 @@ export default function BuylistList(props) {
                                 <td class="provider"><span>{item.provideName}</span></td>
                                 <td class="rating"><span>{item.rate}</span></td>
                                 <td class="in-stock"><span>{item.inStock}</span></td>
-                                <td><AddToBuyListBox commodity={item} setCommodity={updateBuylistHandeling} /></td>
+                                <td><AddToBuyListBox commodity={item} setCommodity={updateBuylistHandeling} setNumOfCart={setNumOfCart}/></td>
 
                             </tr>
                         )) :

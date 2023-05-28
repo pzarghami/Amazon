@@ -29,13 +29,18 @@ export default function PayForm(props) {
     async function handlePay() {
         try {
             const response = await axios.post('pay');
+            const tempUser=response.data.content;
+            console.log(response);
             if (response.data.status) {
-                setUser(response.data.content);
+                setUser(tempUser);
+                console.log("After setUser", user);
+                console.log(setUser);
 
             }
             setShowPopupPayingForm(false);
         }
         catch (e) {
+            console.log(e);
             setError(true);
         }
 
@@ -68,7 +73,7 @@ export default function PayForm(props) {
     return (
 
         <div className="popup">
-            
+
             <div className="popup-content">
                 <span className="close" onClick={handleClose}>
                     &times;
@@ -104,21 +109,22 @@ export default function PayForm(props) {
                         <button type="submit">Submit</button>
                     </div>
                 </form>
-                {discountValue ? 
-                <>
-                    <div className="total-cost">{totalCost}</div>
-                    <div className="total-cost-with-discount">{discountValue}</div>
-                    </>:
+                {discountValue ?
+                    <>
+                        <div className="total-cost">{totalCost}</div>
+                        <div className="total-cost-with-discount">{discountValue}</div>
+                    </> :
                     <div className="total-cost-with-discount">{totalCost}</div>
 
                 }
                 {error &&
                     <div>Error</div>
                 }
-                
 
-                <button className="pay-button" onClick={handlePay}>Buy!</button>
-                <button className="close-button" onClick={handleClose}>Close</button>
+                <div className="button-container">
+                    <button className="pay-button" onClick={handlePay}>Buy!</button>
+                    <button className="close-button" onClick={handleClose}>Close</button>
+                </div>
 
             </div>
         </div>

@@ -15,8 +15,9 @@ export default function Router() {
   const [numOfCart, setCart]=useState(0);
   const setNumOfCart = async () => {
     try {
-    
+      
       const response = await axios.post('buyListSize');
+      console.log(response);
       if (response.data.status) {
         console.log(response);
         setCart(response.data.content);
@@ -35,9 +36,9 @@ export default function Router() {
       <Route path='/signup' element={<Signup />} />
       <Route element={<Layout numOfCart={numOfCart}/>}>
         <Route path='/commodities' element={<Commodities setNumOfCart={setNumOfCart}/>} />
-        <Route path='/commodities/:id' element={<Commodity/>}/>
+        <Route path='/commodities/:id' element={<Commodity setNumOfCart={setNumOfCart}/>}/>
         <Route path='/provider/:providerId' element={<Provider/>}/>
-        <Route path='/user' element ={<User/>}/>
+        <Route path='/user' element ={<User setNumOfCart={setNumOfCart}/>}/>
       </Route>
     </Routes>
   )

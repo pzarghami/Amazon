@@ -19,7 +19,7 @@ export default function Commodity(props) {
     const userId = localStorage.getItem('userId');
     const [showMOre, setShowMoreFlage] = useState(false);
     const navigate = useNavigate();
-
+    console.log(commodity);
 
     useEffect(() => {
         async function fetchData() {
@@ -148,6 +148,7 @@ export default function Commodity(props) {
                                     name={recCommodity.name}
                                     inStock={recCommodity.inStock}
                                     price={recCommodity.price}
+                                    setNumOfCart={setNumOfCart}
                                 />
                             ))}
                     </div>

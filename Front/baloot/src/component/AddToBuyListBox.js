@@ -8,6 +8,7 @@ import './AddToBuyListBox.css'
 
 export default function AddToBuyListBox(props) {
   const { commodity, setCommodity, setNumOfCart } = props;
+  
   var [quantity, setQuantity] = useState(commodity.quantity);
   const navigate = useNavigate();
 
@@ -36,6 +37,8 @@ export default function AddToBuyListBox(props) {
       if (response.data.status) {
         setCommodity(response.data.content);
         setNumOfCart();
+        console.log(response);
+        console.log("quantity");
         setQuantity(quantity + 1);
       }
 

@@ -50,37 +50,37 @@
     border-radius: 5px;
     border: 1px solid #ccc;
 }
-
 .button-container {
-    display:block;
-    margin: 1rem;
-
-    border-radius: 2px;
-
-  
+    display: flex;
+    justify-content: space-between;
 }
 
 .button-container button {
-
-    border-radius: 2px;
+    padding: 10px 20px;
+    border-radius: 5px;
     border: none;
     color: #fff;
-    text-align: center;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: normal;
-    justify-content: center;
     cursor: pointer;
-    background-color: #593C1C !important;
 }
 
+.button-container button:first-of-type {
+    background: #593C1C;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+}
+
+.button-container button:last-of-type {
+    background-color: #f44336;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+}
 
 
 .total-cost {
     text-decoration: line-through;
     color: red;
   }
-.pay-button {
+/* .pay-button {
     padding: 5px 20px;
 
     border-radius: 5px;
@@ -100,7 +100,7 @@
     cursor: pointer;
     background-color: red !important;
     background: #593C1C;
-}
+} */
 .buylist-item {
     display: flex;
     justify-content: space-between;
