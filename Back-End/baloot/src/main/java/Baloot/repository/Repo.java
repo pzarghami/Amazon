@@ -1,15 +1,22 @@
 package Baloot.repository;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import Baloot.Exeption.CustomException;
 import Baloot.model.User;
 
 public abstract class Repo<T> {
     static User loggedInUser;
-    protected Map<String,T> objectMap;
-    public Repo () {
+    protected Map<String, T> objectMap;
+
+    public Repo() {
         objectMap = new HashMap<>();
     }
 
@@ -37,6 +44,10 @@ public abstract class Repo<T> {
 
     public boolean isIdValid(String id) {
         return objectMap.containsKey(id);
+    }
+
+    public void initTable(String createTableSql) {
+        
     }
 
     public boolean isIdListValid(List<String> ids) {
