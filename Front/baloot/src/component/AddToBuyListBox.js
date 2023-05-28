@@ -7,20 +7,40 @@ import './AddToBuyListBox.css'
 
 
 export default function AddToBuyListBox(props) {
-  const { commodity } = props;
-  var [quantity, setQuantity] = useState(0);
+  const { commodity, setCommodity, setNumOfCart } = props;
+  
+  var [quantity, setQuantity] = useState(commodity.quantity);
   const navigate = useNavigate();
 
+  const removeFromBuylist = async () => {
+    try {
 
+      const response = await axios.delete('/user/buylist/' + commodity.id);
+      if (response.data.status) {
+        setCommodity(response.data.content);
+        setNumOfCart();
+        if (quantity == 0)
+          setQuantity(quantity);
+        else
+          setQuantity(quantity - 1)
+
+      }
+
+    } catch (e) {
+
+    }
+  }
   const addToBuylist = async () => {
     try {
-      //when backend is ready
-      // const data = { quantity }
-      // const userId = localStorage.getItem('userId');
 
-      // const response = await axios.post('/users/' + userId + '/buylist/' + commodity.id);
-      // if (response.data.status)
-      //   navigate('/commodities/' + commodity.id);
+      const response = await axios.post('/user/buylist/' + commodity.id);
+      if (response.data.status) {
+        setCommodity(response.data.content);
+        setNumOfCart();
+        console.log(response);
+        console.log("quantity");
+        setQuantity(quantity + 1);
+      }
 
 
     } catch (e) {
@@ -30,20 +50,14 @@ export default function AddToBuyListBox(props) {
   return (
     <>
       <div className='quantity-box'>
-        <span className="minus" onClick={() => {
-          if (quantity == 0)
-            setQuantity(quantity);
-          else
-            setQuantity(quantity--)
-        }}>
+        <span className="minus" onClick={removeFromBuylist}>
           -
         </span>
         <span className="number"> {quantity} </span>
-        <span className="plus" onClick={() => setQuantity(quantity++)}>
+        <span className="plus" onClick={addToBuylist}>
           +
         </span>
       </div>
-      <button onClick={addToBuylist}>Sumbit</button>
     </>
 
   )

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="baloot:war" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1f8ad945-d01f-466d-b9d9-454d70e2a0af" name="Default Changelist" comment="push with bugs">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/css/404.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/css/auth.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/css/commodities.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/css/commodityPage.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/css/footer.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/css/navbar.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/css/root.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/css/user.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/fiveStars.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/magnifier.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/product.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/sample-product.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/star.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/thumbs-down.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/thumbs-up.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assets/images/toggle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/400.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/403.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/404.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/commoditiesPage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/commodityPage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/signup.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pages/userPage.html" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="farzin" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Nt3tPClUyjeZ6KOPB8Vnq84V6m" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/farzin/university/Term8/IE/Projects/5/Back-End/baloot/pom.xml"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.Interface">
+    <configuration name="Interface" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ie.Interface" />
+      <module name="baloot" />
+      <option name="VM_PARAMETERS" value="--enable-preview" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ie.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tomcat 10(Ubuntu)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10 (Ubuntu)" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="baloot:war">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="7bd128ff-d121-4059-93b0-fdc7b5023649" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="36623" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="baloot:war" />
+        </option>
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Interface" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Interface" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1f8ad945-d01f-466d-b9d9-454d70e2a0af" name="Default Changelist" comment="" />
+      <created>1680469768343</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1680469768343</updated>
+      <workItem from="1680469771360" duration="47000" />
+      <workItem from="1680516388314" duration="469000" />
+      <workItem from="1680516892192" duration="813000" />
+      <workItem from="1680597801637" duration="990000" />
+      <workItem from="1680599733821" duration="9105000" />
+      <workItem from="1680613111259" duration="750000" />
+      <workItem from="1680614665161" duration="28000" />
+      <workItem from="1680616722242" duration="4795000" />
+      <workItem from="1680624752787" duration="2632000" />
+      <workItem from="1680690407977" duration="298000" />
+      <workItem from="1680732766660" duration="18188000" />
+      <workItem from="1680862432934" duration="5791000" />
+      <workItem from="1680872187315" duration="5286000" />
+      <workItem from="1680892001422" duration="1532000" />
+      <workItem from="1681040285793" duration="568000" />
+      <workItem from="1681166252855" duration="196000" />
+    </task>
+    <task id="LOCAL-00001" summary="change git ignore">
+      <created>1680692717127</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1680692717127</updated>
+    </task>
+    <task id="LOCAL-00002" summary="change git ignore">
+      <created>1680692803465</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1680692803465</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="change git ignore" />
+    <MESSAGE value="change filterByName" />
+    <option name="LAST_COMMIT_MESSAGE" value="change filterByName" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ie/commodity/CommodityManager.java</url>
+          <line>125</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

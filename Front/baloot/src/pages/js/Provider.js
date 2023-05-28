@@ -4,28 +4,23 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 import CommodityPreview from '../../component/CommodityPreview';
 
-export default function Provider(props) {
+export default function Provider() {
 
     const { providerId } = useParams();
     const [provider, setProvider] = useState();
     const navigate = useNavigate();
 
-
     useEffect(() => {
         async function fetchData() {
             try {
-                console.log(providerId);
-                const response = await axios.get('providers/' + 1);
 
-                const commodityRes = response.data;
-                console.log(commodityRes);
+                const response = await axios.get('/providers/' + providerId);
+                const providerRes = response.data.content;
+                setProvider(providerRes);
 
-
-                setProvider(commodityRes);
             } catch (e) {
                 if (e.response.status === 404) {
                     console.log(providerId);
-                    //navigate('/404');
                 }
             }
         }
@@ -43,16 +38,16 @@ export default function Provider(props) {
                         <div className='date-provider'>{"Since "+provider.registryDate}</div>
                         <div className='name-provider'>{provider.name}</div>
                     </div>
-                    {provider.commodities &&
+                    {provider.commoditiesList &&
                         <>
                             <div class="recomm-text">All provided commodities</div>
                             <div className="row p-3">
                                 {
-                                    provider.commodities.map((commodity) => (
+                                    provider.commoditiesList.map((commodity) => (
                                         <div className="col-3 mb-3" key={commodity.id}>
                                             <CommodityPreview
                                                 id={commodity.id}
-                                                image={commodity.image}
+                                                imgUrl={commodity.imgUrl}
                                                 name={commodity.name}
                                                 inStock={commodity.inStock}
                                                 price={commodity.price}

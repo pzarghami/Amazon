@@ -1,20 +1,32 @@
 
 import './CommodityPreview.css';
 import axios from "axios";
-import { Link, useLocation ,useNavigate} from "react-router-dom";
+import { Link, useLocation, useNavigate ,useParams} from "react-router-dom";
 import { useEffect, useInsertionEffect, useState } from "react";
 
 export default function CommodityPreview(props) {
-    const { id, image, name, inStock, price } = props;
+    const { id, imgUrl, name, inStock, price, setNumOfCart } = props;
     const userId = localStorage.getItem('userId');
+    const { commodityId } = useParams();
+    const [popupBuylist, setPopupBuylist] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [error, setError] = useState('');
     const handleAddToBuylist = async () => {
         try {
             setError('');
-            const data = { commodityId: id }
-            const response = await axios.post('/users/' + userId + '/buylist/', data);
+            const response = await axios.post('/user/buylist/' + id);
+            console.log(id);
+
+            if (response.data.status) {
+                console.log(response);
+                setNumOfCart();
+                setPopupBuylist(true);
+
+            }
+
+
         } catch (e) {
             console.log(e);
             if (e.response.data.message === "inStock") {
@@ -32,27 +44,39 @@ export default function CommodityPreview(props) {
 
         }
     }
-    const handleLinkToUser =  async () => {
+    const handleLinkToUser = async () => {
+        console.log("hi");
         navigate('/commodities/' + id);
     }
     return (
-        <div class=" ml-0 product">
+        <div class="  product">
             <span class="title">{name}</span>
             <span class="stock">{inStock + " left in stock"}</span>
-
-            <img onClick={ handleLinkToUser} src={image} />
+            <Link to={"/commodities/" + id}>
+                <img className="image" src={imgUrl} />
+            </Link>
             <div class="actions">
                 <span class="price">
                     {price + "$"}
                 </span>
-                <div class="add-to-cart">
-                    <span onClick={handleAddToBuylist} type="button" className="btn ">Add to cart</span>
-                </div>
+                <button className="add-to-cart" onClick={handleAddToBuylist} type="button" >
+                    Add to cart
+                </button>
             </div>
-
+            {popupBuylist &&
+                <div className="popup">
+                    <div className="popup-content">
+                        <span className="close" onClick={() => setPopupBuylist(false)}>
+                            &times;
+                        </span>
+                        <div className="button-container">
+                            Succesfully Added.
+                        </div>
+                    </div>
+                </div>}
             {error &&
                 <div className="text-center text-danger">
-                    <span className="lead text-danger">{error}</span>
+                    <span className="button-container">{error}</span>
                 </div>
             }
         </div>

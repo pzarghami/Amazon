@@ -16,7 +16,7 @@
 
 .product-img {
     width: 48.35vw;
-    height: 84.83vh;
+    height: 60.83vh;
     margin-top: 2vh;
 
 
@@ -25,7 +25,9 @@
 
 .product-img img {
     overflow: hidden;
-    position: absolute;
+    width: 100%;
+    height: 100%;
+
 
 }
 

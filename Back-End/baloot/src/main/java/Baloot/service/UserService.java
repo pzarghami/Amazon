@@ -10,13 +10,20 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserService {
 
     @RequestMapping(value = "/user", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Response getUserDTO() {
-        return new Response(true, "OK", UserDomainManager.getInstance().getUserDTO());
+        try {
+            return new Response(true, "OK", UserDomainManager.getInstance().getUserDTO());
+        } catch (CustomException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -62,8 +69,7 @@ public class UserService {
     @RequestMapping(value = "/user/buylist/{commodityId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public Response addToBuyList(@PathVariable(value = "commodityId") int commodityId) {
         try {
-            UserDomainManager.getInstance().addToBuyList(commodityId);
-            return new Response(true, "OK", "successfully added");
+            return new Response(true, "OK", UserDomainManager.getInstance().addToBuyList(commodityId));
         } catch (CustomException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "InvalidCredential", e);
         }
@@ -72,16 +78,57 @@ public class UserService {
     @RequestMapping(value = "/user/buylist/{commodityId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Response removeFromBuyList(@PathVariable(value = "commodityId") int commodityId) {
         try {
-            UserDomainManager.getInstance().removeFromBuyList(commodityId);
-            return new Response(true, "OK", "successfully removed");
+            return new Response(true, "OK", UserDomainManager.getInstance().removeFromBuyList(commodityId));
         } catch (CustomException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "InvalidCredential", e);
         }
     }
 
     @RequestMapping(value = "/addCredit", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Response addCredit(@RequestBody int amount) {
-        UserDomainManager.getInstance().addCredit(amount);
-        return new Response(true, "OK", "successfully add credit");
+    public Response addCredit(@RequestBody String amountForm) {
+        try {
+            var registerJson = new ObjectMapper().readTree(amountForm);
+            var amount = registerJson.get("amount").asInt();
+            UserDomainManager.getInstance().addCredit(amount);
+            return new Response(true, "OK", "successfully add credit");
+        } catch (JsonProcessingException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(value = "/price", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response getPrice() {
+        return new Response(true, "OK", UserDomainManager.getInstance().getPrice());
+    }
+
+    @RequestMapping(value = "/discount", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response setDiscount(@RequestBody String discountForm) {
+        try {
+            var discountJson = new ObjectMapper().readTree(discountForm);
+            var discountCode = discountJson.get("discountCode").asText();
+            return new Response(true, "OK", UserDomainManager.getInstance().setDiscount(discountCode));
+        } catch (CustomException | JsonProcessingException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(value = "/discount", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response removeDiscount() {
+        UserDomainManager.getInstance().removeDiscount();
+        return new Response(true, "OK", "discount successfully removed");
+    }
+
+    @RequestMapping(value = "/pay", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response payNow() {
+        try {
+            return new Response(true, "OK", UserDomainManager.getInstance().finalizeThePurchase());
+        } catch (CustomException e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "InvalidCredential", e);
+        }
+    }
+
+    @RequestMapping(value = "/buyListSize", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response getBuyListSize() {
+        return new Response(true, "OK", UserDomainManager.getInstance().getBuyListSize());
     }
 }

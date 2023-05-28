@@ -25,4 +25,10 @@ public class CommentDomainManager {
         return newComment.getDTO();
     }
 
+    public CommentDTO voteComment(String commentId, int vote) throws CustomException {
+        var comment = CommentRepo.getInstance().getElementById(commentId);
+        comment.voteComment(UserRepo.loggedInUser.getUsername(), vote);
+        return comment.getDTO();
+    }
+
 }

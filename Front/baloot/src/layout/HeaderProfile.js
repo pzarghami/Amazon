@@ -2,36 +2,31 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './HeaderProfile.css';
 import './Dropdown.css';
 import axios from 'axios';
+import { useEffect, useState } from "react";
 import SearchBarHeader from '../component/SearchBarHeader';
 import LoginButton from './LoginButton';
-import { useState } from 'react';
 
 
-export default function HeaderProfile() {
+
+export default function HeaderProfile(props) {
+  const {numOfCart}=props;
+
   var isLoggedIn = localStorage.getItem('userLoggedIn');
   var userId = localStorage.getItem('userId');
+//   useEffect(() => {
+//     console.log(numOfcart);
+
+// }, [numOfcart]);
+
+
 
   const location = useLocation();
-  const numOfCartStorage=useState(0);
   const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    try {
-      localStorage.removeItem('userLoggedIn');
-      localStorage.removeItem('userId');
-      const response = await axios.post('/auth/logout');
-      if (response.data.status) {
-        navigate('/movies');
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
 
   return (
     <>
       {
-        location.pathname == "/commodities" &&
+        location.pathname == "/commodities/" || location.pathname == "/commodities" &&
         <SearchBarHeader />
       }
       <>
@@ -39,13 +34,18 @@ export default function HeaderProfile() {
 
           <div class="user-button">
             <Link to='/user'>
-              <button type="button" >{localStorage.getItem('userId')}</button>
+              <button type="button" >{userId}</button>
             </Link>
           </div>
 
-          <div class="user-button">
+          <div class="user-cart-button">
             <Link to='/user'>
-              <button type="button" >{"Cart  " + numOfCartStorage[0]}</button>
+              {numOfCart ?
+                <button type="button" className='full-cart'>{"Cart  " + numOfCart}</button>
+                :
+                <button type="button" className='empty-cart'>{"Cart  " + numOfCart}</button>
+              }
+
             </Link>
           </div>
         </div>

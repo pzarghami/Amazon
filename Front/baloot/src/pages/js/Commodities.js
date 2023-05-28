@@ -8,6 +8,7 @@ import CommodityPreview from '../../component/CommodityPreview';
 import '../css/commodities.css'
 import '../css/root.css'
 import '../css/footer.css'
+import SearchBarHeader from '../../component/SearchBarHeader';
 
 const nameCompare = (a, b) => {
     if (a.name > b.name) return 1;
@@ -20,7 +21,8 @@ const priceCompare = (a, b) => {
     else if (a.price === b.price) return 0;
     else return -1;
 };
-export default function Commodities() {
+export default function Commodities(props) {
+    const {setNumOfCart}=props;
     const [commodities, setCommodities] = useState(null);
 
     const [commoditiesFetch, setFetchCommodities] = useState(null);
@@ -37,8 +39,10 @@ export default function Commodities() {
     };
 
     const filterCat = (item) => {
+
         for (var cat in item.categories) {
             if (item.categories[cat].includes(searchValue)) {
+
                 return true;
             }
         }
@@ -46,7 +50,7 @@ export default function Commodities() {
     };
 
     const filterProvider = (item) => {
-        return item.providerId.includes(searchValue);
+        return item.providerName.includes(searchValue);
     };
     const filterAvailableCommodities = (item) => {
         if (item.inStock != 0){
@@ -61,6 +65,8 @@ export default function Commodities() {
         if (filterMode === "category") return filterCat;
 
         if (filterMode == "inStock") return filterAvailableCommodities;
+
+        if(filterMode=="provider") return filterProvider;
 
     };
 
@@ -79,8 +85,10 @@ export default function Commodities() {
 
     useEffect(() => {
 
+
         if (!commoditiesFetch || !commodities) return;
         let newComm = commoditiesFetch.slice();
+
         newComm = newComm.filter(getFilterFunc(filterBy));
 
         setCommodities(newComm);
@@ -91,9 +99,7 @@ export default function Commodities() {
         async function fetchData() {
             try {
                 const response = await axios.get("commodities");
-                const commoditiesList = response.data;
-
-
+                const commoditiesList = response.data.content;
                 setFetchCommodities(commoditiesList);
                 setCommodities(commoditiesList);
             } catch (e) {
@@ -157,10 +163,11 @@ export default function Commodities() {
 
                                     <CommodityPreview
                                         id={commodities[item].id}
-                                        image={commodities[item].image}
+                                        imgUrl={commodities[item].imgUrl}
                                         name={commodities[item].name}
                                         inStock={commodities[item].inStock}
                                         price={commodities[item].price}
+                                        setNumOfCart={setNumOfCart}
                                     />
 
                                 </div>
