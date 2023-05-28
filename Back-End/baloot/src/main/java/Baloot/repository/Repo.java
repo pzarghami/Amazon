@@ -47,7 +47,15 @@ public abstract class Repo<T> {
     }
 
     public void initTable(String createTableSql) {
-        
+        try {
+            Connection con = ConnectionPool.getConnection();
+            PreparedStatement createTableStatement = con.prepareStatement(createTableSql);
+            createTableStatement.executeUpdate();
+            createTableStatement.close();
+            con.close();
+        } catch (SQLException e) {
+            //ignores
+        }
     }
 
     public boolean isIdListValid(List<String> ids) {

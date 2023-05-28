@@ -11,7 +11,6 @@ public class Provider {
     private String registryDate;
     private String image;
     private ArrayList<Commodity> commoditiesList;
-    private float averageRate;
 
     public Provider(int id, String name, String registryDate, String image) {
         this.id = id;
@@ -21,14 +20,19 @@ public class Provider {
         this.commoditiesList = new ArrayList<>();
     }
 
-    public int getId(){return this.id;}
-    public String getName(){return this.name;}
+    public int getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
 
     public void addCommodity(Commodity commodity) {
         commoditiesList.add(commodity);
     }
 
-    public ProviderDTO getDTO(){
+    public ProviderDTO getDTO() {
         var providerDTO = new ProviderDTO();
         providerDTO.setId(this.id);
         providerDTO.setName(this.name);
