@@ -50,33 +50,15 @@
   color: #593C1C;
 }
 
-.sorted-by-sort-container {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1.75rem;
-  line-height: 34px;
-  /* identical to box height */
 
-  text-align: center;
-
-  margin-left: 3.6vw;
-
-  color: #919191;
-}
-
-.category-sort-container {
+.sort-name-notselectedButton {
   width: 7.8vw;
   height: 4.2vh;
-  background-color: #A97B47;
   border-radius: 15px;
   margin-left: 3.6vw;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.category-sort-container span {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 600;
@@ -85,8 +67,87 @@
   /* identical to box height */
 
   text-align: center;
+  background-color: #F7F0E9;
+  color: #909090;
+}
+.sort-name-selectedButton  {
+  width: 7.8vw;
+  height: 4.2vh;
+  border-radius: 15px;
+  margin-left: 3.6vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.75rem;
+  line-height: 34px;
+  /* identical to box height */
 
+  text-align: center;
+  background-color: #A97B47;
   color: #FFFFFF;
+}
+
+.category-sort-container-notselectedButton {
+  width: 7.8vw;
+  height: 4.2vh;
+  border-radius: 15px;
+  margin-left: 3.6vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.75rem;
+  line-height: 34px;
+  /* identical to box height */
+
+  text-align: center;
+  background-color: #F7F0E9;
+  color: #909090;
+}
+
+.category-sort-container-selectedButton {
+  width: 7.8vw;
+  height: 4.2vh;
+  border-radius: 15px;
+  margin-left: 3.6vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.75rem;
+  line-height: 34px;
+  /* identical to box height */
+
+  text-align: center;
+  background-color: #A97B47;
+  color: #FFFFFF;
+}
+
+.category-sort-container-notselectedButton {
+  width: 7.8vw;
+  height: 4.2vh;
+  border-radius: 15px;
+  margin-left: 3.6vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.75rem;
+  line-height: 34px;
+  /* identical to box height */
+
+  text-align: center;
+  background-color: #F7F0E9;
+  color: #909090;
 }
 
 .products-container {
@@ -107,7 +168,7 @@
   border-radius: 15px;
   margin: 0 0.9vw;
   padding: 0;
-  
+
 }
 
 .product .title {

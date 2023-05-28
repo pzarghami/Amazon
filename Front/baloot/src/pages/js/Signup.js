@@ -14,20 +14,23 @@ export default function Signup() {
     const [username, setUser] = useState('');
     const [password, setPassword] = useState('');
     const [passwordAuth, setPasswordAuth] = useState('');
+    const [email, setEmail]=useState('');
+    const [birthDate, setBithDate]=useState('');
+    const [address, setAddress]=useState('');
 
     const handelSignup = async (e) => {
 
         e.preventDefault();
         setError('');
-        const from = location.state?.from || '/commodities';
+        const from = location.state?.from || '/login';
         try {
             if(password != passwordAuth){
                 setError("Your password is not the same.");
                 return;
             }
-            const data = { username, password };
+            const data = { username:username, password:password, email:email, birthDate:birthDate, address:address };
             
-            const response = await axios.post('/auth/login/', data);
+            const response = await axios.post('/auth/register/', data);
 
             if (response.data.status) {
                 localStorage.setItem('userLoggedIn', true);
@@ -59,16 +62,46 @@ export default function Signup() {
                         <input type="username"
                             id="form2Example11"
                             class="form-control"
+                            required="true"
                             onChange={e => { setUser(e.target.value) }}
                         />
                     </div>
 
+
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example22">Email</label>
+                        <input type="email"
+                            id="form2Example22"
+                            class="form-control"
+                            required="true"
+                            onChange={e => { setEmail(e.target.value) }} />
+
+                    </div>
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example22">Address</label>
+                        <input type="address"
+                            id="form2Example22"
+                            class="form-control"
+                            required="true"
+                            onChange={e => { setAddress(e.target.value) }} />
+
+                    </div>
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example22">Birth date</label>
+                        <input type="date"
+                            id="form2Example22"
+                            class="form-control"
+                            required="true"
+                            onChange={e => { setBithDate(e.target.value) }} />
+
+                    </div>
                     <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example22">Password</label>
                         <input
                             type="password"
                             id="form2Example22"
                             class="form-control"
+                            required="true"
                             onChange={e => { setPassword(e.target.value) }} />
 
                     </div>
@@ -78,6 +111,7 @@ export default function Signup() {
                         <input type="password"
                             id="form2Example22"
                             class="form-control"
+                            required="true"
                             onChange={e => { setPasswordAuth(e.target.value) }} />
 
                     </div>
@@ -98,7 +132,7 @@ export default function Signup() {
                             </Link>
 
                         </div>
-                        <p class="mb-0 me-2">حساب کاربری دارید؟</p>
+                        <p class="mb-0 me-2">Have acount?</p>
                     </div>
 
                 </form>

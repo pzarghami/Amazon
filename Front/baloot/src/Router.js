@@ -1,20 +1,44 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import React, { useState } from "react";
+import axios from "axios";
 import Login from "./pages/js/Login";
 import Signup from "./pages/js/Signup"
 import NotFound404 from "./pages/js/NotFound404";
 import Commodities from "./pages/js/Commodities";
 import Layout from "./layout/Layout";
+import Commodity from "./pages/js/Commodity";
+import  Provider  from "./pages/js/Provider";
+import User from "./pages/js/User";
 
 
 export default function Router() {
+  const [numOfCart, setCart]=useState(0);
+  const setNumOfCart = async () => {
+    try {
+      
+      const response = await axios.post('buyListSize');
+      console.log(response);
+      if (response.data.status) {
+        console.log(response);
+        setCart(response.data.content);
+      }
+
+
+    } catch (e) {
+
+    }
+  }
   return (
     <Routes>
       <Route path='/' element={<Navigate to='/commodities' />} />
       <Route path='*' element={<NotFound404 />} />
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Signup />} />
-      <Route element={<Layout />}>
-        <Route path='/commodities' element={<Commodities />} />
+      <Route element={<Layout numOfCart={numOfCart}/>}>
+        <Route path='/commodities' element={<Commodities setNumOfCart={setNumOfCart}/>} />
+        <Route path='/commodities/:id' element={<Commodity setNumOfCart={setNumOfCart}/>}/>
+        <Route path='/provider/:providerId' element={<Provider/>}/>
+        <Route path='/user' element ={<User setNumOfCart={setNumOfCart}/>}/>
       </Route>
     </Routes>
   )

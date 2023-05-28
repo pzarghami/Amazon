@@ -1,0 +1,117 @@
+
+.product {
+
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFF ;
+  box-shadow: 0px 4px 4px rgba(85, 24, 24, 0.25) !important;
+  border-radius: 15px;
+  margin: 0 0.9vw;
+  padding: 0;
+    
+  }
+  
+  .product .title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 3.6;
+    /* identical to box height */
+  
+    margin-top: 1.5vh;
+    margin-left: 0.7vw;
+  
+  
+    color: #593C1C;
+  }
+  
+  .product .stock {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 2.01vh;
+  
+    margin-top: 0.4vh;
+    margin-left: 1.5vw;
+    color: #C82525;
+  }
+  
+  .product .image {
+    width: 100%;
+    height: 20vh;
+
+  }
+  
+  .product .actions {
+    display: flex;
+    margin-top: 1.8vh;
+  
+  }
+  
+  .product .price {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 29px;
+    /* identical to box height */
+  
+    text-align: center;
+  
+    margin-left: 1.9vw;
+    color: #593C1C;
+  }
+  
+  .product .add-to-cart {
+    width: 7.8vw;
+    height: 100%;
+    border: 1px solid #593C1C;
+    border-radius: 15px;
+    margin: 2vh;
+    margin-left: 3.8vw;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .product .add-to-cart:hover{
+    width: 7.8vw;
+    height: 100%;
+    border: 1px solid #593C1C;
+    border-radius: 15px;
+    margin: 2vh;
+    margin-left: 3.8vw;
+    color: #FFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 29px;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    
+
+}
+.button-container button:first-of-type {
+  background: #593C1C;
+  mix-blend-mode: normal;
+  border-radius: 15px;
+}
+ 

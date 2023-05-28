@@ -2,55 +2,55 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './HeaderProfile.css';
 import './Dropdown.css';
 import axios from 'axios';
+import { useEffect, useState } from "react";
+import SearchBarHeader from '../component/SearchBarHeader';
+import LoginButton from './LoginButton';
 
 
-export default function HeaderProfile() {
+
+export default function HeaderProfile(props) {
+  const {numOfCart}=props;
+
   var isLoggedIn = localStorage.getItem('userLoggedIn');
   var userId = localStorage.getItem('userId');
+//   useEffect(() => {
+//     console.log(numOfcart);
+
+// }, [numOfcart]);
+
+
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    try {
-      localStorage.removeItem('userLoggedIn');
-      localStorage.removeItem('userId');
-      const response = await axios.post('/auth/logout');
-      if (response.data.status) {
-        navigate('/movies');
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
   return (
-    <div className="dropdown porfile-dropdown-contianer">
-      <span
-        id="profileDropdown"
-        data-toggle="dropdown"
-        className="profile-icon iconify-inline"
-        data-icon="healthicons:ui-user-profile-negative"
-      ></span>
-      <div className="profile-menu dropdown-menu " aria-labelledby="profileDropdown">
-        {isLoggedIn ?
-          <>
-            <span className="menu-item dropdown-item ">{userId}</span>
-            <Link className="menu-item dropdown-item " to='/watchlist'>watch list</Link>
-            <div
-              onClick={handleLogout}
-              className="menu-item dropdown-item"
-            >
-              <span>Logout</span>
-            </div>
-          </>
-          :
-          <>
-            <Link state={{ from: location }} className="menu-item dropdown-item " to="/login">ورود</Link>
-            <Link className="menu-item dropdown-item " to='signup'>ثبت نام</Link>
-          </>
-        }
-      </div>
-    </div>
+    <>
+      {
+        location.pathname == "/commodities/" || location.pathname == "/commodities" &&
+        <SearchBarHeader />
+      }
+      <>
+        <div class="user-container">
+
+          <div class="user-button">
+            <Link to='/user'>
+              <button type="button" >{userId}</button>
+            </Link>
+          </div>
+
+          <div class="user-cart-button">
+            <Link to='/user'>
+              {numOfCart ?
+                <button type="button" className='full-cart'>{"Cart  " + numOfCart}</button>
+                :
+                <button type="button" className='empty-cart'>{"Cart  " + numOfCart}</button>
+              }
+
+            </Link>
+          </div>
+        </div>
+      </>
+
+    </>
   )
 }
