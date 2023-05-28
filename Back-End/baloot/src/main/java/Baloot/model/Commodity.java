@@ -57,6 +57,12 @@ public class Commodity {
         return categories;
     }
 
+    public int getInStock(){return inStock;}
+
+    public void decreaseInStock(){inStock = inStock - 1;}
+
+    public void increaseInStock(){inStock = inStock + 1;}
+
     public boolean isYourCategory(ArrayList<String> cats) {
         for (String cat : cats) {
             for (String category : categories) {
@@ -78,7 +84,7 @@ public class Commodity {
 
     public Integer getUserRate(String userId) {
         if (!userRateMap.containsKey(userId)) {
-            return null;
+            return 0;
         }
         return (Integer) userRateMap.get(userId);
     }
@@ -95,16 +101,19 @@ public class Commodity {
         averageRating = sumRate / numberOfRate;
     }
 
-    public CommodityDTO getDTO() throws CustomException {
+    public CommodityDTO getDTO(int quantity) throws CustomException {
         var DTO = new CommodityDTO();
         DTO.setId(Integer.parseInt(id));
         DTO.setName(name);
         DTO.setProvideName(provider.getName());
+        DTO.setProviderId(provider.getId());
         DTO.setPrice(price);
         DTO.setCategories(categories);
-        DTO.setRate(averageRating);
+        DTO.setRate(Math.round(averageRating * 100.0) / 100.0);
         DTO.setInStock(inStock);
         DTO.setImgUrl(image);
+        DTO.setNumOfRate(userRateMap.size());
+        DTO.setQuantity(quantity);
         var commentsDTO = new ArrayList<CommentDTO>();
         comments.forEach(comment -> commentsDTO.add(comment.getDTO()));
         DTO.setComments(commentsDTO);
@@ -120,6 +129,8 @@ public class Commodity {
         DTO.setInStock(inStock);
         DTO.setImgUrl(image);
         DTO.setQuantity(quantity);
+        DTO.setProviderName(provider.getName());
+        DTO.setCategories(categories);
         return DTO;
     }
 

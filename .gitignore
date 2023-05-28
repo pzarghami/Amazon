@@ -1,0 +1,27 @@
+target
+.*
+.idea
+!/.gitignore
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+Front/baloot/node_modules
+Front/baloot/.pnp
+Front/baloot/.pnp.js
+
+# testing
+Front/baloot/coverage
+
+# production
+Front/baloot/build
+
+# misc
+Front/baloot.DS_Store
+Front/baloot.env.local
+Front/baloot.env.development.local
+Front/baloot.env.test.local
+Front/baloot.env.production.local
+
+Front/baloot/npm-debug.log*
+Front/baloot/yarn-debug.log*
+Front/baloot/yarn-error.log*

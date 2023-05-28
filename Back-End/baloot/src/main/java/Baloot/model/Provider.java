@@ -11,6 +11,7 @@ public class Provider {
     private String registryDate;
     private String image;
     private ArrayList<Commodity> commoditiesList;
+    private float averageRate;
 
     public Provider(int id, String name, String registryDate, String image) {
         this.id = id;
@@ -37,6 +38,7 @@ public class Provider {
         providerDTO.setId(this.id);
         providerDTO.setName(this.name);
         providerDTO.setRegistryDate(this.registryDate);
+        providerDTO.setImage(image);
         var providersCommodityDTO = new ArrayList<CommodityBriefDTO>();
         commoditiesList.forEach(commodity -> providersCommodityDTO.add(commodity.getBriefDTO(0)));
         providerDTO.setCommoditiesList(providersCommodityDTO);
