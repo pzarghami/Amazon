@@ -11,6 +11,11 @@ export default function HistoryList(props) {
     const handleLinkToUser =  id => {
         navigate('/commodities/' + id);
     }
+
+    useEffect(() => {
+        
+        setHistoryList(user.userPurchasedList);
+    }, [user]);
     return (
         <>
             <div class="history-box">

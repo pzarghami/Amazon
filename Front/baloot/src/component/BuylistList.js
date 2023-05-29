@@ -10,24 +10,33 @@ export default function BuylistList(props) {
 
     const navigate = useNavigate();
 
-
+    useEffect(() => {
+        
+        setUserBuylist(user.buyList);
+        setNumOfCart();
+    }, [user]);
     const deleteByIndex = index => {
         setUserBuylist(oldValues => {
             return oldValues.filter((_, i) => i !== index)
         })
     }
     const updateBuylistHandeling = editedCommodity => {
-        
+
         const commodityIndex = user["buyList"].findIndex(x => x.id === editedCommodity.id);
-        if (editedCommodity.quantity == 0)
-            deleteByIndex(commodityIndex);
-        else
-            userBuylist[commodityIndex]=editedCommodity;
-        console.log(userBuylist);
-        user["buylist"]=userBuylist;
-        setUser({ ...user });
-        console.log(user);
-    }
+        if (editedCommodity.quantity === 0) {
+            setUser(prevUser => ({
+                ...prevUser,
+                buyList: prevUser.buyList.filter(item => item.id !== editedCommodity.id)
+            }));
+            setUserBuylist(prevUserBuylist => prevUserBuylist.filter(item => item.id !== editedCommodity.id));
+        } else {
+            setUser(prevUser => ({
+                ...prevUser,
+                buyList: prevUser.buyList.map(item => item.id === editedCommodity.id ? editedCommodity : item)
+            }));
+            setUserBuylist(prevUserBuylist => prevUserBuylist.map(item => item.id === editedCommodity.id ? editedCommodity : item));
+        }
+    };
     const handleLinkToUser =  id => {
         navigate('/commodities/' + id);
     }
