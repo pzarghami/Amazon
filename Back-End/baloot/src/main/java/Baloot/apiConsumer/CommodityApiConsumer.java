@@ -7,6 +7,7 @@ import Baloot.repository.CommodityRepo;
 import Baloot.repository.ProviderRepo;
 import com.fasterxml.jackson.databind.JsonNode;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CommodityApiConsumer extends APIConsumer{
@@ -19,7 +20,7 @@ public class CommodityApiConsumer extends APIConsumer{
             try {
                 var newCommodity = makeNewCommodity(node);
                 repo.addElement(newCommodity);
-            }catch (CustomException e){
+            }catch (CustomException | SQLException e){
                 //ignore
             }
         }

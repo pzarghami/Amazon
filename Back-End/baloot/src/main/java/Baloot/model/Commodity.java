@@ -133,6 +133,16 @@ public class Commodity {
         DTO.setCategories(categories);
         return DTO;
     }
-
+    public Map<String, String> getDBTuple() {
+        Map<String, String> tuple = new HashMap<>();
+        tuple.put("id", this.id);;
+        tuple.put("name", this.name);
+        tuple.put("provider",String.valueOf(this.provider.getId()));
+        tuple.put("price",String.valueOf(this.price));
+        tuple.put("inStock",String.valueOf(this.inStock));
+        tuple.put("imgUrl",this.image);
+        tuple.put("averageRate", String.valueOf(this.averageRating));
+        return tuple;
+    }
 
 }

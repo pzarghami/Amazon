@@ -12,16 +12,16 @@ import java.sql.SQLException;
 import Baloot.Exeption.CustomException;
 import Baloot.model.User;
 
-public abstract class Repo<T> {
+public abstract class Repo<T, PK> {
     static User loggedInUser;
     protected Map<String, T> objectMap;
-
+    protected CustomException notFoundException;
     public Repo() {
         objectMap = new HashMap<>();
     }
 
-    public abstract void addElement(T newObject) throws CustomException;
-
+    public abstract void addElement(T newObject) throws CustomException, SQLException;
+    abstract protected String getAddElementStatement();
     public abstract void updateElement(T newObject) throws CustomException;
 
     public T getElementById(String id) throws CustomException {
@@ -65,6 +65,22 @@ public abstract class Repo<T> {
     public void removeElements(List<String> ids) {
         if (ids == null) {
             objectMap.clear();
+        }
+    }
+    protected int executeUpdate(String sql, List<String> fillValues) throws SQLException {
+        Connection con = ConnectionPool.getConnection();
+        PreparedStatement st = con.prepareStatement(sql);
+        fillValues(st, fillValues);
+        var result = st.executeUpdate();
+        st.close();
+        con.close();
+        return result;
+    }
+    protected void fillValues(PreparedStatement st, List<String> values) throws SQLException {
+        int valuePosition = 1;
+        for (var value : values) {
+            st.setString(valuePosition, value);
+            valuePosition++;
         }
     }
 }

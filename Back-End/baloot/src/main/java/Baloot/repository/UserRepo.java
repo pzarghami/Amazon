@@ -3,9 +3,9 @@ package Baloot.repository;
 import Baloot.Exeption.CustomException;
 import Baloot.model.User;
 
-public class UserRepo extends Repo<User> {
+public class UserRepo extends Repo<User,Integer> {
     private static UserRepo instance = null;
-
+    public static final String USER_TABLE = "User";
     public static User loggedInUser = null;
 
     public static UserRepo getInstance() {
@@ -22,6 +22,11 @@ public class UserRepo extends Repo<User> {
             throw new CustomException("Object exist");
         }
         this.objectMap.put(objectId,newObject);
+    }
+
+    @Override
+    protected String getAddElementStatement() {
+        return null;
     }
 
     @Override

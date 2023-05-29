@@ -3,7 +3,7 @@ package Baloot.repository;
 import Baloot.Exeption.CustomException;
 import Baloot.model.Provider;
 
-public class ProviderRepo extends Repo<Provider> {
+public class ProviderRepo extends Repo<Provider, Integer> {
     public static final String PROVIDER_TABLE = "Provider";
     private static ProviderRepo instance;
 
@@ -37,6 +37,11 @@ public class ProviderRepo extends Repo<Provider> {
             throw new CustomException("Object exist");
         }
         this.objectMap.put(objectId, newObject);
+    }
+
+    @Override
+    protected String getAddElementStatement() {
+        return null;
     }
 
     @Override

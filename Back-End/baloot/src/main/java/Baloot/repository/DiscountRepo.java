@@ -3,7 +3,7 @@ package Baloot.repository;
 import Baloot.Exeption.CustomException;
 import Baloot.model.Discount;
 
-public class DiscountRepo extends Repo<Discount> {
+public class DiscountRepo extends Repo<Discount,Integer> {
     private static DiscountRepo instance = null;
 
     public static DiscountRepo getInstance(){
@@ -21,6 +21,11 @@ public class DiscountRepo extends Repo<Discount> {
             throw new CustomException("Object exist");
         }
         this.objectMap.put(objectId,newObject);
+    }
+
+    @Override
+    protected String getAddElementStatement() {
+        return null;
     }
 
     @Override

@@ -3,7 +3,7 @@ package Baloot.repository;
 import Baloot.Exeption.CustomException;
 import Baloot.model.Comment;
 
-public class CommentRepo extends Repo<Comment> {
+public class CommentRepo extends Repo<Comment,Integer> {
     public static Integer lastCommentId = 0;
     private static CommentRepo instance = null;
 
@@ -21,6 +21,11 @@ public class CommentRepo extends Repo<Comment> {
         } else {
             throw new CustomException("InvalidComment");
         }
+    }
+
+    @Override
+    protected String getAddElementStatement() {
+        return null;
     }
 
     @Override
