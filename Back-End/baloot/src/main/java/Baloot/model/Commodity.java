@@ -6,6 +6,7 @@ import Baloot.model.DTO.CommodityBriefDTO;
 import Baloot.model.DTO.CommodityDTO;
 import Baloot.repository.CommodityRepo;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -101,7 +102,7 @@ public class Commodity {
         averageRating = sumRate / numberOfRate;
     }
 
-    public CommodityDTO getDTO(int quantity) throws CustomException {
+    public CommodityDTO getDTO(int quantity) throws CustomException, SQLException {
         var DTO = new CommodityDTO();
         DTO.setId(Integer.parseInt(id));
         DTO.setName(name);

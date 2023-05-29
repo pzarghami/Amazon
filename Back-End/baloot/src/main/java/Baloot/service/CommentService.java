@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.sql.SQLException;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CommentService {
@@ -19,7 +21,7 @@ public class CommentService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         try {
             return new Response(true, "OK", CommentDomainManager.getInstance().postNewComment(newComment));
-        } catch (CustomException e) {
+        } catch (CustomException | SQLException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Related Source Not Found", e);
         }
     }

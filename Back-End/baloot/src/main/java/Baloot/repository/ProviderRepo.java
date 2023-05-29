@@ -3,12 +3,22 @@ package Baloot.repository;
 import Baloot.Exeption.CustomException;
 import Baloot.model.Provider;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class ProviderRepo extends Repo<Provider, Integer> {
     public static final String PROVIDER_TABLE = "Provider";
     private static ProviderRepo instance;
 
     private ProviderRepo() {
         initActorTable();
+    }
+
+    @Override
+    protected String getGetElementByIdStatement() {
+        return null;
     }
 
     public static ProviderRepo getInstance() {
@@ -40,7 +50,27 @@ public class ProviderRepo extends Repo<Provider, Integer> {
     }
 
     @Override
+    protected void fillGetElementByIdValues(PreparedStatement st, Integer id) throws SQLException {
+
+    }
+
+    @Override
     protected String getAddElementStatement() {
+        return null;
+    }
+
+    @Override
+    protected String getGetAllElementsStatement() {
+        return null;
+    }
+
+    @Override
+    protected Provider convertResultSetToDomainModel(ResultSet rs) throws SQLException {
+        return null;
+    }
+
+    @Override
+    protected ArrayList<Provider> convertResultSetToDomainModelList(ResultSet rs) throws SQLException {
         return null;
     }
 

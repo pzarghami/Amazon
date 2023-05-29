@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @RestController
@@ -21,7 +22,7 @@ public class UserService {
     public Response getUserDTO() {
         try {
             return new Response(true, "OK", UserDomainManager.getInstance().getUserDTO());
-        } catch (CustomException e) {
+        } catch (CustomException | SQLException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
@@ -39,7 +40,11 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "InvalidCredential", e);
         } catch (JsonProcessingException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
+
     }
 
     @RequestMapping(value = "/auth/logout", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -70,7 +75,7 @@ public class UserService {
     public Response addToBuyList(@PathVariable(value = "commodityId") int commodityId) {
         try {
             return new Response(true, "OK", UserDomainManager.getInstance().addToBuyList(commodityId));
-        } catch (CustomException e) {
+        } catch (CustomException | SQLException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "InvalidCredential", e);
         }
     }
@@ -79,7 +84,7 @@ public class UserService {
     public Response removeFromBuyList(@PathVariable(value = "commodityId") int commodityId) {
         try {
             return new Response(true, "OK", UserDomainManager.getInstance().removeFromBuyList(commodityId));
-        } catch (CustomException e) {
+        } catch (CustomException | SQLException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "InvalidCredential", e);
         }
     }
@@ -107,7 +112,7 @@ public class UserService {
             var discountJson = new ObjectMapper().readTree(discountForm);
             var discountCode = discountJson.get("discountCode").asText();
             return new Response(true, "OK", UserDomainManager.getInstance().setDiscount(discountCode));
-        } catch (CustomException | JsonProcessingException e) {
+        } catch (CustomException | JsonProcessingException | SQLException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
@@ -122,7 +127,7 @@ public class UserService {
     public Response payNow() {
         try {
             return new Response(true, "OK", UserDomainManager.getInstance().finalizeThePurchase());
-        } catch (CustomException e) {
+        } catch (CustomException | SQLException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "InvalidCredential", e);
         }
     }

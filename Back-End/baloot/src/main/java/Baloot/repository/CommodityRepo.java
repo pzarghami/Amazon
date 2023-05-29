@@ -5,6 +5,7 @@ import Baloot.model.Commodity;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +31,11 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
         this.initCommodityRateTable();
         System.out.println("FUCK");
         this.notFoundException = new CustomException("CommodityNotFound");
+    }
+
+    @Override
+    protected String getGetElementByIdStatement() {
+        return null;
     }
 
     private void initCommodityTable() {
@@ -126,6 +132,11 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
 
     }
 
+    @Override
+    protected void fillGetElementByIdValues(PreparedStatement st, Integer id) throws SQLException {
+
+    }
+
     private void addCommodityCategories(Integer commodityId, ArrayList<String> categories) throws SQLException {
         var sql = String.format(
                 "INSERT IGNORE INTO %s(commodityId, category)\nVALUES (?,?);", CATEGORY_TABLE
@@ -148,9 +159,24 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
         objectMap.put(objectId, newObject);
 
     }
+    @Override
+    protected String getGetAllElementsStatement() {
+        return String.format("SELECT * FROM %s;", COMMODITY_TABLE);
+    }
 
-    public ArrayList<CommodityBriefDTO> calculateSuggestedProducts(String commodityId) throws CustomException {
-        var commodity = getElementById(commodityId);
+    @Override
+    protected Commodity convertResultSetToDomainModel(ResultSet rs) throws SQLException {
+        return null;
+    }
+
+    @Override
+    protected ArrayList<Commodity> convertResultSetToDomainModelList(ResultSet rs) throws SQLException {
+        return null;
+    }
+
+
+    public ArrayList<CommodityBriefDTO> calculateSuggestedProducts(String commodityId) throws CustomException, SQLException {
+        var commodity = getElementById(Integer.valueOf(commodityId));
         var commodityCategory = commodity.getCategories();
         HashMap<String, Double> suggestedCommoditiesId = new HashMap<>();
         for (var pair : objectMap.entrySet()) {
@@ -162,9 +188,9 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
                 suggestedCommoditiesId.put(pair.getKey(), pair.getValue().getAverageRating());
         }
         var commodityIdWithTopScores = sortByValue(suggestedCommoditiesId);
-        ArrayList<String> fiveCommodityIdWithTopScores = new ArrayList<>();
+        ArrayList<Integer> fiveCommodityIdWithTopScores = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            fiveCommodityIdWithTopScores.add(commodityIdWithTopScores.get(i));
+            fiveCommodityIdWithTopScores.add(Integer.valueOf(commodityIdWithTopScores.get(i)));
         }
         var commodities = getElementsById(fiveCommodityIdWithTopScores);
         var commodityBriefDTO = new ArrayList<CommodityBriefDTO>();

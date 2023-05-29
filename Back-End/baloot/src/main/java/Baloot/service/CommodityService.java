@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.sql.SQLException;
+
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -17,7 +19,7 @@ public class CommodityService {
     public Response getCommodities() {
         try {
             return new Response(true, "OK", CommodityDomainManager.getInstance().getCommodityDTOList());
-        } catch (CustomException e) {
+        } catch (CustomException | SQLException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
     }
@@ -26,7 +28,7 @@ public class CommodityService {
     public Response getCommodityInfo(@PathVariable(value = "id") String commodityId) {
         try {
             return new Response(true, "OK", CommodityDomainManager.getInstance().getCommodityDTO(commodityId));
-        } catch (CustomException e) {
+        } catch (CustomException | SQLException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
     }

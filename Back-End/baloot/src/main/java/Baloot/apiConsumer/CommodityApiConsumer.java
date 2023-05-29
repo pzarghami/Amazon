@@ -26,12 +26,12 @@ public class CommodityApiConsumer extends APIConsumer{
         }
     }
 
-    private Commodity makeNewCommodity(JsonNode node) throws CustomException {
+    private Commodity makeNewCommodity(JsonNode node) throws CustomException, SQLException {
         String id = node.get("id").asText();
         String name = node.get("name").asText();
         String providerId = node.get("providerId").asText();
         var repo = ProviderRepo.getInstance();
-        Provider provider = repo.getElementById(providerId);
+        Provider provider = repo.getElementById(Integer.valueOf(providerId));
         float price = node.get("price").floatValue();
         float rate = node.get("rating").floatValue();
         int inStock = node.get("inStock").asInt();

@@ -5,6 +5,7 @@ import Baloot.model.DTO.CommodityBriefDTO;
 import Baloot.model.DTO.CommodityDTO;
 import Baloot.model.DTO.UserDTO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class User {
         return username;
     }
 
-    public CommodityDTO addToBuyList(Commodity commodity) throws CustomException {
+    public CommodityDTO addToBuyList(Commodity commodity) throws CustomException, SQLException {
         if(commodity.getInStock()<1)
             throw new CustomException("there is not enough commodity");
         commodity.decreaseInStock();
@@ -52,7 +53,7 @@ public class User {
         return commodity.getDTO(buyList.get(commodity));
     }
 
-    public CommodityDTO removeFromBuyList(Commodity commodity) throws CustomException {
+    public CommodityDTO removeFromBuyList(Commodity commodity) throws CustomException, SQLException {
         int quantity;
         if (!buyList.containsKey(commodity))
             throw new CustomException("don't exist.");
@@ -118,7 +119,7 @@ public class User {
         }
     }
 
-    public UserDTO getDTO() throws CustomException {
+    public UserDTO getDTO() throws CustomException, SQLException {
         var DTO = new UserDTO();
         DTO.setUsername(username);
         DTO.setEmail(email);

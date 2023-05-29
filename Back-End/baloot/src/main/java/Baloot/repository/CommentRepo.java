@@ -3,6 +3,11 @@ package Baloot.repository;
 import Baloot.Exeption.CustomException;
 import Baloot.model.Comment;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class CommentRepo extends Repo<Comment,Integer> {
     public static Integer lastCommentId = 0;
     private static CommentRepo instance = null;
@@ -15,6 +20,11 @@ public class CommentRepo extends Repo<Comment,Integer> {
     }
 
     @Override
+    protected String getGetElementByIdStatement() {
+        return null;
+    }
+
+    @Override
     public void addElement(Comment newObject) throws CustomException {
         if (newObject.setId(lastCommentId + 1)) {
             objectMap.put((++lastCommentId).toString(), newObject);
@@ -24,7 +34,27 @@ public class CommentRepo extends Repo<Comment,Integer> {
     }
 
     @Override
+    protected void fillGetElementByIdValues(PreparedStatement st, Integer id) throws SQLException {
+
+    }
+
+    @Override
     protected String getAddElementStatement() {
+        return null;
+    }
+
+    @Override
+    protected String getGetAllElementsStatement() {
+        return null;
+    }
+
+    @Override
+    protected Comment convertResultSetToDomainModel(ResultSet rs) throws SQLException {
+        return null;
+    }
+
+    @Override
+    protected ArrayList<Comment> convertResultSetToDomainModelList(ResultSet rs) throws SQLException {
         return null;
     }
 

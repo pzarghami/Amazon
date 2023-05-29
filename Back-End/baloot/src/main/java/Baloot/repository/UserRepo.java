@@ -3,7 +3,12 @@ package Baloot.repository;
 import Baloot.Exeption.CustomException;
 import Baloot.model.User;
 
-public class UserRepo extends Repo<User,Integer> {
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+public class UserRepo extends Repo<User,String> {
     private static UserRepo instance = null;
     public static final String USER_TABLE = "User";
     public static User loggedInUser = null;
@@ -16,6 +21,11 @@ public class UserRepo extends Repo<User,Integer> {
     }
 
     @Override
+    protected String getGetElementByIdStatement() {
+        return null;
+    }
+
+    @Override
     public void addElement(User newObject) throws CustomException {
         var objectId = newObject.getUsername();
         if (isIdValid(objectId)) {
@@ -25,7 +35,27 @@ public class UserRepo extends Repo<User,Integer> {
     }
 
     @Override
+    protected void fillGetElementByIdValues(PreparedStatement st, String id) throws SQLException {
+
+    }
+
+    @Override
     protected String getAddElementStatement() {
+        return null;
+    }
+
+    @Override
+    protected String getGetAllElementsStatement() {
+        return null;
+    }
+
+    @Override
+    protected User convertResultSetToDomainModel(ResultSet rs) throws SQLException {
+        return null;
+    }
+
+    @Override
+    protected ArrayList<User> convertResultSetToDomainModelList(ResultSet rs) throws SQLException {
         return null;
     }
 

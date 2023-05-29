@@ -8,6 +8,8 @@ import Baloot.repository.DiscountRepo;
 import Baloot.repository.UserRepo;
 import Baloot.Exeption.CustomException;
 
+import java.sql.SQLException;
+
 public class UserDomainManager {
     private static UserDomainManager instance;
 
@@ -18,11 +20,11 @@ public class UserDomainManager {
         return instance;
     }
 
-    public UserDTO getUserDTO() throws CustomException {
+    public UserDTO getUserDTO() throws CustomException, SQLException {
         return UserRepo.loggedInUser.getDTO();
     }
 
-    public void loginUser(String username, String Password) throws CustomException {
+    public void loginUser(String username, String Password) throws CustomException, SQLException {
         var user = UserRepo.getInstance().getElementById(username);
         if (!user.checkPassword(Password)) {
             throw new CustomException("password is wrong");
@@ -40,13 +42,13 @@ public class UserDomainManager {
         // UserRepo.getInstance().loginUser(user);
     }
 
-    public CommodityDTO addToBuyList(int commodityId) throws CustomException {
-        var commodity = CommodityRepo.getInstance().getElementById(String.valueOf(commodityId));
+    public CommodityDTO addToBuyList(int commodityId) throws CustomException, SQLException {
+        var commodity = CommodityRepo.getInstance().getElementById(commodityId);
         return UserRepo.loggedInUser.addToBuyList(commodity);
     }
 
-    public CommodityDTO removeFromBuyList(int commodityId) throws CustomException {
-        var commodity = CommodityRepo.getInstance().getElementById(String.valueOf(commodityId));
+    public CommodityDTO removeFromBuyList(int commodityId) throws CustomException, SQLException {
+        var commodity = CommodityRepo.getInstance().getElementById(commodityId);
         return UserRepo.loggedInUser.removeFromBuyList(commodity);
     }
 
@@ -58,7 +60,7 @@ public class UserDomainManager {
         return UserRepo.loggedInUser.getBuyListPrice();
     }
 
-    public float setDiscount(String discountCode) throws CustomException {
+    public float setDiscount(String discountCode) throws CustomException, SQLException {
         var discount = DiscountRepo.getInstance().getElementById(discountCode);
         UserRepo.loggedInUser.setDiscount(discount);
         return UserRepo.loggedInUser.getBuyListPrice();
@@ -68,7 +70,7 @@ public class UserDomainManager {
         UserRepo.loggedInUser.removeDiscount();
     }
 
-    public UserDTO finalizeThePurchase() throws CustomException {
+    public UserDTO finalizeThePurchase() throws CustomException, SQLException {
         UserRepo.loggedInUser.finalizeThePurchase();
         return UserRepo.loggedInUser.getDTO();
     }
