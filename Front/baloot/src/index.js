@@ -1,8 +1,14 @@
 import React from 'react';
+import axios from "axios";
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.headers.common["Access-Control-Allow-Origin"] = "GET, PUT, POST";
+axios.defaults.headers.common["Access-Control-Allow-Methods"] = "GET, PUT, POST, DELETE, OPTIONS";
+axios.defaults.headers.common["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -1,0 +1,65 @@
+.quantity-box {
+    width: 9vw;
+    height: 4.2vh;
+    margin-top:0.3vh;
+    display: flex;
+    /* identical to box heiht */
+    background: #FFFFFF;
+    border: 1px solid #593C1C;
+    border-radius: 15px;
+}
+.quantity-box .minus {
+    margin-top: 1vh;
+    margin-left : 1vw;
+    display: flex;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 1.75rem;
+    line-height: 20px;
+    color:black;
+    text-align: center;
+}
+.quantity-box .number {
+    margin-top: 1.4vh;
+    margin-left : 2.5vw;
+    display: flex;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 1.75rem;
+    line-height: 20px;
+    color:black;
+    text-align: center;
+}
+.quantity-box .plus {
+    margin-top: 1.4vh;
+    margin-left : 3vw;
+    display: flex;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 1.75rem;
+    line-height: 20px;
+    color:black;
+    text-align: center;
+}
+button {
+    margin-top:0.3vh;
+    display: flex;
+    /* identical to box heiht */
+    background: #FFFFFF;
+    border: 1px solid #593C1C;
+    border-radius: 15px;
+    align-content: center;
+}
+button:hover{
+    margin-top:0.3vh;
+    display: flex;
+    /* identical to box heiht */
+    background: #593C1C;
+    border: 1px solid #593C1C;
+    border-radius: 15px;
+    align-content: center;
+    color: white;
+}

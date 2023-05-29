@@ -1,0 +1,30 @@
+
+.comment-box {
+    background: #FFFFFF;
+}
+.comments {
+    background: #FFFFFF;
+    margin:2%;
+}
+
+.comment-text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.75rem;
+    padding-top: 8vh;
+    margin-left: 4vw;
+
+    color: #593C1C;
+}
+
+.comment-num {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.75rem;
+    margin-left: 0.5vw;
+    padding-top: 8vh;
+
+    color: #909090;
+}

@@ -1,0 +1,694 @@
+{
+    "commodities": [
+        {
+            "id": 1,
+            "name": "Onion",
+            "providerId": 1,
+            "price": 1,
+            "categories": [
+                "Vegetables"
+            ],
+            "rating": 7.0,
+            "inStock": 50,
+            "countOfRating": 12,
+            "userRate": 3,
+            "image": "https://www.macmillandictionary.com/external/slideshow/full/135967_full.jpg",
+            "comments": [
+                {
+                    "id": 1,
+                    "like": 5,
+                    "disLike": 10,
+                    "ownerUserid": "Abass",
+                    "date": "12-3-2020",
+                    "text": "i like that so much."
+                },
+                {
+                    "id": 2,
+                    "like": 1,
+                    "disLike": 10,
+                    "ownerUserid": "2ref",
+                    "date": "12-3-2020",
+                    "text": "i font like that so much."
+                }
+            ],
+            "reccommendList": [
+                {
+                    "id": 2,
+                    "name": "Potato",
+                    "providerId": 1,
+                    "price": 14000,
+                    "categories": [
+                        "Vegetables"
+                    ],
+                    "rating": 7.0,
+                    "inStock": 60,
+                    "image": "https://www.macmillandictionary.com/external/slideshow/full/141151_full.jpg"
+                },
+                {
+                    "id": 7,
+                    "name": "Cabbage",
+                    "providerId": 1,
+                    "price": 30000,
+                    "categories": [
+                        "Vegetables"
+                    ],
+                    "rating": 6.0,
+                    "inStock": 30,
+                    "image": "https://www.macmillandictionary.com/external/slideshow/full/34022_full.jpg"
+                },
+                {
+                    "id": 12,
+                    "name": "Galaxy A53",
+                    "providerId": 2,
+                    "price": 15000000,
+                    "categories": [
+                        "Phone",
+                        "Technology"
+                    ],
+                    "rating": 7.6,
+                    "inStock": 20,
+                    "image": "https://www.androidplanet.nl/wp-content/uploads/2022/04/samsung-galaxy-a53-review-5.jpg"
+                },
+                {
+                    "id": 9,
+                    "name": "Galaxy A73",
+                    "providerId": 2,
+                    "price": 17000000,
+                    "categories": [
+                        "Phone",
+                        "Technology"
+                    ],
+                    "rating": 8.0,
+                    "inStock": 10,
+                    "image": "https://nextrift.com/wp-content/uploads/2022/04/samsung-galaxy-a73-unboxing-5.jpg"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Potato",
+            "providerId": 1,
+            "price": 14000,
+            "categories": [
+                "Vegetables"
+            ],
+            "rating": 7.0,
+            "inStock": 60,
+            "image": "https://www.macmillandictionary.com/external/slideshow/full/141151_full.jpg"
+        },
+        {
+            "id": 3,
+            "name": "Carrot",
+            "providerId": 1,
+            "price": 25000,
+            "categories": [
+                "Vegetables"
+            ],
+            "rating": 7.0,
+            "inStock": 50,
+            "image": "https://www.macmillandictionary.com/external/slideshow/full/139431_full.jpg"
+        },
+        {
+            "id": 4,
+            "name": "Celery",
+            "providerId": 1,
+            "price": 15000,
+            "categories": [
+                "Vegetables"
+            ],
+            "rating": 6.5,
+            "inStock": 20,
+            "image": "https://www.macmillandictionary.com/external/slideshow/full/1422_full.jpg"
+        },
+        {
+            "id": 6,
+            "name": "Broccoli",
+            "providerId": 1,
+            "price": 40000,
+            "categories": [
+                "Vegetables"
+            ],
+            "rating": 8.0,
+            "inStock": 25,
+            "image": "https://www.macmillandictionary.com/external/slideshow/full/36735_full.jpg"
+        },
+        {
+            "id": 7,
+            "name": "Cabbage",
+            "providerId": 1,
+            "price": 30000,
+            "categories": [
+                "Vegetables"
+            ],
+            "rating": 6.0,
+            "inStock": 30,
+            "image": "https://www.macmillandictionary.com/external/slideshow/full/34022_full.jpg"
+        },
+        {
+            "id": 8,
+            "name": "Lettuce",
+            "providerId": 1,
+            "price": 25000,
+            "categories": [
+                "Vegetables"
+            ],
+            "rating": 7.0,
+            "inStock": 50,
+            "image": "https://www.macmillandictionary.com/external/slideshow/full/28342_full.jpg"
+        },
+        {
+            "id": 9,
+            "name": "Galaxy A73",
+            "providerId": 2,
+            "price": 17000000,
+            "categories": [
+                "Phone",
+                "Technology"
+            ],
+            "rating": 8.0,
+            "inStock": 10,
+            "image": "https://nextrift.com/wp-content/uploads/2022/04/samsung-galaxy-a73-unboxing-5.jpg"
+        },
+        {
+            "id": 10,
+            "name": "Galaxy S23 Plus",
+            "providerId": 2,
+            "price": 57600000,
+            "categories": [
+                "Phone",
+                "Technology"
+            ],
+            "rating": 8.3,
+            "inStock": 5,
+            "image": "https://www.lowyat.net/wp-content/uploads/2022/09/samsung-galaxy-s23-plus-leak-OnLeaks-design-3.jpg"
+        },
+        {
+            "id": 11,
+            "name": "Galaxy S23 Ultra",
+            "providerId": 2,
+            "price": 65000000,
+            "categories": [
+                "Phone",
+                "Technology"
+            ],
+            "rating": 8.7,
+            "inStock": 7,
+            "image": "https://www.lowyat.net/wp-content/uploads/2022/09/samsung-galaxy-s23-plus-leak-OnLeaks-design-3.jpg"
+        },
+        {
+            "id": 12,
+            "name": "Galaxy A53",
+            "providerId": 2,
+            "price": 15000000,
+            "categories": [
+                "Phone",
+                "Technology"
+            ],
+            "rating": 7.6,
+            "inStock": 20,
+            "image": "https://www.androidplanet.nl/wp-content/uploads/2022/04/samsung-galaxy-a53-review-5.jpg"
+        },
+        {
+            "id": 13,
+            "name": "Galaxy Z Fold 4",
+            "providerId": 2,
+            "price": 75300000,
+            "categories": [
+                "Phone",
+                "Technology"
+            ],
+            "rating": 7.9,
+            "inStock": 5,
+            "image": "https://images.frandroid.com/wp-content/uploads/2022/08/2-037-product-galaxy-zfold4-graygreen-phantomblack-beige-hi.jpg"
+        },
+        {
+            "id": 14,
+            "name": "Galaxy Z Flip 4",
+            "providerId": 2,
+            "price": 43500000,
+            "categories": [
+                "Phone",
+                "Technology"
+            ],
+            "rating": 7.7,
+            "inStock": 8,
+            "image": "https://cdn.vodafone.co.uk/en/assets/images/desktop/Samsung_Galaxy_Z_Flip4_bora_purple-full-product-front-600.png"
+        },
+        {
+            "id": 15,
+            "name": "Iphone 14 Pro Max",
+            "providerId": 2,
+            "price": 73500000,
+            "categories": [
+                "Phone",
+                "Technology"
+            ],
+            "rating": 9.2,
+            "inStock": 20,
+            "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-7inch-deeppurple?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1663703841896"
+        },
+        {
+            "id": 16,
+            "name": "Iphone 14 Pro",
+            "providerId": 2,
+            "price": 65000000,
+            "categories": [
+                "Phone",
+                "Technology"
+            ],
+            "rating": 9.0,
+            "inStock": 10,
+            "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-1inch-deeppurple?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1663703840578"
+        },
+        {
+            "id": 17,
+            "name": "Iphone 14 Plus",
+            "providerId": 2,
+            "price": 60250000,
+            "categories": [
+                "Phone",
+                "Technology"
+            ],
+            "rating": 8.8,
+            "inStock": 14,
+            "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-finish-select-202209-6-7inch-blue?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1661027942322"
+        },
+        {
+            "id": 18,
+            "name": "Iphone 14",
+            "providerId": 2,
+            "price": 59300000,
+            "categories": [
+                "Phone",
+                "Technology"
+            ],
+            "rating": 9.0,
+            "inStock": 3,
+            "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-finish-select-202209-6-1inch-starlight?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1661027204398"
+        },
+        {
+            "id": 19,
+            "name": "Xiaomi 12 Pro",
+            "providerId": 2,
+            "price": 31000000,
+            "categories": [
+                "Phone",
+                "Technology"
+            ],
+            "rating": 9.5,
+            "inStock": 17,
+            "image": "https://cdn.dxomark.com/wp-content/uploads/medias/post-107919/Xiaomi-12-Pro-featured-image-packshot-review-1.jpg"
+        },
+        {
+            "id": 20,
+            "name": "Xiaomi Mi 11",
+            "providerId": 2,
+            "price": 23000000,
+            "categories": [
+                "Phone",
+                "Technology"
+            ],
+            "rating": 8.3,
+            "inStock": 23,
+            "image": "https://cdn.dxomark.com/wp-content/uploads/medias/post-87137/Xiaomi-Mi-11-Lite-5G-Yoast-image-packshot-review-Recovered.jpg"
+        },
+        {
+            "id": 21,
+            "name": "Type C Super Fast Charger Adaptor",
+            "providerId": 3,
+            "price": 700000,
+            "categories": [
+                "Phone",
+                "Technology",
+                "Phone Accessory"
+            ],
+            "rating": 8.0,
+            "inStock": 10,
+            "image": "https://images.samsung.com/is/image/samsung/my-feature-super-fast-charging-to-stay-live-248849321?$FB_TYPE_A_MO_JPG$"
+        },
+        {
+            "id": 22,
+            "name": "Type C Cable",
+            "providerId": 3,
+            "price": 120000,
+            "categories": [
+                "Phone",
+                "Technology",
+                "Phone Accessory"
+            ],
+            "rating": 8.3,
+            "inStock": 5,
+            "image": "https://images.samsung.com/is/image/samsung/in-cable-combo-dg930-ep-dg930ibegin-frontblack-119451395?$650_519_PNG$"
+        },
+        {
+            "id": 23,
+            "name": "Mini USB Cable",
+            "providerId": 3,
+            "price": 70000,
+            "categories": [
+                "Phone",
+                "Technology",
+                "Phone Accessory"
+            ],
+            "rating": 8.7,
+            "inStock": 7,
+            "image": "https://my.element14.com/productimages/large/en_GB/130887806-40.jpg"
+        },
+        {
+            "id": 24,
+            "name": "Galaxy Buds 2 Pro",
+            "providerId": 3,
+            "price": 6120000,
+            "categories": [
+                "Phone",
+                "Technology",
+                "Phone Accessory"
+            ],
+            "rating": 7.6,
+            "inStock": 20,
+            "image": "https://m.media-amazon.com/images/I/61KVX-MbIUL.jpg"
+        },
+        {
+            "id": 25,
+            "name": "Galaxy Buds Pro",
+            "providerId": 3,
+            "price": 5700000,
+            "categories": [
+                "Phone",
+                "Technology",
+                "Phone Accessory"
+            ],
+            "rating": 7.9,
+            "inStock": 5,
+            "image": "https://nextrift.com/wp-content/uploads/2021/02/samsung-galaxy-buds-pro-review-1.jpg"
+        },
+        {
+            "id": 27,
+            "name": "Airpod Pro",
+            "providerId": 3,
+            "price": 11000000,
+            "categories": [
+                "Phone",
+                "Technology",
+                "Phone Accessory"
+            ],
+            "rating": 9.2,
+            "inStock": 20,
+            "image": "https://as-images.apple.com/is/MME73?wid=1000&hei=1000&fmt=jpeg&qlt=95&.v=1632861342000"
+        },
+        {
+            "id": 28,
+            "name": "Lightning Cable",
+            "providerId": 3,
+            "price": 200000,
+            "categories": [
+                "Phone",
+                "Technology",
+                "Phone Accessory"
+            ],
+            "rating": 8.3,
+            "inStock": 23,
+            "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MM0A3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1632956386000"
+        },
+        {
+            "id": 29,
+            "name": "Apple",
+            "providerId": 4,
+            "price": 13000,
+            "categories": [
+                "Fruits"
+            ],
+            "rating": 7.0,
+            "inStock": 50,
+            "image": "https://www.macmillandictionary.com/external/slideshow/full/132474_full.jpg"
+        },
+        {
+            "id": 30,
+            "name": "Mango",
+            "providerId": 4,
+            "price": 240000,
+            "categories": [
+                "Fruits"
+            ],
+            "rating": 7.0,
+            "inStock": 60,
+            "image": "https://www.collinsdictionary.com/images/full/mango_414745195.jpg"
+        },
+        {
+            "id": 31,
+            "name": "Orange",
+            "providerId": 4,
+            "price": 25000,
+            "categories": [
+                "Fruits"
+            ],
+            "rating": 7.0,
+            "inStock": 50,
+            "image": "https://www.macmillandictionary.com/external/slideshow/full/orange%20fruit_full.jpg"
+        },
+        {
+            "id": 32,
+            "name": "Banana",
+            "providerId": 4,
+            "price": 63000,
+            "categories": [
+                "Fruits"
+            ],
+            "rating": 6.5,
+            "inStock": 20,
+            "image": "https://www.macmillandictionary.com/external/slideshow/full/153051_full.jpg"
+        },
+        {
+            "id": 33,
+            "name": "Tangerine",
+            "providerId": 4,
+            "price": 35000,
+            "categories": [
+                "Fruits"
+            ],
+            "rating": 7.0,
+            "inStock": 20,
+            "image": "https://www.macmillandictionaryblog.com/wp-content/uploads/2018/06/25609-1024x683.jpg"
+        },
+        {
+            "id": 34,
+            "name": "Grapefruit",
+            "providerId": 4,
+            "price": 400000,
+            "categories": [
+                "Fruits"
+            ],
+            "rating": 8.0,
+            "inStock": 25,
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Grapefruits_-_whole-halved-segments.jpg/1200px-Grapefruits_-_whole-halved-segments.jpg"
+        },
+        {
+            "id": 35,
+            "name": "Kiwi",
+            "providerId": 4,
+            "price": 30000,
+            "categories": [
+                "Fruits"
+            ],
+            "rating": 6.0,
+            "inStock": 30,
+            "image": "https://www.macmillandictionaryblog.com/wp-content/uploads/2015/02/half.jpg"
+        },
+        {
+            "id": 36,
+            "name": "Pineapple",
+            "providerId": 4,
+            "price": 125000,
+            "categories": [
+                "Fruits"
+            ],
+            "rating": 7.0,
+            "inStock": 50,
+            "image": "https://www.macmillandictionary.com/external/slideshow/full/36891_full.jpg"
+        },
+        {
+            "id": 37,
+            "name": "Pear",
+            "providerId": 4,
+            "price": 80000,
+            "categories": [
+                "Fruits"
+            ],
+            "rating": 7.0,
+            "inStock": 50,
+            "image": "https://www.macmillandictionary.com/external/slideshow/thumb/158459_thumb.jpg"
+        },
+        {
+            "id": 38,
+            "name": "Passionfruit",
+            "providerId": 4,
+            "price": 240000,
+            "categories": [
+                "Fruits"
+            ],
+            "rating": 7.0,
+            "inStock": 60,
+            "image": "https://www.macmillandictionary.com/external/slideshow/full/Passion%20Fruit_full.jpg"
+        },
+        {
+            "id": 39,
+            "name": "Plum",
+            "providerId": 4,
+            "price": 50000,
+            "categories": [
+                "Fruits"
+            ],
+            "rating": 7.0,
+            "inStock": 50,
+            "image": "https://www.macmillandictionary.com/external/slideshow/full/plums_full.jpg"
+        },
+        {
+            "id": 40,
+            "name": "Water Melon",
+            "providerId": 4,
+            "price": 30000,
+            "categories": [
+                "Fruits"
+            ],
+            "rating": 6.5,
+            "inStock": 20,
+            "image": "https://www.macmillandictionary.com/external/slideshow/full/151041_full.jpg"
+        },
+        {
+            "id": 41,
+            "name": "Coconut",
+            "providerId": 4,
+            "price": 150000,
+            "categories": [
+                "Fruits"
+            ],
+            "rating": 7.0,
+            "inStock": 20,
+            "image": "https://www.collinsdictionary.com/images/full/coconut_111802346.jpg"
+        },
+        {
+            "id": 42,
+            "name": "Cherry",
+            "providerId": 4,
+            "price": 60000,
+            "categories": [
+                "Fruits"
+            ],
+            "rating": 8.0,
+            "inStock": 25,
+            "image": "https://www.macmillandictionary.com/external/slideshow/full/37605_full.jpg"
+        },
+        {
+            "id": 43,
+            "name": "Blackberry",
+            "providerId": 4,
+            "price": 300000,
+            "categories": [
+                "Fruits"
+            ],
+            "rating": 6.0,
+            "inStock": 30,
+            "image": "https://www.macmillandictionary.com/external/slideshow/thumb/36724_thumb.jpg"
+        }
+    ],
+    "providers": [
+        {
+            "id": 1,
+            "name": "Vegetable Provider",
+            "registryDate": "2023-01-01",
+            "image": "https://www.macmillandictionaryblog.com/wp-content/uploads/2020/01/140887-1024x683.jpg",
+            "commodities": [
+                {
+                    "id": 37,
+                    "name": "Pear",
+                    "providerId": 4,
+                    "price": 80000,
+                    "categories": [
+                        "Fruits"
+                    ],
+                    "rating": 7.0,
+                    "inStock": 50,
+                    "image": "https://www.macmillandictionary.com/external/slideshow/thumb/158459_thumb.jpg"
+                },
+                {
+                    "id": 38,
+                    "name": "Passionfruit",
+                    "providerId": 4,
+                    "price": 240000,
+                    "categories": [
+                        "Fruits"
+                    ],
+                    "rating": 7.0,
+                    "inStock": 60,
+                    "image": "https://www.macmillandictionary.com/external/slideshow/full/Passion%20Fruit_full.jpg"
+                },
+                {
+                    "id": 39,
+                    "name": "Plum",
+                    "providerId": 4,
+                    "price": 50000,
+                    "categories": [
+                        "Fruits"
+                    ],
+                    "rating": 7.0,
+                    "inStock": 50,
+                    "image": "https://www.macmillandictionary.com/external/slideshow/full/plums_full.jpg"
+                },
+                {
+                    "id": 40,
+                    "name": "Water Melon",
+                    "providerId": 4,
+                    "price": 30000,
+                    "categories": [
+                        "Fruits"
+                    ],
+                    "rating": 6.5,
+                    "inStock": 20,
+                    "image": "https://www.macmillandictionary.com/external/slideshow/full/151041_full.jpg"
+                },
+                {
+                    "id": 41,
+                    "name": "Coconut",
+                    "providerId": 4,
+                    "price": 150000,
+                    "categories": [
+                        "Fruits"
+                    ],
+                    "rating": 7.0,
+                    "inStock": 20,
+                    "image": "https://www.collinsdictionary.com/images/full/coconut_111802346.jpg"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Phone Provider",
+            "registryDate": "2022-11-10",
+            "image": "https://images.anandtech.com/doci/9770/X-T30_DSF5320_678x452.jpg"
+        },
+        {
+            "id": 3,
+            "name": "Phone Accessory Provider",
+            "registryDate": "2020-02-25",
+            "image": "https://guide-images.cdn.ifixit.com/igi/j2OrUlQygRT6wRaY.large"
+        },
+        {
+            "id": 4,
+            "name": "Fruit Provider",
+            "registryDate": "2022-12-15",
+            "image": "https://www.macmillandictionaryblog.com/wp-content/uploads/2018/12/55153-810x535.jpg"
+        },
+        {
+            "id": 5,
+            "name": "Home and Kitchen Appliances Provider",
+            "registryDate": "2021-10-01",
+            "image": "https://vaya.in/wp-content/uploads/2021/05/10-Must-Have-Appliances-for-Easy-Kitchen-Chores.jpg"
+        },
+        {
+            "id": 6,
+            "name": "Dairy Provider",
+            "registryDate": "2022-11-11",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/0/00/%D0%A0%D1%96%D0%B7%D0%BD%D1%96_%D0%B2%D0%B8%D0%B4%D0%B8_%D0%BC%D0%BE%D0%BB%D0%BE%D1%87%D0%BD%D0%B8%D1%85_%D0%BF%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D1%96%D0%B2_%D1%83%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D1%81%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B2%D0%B8%D1%80%D0%BE%D0%B1%D0%BD%D0%B8%D1%86%D1%82%D0%B2%D0%B0.jpg"
+        }
+    ]
+}
