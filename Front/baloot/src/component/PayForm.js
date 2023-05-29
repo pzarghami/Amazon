@@ -5,7 +5,7 @@ import "./PayForm.css";
 
 export default function PayForm(props) {
     const { setShowPopupPayingForm, user, setUser } = props;
-    console.log(user);
+    console.log("first user: ",user);
 
     const [discount, setDiscount] = useState(null);
     const [totalCost, setTotalCost] = useState(0);
@@ -29,12 +29,14 @@ export default function PayForm(props) {
     async function handlePay() {
         try {
             const response = await axios.post('pay');
+            console.log("response befor tempUser defined: ",response);
             const tempUser=response.data.content;
-            console.log(response);
+
             if (response.data.status) {
+                console.log("response.data: ",response.data.content);
+                console.log("tempUser: ",tempUser);
                 setUser(tempUser);
                 console.log("After setUser", user);
-                console.log(setUser);
 
             }
             setShowPopupPayingForm(false);
