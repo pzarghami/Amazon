@@ -11,7 +11,6 @@ public class Provider {
     private String registryDate;
     private String image;
     private ArrayList<Commodity> commoditiesList;
-    private float averageRate;
 
     public Provider(int id, String name, String registryDate, String image) {
         this.id = id;
