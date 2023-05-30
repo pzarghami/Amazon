@@ -75,8 +75,17 @@ public class User {
         var buyListPrice = getBuyListPrice();
         if (buyListPrice > this.credit)
             throw new CustomException("credit is not enough");
-        userPurchasedList.putAll(buyList);
+        for(Map.Entry<Commodity,Integer> entry :buyList.entrySet()){
+            if(userPurchasedList.containsKey(entry.getKey())){
+                var lastQuantity = userPurchasedList.get(entry.getKey());
+                userPurchasedList.put(entry.getKey(),entry.getValue()+lastQuantity);
+            }
+            else {
+                userPurchasedList.put(entry.getKey(),entry.getValue());
+            }
+        }
         buyList.clear();
+        this.credit -= buyListPrice;
         if (discount != null) {
             this.discountCodeUsed.add(discount);
             this.discount = null;
