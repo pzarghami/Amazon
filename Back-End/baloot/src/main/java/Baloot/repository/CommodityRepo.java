@@ -249,5 +249,43 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
         return commodityBriefDTO;
 
     }
+    public  ArrayList<Commodity> getFilteredElementsByName(String filterValue) throws SQLException {
+        String sql = String.format("""
+                        SELECT *
+                        FROM %s
+                        WHERE name LIKE '%%%s%%';
+                        """, COMMODITY_TABLE, filterValue);
+        var dbOutput=executeQuery(sql,List.of());
+        var rs=dbOutput.getFirst();
+        ArrayList<Commodity> commodities=convertResultSetToDomainModelList(rs);
+        return commodities;
+
+
+    }
+
+    public  ArrayList<Commodity> getFilteredElementsByCategory(String filterValue) throws SQLException {
+        String sql = String.format("""
+                        SELECT *
+                        FROM %s
+                        WHERE name LIKE '%%%s%%';
+                        """, CATEGORY_TABLE, filterValue);
+        var dbOutput=executeQuery(sql,List.of());
+        var rs=dbOutput.getFirst();
+        return convertResultSetToDomainModelList(rs);
+
+    }
+
+    public  ArrayList<Commodity> getFilteredElementsByProvider(String filterValue) throws SQLException {
+        String sql = String.format("""
+                SELECT c.*
+                FROM %s p, %s c
+                WHERE   p.name LIKE '%%%s%%'AND p.id = c.providerId ;
+                        """,
+                ProviderRepo.PROVIDER_TABLE,COMMODITY_TABLE, filterValue);
+        var dbOutput=executeQuery(sql,List.of());
+        var rs=dbOutput.getFirst();
+        return convertResultSetToDomainModelList(rs);
+    }
+
 
 }

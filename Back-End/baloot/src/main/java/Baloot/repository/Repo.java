@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import Baloot.Exeption.CustomException;
+import Baloot.model.Commodity;
 import Baloot.model.User;
 import kotlin.Pair;
 
@@ -149,5 +150,6 @@ public abstract class Repo<T, PK> {
         closables.getFirst().close();
         closables.getSecond().close();
     }
+
 
 }

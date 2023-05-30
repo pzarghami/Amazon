@@ -56,4 +56,19 @@ public class CommodityDomainManager {
 
     }
 
+    public List<CommodityBriefDTO> getFilteredCommodityByName(String filterValue) throws SQLException {
+        ArrayList<Commodity> commodities=CommodityRepo.getInstance().getFilteredElementsByName(filterValue);
+        return getCommoditiesDTO(commodities);
+    }
+
+    public List<CommodityBriefDTO> getFilteredCommodityByCategory(String filterValue) throws SQLException {
+        ArrayList<Commodity> commodities=CommodityRepo.getInstance().getFilteredElementsByCategory(filterValue);
+        return getCommoditiesDTO(commodities);
+    }
+
+    public List<CommodityBriefDTO> getFilteredCommodityByProvider(String filterValue
+    ) throws SQLException {
+        ArrayList<Commodity> commodities=CommodityRepo.getInstance().getFilteredElementsByProvider(filterValue);
+        return getCommoditiesDTO(commodities);
+    }
 }
