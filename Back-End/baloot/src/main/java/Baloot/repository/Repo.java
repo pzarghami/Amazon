@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 import Baloot.Exeption.CustomException;
 import Baloot.model.User;
+import kotlin.Pair;
 
 public abstract class Repo<T, PK> {
     static User loggedInUser;
@@ -120,6 +121,13 @@ public abstract class Repo<T, PK> {
             objectMap.clear();
         }
     }
+    protected Pair<ResultSet, Pair<Connection, PreparedStatement>> executeQuery(String sql, List<String> fillValues) throws SQLException {
+        Connection con = ConnectionPool.getConnection();
+        PreparedStatement st = con.prepareStatement(sql);
+        fillValues(st, fillValues);
+        var result = st.executeQuery();
+        return new Pair<>(result, new Pair<>(con, st));
+    }
     protected int executeUpdate(String sql, List<String> fillValues) throws SQLException {
         Connection con = ConnectionPool.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
@@ -129,6 +137,7 @@ public abstract class Repo<T, PK> {
         con.close();
         return result;
     }
+
     protected void fillValues(PreparedStatement st, List<String> values) throws SQLException {
         int valuePosition = 1;
         for (var value : values) {
@@ -136,4 +145,9 @@ public abstract class Repo<T, PK> {
             valuePosition++;
         }
     }
+    protected void finishWithResultSet(Pair<Connection, PreparedStatement> closables) throws SQLException {
+        closables.getFirst().close();
+        closables.getSecond().close();
+    }
+
 }

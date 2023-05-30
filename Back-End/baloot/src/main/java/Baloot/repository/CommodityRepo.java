@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import Baloot.model.DTO.CommodityBriefDTO;
+import Baloot.model.Provider;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -166,11 +167,61 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
 
     @Override
     protected Commodity convertResultSetToDomainModel(ResultSet rs) throws SQLException {
-        return null;
+        var commodity=new Commodity(
+                rs.getString("id"),
+                rs.getString("name"),
+                getProviderFromDB(rs.getString("providerId")),
+                rs.getFloat("price"),
+                getCategoriesFromDB(rs.getInt("id")),
+                rs.getFloat("averageRate"),
+                rs.getInt("inStock"),
+                rs.getString("imgUrl")
+        );
+
+        return commodity;
+    }
+
+    private ArrayList<String > getCategoriesFromDB(Integer id) throws SQLException {
+        ArrayList<String> categories=new ArrayList<>();
+        String sqlSelect= String.format(
+                "SELECT C.category\n" +
+                "FROM %s C\n" +
+                "WHERE C.commodityId== ?",CATEGORY_TABLE);
+        var dbOutput= executeQuery(sqlSelect, List.of(id.toString()));
+        var rs=dbOutput.getFirst();
+        while(rs.next()){
+            categories.add(rs.getString("category"));
+        }
+        finishWithResultSet(dbOutput.getSecond());
+        return categories;
+
+    }
+
+    private Provider getProviderFromDB(String providerId) throws SQLException {
+        String sql=String.format(
+                "SELECT *\n" +
+                "FROM %s P \n" +
+                "WHERE p.id= ?",ProviderRepo.PROVIDER_TABLE
+        );
+        var dbOutput=executeQuery(sql,List.of(providerId));
+        var rs=dbOutput.getFirst();
+        var provider=new Provider(
+                rs.getInt("id"),
+                rs.getString("name"),
+                rs.getString("registryDate"),
+                rs.getString("imgUrl")
+
+        );
+        finishWithResultSet(dbOutput.getSecond());
+        return provider;
     }
 
     @Override
     protected ArrayList<Commodity> convertResultSetToDomainModelList(ResultSet rs) throws SQLException {
+        ArrayList<Commodity> commodities=new ArrayList<>();
+        while(rs.next()){
+            commodities.add(convertResultSetToDomainModel(rs));
+        }
         return null;
     }
 
