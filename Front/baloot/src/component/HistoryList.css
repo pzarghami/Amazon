@@ -1,0 +1,141 @@
+.history-box {
+
+    width: 83.1vw;
+    height: 1.3vh;
+    margin-top: 8.2rem;
+
+
+}
+.topic-box th,
+.history tr {
+  vertical-align: middle;
+}
+.history-box span {
+    width: 4.4vw;
+    height: 4.4vh;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.5rem;
+    line-height: 48px;
+    text-align: center;
+    margin-left: 0.4vw;
+    margin-top: 90vh;
+    color: #593C1C;
+
+}
+
+.history {
+    width: 83vw;
+    height: 13.8vh;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    border-radius: 15px;
+    margin-left: 4.1vw;
+    margin-top: 3.3vh;
+    display: flex;
+    align-items: center;
+
+}
+table {
+    width: 83.1vw;
+    margin-top: 8.2rem;
+    border-collapse: collapse;
+}
+.topic-box {
+    width: 83.1vw;
+    height: 6.9vh;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(208, 208, 208, 0.25);
+    border-radius: 15px;
+    margin-top: 4.2vh;
+
+    display: flex;
+    align-items: center;
+}
+.topic-box .image span,
+.topic-box .name span,
+.topic-box .cate span,
+.topic-box .price span,
+.topic-box .provider span,
+.topic-box .rating span,
+.topic-box .stock span,
+.topic-box .quantity span {
+    font-size: 1.75rem;
+    line-height: 34px;
+
+    color: #000000;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    margin: 4rem;
+    vertical-align:middle; 
+}
+.history img {
+    width: 6.5vh;
+    height: 9.2vh;
+    /* background: url(image.png); */
+    background: #FFFFFF;
+
+}
+.history .name span,
+.history .cate span,
+.history .price span,
+.history .provider span,
+.history .quantity span
+ {
+    font-size: 1.5rem;
+    line-height: 29px;
+    text-align: center;
+    color: #919191;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: normal;
+    justify-content: center;
+    margin: 4rem;
+}
+
+
+.history .rating span {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 29px;
+    justify-content: center;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #FFC700;
+    margin: 4rem;
+}
+
+.history .in-stock span {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.25rem;
+    line-height: 44px;
+    text-align: center;
+    justify-content: center;
+
+    color: #C82525;
+    margin: 4rem;
+}
+
+
+.empty-box {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    /* identical to box height */
+
+    margin: 6vh;
+    text-align: center;
+
+    color: #A97B47;
+
+}
