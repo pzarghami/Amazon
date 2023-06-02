@@ -264,11 +264,12 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
     }
 
     public  ArrayList<Commodity> getFilteredElementsByCategory(String filterValue) throws SQLException {
+
         String sql = String.format("""
-                        SELECT *
-                        FROM %s
-                        WHERE name LIKE '%%%s%%';
-                        """, CATEGORY_TABLE, filterValue);
+                                SELECT c.*
+                                FROM %s c, %s cat
+                                WHERE name LIKE '%%%s%%' AND c.id=cat.commodityId;
+                                """, COMMODITY_TABLE,CATEGORY_TABLE, filterValue);
         var dbOutput=executeQuery(sql,List.of());
         var rs=dbOutput.getFirst();
         return convertResultSetToDomainModelList(rs);
