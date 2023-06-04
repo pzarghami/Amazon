@@ -17,8 +17,7 @@ public class ProviderRepo extends Repo<Provider, Integer> {
     }
 
     @Override
-    protected String getGetElementByIdStatement() {
-        return null;
+    protected String getGetElementByIdStatement() {      return String.format("SELECT* FROM %s p WHERE p.id = ?;", PROVIDER_TABLE);
     }
 
     public static ProviderRepo getInstance() {

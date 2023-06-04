@@ -28,7 +28,8 @@ public class CommentDomainManager {
 
     public CommentDTO voteComment(String commentId, int vote) throws CustomException, SQLException {
         var comment = CommentRepo.getInstance().getElementById(Integer.valueOf(commentId));
-        comment.voteComment(UserRepo.loggedInUser.getUsername(), vote);
+        comment.updateCommentVotes(UserRepo.loggedInUser.getUsername(), vote);
+        CommentRepo.getInstance().updateCommentVotes(commentId, UserRepo.loggedInUser.getUsername(), vote);
         return comment.getDTO();
     }
 

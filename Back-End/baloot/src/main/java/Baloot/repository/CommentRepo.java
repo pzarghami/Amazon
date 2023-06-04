@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class CommentRepo extends Repo<Comment,Integer> {
@@ -62,7 +63,7 @@ public class CommentRepo extends Repo<Comment,Integer> {
 
     @Override
     protected String getGetElementByIdStatement() {
-        return null;
+        return String.format("SELECT* FROM %s a WHERE a.id = ?;", COMMENT_TABLE);
     }
 
     @Override
@@ -94,12 +95,33 @@ public class CommentRepo extends Repo<Comment,Integer> {
 
     @Override
     protected Comment convertResultSetToDomainModel(ResultSet rs) throws SQLException {
-        return null;
-    }
+        var newComment = new Comment(
+                rs.getString("userId"),
+                rs.getString("text"),
+                rs.getString("createdDate"),
+                getUserVoteMap(rs.getInt("id"))
+        );
+        return newComment;
 
+    }
+    private HashMap<String, Short> getUserVoteMap(Integer commentId) throws SQLException {
+        var userVoteMap = new HashMap<String, Short>();
+        String sql = String.format("SELECT userId, vote FROM %s WHERE commentId=?;", VOTE_MAP_TABLE);
+        var dbOutput = executeQuery(sql, List.of(commentId.toString()));
+        var res = dbOutput.getFirst();
+        while (res.next()) {
+            userVoteMap.put(res.getString("userId"), res.getShort("vote"));
+        }
+        finishWithResultSet(dbOutput.getSecond());
+        return userVoteMap;
+    }
     @Override
     protected ArrayList<Comment> convertResultSetToDomainModelList(ResultSet rs) throws SQLException {
-        return null;
+        ArrayList<Comment> comments = new ArrayList<>();
+        while (rs.next()) {
+            comments.add(this.convertResultSetToDomainModel(rs));
+        }
+        return comments;
     }
 
     @Override
@@ -109,5 +131,13 @@ public class CommentRepo extends Repo<Comment,Integer> {
             throw new CustomException("Object Not found");
         }
         objectMap.put(objectId, newObject);
+    }
+
+    public void updateCommentVotes(String commentId, String username, int vote) throws SQLException {
+        String sql = String.format(
+                "INSERT INTO %s (userId, commentId, vote)\n" +
+                        "VALUES(?, ?, ?) ON DUPLICATE KEY UPDATE\n" +
+                        "vote=?;", VOTE_MAP_TABLE);
+        executeUpdate(sql, List.of(username, commentId, String.valueOf(vote), String.valueOf(vote)));
     }
 }

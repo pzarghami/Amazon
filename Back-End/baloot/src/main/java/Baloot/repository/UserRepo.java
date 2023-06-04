@@ -42,7 +42,7 @@ public class UserRepo extends Repo<User,String> {
     }
     @Override
     protected String getGetElementByIdStatement() {
-        return null;
+        return String.format("SELECT * FROM %s a WHERE a.username = ?;", USER_TABLE);
     }
 
     @Override

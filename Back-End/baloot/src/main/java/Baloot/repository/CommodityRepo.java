@@ -66,7 +66,7 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
 
     @Override
     protected String getGetElementByIdStatement() {
-        return null;
+        return String.format("SELECT* FROM %s c WHERE c.id = ?;", COMMODITY_TABLE);
     }
 
     private void initCommodityTable() {
