@@ -197,18 +197,28 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
 
     @Override
     protected Commodity convertResultSetToDomainModel(ResultSet rs) throws SQLException {
-        var commodity=new Commodity(
+
+        return new Commodity(
                 rs.getString("id"),
                 rs.getString("name"),
                 getProviderFromDB(rs.getString("providerId")),
                 rs.getFloat("price"),
                 getCategoriesFromDB(rs.getInt("id")),
-                rs.getFloat("averageRate"),
+                getUserRateMap(rs.getInt("id")),
                 rs.getInt("inStock"),
                 rs.getString("imgUrl")
         );
-
-        return commodity;
+    }
+    private HashMap<String, Integer> getUserRateMap(Integer commodityId) throws SQLException {
+        var hashMap = new HashMap<String, Integer>();
+        String sql = String.format("SELECT userId, rate FROM %s WHERE commodityId=?;", RATE_TABLE);
+        var dbOutput = executeQuery(sql, List.of(commodityId.toString()));
+        var res = dbOutput.getFirst();
+        while (res.next()) {
+            hashMap.put(res.getString("userId"), res.getInt("rate"));
+        }
+        finishWithResultSet(dbOutput.getSecond());
+        return hashMap;
     }
 
     private ArrayList<String > getCategoriesFromDB(Integer id) throws SQLException {
@@ -252,7 +262,7 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
         while(rs.next()){
             commodities.add(convertResultSetToDomainModel(rs));
         }
-        return null;
+        return commodities;
     }
 
 
@@ -287,8 +297,7 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
                         """, COMMODITY_TABLE, filterValue);
         var dbOutput=executeQuery(sql,List.of());
         var rs=dbOutput.getFirst();
-        ArrayList<Commodity> commodities=convertResultSetToDomainModelList(rs);
-        return commodities;
+        return convertResultSetToDomainModelList(rs);
 
 
     }

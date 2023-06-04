@@ -41,6 +41,18 @@ public class Commodity {
         this.userRateMap = new HashMap<>();
 
     }
+    public Commodity(String id, String name, Provider provider, float price, ArrayList<String> categories, HashMap<String,Integer> userRateMap, int inStock, String image) {
+        this.id = id;
+        this.name = name;
+        this.provider = provider;
+        this.price = price;
+        this.categories = categories;
+        this.inStock = inStock;
+        this.image = image;
+        this.comments = new ArrayList<>();
+        this.userRateMap =userRateMap;
+
+    }
 
     public String getId() {
         return id;
