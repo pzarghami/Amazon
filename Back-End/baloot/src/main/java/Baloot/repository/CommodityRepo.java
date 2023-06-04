@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 import Baloot.model.DTO.CommodityBriefDTO;
 import Baloot.model.Provider;
+import Baloot.model.User;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -32,6 +33,35 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
         this.initCommodityRateTable();
         System.out.println("FUCK");
         this.notFoundException = new CustomException("CommodityNotFound");
+    }
+
+
+    public static void updateAverageRate(Commodity commodity) throws SQLException {
+
+        var dbOutput=instance.executeQuery(String.format("""
+                SELECT AVG(R.rate) AS newAverage
+                FROM %s R
+                WHERE R.commodityId=?
+                """,RATE_TABLE),List.of(commodity.getId()));
+        var newAverage=dbOutput.getFirst().getString("newAverage");
+        instance.executeUpdate(String.format("""
+                UPDATE %s
+                SET averageRate=?
+                WHERE id=?
+                """,COMMODITY_TABLE),List.of(newAverage, commodity.getId()));
+
+
+    }
+
+
+    public static void updateRateTable(Commodity commodity, User ratingUser, int rate) throws SQLException {
+        String sql = String.format(
+                "INSERT INTO %s(commodityId, userId, rate)\n" +
+                        "VALUES(?, ?, ?) ON DUPLICATE KEY UPDATE\n" +
+                        "rate=?;", RATE_TABLE);
+        instance.executeUpdate(sql, List.of(commodity.getId(), ratingUser.getUsername(), String.valueOf(rate), String.valueOf(rate)));
+
+
     }
 
     @Override
@@ -180,7 +210,13 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
 
         return commodity;
     }
-
+    public void rateMovie(Integer commodityId, String username, int rate) throws CustomException, SQLException {
+        String sql = String.format(
+                "INSERT INTO %s(commodityId, userId, rate)\n" +
+                        "VALUES(?, ?, ?) ON DUPLICATE KEY UPDATE\n" +
+                        "rate=?;", RATE_TABLE);
+        executeUpdate(sql, List.of(commodityId.toString(), username, String.valueOf(rate), String.valueOf(rate)));
+    }
     private ArrayList<String > getCategoriesFromDB(Integer id) throws SQLException {
         ArrayList<String> categories=new ArrayList<>();
         String sqlSelect= String.format(

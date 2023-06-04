@@ -39,7 +39,8 @@ public class CommodityDomainManager {
     public CommodityDTO rateCommodity(String commodityId, int rate) throws CustomException, SQLException {
         var ratingUser = UserRepo.loggedInUser;
         var commodity = CommodityRepo.getInstance().getElementById(Integer.valueOf(commodityId));
-        commodity.updateCommodityRating(ratingUser.getUsername(), rate);
+        CommodityRepo.updateRateTable(commodity,ratingUser,rate);
+        CommodityRepo.updateAverageRate(commodity);
         return getCommodityDTO(commodityId);
     }
 
