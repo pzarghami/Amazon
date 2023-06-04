@@ -3,8 +3,10 @@ package Baloot.model;
 import Baloot.Exeption.CustomException;
 import Baloot.model.DTO.CommentDTO;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Comment {
     private String id;
@@ -74,4 +76,13 @@ public class Comment {
         DTO.setCommentCommodityId(Integer.parseInt(commentCommodity.getId()));
         return DTO;
     }
+    public Map<String, String> getDBTuple() throws SQLException {
+        Map<String, String> tuple = new HashMap<>();
+        tuple.put("text", this.text);
+        tuple.put("userId", this.commentOwner.getUsername());
+        tuple.put("commodityId", this.commentCommodity.getId());
+        tuple.put("createdDate", this.createDate.toString());
+        return tuple;
+    }
+
 }

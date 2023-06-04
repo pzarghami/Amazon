@@ -23,7 +23,6 @@ public class CommentDomainManager {
         var commentCommodity = CommodityRepo.getInstance().getElementById(commentDTO.getCommentCommodityId());
         var newComment = new Comment(UserRepo.loggedInUser, commentDTO.getText(), commentCommodity);
         CommentRepo.getInstance().addElement(newComment);
-        commentCommodity.addComment(newComment);
         return newComment.getDTO();
     }
 

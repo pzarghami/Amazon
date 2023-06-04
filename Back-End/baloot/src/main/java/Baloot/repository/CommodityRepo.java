@@ -210,13 +210,7 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
 
         return commodity;
     }
-    public void rateMovie(Integer commodityId, String username, int rate) throws CustomException, SQLException {
-        String sql = String.format(
-                "INSERT INTO %s(commodityId, userId, rate)\n" +
-                        "VALUES(?, ?, ?) ON DUPLICATE KEY UPDATE\n" +
-                        "rate=?;", RATE_TABLE);
-        executeUpdate(sql, List.of(commodityId.toString(), username, String.valueOf(rate), String.valueOf(rate)));
-    }
+
     private ArrayList<String > getCategoriesFromDB(Integer id) throws SQLException {
         ArrayList<String> categories=new ArrayList<>();
         String sqlSelect= String.format(
