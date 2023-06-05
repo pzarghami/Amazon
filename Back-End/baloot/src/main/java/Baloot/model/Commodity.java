@@ -4,6 +4,7 @@ import Baloot.Exeption.CustomException;
 import Baloot.model.DTO.CommentDTO;
 import Baloot.model.DTO.CommodityBriefDTO;
 import Baloot.model.DTO.CommodityDTO;
+import Baloot.repository.CommentRepo;
 import Baloot.repository.CommodityRepo;
 
 import java.sql.SQLException;
@@ -41,7 +42,7 @@ public class Commodity {
         this.userRateMap = new HashMap<>();
 
     }
-    public Commodity(String id, String name, Provider provider, float price, ArrayList<String> categories, HashMap<String,Integer> userRateMap, int inStock, String image) {
+    public Commodity(String id, String name, Provider provider, float price, ArrayList<String> categories, int inStock, String image) throws SQLException {
         this.id = id;
         this.name = name;
         this.provider = provider;
@@ -49,11 +50,18 @@ public class Commodity {
         this.categories = categories;
         this.inStock = inStock;
         this.image = image;
-        this.comments = new ArrayList<>();
-        this.userRateMap =userRateMap;
+        this.comments = null;
+        userRateMap=CommodityRepo.getInstance().getUserRateMap(Integer.parseInt(this.id));
+        this.averageRating=calculateAvgRate();
 
     }
-
+    private Double calculateAvgRate() {
+        int sum = 0;
+        for (var value : this.userRateMap.values()) {
+            sum += value;
+        }
+        return (sum / (double) this.userRateMap.values().size());
+    }
     public String getId() {
         return id;
     }
@@ -75,7 +83,11 @@ public class Commodity {
     public void decreaseInStock(){inStock = inStock - 1;}
 
     public void increaseInStock(){inStock = inStock + 1;}
-
+    private ArrayList<Comment> getComments() throws SQLException {
+        if (this.comments == null)
+            return CommentRepo.getInstance().getCommentsForCommodity(Integer.valueOf(this.id));
+        return this.comments;
+    }
     public boolean isYourCategory(ArrayList<String> cats) {
         for (String cat : cats) {
             for (String category : categories) {
@@ -116,18 +128,22 @@ public class Commodity {
 
     public CommodityDTO getDTO(int quantity) throws CustomException, SQLException {
         var DTO = new CommodityDTO();
+
+        comments=getComments();
+
         DTO.setId(Integer.parseInt(id));
         DTO.setName(name);
         DTO.setProvideName(provider.getName());
         DTO.setProviderId(provider.getId());
         DTO.setPrice(price);
+        DTO.setRate(averageRating);
         DTO.setCategories(categories);
-        DTO.setRate(Math.round(averageRating * 100.0) / 100.0);
         DTO.setInStock(inStock);
         DTO.setImgUrl(image);
         DTO.setNumOfRate(userRateMap.size());
         DTO.setQuantity(quantity);
         var commentsDTO = new ArrayList<CommentDTO>();
+
         comments.forEach(comment -> commentsDTO.add(comment.getDTO()));
         DTO.setComments(commentsDTO);
         DTO.setSuggestionCommodity(CommodityRepo.getInstance().calculateSuggestedProducts(id));

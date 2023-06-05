@@ -1,6 +1,7 @@
 package Baloot.repository;
 
 import Baloot.Exeption.CustomException;
+import Baloot.model.Comment;
 import Baloot.model.Commodity;
 
 import java.sql.Connection;
@@ -66,7 +67,7 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
 
     @Override
     protected String getGetElementByIdStatement() {
-        return String.format("SELECT* FROM %s c WHERE c.id = ?;", COMMODITY_TABLE);
+        return String.format("SELECT * FROM %s c WHERE c.id = ?;", COMMODITY_TABLE);
     }
 
     private void initCommodityTable() {
@@ -204,12 +205,11 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
                 getProviderFromDB(rs.getString("providerId")),
                 rs.getFloat("price"),
                 getCategoriesFromDB(rs.getInt("id")),
-                getUserRateMap(rs.getInt("id")),
                 rs.getInt("inStock"),
                 rs.getString("imgUrl")
         );
     }
-    private HashMap<String, Integer> getUserRateMap(Integer commodityId) throws SQLException {
+    public HashMap<String, Integer> getUserRateMap(Integer commodityId) throws SQLException {
         var hashMap = new HashMap<String, Integer>();
         String sql = String.format("SELECT userId, rate FROM %s WHERE commodityId=?;", RATE_TABLE);
         var dbOutput = executeQuery(sql, List.of(commodityId.toString()));
@@ -270,22 +270,23 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
         var commodity = getElementById(Integer.valueOf(commodityId));
         var commodityCategory = commodity.getCategories();
         HashMap<String, Double> suggestedCommoditiesId = new HashMap<>();
-        for (var pair : objectMap.entrySet()) {
-            if (String.valueOf(pair.getValue().getId()).equals(commodityId))
+        List<Commodity> commodities= getAllElements();
+        for(var comm : commodities){
+            if(comm.getId().equals(commodityId))
                 continue;
-            if (pair.getValue().isYourCategory(commodityCategory))
-                suggestedCommoditiesId.put(pair.getKey(), 11 + pair.getValue().getAverageRating());
+            if(comm.isYourCategory(commodityCategory))
+                suggestedCommoditiesId.put(comm.getId(), 11 + comm.getAverageRating());
             else
-                suggestedCommoditiesId.put(pair.getKey(), pair.getValue().getAverageRating());
+                suggestedCommoditiesId.put(comm.getId(),comm.getAverageRating());
         }
         var commodityIdWithTopScores = sortByValue(suggestedCommoditiesId);
         ArrayList<Integer> fiveCommodityIdWithTopScores = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             fiveCommodityIdWithTopScores.add(Integer.valueOf(commodityIdWithTopScores.get(i)));
         }
-        var commodities = getElementsById(fiveCommodityIdWithTopScores);
+        var commoditiesTop = getElementsById(fiveCommodityIdWithTopScores);
         var commodityBriefDTO = new ArrayList<CommodityBriefDTO>();
-        commodities.forEach(commodity1 -> commodityBriefDTO.add(commodity1.getBriefDTO(0)));
+        commoditiesTop.forEach(commodity1 -> commodityBriefDTO.add(commodity1.getBriefDTO(0)));
         return commodityBriefDTO;
 
     }
@@ -326,6 +327,7 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
         var rs=dbOutput.getFirst();
         return convertResultSetToDomainModelList(rs);
     }
+
 
 
 }

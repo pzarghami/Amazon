@@ -32,14 +32,7 @@ public class UserRepo extends Repo<User,String> {
                 ,CommodityRepo.COMMODITY_TABLE, BUYLIST_TABLE);
         return instance.executeUpdate(sql, List.of(loggedInUser.getUsername()));
     }
-    public static int getUserRate(Commodity commodity)throws SQLException{
-        String sql=String.format(
-                "SELECT r.rate\n"
-                        +"FROM %s c, %s r\n"
-                        +"WHERE c.id=r.commodityId AND r.userId= ?"
-                ,CommodityRepo.COMMODITY_TABLE, RATE_TABLE);
-        return instance.executeUpdate(sql, List.of(loggedInUser.getUsername()));
-    }
+
     @Override
     protected String getGetElementByIdStatement() {
         return String.format("SELECT * FROM %s a WHERE a.username = ?;", USER_TABLE);

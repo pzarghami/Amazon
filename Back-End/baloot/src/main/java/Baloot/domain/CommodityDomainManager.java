@@ -48,7 +48,7 @@ public class CommodityDomainManager {
         CommodityDTO DTO;
         if (UserRepo.loggedInUser != null) {
             DTO = commodity.getDTO(UserRepo.getQuantityOfCommodity(commodity));
-            DTO.setUserRate(UserRepo.getUserRate(commodity));
+            DTO.setUserRate(commodity.getUserRate(UserRepo.loggedInUser.getUsername()));
         } else {
             DTO = commodity.getDTO(0);
             DTO.setUserRate(0);

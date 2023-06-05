@@ -140,4 +140,15 @@ public class CommentRepo extends Repo<Comment,Integer> {
                         "vote=?;", VOTE_MAP_TABLE);
         executeUpdate(sql, List.of(username, commentId, String.valueOf(vote), String.valueOf(vote)));
     }
+    public ArrayList<Comment> getCommentsForCommodity(Integer commodityId) throws SQLException {
+        var comments = new ArrayList<Comment>();
+        String sql = String.format(
+                "SELECT c.id, c.text, c.createdDate\n" +
+                        "FROM %s c\n" +
+                        "WHERE c.commodityId=?;", COMMENT_TABLE);
+        var dbOutput = executeQuery(sql, List.of(commodityId.toString()));
+        var res = convertResultSetToDomainModelList(dbOutput.getFirst());
+        finishWithResultSet(dbOutput.getSecond());
+        return res;
+    }
 }
