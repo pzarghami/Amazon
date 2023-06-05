@@ -36,31 +36,31 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
         this.notFoundException = new CustomException("CommodityNotFound");
     }
 
+//
+//    public static void updateAverageRate(Commodity commodity) throws SQLException {
+//
+//        var dbOutput=instance.executeQuery(String.format("""
+//                SELECT AVG(R.rate) AS newAverage
+//                FROM %s R
+//                WHERE R.commodityId=?
+//                """,RATE_TABLE),List.of(commodity.getId()));
+//        var newAverage=dbOutput.getFirst().getString("newAverage");
+//        instance.executeUpdate(String.format("""
+//                UPDATE %s
+//                SET averageRate=?
+//                WHERE id=?
+//                """,COMMODITY_TABLE),List.of(newAverage, commodity.getId()));
+//
+//
+//    }
 
-    public static void updateAverageRate(Commodity commodity) throws SQLException {
 
-        var dbOutput=instance.executeQuery(String.format("""
-                SELECT AVG(R.rate) AS newAverage
-                FROM %s R
-                WHERE R.commodityId=?
-                """,RATE_TABLE),List.of(commodity.getId()));
-        var newAverage=dbOutput.getFirst().getString("newAverage");
-        instance.executeUpdate(String.format("""
-                UPDATE %s
-                SET averageRate=?
-                WHERE id=?
-                """,COMMODITY_TABLE),List.of(newAverage, commodity.getId()));
-
-
-    }
-
-
-    public static void updateRateTable(Commodity commodity, User ratingUser, int rate) throws SQLException {
+    public static void updateRateTable(String commodityId, User ratingUser, int rate) throws SQLException {
         String sql = String.format(
                 "INSERT INTO %s(commodityId, userId, rate)\n" +
                         "VALUES(?, ?, ?) ON DUPLICATE KEY UPDATE\n" +
                         "rate=?;", RATE_TABLE);
-        instance.executeUpdate(sql, List.of(commodity.getId(), ratingUser.getUsername(), String.valueOf(rate), String.valueOf(rate)));
+        instance.executeUpdate(sql, List.of(commodityId, ratingUser.getUsername(), String.valueOf(rate), String.valueOf(rate)));
 
 
     }
