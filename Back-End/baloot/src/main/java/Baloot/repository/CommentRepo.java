@@ -124,14 +124,14 @@ public class CommentRepo extends Repo<Comment,Integer> {
         return comments;
     }
 
-    @Override
-    public void updateElement(Comment newObject) throws CustomException {
-        var objectId = String.valueOf(newObject.getId());
-        if (!isIdValid(objectId)) {
-            throw new CustomException("Object Not found");
-        }
-        objectMap.put(objectId, newObject);
-    }
+//    @Override
+//    public void updateElement(Comment newObject) throws CustomException {
+//        var objectId = String.valueOf(newObject.getId());
+//        if (!isIdValid(objectId)) {
+//            throw new CustomException("Object Not found");
+//        }
+//        objectMap.put(objectId, newObject);
+//    }
 
     public void updateCommentVotes(String commentId, String username, int vote) throws SQLException {
         String sql = String.format(

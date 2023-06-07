@@ -12,9 +12,8 @@ import java.util.List;
 
 public class UserRepo extends Repo<User, String> {
     private static final String BUYLIST_TABLE = "BuyList";
-    private static final String RATE_TABLE = "RateTable";
-    private static UserRepo instance = null;
     public static final String USER_TABLE = "User";
+    private static UserRepo instance = null;
     public static User loggedInUser = null;
 
     public static UserRepo getInstance() {
@@ -51,16 +50,6 @@ public class UserRepo extends Repo<User, String> {
                         FROM %s c, %s b
                         WHERE c.id=b.commodityId AND b.userId= ?"""
                 , CommodityRepo.COMMODITY_TABLE, BUYLIST_TABLE);
-        return instance.executeUpdate(sql, List.of(loggedInUser.getUsername()));
-    }
-
-    public static int getUserRate(Commodity commodity) throws SQLException {
-        String sql = String.format(
-                """
-                        SELECT r.rate
-                        FROM %s c, %s r
-                        WHERE c.id=r.commodityId AND r.userId= ?"""
-                , CommodityRepo.COMMODITY_TABLE, RATE_TABLE);
         return instance.executeUpdate(sql, List.of(loggedInUser.getUsername()));
     }
 
@@ -112,14 +101,14 @@ public class UserRepo extends Repo<User, String> {
         return users;
     }
 
-    @Override
-    public void updateElement(User newObject) throws CustomException {
-        var objectId = newObject.getUsername();
-        if (!isIdValid(objectId)) {
-            throw new CustomException("Object Not found");
-        }
-        objectMap.put(objectId, newObject);
-    }
+//    @Override
+//    public void updateElement(User newObject) throws CustomException {
+//        var objectId = newObject.getUsername();
+//        if (!isIdValid(objectId)) {
+//            throw new CustomException("Object Not found");
+//        }
+//        objectMap.put(objectId, newObject);
+//    }
 
     public void loginUser(User user) {
         loggedInUser = user;

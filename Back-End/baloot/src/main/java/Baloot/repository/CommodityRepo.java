@@ -185,15 +185,15 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
         con.close();
     }
 
-    @Override
-    public void updateElement(Commodity newObject) throws CustomException {
-        var objectId = String.valueOf(newObject.getId());
-        if (!isIdValid(objectId)) {
-            throw new CustomException("Object Not found");
-        }
-        objectMap.put(objectId, newObject);
-
-    }
+//    @Override
+//    public void updateElement(Commodity newObject) throws CustomException {
+//        var objectId = String.valueOf(newObject.getId());
+//        if (!isIdValid(objectId)) {
+//            throw new CustomException("Object Not found");
+//        }
+//        objectMap.put(objectId, newObject);
+//
+//    }
 
     @Override
     protected String getGetAllElementsStatement() {
