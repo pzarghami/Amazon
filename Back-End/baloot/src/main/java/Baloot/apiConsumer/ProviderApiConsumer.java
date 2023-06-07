@@ -6,6 +6,8 @@ import Baloot.model.Provider;
 import Baloot.repository.ProviderRepo;
 import com.fasterxml.jackson.databind.JsonNode;
 
+import java.sql.SQLException;
+
 public class ProviderApiConsumer extends APIConsumer{
 
     public ProviderApiConsumer(String apiUrl){this.apiUrl = apiUrl;}
@@ -16,8 +18,8 @@ public class ProviderApiConsumer extends APIConsumer{
             try {
                 var newProvider = makeNewProvider(node);
                 repo.addElement(newProvider);
-            }catch (CustomException e){
-                //ignore
+            }catch (CustomException | SQLException e){
+                e.printStackTrace();
             }
         }
     }

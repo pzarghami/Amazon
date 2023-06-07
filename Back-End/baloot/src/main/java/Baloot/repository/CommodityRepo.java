@@ -51,7 +51,7 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
                         "    imgUrl      VARCHAR(255),\n" +
                         "    averageRate DOUBLE,\n" +
                         "    PRIMARY KEY (id),\n" +
-                        "    FOREIGN KEY (providerId) REFERENCES" + ProviderRepo.PROVIDER_TABLE+"ON DELETE CASCADE \n" +
+                        "    FOREIGN KEY (providerId) REFERENCES " + ProviderRepo.PROVIDER_TABLE+" ON DELETE CASCADE \n" +
                         ");",
                 COMMODITY_TABLE
         ));
@@ -60,14 +60,15 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
     private void initCategoriesTable() {
         this.initTable(
                 String.format(
-                        "CREATE TABLE IF NOT EXISTS %s\n" +
-                                "(\n" +
-                                "    category VARCHAR(225),\n" +
-                                "    commodityId INTEGER ,\n" +
-                                "    FOREIGN KEY (commodityId) REFERENCES  Commodity  (id) ON DELETE CASCADE,\n" +
-                                "    PRIMARY KEY(commodityId, category)\n" +
-                                "\n" +
-                                ");",
+                        """
+                                CREATE TABLE IF NOT EXISTS %s
+                                (
+                                    category VARCHAR(225),
+                                    commodityId INTEGER ,
+                                    FOREIGN KEY (commodityId) REFERENCES  Commodity  (id) ON DELETE CASCADE,
+                                    PRIMARY KEY(commodityId, category)
+
+                                );""",
                         CATEGORY_TABLE
                 )
         );

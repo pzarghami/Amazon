@@ -4,9 +4,10 @@ import Baloot.model.DTO.CommodityBriefDTO;
 import Baloot.model.DTO.ProviderDTO;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Provider {
-    private int id;
+    private Integer id;
     private String name;
     private String registryDate;
     private String image;
@@ -43,4 +44,9 @@ public class Provider {
         providerDTO.setCommoditiesList(providersCommodityDTO);
         return providerDTO;
     }
+
+    public Map<String, String> getDBTuple() {
+        return Map.of("id", id.toString(), "name", name, "registryDate", registryDate, "imgUrl", image);
+    }
+
 }

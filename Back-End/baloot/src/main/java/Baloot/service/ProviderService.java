@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.sql.SQLException;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProviderService {
@@ -15,7 +17,7 @@ public class ProviderService {
     public Response getProviderDTO(@PathVariable(value = "id")String providerID){
         try{
             return new Response(true,"OK", ProviderDomainManager.getInstance().getProviderDTO(providerID));
-        }catch (CustomException e){
+        }catch (CustomException | SQLException e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Actor Not Found", e);
         }
     }
