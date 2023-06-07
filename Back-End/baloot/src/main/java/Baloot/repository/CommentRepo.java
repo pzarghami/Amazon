@@ -63,7 +63,7 @@ public class CommentRepo extends Repo<Comment,Integer> {
 
     @Override
     protected String getGetElementByIdStatement() {
-        return String.format("SELECT* FROM %s a WHERE a.id = ?;", COMMENT_TABLE);
+        return String.format("SELECT * FROM %s a WHERE a.id = ?;", COMMENT_TABLE);
     }
 
     @Override
