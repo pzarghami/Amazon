@@ -64,7 +64,7 @@ public class UserService {
             var address = registerJson.get("address").asText();
             UserDomainManager.getInstance().registerUser(username, password, email, birthdate, address);
             return new Response(true, "OK", "successfully register");
-        } catch (CustomException e) {
+        } catch (CustomException | SQLException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "InvalidCredential", e);
         } catch (JsonProcessingException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);

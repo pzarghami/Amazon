@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepo extends Repo<User,String> {
-    private static final Object BUYLIST_TABLE ="BuyList" ;
-    private static final Object RATE_TABLE="RateTable";
+    private static final String BUYLIST_TABLE ="BuyList" ;
+    private static final String RATE_TABLE="RateTable";
     private static UserRepo instance = null;
     public static final String USER_TABLE = "User";
     public static User loggedInUser = null;
@@ -24,27 +24,59 @@ public class UserRepo extends Repo<User,String> {
         return instance;
     }
 
+    private UserRepo(){
+        initUserTable();
+    }
+
+    private void initUserTable(){
+        initTable(
+                String.format(
+                        """
+                                CREATE TABLE IF NOT EXISTS %s(username VARCHAR(255),
+                                password VARCHAR(255),
+                                email VARCHAR(255),
+                                birthDate VARCHAR(225),
+                                address VARCHAR(255),
+                                credit INTEGER,
+                                PRIMARY KEY(username));""",
+                        USER_TABLE
+                )
+        );
+    }
+
     public static int getQuantityOfCommodity(Commodity commodity) throws SQLException {
         String sql=String.format(
-                "SELECT b.quantity\n"
-                +"FROM %s c, %s b\n"
-                +"WHERE c.id=b.commodityId AND b.userId= ?"
+                """
+                        SELECT b.quantity
+                        FROM %s c, %s b
+                        WHERE c.id=b.commodityId AND b.userId= ?"""
                 ,CommodityRepo.COMMODITY_TABLE, BUYLIST_TABLE);
         return instance.executeUpdate(sql, List.of(loggedInUser.getUsername()));
     }
-
+    public static int getUserRate(Commodity commodity)throws SQLException{
+        String sql=String.format(
+                """
+                        SELECT r.rate
+                        FROM %s c, %s r
+                        WHERE c.id=r.commodityId AND r.userId= ?"""
+                ,CommodityRepo.COMMODITY_TABLE, RATE_TABLE);
+        return instance.executeUpdate(sql, List.of(loggedInUser.getUsername()));
+    }
     @Override
     protected String getGetElementByIdStatement() {
-        return String.format("SELECT * FROM %s a WHERE a.username = ?;", USER_TABLE);
+        return null;
     }
 
     @Override
-    public void addElement(User newObject) throws CustomException {
-        var objectId = newObject.getUsername();
-        if (isIdValid(objectId)) {
-            throw new CustomException("Object exist");
-        }
-        this.objectMap.put(objectId,newObject);
+    public void addElement(User newObject) throws CustomException, SQLException {
+        var tupleMap = newObject.getDBTuple();
+        executeUpdate(getAddElementStatement(), List.of(
+                tupleMap.get("username"),
+                tupleMap.get("password"),
+                tupleMap.get("email"),
+                tupleMap.get("birthDate"),
+                tupleMap.get("address"),
+                tupleMap.get("credit")));
     }
 
     @Override
@@ -54,7 +86,8 @@ public class UserRepo extends Repo<User,String> {
 
     @Override
     protected String getAddElementStatement() {
-        return null;
+        return String.format("INSERT IGNORE INTO %s\n" +
+                "VALUES (?, ?, ?, ?, ?, ?);", USER_TABLE);
     }
 
     @Override

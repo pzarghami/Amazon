@@ -36,7 +36,7 @@ public class UserDomainManager {
         UserRepo.getInstance().logoutUser();
     }
 
-    public void registerUser(String username, String password, String email, String birthdate, String address) throws CustomException {
+    public void registerUser(String username, String password, String email, String birthdate, String address) throws CustomException, SQLException {
         var user = new User(username, password, email, birthdate, address, 0);
         UserRepo.getInstance().addElement(user);
         // UserRepo.getInstance().loginUser(user);
