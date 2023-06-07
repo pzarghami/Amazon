@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepo extends Repo<User,String> {
-    private static final String BUYLIST_TABLE ="BuyList" ;
-    private static final String RATE_TABLE="RateTable";
+public class UserRepo extends Repo<User, String> {
+    private static final String BUYLIST_TABLE = "BuyList";
+    private static final String RATE_TABLE = "RateTable";
     private static UserRepo instance = null;
     public static final String USER_TABLE = "User";
     public static User loggedInUser = null;
@@ -24,11 +24,11 @@ public class UserRepo extends Repo<User,String> {
         return instance;
     }
 
-    private UserRepo(){
+    private UserRepo() {
         initUserTable();
     }
 
-    private void initUserTable(){
+    private void initUserTable() {
         initTable(
                 String.format(
                         """
@@ -45,26 +45,28 @@ public class UserRepo extends Repo<User,String> {
     }
 
     public static int getQuantityOfCommodity(Commodity commodity) throws SQLException {
-        String sql=String.format(
+        String sql = String.format(
                 """
                         SELECT b.quantity
                         FROM %s c, %s b
                         WHERE c.id=b.commodityId AND b.userId= ?"""
-                ,CommodityRepo.COMMODITY_TABLE, BUYLIST_TABLE);
+                , CommodityRepo.COMMODITY_TABLE, BUYLIST_TABLE);
         return instance.executeUpdate(sql, List.of(loggedInUser.getUsername()));
     }
-    public static int getUserRate(Commodity commodity)throws SQLException{
-        String sql=String.format(
+
+    public static int getUserRate(Commodity commodity) throws SQLException {
+        String sql = String.format(
                 """
                         SELECT r.rate
                         FROM %s c, %s r
                         WHERE c.id=r.commodityId AND r.userId= ?"""
-                ,CommodityRepo.COMMODITY_TABLE, RATE_TABLE);
+                , CommodityRepo.COMMODITY_TABLE, RATE_TABLE);
         return instance.executeUpdate(sql, List.of(loggedInUser.getUsername()));
     }
+
     @Override
     protected String getGetElementByIdStatement() {
-        return null;
+        return String.format("SELECT * FROM %s a WHERE a.username = ?;", USER_TABLE);
     }
 
     @Override
@@ -81,7 +83,7 @@ public class UserRepo extends Repo<User,String> {
 
     @Override
     protected void fillGetElementByIdValues(PreparedStatement st, String id) throws SQLException {
-
+        st.setString(1, id);
     }
 
     @Override
@@ -92,17 +94,22 @@ public class UserRepo extends Repo<User,String> {
 
     @Override
     protected String getGetAllElementsStatement() {
-        return null;
+        return String.format("SELECT * FROM %s;", USER_TABLE);
     }
 
     @Override
     protected User convertResultSetToDomainModel(ResultSet rs) throws SQLException {
-        return null;
+        return new User(rs.getString("username"), rs.getString("password"), rs.getString("email"),
+                rs.getString("birthDate"), rs.getString("address"), rs.getInt("credit"));
     }
 
     @Override
     protected ArrayList<User> convertResultSetToDomainModelList(ResultSet rs) throws SQLException {
-        return null;
+        ArrayList<User> users = new ArrayList<>();
+        while (rs.next()) {
+            users.add(this.convertResultSetToDomainModel(rs));
+        }
+        return users;
     }
 
     @Override

@@ -19,7 +19,7 @@ public class Server {
             (new UserAPIConsumer("http://5.253.25.110:5000/api/users")).importData();
             (new ProviderApiConsumer("http://5.253.25.110:5000/api/v2/providers")).importData();
             (new CommodityApiConsumer("http://5.253.25.110:5000/api/v2/commodities")).importData();
-            (new DiscountApiConsumer("http://5.253.25.110:5000/api/discount")).importData();
+            //(new DiscountApiConsumer("http://5.253.25.110:5000/api/discount")).importData();
 
         }catch (IOException e){
             e.printStackTrace();
