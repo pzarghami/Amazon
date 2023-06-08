@@ -107,10 +107,10 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
     private void initCommodityRateTable() {
         this.initTable(String.format(
                 "CREATE TABLE IF NOT EXISTS %s(\n" +
-                        "    userId INTEGER,\n" +
+                        "    userId VARCHAR(255),\n" +
                         "    commodityId INTEGER,\n" +
                         "    rate INTEGER,\n" +
-                        "    FOREIGN KEY (userId) REFERENCES " + UserRepo.USER_TABLE + " (id) ON DELETE CASCADE ,\n" +
+                        "    FOREIGN KEY (userId) REFERENCES " + UserRepo.USER_TABLE + " (username) ON DELETE CASCADE ,\n" +
                         "    FOREIGN KEY (commodityId) REFERENCES " + COMMODITY_TABLE + " (id) ON DELETE CASCADE,\n" +
                         "    PRIMARY KEY (commodityId,userId)\n" +
                         ");"
@@ -231,7 +231,7 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
         String sqlSelect = String.format(
                 "SELECT C.category\n" +
                         "FROM %s C\n" +
-                        "WHERE C.commodityId== ?", CATEGORY_TABLE);
+                        "WHERE C.commodityId= ?", CATEGORY_TABLE);
         var dbOutput = executeQuery(sqlSelect, List.of(id.toString()));
         var rs = dbOutput.getFirst();
         while (rs.next()) {
@@ -246,17 +246,20 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
         String sql = String.format(
                 "SELECT *\n" +
                         "FROM %s P \n" +
-                        "WHERE p.id= ?", ProviderRepo.PROVIDER_TABLE
+                        "WHERE P.id= ?", ProviderRepo.PROVIDER_TABLE
         );
         var dbOutput = executeQuery(sql, List.of(providerId));
         var rs = dbOutput.getFirst();
-        var provider = new Provider(
-                rs.getInt("id"),
-                rs.getString("name"),
-                rs.getString("registryDate"),
-                rs.getString("imgUrl")
+        Provider provider=null;
+        if(rs.next()) {
+             provider = new Provider(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getString("registryDate"),
+                    rs.getString("imgUrl")
 
-        );
+            );
+        }
         finishWithResultSet(dbOutput.getSecond());
         return provider;
     }
