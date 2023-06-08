@@ -1,8 +1,10 @@
 package Baloot.repository;
 
 import Baloot.Exeption.CustomException;
+import Baloot.model.Commodity;
 import Baloot.model.Provider;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -70,29 +72,51 @@ public class ProviderRepo extends Repo<Provider, Integer> {
 
     @Override
     protected Provider convertResultSetToDomainModel(ResultSet rs) throws SQLException {
-        return new Provider(rs.getInt("id"),rs.getString("name"),rs.getString("registryDate"),rs.getString("imgUrl"));
+        return new Provider(rs.getInt("id"), rs.getString("name"), rs.getString("registryDate"), rs.getString("imgUrl"));
     }
 
     @Override
     protected ArrayList<Provider> convertResultSetToDomainModelList(ResultSet rs) throws SQLException {
         ArrayList<Provider> providers = new ArrayList<>();
-        try{
-            while (rs.next()){
+        try {
+            while (rs.next()) {
                 providers.add(this.convertResultSetToDomainModel(rs));
             }
             return providers;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             return providers;
         }
     }
 
-    @Override
-    public void updateElement(Provider newObject) throws CustomException {
-        var objectId = String.valueOf(newObject.getId());
-        if (!isIdValid(objectId)) {
-            throw new CustomException("Object Not found");
+    public ArrayList<Commodity> getCommoditiesOfProvider(Integer id) {
+        var commodityIds = new ArrayList<Integer>();
+        var commodities = new ArrayList<Commodity>();
+        try {
+            Connection con = ConnectionPool.getConnection();
+            PreparedStatement st = con.prepareStatement(String.format("""
+                    Select c.id
+                    FROM Commodity c
+                    where providerId = %s
+                    """,id.toString()));
+            ResultSet rs = st.executeQuery();
+            while (rs.next()){
+                commodityIds.add(rs.getInt("id"));
+            }
+            commodities = (ArrayList<Commodity>) CommodityRepo.getInstance().getElementsById(commodityIds);
+        } catch (SQLException | CustomException e) {
+            e.printStackTrace();
+
         }
-        objectMap.put(objectId, newObject);
+        return commodities;
     }
+
+//    @Override
+//    public void updateElement(Provider newObject) throws CustomException {
+//        var objectId = String.valueOf(newObject.getId());
+//        if (!isIdValid(objectId)) {
+//            throw new CustomException("Object Not found");
+//        }
+//        objectMap.put(objectId, newObject);
+//    }
 }
