@@ -44,13 +44,15 @@ public class UserRepo extends Repo<User, String> {
     }
 
     public static int getQuantityOfCommodity(Commodity commodity) throws SQLException {
-        String sql = String.format(
-                """
-                        SELECT b.quantity
-                        FROM %s c, %s b
-                        WHERE c.id=b.commodityId AND b.userId= ?"""
-                , CommodityRepo.COMMODITY_TABLE, BUYLIST_TABLE);
-        return instance.executeUpdate(sql, List.of(loggedInUser.getUsername()));
+        //when buyList is done.
+//        String sql = String.format(
+//                """
+//                        SELECT b.quantity
+//                        FROM %s c, %s b
+//                        WHERE c.id=b.commodityId AND b.userId= ?"""
+//                , CommodityRepo.COMMODITY_TABLE, BUYLIST_TABLE);
+//        return instance.executeUpdate(sql, List.of(loggedInUser.getUsername()));
+        return 0;
     }
 
     @Override

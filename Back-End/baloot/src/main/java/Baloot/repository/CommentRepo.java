@@ -73,35 +73,36 @@ public class CommentRepo extends Repo<Comment,Integer> {
                 tupleMap.get("text"),
                 tupleMap.get("userId"),
                 tupleMap.get("commodityId"),
-                tupleMap.get("createdDate")
+                tupleMap.get("createDate")
         ));
     }
 
     @Override
     protected void fillGetElementByIdValues(PreparedStatement st, Integer id) throws SQLException {
-
+        st.setString(1, id.toString());
     }
 
     @Override
     protected String getAddElementStatement() {
-        return String.format("INSERT INTO %s(text, userId, commodityId, createdDate)\n" +
+        return String.format("INSERT INTO %s(text, userId, commodityId, createDate)\n" +
                 "VALUES (?, ?, ?, ?);", COMMENT_TABLE);
     }
 
     @Override
     protected String getGetAllElementsStatement() {
-        return null;
+        return String.format("SELECT * FROM %s;", COMMENT_TABLE);
     }
 
     @Override
-    protected Comment convertResultSetToDomainModel(ResultSet rs) throws SQLException {
-        var newComment = new Comment(
-                rs.getString("userId"),
+    protected Comment convertResultSetToDomainModel(ResultSet rs) throws SQLException, CustomException {
+        return new Comment(
+                rs.getString("id"),
                 rs.getString("text"),
-                rs.getString("createdDate"),
-                getUserVoteMap(rs.getInt("id"))
+                rs.getString("createDate"),
+                getUserVoteMap(rs.getInt("id")),
+                UserRepo.getInstance().getElementById(rs.getString("userId")),
+                CommodityRepo.getInstance().getElementById(rs.getInt("commodityId"))
         );
-        return newComment;
 
     }
     private HashMap<String, Short> getUserVoteMap(Integer commentId) throws SQLException {
@@ -116,7 +117,7 @@ public class CommentRepo extends Repo<Comment,Integer> {
         return userVoteMap;
     }
     @Override
-    protected ArrayList<Comment> convertResultSetToDomainModelList(ResultSet rs) throws SQLException {
+    protected ArrayList<Comment> convertResultSetToDomainModelList(ResultSet rs) throws SQLException, CustomException {
         ArrayList<Comment> comments = new ArrayList<>();
         while (rs.next()) {
             comments.add(this.convertResultSetToDomainModel(rs));
@@ -140,10 +141,10 @@ public class CommentRepo extends Repo<Comment,Integer> {
                         "vote=?;", VOTE_MAP_TABLE);
         executeUpdate(sql, List.of(username, commentId, String.valueOf(vote), String.valueOf(vote)));
     }
-    public ArrayList<Comment> getCommentsForCommodity(Integer commodityId) throws SQLException {
+    public ArrayList<Comment> getCommentsForCommodity(Integer commodityId) throws SQLException, CustomException {
         var comments = new ArrayList<Comment>();
         String sql = String.format(
-                "SELECT c.id, c.text, c.createdDate\n" +
+                "SELECT *\n" +
                         "FROM %s c\n" +
                         "WHERE c.commodityId=?;", COMMENT_TABLE);
         var dbOutput = executeQuery(sql, List.of(commodityId.toString()));

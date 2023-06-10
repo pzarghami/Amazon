@@ -168,7 +168,11 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
 
     @Override
     protected void fillGetElementByIdValues(PreparedStatement st, Integer id) throws SQLException {
-
+        try {
+            st.setString(1, String.valueOf(id));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void addCommodityCategories(Integer commodityId, ArrayList<String> categories) throws SQLException {
@@ -317,7 +321,7 @@ public class CommodityRepo extends Repo<Commodity, Integer> {
         String sql = String.format("""
                 SELECT c.*
                 FROM %s c, %s cat
-                WHERE name LIKE '%%%s%%' AND c.id=cat.commodityId;
+                WHERE cat.category LIKE '%%%s%%' AND c.id=cat.commodityId;
                 """, COMMODITY_TABLE, CATEGORY_TABLE, filterValue);
         var dbOutput = executeQuery(sql, List.of());
         var rs = dbOutput.getFirst();

@@ -56,7 +56,6 @@ export default function Commodities(props) {
     
           try {
             const response = await axios.get("commodities?filterBy="+filter+"&filterValue="+value);
-            console.log("HIIII",response);
             const commoditiesList = response.data.content;
             setCommodities(commoditiesList);
             setFetchCommodities(commoditiesList);

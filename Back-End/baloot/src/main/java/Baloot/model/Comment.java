@@ -28,10 +28,12 @@ public class Comment {
         this.dislikeNumber = 0;
         this.userVoteMap = new HashMap<>();
     }
-    public Comment (String id, String text, String createdDate, HashMap<String, Short> userVoteMap) {
+    public Comment (String id, String text, String createdDate, HashMap<String, Short> userVoteMap, User commentOwner, Commodity commodity) {
         this.createDate = LocalDate.parse(createdDate);
         this.id = id;
         this.userVoteMap = userVoteMap;
+        this.commentOwner=commentOwner;
+        this.commentCommodity=commodity;
         this.text = text;
         setLikesAndDislikes();
     }
@@ -99,7 +101,7 @@ public class Comment {
         tuple.put("text", this.text);
         tuple.put("userId", this.commentOwner.getUsername());
         tuple.put("commodityId", this.commentCommodity.getId());
-        tuple.put("createdDate", this.createDate.toString());
+        tuple.put("createDate", this.createDate.toString());
         return tuple;
     }
 

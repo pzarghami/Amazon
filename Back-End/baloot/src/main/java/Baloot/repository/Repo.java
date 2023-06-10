@@ -32,9 +32,9 @@ public abstract class Repo<T, PK> {
 
     abstract protected String getGetAllElementsStatement();
 
-    abstract protected T convertResultSetToDomainModel(ResultSet rs) throws SQLException;
+    abstract protected T convertResultSetToDomainModel(ResultSet rs) throws SQLException, CustomException;
 
-    abstract protected ArrayList<T> convertResultSetToDomainModelList(ResultSet rs) throws SQLException;
+    abstract protected ArrayList<T> convertResultSetToDomainModelList(ResultSet rs) throws SQLException, CustomException;
 
     public T getElementById(PK id) throws SQLException, CustomException {
         Connection con = ConnectionPool.getConnection();
@@ -60,7 +60,7 @@ public abstract class Repo<T, PK> {
         }
     }
 
-    public List<T> getAllElements() throws SQLException {
+    public List<T> getAllElements() throws SQLException, CustomException {
         List<T> result = new ArrayList<>();
         Connection con = ConnectionPool.getConnection();
         PreparedStatement st = con.prepareStatement(getGetAllElementsStatement());
@@ -70,7 +70,7 @@ public abstract class Repo<T, PK> {
             st.close();
             con.close();
             return result;
-        } catch (SQLException e) {
+        } catch (SQLException | CustomException e) {
             st.close();
             con.close();
             System.out.println("error in Repository.findAll query.");

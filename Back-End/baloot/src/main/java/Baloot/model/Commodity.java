@@ -42,6 +42,7 @@ public class Commodity {
         this.userRateMap = new HashMap<>();
 
     }
+
     public Commodity(String id, String name, Provider provider, float price, ArrayList<String> categories, int inStock, String image) throws SQLException {
         this.id = id;
         this.name = name;
@@ -51,17 +52,21 @@ public class Commodity {
         this.inStock = inStock;
         this.image = image;
         this.comments = null;
-        userRateMap=CommodityRepo.getInstance().getUserRateMap(Integer.parseInt(this.id));
-        this.averageRating=calculateAvgRate();
+        userRateMap = CommodityRepo.getInstance().getUserRateMap(Integer.parseInt(this.id));
+        this.averageRating = calculateAvgRate();
 
     }
+
     private Double calculateAvgRate() {
+        if(userRateMap.size()==0)
+            return 0.0;
         int sum = 0;
         for (var value : this.userRateMap.values()) {
             sum += value;
         }
         return (sum / (double) this.userRateMap.values().size());
     }
+
     public String getId() {
         return id;
     }
@@ -78,16 +83,24 @@ public class Commodity {
         return categories;
     }
 
-    public int getInStock(){return inStock;}
+    public int getInStock() {
+        return inStock;
+    }
 
-    public void decreaseInStock(){inStock = inStock - 1;}
+    public void decreaseInStock() {
+        inStock = inStock - 1;
+    }
 
-    public void increaseInStock(){inStock = inStock + 1;}
-    private ArrayList<Comment> getComments() throws SQLException {
+    public void increaseInStock() {
+        inStock = inStock + 1;
+    }
+
+    private ArrayList<Comment> getComments() throws SQLException, CustomException {
         if (this.comments == null)
             return CommentRepo.getInstance().getCommentsForCommodity(Integer.valueOf(this.id));
         return this.comments;
     }
+
     public boolean isYourCategory(ArrayList<String> cats) {
         for (String cat : cats) {
             for (String category : categories) {
@@ -143,8 +156,9 @@ public class Commodity {
         DTO.setNumOfRate(userRateMap.size());
         DTO.setQuantity(quantity);
         var commentsDTO = new ArrayList<CommentDTO>();
-
-        comments.forEach(comment -> commentsDTO.add(comment.getDTO()));
+        if (comments != null) {
+            comments.forEach(comment -> commentsDTO.add(comment.getDTO()));
+        }
         DTO.setComments(commentsDTO);
         DTO.setSuggestionCommodity(CommodityRepo.getInstance().calculateSuggestedProducts(id));
         return DTO;
@@ -162,14 +176,16 @@ public class Commodity {
         DTO.setCategories(categories);
         return DTO;
     }
+
     public Map<String, String> getDBTuple() {
         Map<String, String> tuple = new HashMap<>();
-        tuple.put("id", this.id);;
+        tuple.put("id", this.id);
+        ;
         tuple.put("name", this.name);
-        tuple.put("provider",String.valueOf(this.provider.getId()));
-        tuple.put("price",String.valueOf(this.price));
-        tuple.put("inStock",String.valueOf(this.inStock));
-        tuple.put("imgUrl",this.image);
+        tuple.put("provider", String.valueOf(this.provider.getId()));
+        tuple.put("price", String.valueOf(this.price));
+        tuple.put("inStock", String.valueOf(this.inStock));
+        tuple.put("imgUrl", this.image);
         tuple.put("averageRate", String.valueOf(this.averageRating));
         return tuple;
     }
