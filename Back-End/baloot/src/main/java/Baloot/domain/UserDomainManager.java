@@ -53,7 +53,7 @@ public class UserDomainManager {
     }
 
     public void addCredit(int amount) {
-        UserRepo.loggedInUser.addCredit(amount);
+        UserRepo.getInstance().addCredit(UserRepo.loggedInUser.getUsername(),amount);
     }
 
     public float getPrice() {

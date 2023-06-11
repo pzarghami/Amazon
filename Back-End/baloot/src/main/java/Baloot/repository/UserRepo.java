@@ -112,6 +112,17 @@ public class UserRepo extends Repo<User, String> {
 //        objectMap.put(objectId, newObject);
 //    }
 
+    public void addCredit(String username, Integer amount){
+        var st = String.format("UPDATE %s SET credit = credit + ?" +
+                "WHERE username = ?",USER_TABLE);
+        try {
+            executeUpdate(st, List.of(username, amount.toString()));
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
     public void loginUser(User user) {
         loggedInUser = user;
     }

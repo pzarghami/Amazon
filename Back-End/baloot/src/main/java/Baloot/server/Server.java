@@ -27,16 +27,6 @@ public class Server {
             (new ProviderApiConsumer("http://5.253.25.110:5000/api/v2/providers")).importData();
             (new CommodityApiConsumer("http://5.253.25.110:5000/api/v2/commodities")).importData();
             (new DiscountApiConsumer("http://5.253.25.110:5000/api/discount")).importData();
-            var ids = new ArrayList<Integer>();
-            ids.add(1);
-            ids.add(2);
-            ids.add(3);
-            try {
-                var commodities = ProviderRepo.getInstance().getElementsById(ids);
-                System.out.println(commodities.get(1).getName());
-            }catch (SQLException | CustomException e){
-                System.out.println("cant");
-            }
 
 
         } catch (IOException e) {
