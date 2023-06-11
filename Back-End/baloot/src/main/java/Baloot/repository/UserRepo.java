@@ -25,6 +25,7 @@ public class UserRepo extends Repo<User, String> {
 
     private UserRepo() {
         initUserTable();
+        initBuyListTable();
     }
 
     private void initUserTable() {
@@ -39,6 +40,20 @@ public class UserRepo extends Repo<User, String> {
                                 credit INTEGER,
                                 PRIMARY KEY(username));""",
                         USER_TABLE
+                )
+        );
+    }
+    private void initBuyListTable(){
+        initTable(
+                String.format(
+                        """
+                                CREATE TABLE IF NOT EXISTS %s(userId VARCHAR(255),
+                                commodityID INTEGER,
+                                PRIMARY KEY(userId,commodityID),
+                                FOREIGN KEY (userId) REFERENCES %s (username),
+                                FOREIGN KEY (commodityID) REFERENCES %s (id)
+                                );""",
+                        BUYLIST_TABLE,USER_TABLE,CommodityRepo.COMMODITY_TABLE
                 )
         );
     }
@@ -130,4 +145,5 @@ public class UserRepo extends Repo<User, String> {
     public void logoutUser() {
         loggedInUser = null;
     }
+
 }
