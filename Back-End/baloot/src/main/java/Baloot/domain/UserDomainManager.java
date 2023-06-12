@@ -44,16 +44,18 @@ public class UserDomainManager {
 
     public CommodityDTO addToBuyList(int commodityId) throws CustomException, SQLException {
         var commodity = CommodityRepo.getInstance().getElementById(commodityId);
-        return UserRepo.loggedInUser.addToBuyList(commodity);
+        var quantity = UserRepo.getInstance().addToBuyList(commodity);
+        return commodity.getDTO(quantity);
     }
 
     public CommodityDTO removeFromBuyList(int commodityId) throws CustomException, SQLException {
         var commodity = CommodityRepo.getInstance().getElementById(commodityId);
-        return UserRepo.loggedInUser.removeFromBuyList(commodity);
+        var quantity = UserRepo.getInstance().removeFromBuyList(commodity);
+        return commodity.getDTO(quantity);
     }
 
     public void addCredit(int amount) {
-        UserRepo.getInstance().addCredit(UserRepo.loggedInUser.getUsername(),amount);
+        UserRepo.getInstance().addCredit(UserRepo.loggedInUser.getUsername(), amount);
     }
 
     public float getPrice() {
