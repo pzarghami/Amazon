@@ -162,7 +162,7 @@ public class UserRepo extends Repo<User, String> {
         var st = String.format("UPDATE %s SET credit = credit + ?" +
                 "WHERE username = ?", USER_TABLE);
         try {
-            executeUpdate(st, List.of(username, amount.toString()));
+            executeUpdate(st, List.of(amount.toString(),username));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -258,7 +258,7 @@ public class UserRepo extends Repo<User, String> {
                     from Commodity C , BuyList B
                     where B.commodityID = C.id
                     """;
-            var dbOutput = executeQuery(st,List.of());
+            var dbOutput = executeQuery(st, List.of());
             var res = dbOutput.getFirst();
             res.next();
             var price = res.getInt("TOTAL");
@@ -267,6 +267,46 @@ public class UserRepo extends Repo<User, String> {
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
+        }
+    }
+
+    public int getCredit(){
+        try {
+            String st = String.format("""
+                    SELECT credit 
+                    FROM %s U 
+                    WHERE U.username = ?
+                    """,USER_TABLE);
+            var dbOutput = executeQuery(st,List.of(loggedInUser.getUsername()));
+            var res = dbOutput.getFirst();
+            res.next();
+            var credit = res.getInt("credit");
+            finishWithResultSet(dbOutput.getSecond());
+            return credit;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public void completeBuy(Integer price) {
+        try {
+            String st = """
+                    insert into PurchasedList (userId, commodityID, quantity)
+                    SELECT userId,commodityID,quantity
+                    from BuyList on duplicate key update quantity = PurchasedList.quantity + BuyList.quantity;
+                    """;
+
+            executeUpdate(st, List.of());
+            String st2 = "delete from BuyList;";
+            executeUpdate(st2,List.of());
+            String st3 = String.format("""
+                    UPDATE %s SET credit = credit - ?
+                    WHERE username = ?
+                    """,USER_TABLE);
+            executeUpdate(st3,List.of(price.toString(), loggedInUser.getUsername()));
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

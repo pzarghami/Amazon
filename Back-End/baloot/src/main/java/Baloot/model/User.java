@@ -21,9 +21,6 @@ public class User {
     private String address;
     private Discount discount;
     private Integer credit;
-    private Map<Commodity,Integer>buyList;
-    private Map<Commodity, Integer> userPurchasedList;
-    private ArrayList<Discount> discountCodeUsed;
 
     public User(String username, String password, String email, String birthDate, String address, int credit) {
         this.username = username;
@@ -32,9 +29,6 @@ public class User {
         this.birthDate = birthDate;
         this.address = address;
         this.credit = credit;
-        this.buyList = new HashMap<>();
-        this.userPurchasedList = new HashMap<>();
-        this.discountCodeUsed = new ArrayList<>();
         this.discount = null;
     }
 
@@ -77,10 +71,8 @@ public class User {
         var buyListPrice = getBuyListPrice();
         if (buyListPrice > this.credit)
             throw new CustomException("credit is not enough");
-        userPurchasedList.putAll(buyList);
-        buyList.clear();
+        UserRepo.getInstance().completeBuy((int) buyListPrice);
         if (discount != null) {
-            this.discountCodeUsed.add(discount);
             this.discount = null;
         }
     }
@@ -121,7 +113,7 @@ public class User {
         DTO.setEmail(email);
         DTO.setBirthDate(birthDate);
         DTO.setAddress(address);
-        DTO.setCredit(credit);
+        DTO.setCredit(UserRepo.getInstance().getCredit());
 
         var commodities = UserRepo.getInstance().getCommoditiesOfBuyList(true);
         var BuyListDTO = new ArrayList<CommodityDTO>();
