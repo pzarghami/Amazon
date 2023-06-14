@@ -41,16 +41,17 @@ public class CommentRepo extends Repo<Comment,Integer> {
 
     private void initCommentTable() {
         this.initTable(String.format(
-                "CREATE  TABLE IF NOT EXISTS %s (\n" +
-                "    id INTEGER NOT NULL AUTO_INCREMENT,\n" +
-                "    userId VARCHAR(255),\n" +
-                "    commodityId INTEGER,\n" +
-                "    text VARCHAR(255),\n" +
-                "    createDate VARCHAR(255),\n" +
-                "    PRIMARY KEY (id),\n" +
-                "    FOREIGN KEY (userId) REFERENCES %s (username),\n" +
-                "    FOREIGN KEY (commodityId) REFERENCES %s (id)\n" +
-                ");",COMMENT_TABLE,UserRepo.USER_TABLE,CommodityRepo.COMMODITY_TABLE));
+                """
+                        CREATE  TABLE IF NOT EXISTS %s (
+                            id INTEGER NOT NULL AUTO_INCREMENT,
+                            userId VARCHAR(255),
+                            commodityId INTEGER,
+                            text VARCHAR(255),
+                            createDate VARCHAR(255),
+                            PRIMARY KEY (id),
+                            FOREIGN KEY (userId) REFERENCES %s (username),
+                            FOREIGN KEY (commodityId) REFERENCES %s (id)
+                        );""",COMMENT_TABLE,UserRepo.USER_TABLE,CommodityRepo.COMMODITY_TABLE));
 
     }
 

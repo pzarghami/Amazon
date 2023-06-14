@@ -4,6 +4,7 @@ import Baloot.Exeption.CustomException;
 import Baloot.model.DTO.CommodityBriefDTO;
 import Baloot.model.DTO.CommodityDTO;
 import Baloot.model.DTO.UserDTO;
+import Baloot.repository.UserRepo;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,9 +21,6 @@ public class User {
     private String address;
     private Discount discount;
     private Integer credit;
-    private Map<Commodity, Integer> buyList;
-    private Map<Commodity, Integer> userPurchasedList;
-    private ArrayList<Discount> discountCodeUsed;
 
     public User(String username, String password, String email, String birthDate, String address, int credit) {
         this.username = username;
@@ -31,9 +29,6 @@ public class User {
         this.birthDate = birthDate;
         this.address = address;
         this.credit = credit;
-        this.buyList = new HashMap<>();
-        this.userPurchasedList = new HashMap<>();
-        this.discountCodeUsed = new ArrayList<>();
         this.discount = null;
     }
 
@@ -41,51 +36,49 @@ public class User {
         return username;
     }
 
-    public CommodityDTO addToBuyList(Commodity commodity) throws CustomException, SQLException {
-        if(commodity.getInStock()<1)
-            throw new CustomException("there is not enough commodity");
-        commodity.decreaseInStock();
-        if (buyList.containsKey(commodity)) {
-            buyList.put(commodity, buyList.get(commodity) + 1);
-        } else {
-            buyList.put(commodity, 1);
-        }
-        return commodity.getDTO(buyList.get(commodity));
-    }
+//    public CommodityDTO addToBuyList(Commodity commodity) throws CustomException, SQLException {
+//        if(commodity.getInStock()<1)
+//            throw new CustomException("there is not enough commodity");
+//        commodity.decreaseInStock();
+//        if (buyList.containsKey(commodity)) {
+//            buyList.put(commodity, buyList.get(commodity) + 1);
+//        } else {
+//            buyList.put(commodity, 1);
+//        }
+//        return commodity.getDTO(buyList.get(commodity));
+//    }
 
-    public CommodityDTO removeFromBuyList(Commodity commodity) throws CustomException, SQLException {
-        int quantity;
-        if (!buyList.containsKey(commodity))
-            throw new CustomException("don't exist.");
-        if (buyList.get(commodity) > 1) {
-            buyList.put(commodity, buyList.get(commodity) - 1);
-            quantity = buyList.get(commodity);
-        } else {
-            buyList.remove(commodity);
-            quantity = 0;
-        }
-        commodity.increaseInStock();
-        return commodity.getDTO(quantity);
-    }
+//    public CommodityDTO removeFromBuyList(Commodity commodity) throws CustomException, SQLException {
+//        int quantity;
+//        if (!buyList.containsKey(commodity))
+//            throw new CustomException("don't exist.");
+//        if (buyList.get(commodity) > 1) {
+//            buyList.put(commodity, buyList.get(commodity) - 1);
+//            quantity = buyList.get(commodity);
+//        } else {
+//            buyList.remove(commodity);
+//            quantity = 0;
+//        }
+//        commodity.increaseInStock();
+//        return commodity.getDTO(quantity);
+//    }
 
-    public int getQuantityOfCommodity(Commodity commodity) {
-        return buyList.getOrDefault(commodity, 0);
-    }
+//    public int getQuantityOfCommodity(Commodity commodity) {
+//        return buyList.getOrDefault(commodity, 0);
+//    }
 
     public void finalizeThePurchase() throws CustomException {
         var buyListPrice = getBuyListPrice();
         if (buyListPrice > this.credit)
             throw new CustomException("credit is not enough");
-        userPurchasedList.putAll(buyList);
-        buyList.clear();
+        UserRepo.getInstance().completeBuy((int) buyListPrice);
         if (discount != null) {
-            this.discountCodeUsed.add(discount);
             this.discount = null;
         }
     }
 
     public int getBuyListSize() {
-        return buyList.size();
+        return UserRepo.getInstance().getCommoditiesOfBuyList(true).size();
     }
 
     public void addCredit(int amount) {
@@ -97,8 +90,6 @@ public class User {
     }
 
     public void setDiscount(Discount discount) throws CustomException {
-        if (discountCodeUsed.contains(discount))
-            throw new CustomException("discount is used");
         this.discount = discount;
     }
 
@@ -107,10 +98,7 @@ public class User {
     }
 
     public float getBuyListPrice() {
-        float sumPrice = 0;
-        for (Commodity commodity : buyList.keySet()) {
-            sumPrice += commodity.getPrice();
-        }
+        float sumPrice =UserRepo.getInstance().getBuyListPrice();
         if (discount == null)
             return sumPrice;
         else {
@@ -125,18 +113,28 @@ public class User {
         DTO.setEmail(email);
         DTO.setBirthDate(birthDate);
         DTO.setAddress(address);
-        DTO.setCredit(credit);
+        DTO.setCredit(UserRepo.getInstance().getCredit());
 
-        var buyListDTO = new ArrayList<CommodityDTO>();
-        for (Map.Entry<Commodity, Integer> entry : buyList.entrySet()) {
-            buyListDTO.add(entry.getKey().getDTO(entry.getValue()));
-        }
-        DTO.setBuyList(buyListDTO);
+        var commodities = UserRepo.getInstance().getCommoditiesOfBuyList(true);
+        var BuyListDTO = new ArrayList<CommodityDTO>();
+        commodities.forEach(commodity -> {
+            try {
+                BuyListDTO.add(commodity.getDTO(UserRepo.getInstance().getQuantityOfCommodity(commodity)));
+            } catch (CustomException | SQLException e) {
+                e.printStackTrace();
+            }
+        });
+        DTO.setBuyList(BuyListDTO);
 
         var purchasedListDTO = new ArrayList<CommodityDTO>();
-        for (Map.Entry<Commodity, Integer> entry : userPurchasedList.entrySet()) {
-            purchasedListDTO.add(entry.getKey().getDTO(entry.getValue()));
-        }
+        var commodities2 = UserRepo.getInstance().getCommoditiesOfBuyList(false);
+        commodities2.forEach(commodity -> {
+            try {
+                purchasedListDTO.add(commodity.getDTO(UserRepo.getInstance().getQuantityOfCommodity(commodity)));
+            } catch (CustomException | SQLException e) {
+                e.printStackTrace();
+            }
+        });
         DTO.setUserPurchasedList(purchasedListDTO);
 
         return DTO;

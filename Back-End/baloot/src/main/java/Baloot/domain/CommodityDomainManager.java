@@ -45,7 +45,7 @@ public class CommodityDomainManager {
     private CommodityDTO getCommodityDTO(Commodity commodity) throws CustomException, SQLException {
         CommodityDTO DTO;
         if (UserRepo.loggedInUser != null) {
-            DTO = commodity.getDTO(UserRepo.getQuantityOfCommodity(commodity));
+            DTO = commodity.getDTO(UserRepo.getInstance().getQuantityOfCommodity(commodity));
             DTO.setUserRate(commodity.getUserRate(UserRepo.loggedInUser.getUsername()));
         } else {
             DTO = commodity.getDTO(0);
