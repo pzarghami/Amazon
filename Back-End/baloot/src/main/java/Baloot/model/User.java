@@ -19,7 +19,7 @@ public class User {
     private String birthDate;
     private String address;
     private Discount discount;
-    private int credit;
+    private Integer credit;
     private Map<Commodity, Integer> buyList;
     private Map<Commodity, Integer> userPurchasedList;
     private ArrayList<Discount> discountCodeUsed;
@@ -140,5 +140,16 @@ public class User {
         DTO.setUserPurchasedList(purchasedListDTO);
 
         return DTO;
+    }
+
+    public Map<String,String> getDBTuple(){
+        Map<String, String> tuple = new HashMap<>();
+        tuple.put("username", this.username);
+        tuple.put("password", this.password);
+        tuple.put("email", this.email.toString());
+        tuple.put("birthDate", this.birthDate.toString());
+        tuple.put("address", this.address);
+        tuple.put("credit",this.credit.toString());
+        return tuple;
     }
 }

@@ -16,20 +16,27 @@ import kotlin.Pair;
 
 public abstract class Repo<T, PK> {
     static User loggedInUser;
-    protected Map<String, T> objectMap;
-    protected CustomException notFoundException;
+    //protected Map<String, T> objectMap;
+    //protected CustomException notFoundException;
+
     public Repo() {
-        objectMap = new HashMap<>();
     }
+
     abstract protected String getGetElementByIdStatement();
+
     public abstract void addElement(T newObject) throws CustomException, SQLException;
+
     abstract protected void fillGetElementByIdValues(PreparedStatement st, PK id) throws SQLException;
+
     abstract protected String getAddElementStatement();
+
     abstract protected String getGetAllElementsStatement();
-    abstract protected T convertResultSetToDomainModel(ResultSet rs) throws SQLException;
-    abstract protected ArrayList<T> convertResultSetToDomainModelList(ResultSet rs) throws SQLException;
-    public abstract void updateElement(T newObject) throws CustomException;
-    public T getElementById(PK id) throws SQLException,CustomException {
+
+    abstract protected T convertResultSetToDomainModel(ResultSet rs) throws SQLException, CustomException;
+
+    abstract protected ArrayList<T> convertResultSetToDomainModelList(ResultSet rs) throws SQLException, CustomException;
+
+    public T getElementById(PK id) throws SQLException, CustomException {
         Connection con = ConnectionPool.getConnection();
         PreparedStatement st = con.prepareStatement(getGetElementByIdStatement());
         try {
@@ -52,7 +59,8 @@ public abstract class Repo<T, PK> {
             throw e;
         }
     }
-    public List<T> getAllElements() throws SQLException {
+
+    public List<T> getAllElements() throws SQLException, CustomException {
         List<T> result = new ArrayList<>();
         Connection con = ConnectionPool.getConnection();
         PreparedStatement st = con.prepareStatement(getGetAllElementsStatement());
@@ -62,7 +70,7 @@ public abstract class Repo<T, PK> {
             st.close();
             con.close();
             return result;
-        } catch (SQLException e) {
+        } catch (SQLException | CustomException e) {
             st.close();
             con.close();
             System.out.println("error in Repository.findAll query.");
@@ -97,8 +105,9 @@ public abstract class Repo<T, PK> {
         }
         return result;
     }
+
     public boolean isIdValid(String id) {
-        return objectMap.containsKey(id);
+        return false;
     }
 
     protected void initTable(String createTableSql) {
@@ -113,15 +122,16 @@ public abstract class Repo<T, PK> {
         }
     }
 
-    public boolean isIdListValid(List<String> ids) {
-        return objectMap.keySet().containsAll(ids);
-    }
+//    public boolean isIdListValid(List<String> ids) {
+//        return objectMap.keySet().containsAll(ids);
+//    }
+//
+//    public void removeElements(List<String> ids) {
+//        if (ids == null) {
+//            objectMap.clear();
+//        }
+//    }
 
-    public void removeElements(List<String> ids) {
-        if (ids == null) {
-            objectMap.clear();
-        }
-    }
     protected Pair<ResultSet, Pair<Connection, PreparedStatement>> executeQuery(String sql, List<String> fillValues) throws SQLException {
         Connection con = ConnectionPool.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
@@ -129,6 +139,7 @@ public abstract class Repo<T, PK> {
         var result = st.executeQuery();
         return new Pair<>(result, new Pair<>(con, st));
     }
+
     protected int executeUpdate(String sql, List<String> fillValues) throws SQLException {
         Connection con = ConnectionPool.getConnection();
         PreparedStatement st = con.prepareStatement(sql);
@@ -146,6 +157,7 @@ public abstract class Repo<T, PK> {
             valuePosition++;
         }
     }
+
     protected void finishWithResultSet(Pair<Connection, PreparedStatement> closables) throws SQLException {
         closables.getFirst().close();
         closables.getSecond().close();

@@ -5,6 +5,8 @@ import Baloot.model.User;
 import Baloot.repository.UserRepo;
 import com.fasterxml.jackson.databind.JsonNode;
 
+import java.sql.SQLException;
+
 public class UserAPIConsumer extends APIConsumer {
     public UserAPIConsumer(String apiUrl){
         this.apiUrl = apiUrl;
@@ -16,7 +18,7 @@ public class UserAPIConsumer extends APIConsumer {
             try{
                 var newUser = makeNewUser(node);
                 repo.addElement(newUser);
-            }catch (CustomException e){
+            }catch (CustomException | SQLException e){
                 //ignore
             }
         }

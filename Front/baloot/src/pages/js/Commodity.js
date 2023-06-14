@@ -25,12 +25,14 @@ export default function Commodity(props) {
         async function fetchData() {
             try {
                 const response = await axios.get('commodities/' + id);
+                console.log("HIIII",response);
                 const commodityRes = response.data.content;
                 setCommodity(commodityRes);
 
 
             } catch (e) {
                 if (e.response.status === 404) {
+                    
                     navigate('/404');
                 }
             }

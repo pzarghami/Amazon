@@ -23,13 +23,13 @@ public class CommentDomainManager {
         var commentCommodity = CommodityRepo.getInstance().getElementById(commentDTO.getCommentCommodityId());
         var newComment = new Comment(UserRepo.loggedInUser, commentDTO.getText(), commentCommodity);
         CommentRepo.getInstance().addElement(newComment);
-        commentCommodity.addComment(newComment);
         return newComment.getDTO();
     }
 
     public CommentDTO voteComment(String commentId, int vote) throws CustomException, SQLException {
         var comment = CommentRepo.getInstance().getElementById(Integer.valueOf(commentId));
-        comment.voteComment(UserRepo.loggedInUser.getUsername(), vote);
+        comment.updateCommentVotes(UserRepo.loggedInUser.getUsername(), vote);
+        CommentRepo.getInstance().updateCommentVotes(commentId, UserRepo.loggedInUser.getUsername(), vote);
         return comment.getDTO();
     }
 

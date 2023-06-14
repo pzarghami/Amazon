@@ -6,6 +6,8 @@ import Baloot.repository.CommodityRepo;
 import Baloot.repository.DiscountRepo;
 import com.fasterxml.jackson.databind.JsonNode;
 
+import java.sql.SQLException;
+
 public class DiscountApiConsumer extends APIConsumer{
 
     public DiscountApiConsumer(String apiUrl){this.apiUrl = apiUrl;}
@@ -16,7 +18,7 @@ public class DiscountApiConsumer extends APIConsumer{
             try {
                 var newDiscount = makeNewDiscount(node);
                 repo.addElement(newDiscount);
-            }catch (CustomException e){
+            }catch (CustomException | SQLException e){
                 //ignore
             }
         }

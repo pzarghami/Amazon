@@ -38,8 +38,7 @@ public class CommodityDomainManager {
 
     public CommodityDTO rateCommodity(String commodityId, int rate) throws CustomException, SQLException {
         var ratingUser = UserRepo.loggedInUser;
-        var commodity = CommodityRepo.getInstance().getElementById(Integer.valueOf(commodityId));
-        commodity.updateCommodityRating(ratingUser.getUsername(), rate);
+        CommodityRepo.updateRateTable(commodityId,ratingUser,rate);
         return getCommodityDTO(commodityId);
     }
 
@@ -47,7 +46,7 @@ public class CommodityDomainManager {
         CommodityDTO DTO;
         if (UserRepo.loggedInUser != null) {
             DTO = commodity.getDTO(UserRepo.getQuantityOfCommodity(commodity));
-            DTO.setUserRate(UserRepo.getUserRate(commodity));
+            DTO.setUserRate(commodity.getUserRate(UserRepo.loggedInUser.getUsername()));
         } else {
             DTO = commodity.getDTO(0);
             DTO.setUserRate(0);

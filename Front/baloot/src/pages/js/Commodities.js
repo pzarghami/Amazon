@@ -22,78 +22,50 @@ const priceCompare = (a, b) => {
     else return -1;
 };
 export default function Commodities(props) {
-    const {setNumOfCart}=props;
+    const { setNumOfCart } = props;
     const [commodities, setCommodities] = useState(null);
 
     const [commoditiesFetch, setFetchCommodities] = useState(null);
-
-    const [filterBy, setFilterBy] = useState();
-    const [searchValue, setSearchValue] = useState("");
     const [activeSorting, setSortingActive] = useState(0);
     const [availableCommodities, setAvailableCommodities] = useState(0);
 
     const location = useLocation();
 
-    const filterName = (item) => {
-        return item.name.includes(searchValue);
-    };
-
-    const filterCat = (item) => {
-
-        for (var cat in item.categories) {
-            if (item.categories[cat].includes(searchValue)) {
-
-                return true;
-            }
-        }
-        return false;
-    };
-
-    const filterProvider = (item) => {
-        return item.providerName.includes(searchValue);
-    };
     const filterAvailableCommodities = (item) => {
-        if (item.inStock != 0){
+        if (item.inStock != 0) {
 
             return true;
         }
         return false;
     }
     const getFilterFunc = (filterMode) => {
-        if (filterMode === "name") return filterName;
-
-        if (filterMode === "category") return filterCat;
-
         if (filterMode == "inStock") return filterAvailableCommodities;
 
-        if(filterMode=="provider") return filterProvider;
-
     };
-
     useEffect(() => {
-        if (location.search) {
+        async function fetchFilter() {
+    
+          if (location.search) {
             const searchText = location.search;
-            const params = new URLSearchParams(searchText);
-
-            const filter = params.get("filterBy");
-            const value = params.get("searchValue");
-
-            setFilterBy(filter);
-            setSearchValue(value);
+          const params = new URLSearchParams(searchText);
+    
+          const filter = params.get("filterBy");
+          const value = params.get("searchValue");
+    
+          setCommodities(null);
+    
+          try {
+            const response = await axios.get("commodities?filterBy="+filter+"&filterValue="+value);
+            const commoditiesList = response.data.content;
+            setCommodities(commoditiesList);
+            setFetchCommodities(commoditiesList);
+          } catch (e) {
+            console.log(e);
+          }
         }
-    }, [location.search]);
-
-    useEffect(() => {
-
-
-        if (!commoditiesFetch || !commodities) return;
-        let newComm = commoditiesFetch.slice();
-
-        newComm = newComm.filter(getFilterFunc(filterBy));
-
-        setCommodities(newComm);
-    }, [filterBy, searchValue]);
-
+      }
+      fetchFilter();
+      }, [location.search]);
 
     useEffect(() => {
         async function fetchData() {
