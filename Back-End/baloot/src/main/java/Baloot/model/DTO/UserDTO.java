@@ -9,6 +9,7 @@ public class UserDTO {
     private String email;
     private String birthDate;
     private String address;
+    private String nickName;
     private int credit;
     private ArrayList<CommodityDTO> buyList;
     private ArrayList<CommodityDTO> userPurchasedList;
@@ -67,5 +68,12 @@ public class UserDTO {
 
     public void setUserPurchasedList(ArrayList<CommodityDTO> userPurchasedList) {
         this.userPurchasedList = userPurchasedList;
+    }
+
+    public void setNickname(String login) {
+        nickName=login;
+    }
+
+    public void setPassword(Object o) {
     }
 }

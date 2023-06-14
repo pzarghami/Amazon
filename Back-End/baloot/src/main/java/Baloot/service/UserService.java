@@ -3,8 +3,15 @@ package Baloot.service;
 import Baloot.Exeption.CustomException;
 import Baloot.domain.UserDomainManager;
 import Baloot.model.DTO.Response;
+import Baloot.model.DTO.UserDTO;
+import Baloot.security.DTO.JwtResponseDTO;
+import Baloot.security.JwtTokenUtil;
+import Baloot.util.ApiClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +19,52 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.lang.reflect.Array;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@ComponentScan(basePackages ={"ie.iemdb.security", "ie.iemdb.util"})
 public class UserService {
 
+    private final JwtTokenUtil jwtTokenUtil=new JwtTokenUtil();
+    private final ApiClient apiClient=new ApiClient();
+    @Value("${Oauth.client-secret}")
+    private String oauthClientSecret;
+    @Value("${Oauth.client-id}")
+    private String oauthClientId;
+    private final ObjectMapper mapper = new ObjectMapper();
+    @RequestMapping(value = "/auth/oauth-login", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response loginWithOauth(@RequestParam(value="code", required = true) String code) throws SQLException {
+        try {
+            var accessTokenUrl = String.format("https://github.com/login/oauth/access_token?client_id=%s&client_secret=%s&code=%s",
+                    oauthClientId, oauthClientSecret, code);
+            var accessTokenCallResult = mapper.readTree(apiClient.post(accessTokenUrl, "Accept", "application/json"));
+            var userInfoCallResult = apiClient.get("https://api.github.com/user",
+                    "Authorization",String.format("token %s", accessTokenCallResult.get("access_token").asText()));
+            return authenticateUser(userInfoCallResult);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "SomethingWentWrong", e);
+        } catch (CustomException e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
+        }
+    }
+    private Response authenticateUser(String userInfoCallResult) throws JsonProcessingException, SQLException, CustomException {
+        var jsonResult = mapper.readTree(userInfoCallResult);
+        var userDTO = new UserDTO();
+        userDTO.setNickname(jsonResult.get("login").asText());
+        userDTO.setEmail(jsonResult.get("email").asText());
+        userDTO.setUsername(jsonResult.get("name").asText());
+        userDTO.setAddress(jsonResult.get("address").asText());
+        userDTO.setPassword(null);
+        userDTO.setBirthDate(LocalDate.parse(jsonResult.get("created_at").asText().split("T")[0]).minusYears(18).toString());
+
+        var username = userDTO.getUsername();
+        UserDomainManager.getInstance().registerOrLoinUser(userDTO);
+        return new Response(true, "OK", new JwtResponseDTO(username, jwtTokenUtil.generateToken(username)));
+    }
     @RequestMapping(value = "/user", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Response getUserDTO() {
         try {

@@ -30,7 +30,18 @@ public class UserRepo extends Repo<User, String> {
         initBuyListTable();
         initPurchasedListTable();
     }
-
+    public void updateElement(User newObject) throws SQLException {
+        var sql = String.format("UPDATE %s\nSET\npassword=?,email=?,birthDate=?, address=?, credit=?\nWHERE\nusername=?", USER_TABLE);
+        var tupleMap = newObject.getDBTuple();
+        executeUpdate(sql, List.of(
+                tupleMap.get("password") == null? "" : tupleMap.get("password"),
+                tupleMap.get("email"),
+                tupleMap.get("birthDate"),
+                tupleMap.get("address"),
+                tupleMap.get("credit"),
+                tupleMap.get("username")
+        ));
+    }
     private void initUserTable() {
         initTable(
                 String.format(

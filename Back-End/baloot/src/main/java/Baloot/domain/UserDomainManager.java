@@ -80,4 +80,15 @@ public class UserDomainManager {
     public int getBuyListSize() {
         return UserRepo.loggedInUser.getBuyListSize();
     }
+
+    public void registerOrLoinUser(UserDTO userInfo) throws CustomException, SQLException {
+        var newUser = new User(userInfo.getUsername(), null,userInfo.getEmail() ,  userInfo.getBirthDate(),userInfo.getAddress(), userInfo.getCredit());
+        try {
+            if(UserRepo.getInstance().getElementById(newUser.getUsername()) != null) {
+                UserRepo.getInstance().updateElement(newUser);
+            }
+        } catch (CustomException e) {
+            UserRepo.getInstance().addElement(newUser);
+        }
+    }
 }
