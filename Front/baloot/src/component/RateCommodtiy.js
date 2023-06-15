@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './RateCommodity.css'
 import RateStar from './RateStar';
+import Request from "../functions/Request";
+
 
 export default function RateCommodity(props) {
 
@@ -13,7 +15,7 @@ export default function RateCommodity(props) {
     try {
 
 
-      const response = await axios.post('/commodities/' + commodityId + '/rate/'+rate);
+      const response = await Request.post('/commodities/' + commodityId + '/rate/'+rate);
 
 
       if(response.data.status){

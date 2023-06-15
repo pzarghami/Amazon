@@ -3,7 +3,8 @@ import logo from '../../images/logo.png'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
-
+import { login } from '../../functions/login';
+import Request from '../../functions/Request';
 
 
 export default function Login() {
@@ -22,11 +23,10 @@ export default function Login() {
     try {
       const data = { username: username ,password: password };
 
-      const response = await axios.post('/auth/login/', data);
+      const response = await Request.post('/auth/login/', data);
 
       if (response.data.status) {
-        localStorage.setItem('userLoggedIn', true);
-        localStorage.setItem('userId', username);
+        login(response.data.content.jwt, response.data.content.username);
         navigate(from, { replace: true });
       }
 
@@ -84,7 +84,20 @@ export default function Login() {
             </div>
             <p className="mb-0 me-2">Dont have acount?</p>
           </div>
-
+          <div className="d-flex align-items-center justify-content-center pb-4">
+              <div className="mx-3">
+                <a
+                  href  ='https://github.com/login/oauth/authorize?client_id=2db7f63024fdc56d16a5&scope=user'
+                  style={{ textDecoration: 'none', color: 'white' }}
+                >
+                  <Icon
+                    icon="bi:github"
+                    className="star-icon "
+                    style={{ fontSize: '4rem' }}
+                  />
+                </a>
+              </div>
+            </div>
         </form>
 
       </div>

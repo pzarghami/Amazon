@@ -6,6 +6,7 @@ import { useEffect, useInsertionEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import CommodityPreview from '../../component/CommodityPreview';
 import '../css/commodities.css'
+import Request from "../../functions/Request";
 import '../css/root.css'
 import '../css/footer.css'
 import SearchBarHeader from '../../component/SearchBarHeader';
@@ -55,7 +56,7 @@ export default function Commodities(props) {
           setCommodities(null);
     
           try {
-            const response = await axios.get("commodities?filterBy="+filter+"&filterValue="+value);
+            const response = await Request.get("commodities?filterBy="+filter+"&filterValue="+value);
             const commoditiesList = response.data.content;
             setCommodities(commoditiesList);
             setFetchCommodities(commoditiesList);
@@ -70,7 +71,7 @@ export default function Commodities(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get("commodities");
+                const response = await Request.get("commodities");
                 const commoditiesList = response.data.content;
                 setFetchCommodities(commoditiesList);
                 setCommodities(commoditiesList);

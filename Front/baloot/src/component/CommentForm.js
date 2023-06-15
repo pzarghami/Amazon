@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import './CommentForm.css'
 import Comment from './Comment'
+import Request from "../functions/Request";
+
 
 export default function CommentForm(props) {
 
@@ -15,7 +17,7 @@ export default function CommentForm(props) {
     try {
 
       const data = { commentCommodityId: commodity.id, text: commentText };
-      const response = await axios.post('/comments/', data);
+      const response = await Request.post('/comments/', data);
 
       const newComment = response.data.content;
       addComment(newComment);

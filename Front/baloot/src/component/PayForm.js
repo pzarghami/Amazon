@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import "./PayForm.css";
+import Request from "../functions/Request";
+
 
 export default function PayForm(props) {
     const { setShowPopupPayingForm, user, setUser } = props;
@@ -15,7 +17,7 @@ export default function PayForm(props) {
     async function handleClose() {
         try {
             const data = { totalCost: totalCost - discountValue }
-            const response = await axios.delete('discount');
+            const response = await Request.delete('discount');
             setShowPopupPayingForm(false);
         }
         catch (e) {
@@ -28,7 +30,7 @@ export default function PayForm(props) {
 
     async function handlePay() {
         try {
-            const response = await axios.post('pay');
+            const response = await Request.post('pay');
             console.log("response befor tempUser defined: ",response);
             const tempUser=response.data.content;
 

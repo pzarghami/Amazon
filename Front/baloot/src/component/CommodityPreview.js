@@ -3,6 +3,7 @@ import './CommodityPreview.css';
 import axios from "axios";
 import { Link, useLocation, useNavigate ,useParams} from "react-router-dom";
 import { useEffect, useInsertionEffect, useState } from "react";
+import Request from "../functions/Request";
 
 export default function CommodityPreview(props) {
     const { id, imgUrl, name, inStock, price, setNumOfCart } = props;
@@ -16,7 +17,7 @@ export default function CommodityPreview(props) {
     const handleAddToBuylist = async () => {
         try {
             setError('');
-            const response = await axios.post('/user/buylist/' + id);
+            const response = await Request.post('/user/buylist/' + id);
             console.log(id);
 
             if (response.data.status) {

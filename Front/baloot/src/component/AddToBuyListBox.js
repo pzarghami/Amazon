@@ -4,6 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import './AddToBuyListBox.css'
+import { isUserLoggedIn } from "../functions/isUserLoggedIn";
+import { getUserId } from "../functions/getUserId";
+import Request from "../functions/Request";
 
 
 export default function AddToBuyListBox(props) {
@@ -12,10 +15,12 @@ export default function AddToBuyListBox(props) {
   var [quantity, setQuantity] = useState(commodity.quantity);
   const navigate = useNavigate();
 
+  const isLoggedIn = isUserLoggedIn();
+  const userId = getUserId();
   const removeFromBuylist = async () => {
     try {
 
-      const response = await axios.delete('/user/buylist/' + commodity.id);
+      const response = await Request.delete('/user/buylist/' + commodity.id);
       if (response.data.status) {
         setCommodity(response.data.content);
         setNumOfCart();
@@ -33,7 +38,7 @@ export default function AddToBuyListBox(props) {
   const addToBuylist = async () => {
     try {
 
-      const response = await axios.post('/user/buylist/' + commodity.id);
+      const response = await Request.post('/user/buylist/' + commodity.id);
       if (response.data.status) {
         setCommodity(response.data.content);
         setNumOfCart();

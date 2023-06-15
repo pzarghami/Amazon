@@ -11,6 +11,7 @@ import AddCreditPopup from "../../component/AddCreditPopup";
 import PayForm from "../../component/PayForm"
 import BuylistList from "../../component/BuylistList";
 import HistoryList from "../../component/HistoryList";
+import Request from '../../functions/Request';
 
 export default function User(props) {
 
@@ -21,7 +22,7 @@ export default function User(props) {
     const [creditValue, setCreditValue] = useState(null);
     const [user, setUser] = useState(null);
 
-    const isLoggedIn = localStorage.getItem('userLoggedIn');
+
     const userId = localStorage.getItem('userId');
     const handleAddAmount = (event) => {
         event.preventDefault();
@@ -34,7 +35,7 @@ export default function User(props) {
             setCreditValue(creditValue);
             setShowPopup(false);
             const data = { amount: creditValue }
-            const response = await axios.post("addCredit", data);
+            const response = await Request.post("addCredit", data,{});
             const amount = parseInt(creditValue);
             setCreditValue(0);
             if (response.data.status) {

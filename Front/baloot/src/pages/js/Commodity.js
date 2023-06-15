@@ -9,7 +9,7 @@ import RateCommodity from '../../component/RateCommodtiy'
 import AddToBuyListBox from '../../component/AddToBuyListBox'
 import CommentForm from '../../component/CommentForm';
 import CommodityPreview from '../../component/CommodityPreview'
-
+import Request from "../../functions/Request";
 
 export default function Commodity(props) {
     const {setNumOfCart}=props;
@@ -24,8 +24,7 @@ export default function Commodity(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get('commodities/' + id);
-                console.log("HIIII",response);
+                const response = await Request.get('commodities/' + id);
                 const commodityRes = response.data.content;
                 setCommodity(commodityRes);
 

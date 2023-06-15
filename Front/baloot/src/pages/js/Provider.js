@@ -3,6 +3,7 @@ import '../css/Provider.css'
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 import CommodityPreview from '../../component/CommodityPreview';
+import Request from '../../functions/Request';
 
 export default function Provider() {
 
@@ -14,7 +15,7 @@ export default function Provider() {
         async function fetchData() {
             try {
 
-                const response = await axios.get('/providers/' + providerId);
+                const response = await Request.get('/providers/' + providerId);
                 const providerRes = response.data.content;
                 setProvider(providerRes);
 

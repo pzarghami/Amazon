@@ -3,6 +3,7 @@ import logo from '../../images/logo.png'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+import Request from '../../functions/Request';
 
 
 export default function Signup() {
@@ -14,9 +15,9 @@ export default function Signup() {
     const [username, setUser] = useState('');
     const [password, setPassword] = useState('');
     const [passwordAuth, setPasswordAuth] = useState('');
-    const [email, setEmail]=useState('');
-    const [birthDate, setBithDate]=useState('');
-    const [address, setAddress]=useState('');
+    const [email, setEmail] = useState('');
+    const [birthDate, setBithDate] = useState('');
+    const [address, setAddress] = useState('');
 
     const handelSignup = async (e) => {
 
@@ -24,18 +25,17 @@ export default function Signup() {
         setError('');
         const from = location.state?.from || '/login';
         try {
-            if(password != passwordAuth){
+            if (password != passwordAuth) {
                 setError("Your password is not the same.");
                 return;
             }
-            const data = { username:username, password:password, email:email, birthDate:birthDate, address:address };
-            
-            const response = await axios.post('/auth/register/', data);
+            const data = { username: username, password: password, email: email, birthDate: birthDate, address: address };
+
+            const response = await Request.post('/auth/register/', data);
 
             if (response.data.status) {
-                localStorage.setItem('userLoggedIn', true);
-                localStorage.setItem('userId', username);
-                navigate(from, { replace: true });
+
+                navigate('/login');
             }
 
         } catch (e) {
@@ -133,6 +133,20 @@ export default function Signup() {
 
                         </div>
                         <p class="mb-0 me-2">Have acount?</p>
+                    </div>
+                    <div className="d-flex align-items-center justify-content-center pb-4">
+                        <div className="mx-3">
+                            <a
+                                href='https://github.com/login/oauth/authorize?client_id=2db7f63024fdc56d16a5&scope=user'
+                                style={{ textDecoration: 'none', color: 'white' }}
+                            >
+                                <Icon
+                                    icon="bi:github"
+                                    className="star-icon "
+                                    style={{ fontSize: '4rem' }}
+                                />
+                            </a>
+                        </div>
                     </div>
 
                 </form>

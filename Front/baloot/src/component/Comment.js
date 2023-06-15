@@ -2,6 +2,7 @@ import axios from 'axios';
 import './Comment.css';
 import likes from '../images/thumbs-up.png'
 import disLike from '../images/thumbs-down.png'
+import Request from "../functions/Request";
 
 export default function Comment(props) {
 
@@ -11,7 +12,7 @@ export default function Comment(props) {
         try {
             const data = { vote:vote };
             // /comments/{id}/vote"
-            const response = await axios.post('comments/'+ comment.id +'/vote' , data);
+            const response = await Request.post('comments/'+ comment.id +'/vote' , data);
             console.log(response);
             let newComment = response.data.content;
             updateComment(newComment);
