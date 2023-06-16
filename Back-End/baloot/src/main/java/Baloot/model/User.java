@@ -5,6 +5,7 @@ import Baloot.model.DTO.CommodityBriefDTO;
 import Baloot.model.DTO.CommodityDTO;
 import Baloot.model.DTO.UserDTO;
 import Baloot.repository.UserRepo;
+import Baloot.security.PasswordEncoder;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -86,7 +87,8 @@ public class User {
     }
 
     public boolean checkPassword(String password) {
-        return this.password.equals(password);
+        if (this.password == null) return false;
+        return PasswordEncoder.matches(password, this.password);
     }
 
     public void setDiscount(Discount discount) throws CustomException {

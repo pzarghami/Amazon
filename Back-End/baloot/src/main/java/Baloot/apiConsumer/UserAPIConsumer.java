@@ -3,6 +3,7 @@ package Baloot.apiConsumer;
 import Baloot.Exeption.CustomException;
 import Baloot.model.User;
 import Baloot.repository.UserRepo;
+import Baloot.security.PasswordEncoder;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class UserAPIConsumer extends APIConsumer {
     }
     private User makeNewUser(JsonNode node)throws CustomException{
         String username = node.get("username").asText();
-        String password = node.get("password").asText();
+        String password = PasswordEncoder.encode(node.get("password").asText());
         String email = node.get("email").asText();
         String birthdate = node.get("birthDate").asText();
         String address = node.get("address").asText();

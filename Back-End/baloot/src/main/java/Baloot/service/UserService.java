@@ -4,6 +4,7 @@ import Baloot.Exeption.CustomException;
 import Baloot.domain.UserDomainManager;
 import Baloot.model.DTO.Response;
 import Baloot.model.DTO.UserDTO;
+import Baloot.security.DTO.JwtRequestDTO;
 import Baloot.security.DTO.JwtResponseDTO;
 import Baloot.security.JwtTokenUtil;
 import Baloot.util.ApiClient;
@@ -75,18 +76,18 @@ public class UserService {
     }
 
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Response loginUser(@RequestBody String loginForm) {
+    public Response loginUser(@RequestBody JwtRequestDTO loginForm) {
 
         try {
-            var loginJson = new ObjectMapper().readTree(loginForm);
-            var username = loginJson.get("username").asText();
-            var password = loginJson.get("password").asText();
-            UserDomainManager.getInstance().loginUser(username, password);
-            return new Response(true, "OK", username);
+            if(!loginForm.checkNullability()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            }
+            var userEmail = loginForm.getEmail();
+            var userPassword = loginForm.getPassword();
+            UserDomainManager.getInstance().loginUser(userEmail, userPassword);
+            return new Response(true, "okeb", new JwtResponseDTO(userEmail, jwtTokenUtil.generateToken(userEmail)));
         } catch (CustomException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "InvalidCredential", e);
-        } catch (JsonProcessingException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);

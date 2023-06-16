@@ -7,6 +7,7 @@ import Baloot.repository.CommodityRepo;
 import Baloot.repository.DiscountRepo;
 import Baloot.repository.UserRepo;
 import Baloot.Exeption.CustomException;
+import Baloot.security.PasswordEncoder;
 
 import java.sql.SQLException;
 
@@ -37,7 +38,7 @@ public class UserDomainManager {
     }
 
     public void registerUser(String username, String password, String email, String birthdate, String address) throws CustomException, SQLException {
-        var user = new User(username, password, email, birthdate, address, 0);
+        var user = new User(username, PasswordEncoder.encode(password), email, birthdate, address, 0);
         UserRepo.getInstance().addElement(user);
         // UserRepo.getInstance().loginUser(user);
     }
