@@ -1,4 +1,5 @@
 import '../css/auth.css';
+import { Icon } from '@iconify/react';
 import logo from '../../images/logo.png'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';

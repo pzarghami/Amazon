@@ -19,8 +19,8 @@ import java.io.PrintWriter;
 @ComponentScan(basePackages ={"ie.Baloot.security"})
 public class LoginFilter implements Filter {
 
-    @Autowired
-    JwtTokenUtil jwtTokenUtil;
+
+    JwtTokenUtil jwtTokenUtil= new JwtTokenUtil();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

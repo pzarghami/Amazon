@@ -1,4 +1,5 @@
 import '../css/auth.css';
+import { Icon } from '@iconify/react';
 import logo from '../../images/logo.png'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -23,16 +24,16 @@ export default function Signup() {
 
         e.preventDefault();
         setError('');
-        const from = location.state?.from || '/login';
         try {
+
             if (password != passwordAuth) {
                 setError("Your password is not the same.");
                 return;
             }
             const data = { username: username, password: password, email: email, birthDate: birthDate, address: address };
-
-            const response = await Request.post('/auth/register/', data);
-
+            console.log(data);
+            const response = await axios.post('/auth/register/', data);
+            console.log(response);
             if (response.data.status) {
 
                 navigate('/login');

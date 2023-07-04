@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { login } from "../functions/login";
-import Request from "../functions/Request";
+import { login } from "../../functions/login";
+import Request from "../../functions/Request";
 
 export default function Callback() {
   const [searchParams, setSearchParams] = useSearchParams();
