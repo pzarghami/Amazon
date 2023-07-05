@@ -35,6 +35,7 @@ public class LoginFilter implements Filter {
 
         String requestPath = request.getRequestURI();
         var jwtToken = request.getHeader("Authorization");
+        var test=request.getMethod();
         var needsAuthentication = needsAuthentication(requestPath, request.getMethod());
         if (needsAuthentication){
             if (jwtToken == null || !jwtTokenUtil.validateToken(jwtToken)){
@@ -61,14 +62,14 @@ public class LoginFilter implements Filter {
             if(
                     url.matches("^/auth/login$") ||
                             url.matches("^/auth/login/$") ||
-                            url.matches("^/auth/signup$") ||
-                            url.matches("^/auth/signup/$") ||
+                            url.matches("^/auth/register$") ||
+                            url.matches("^/auth/register/$") ||
                             url.matches("^/auth/oauth-login$") ||
                             url.matches("^/auth/oauth-login/$")
             ) return false;
             return true;
         }
-        return url.matches("^/users/\\S+/watchlist$") || url.matches("^/users/\\S+/watchlist/$");
+        return url.matches("^/users/\\S+$") || url.matches("^/users/\\S+/$");
     }
 
     private void sendUnauthorizedResponse(HttpServletResponse response) throws IOException {

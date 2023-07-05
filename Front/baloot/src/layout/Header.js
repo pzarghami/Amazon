@@ -18,7 +18,7 @@ export default function Header(props) {
         <img src={logo} alt="logo" />
         <span>Baloot</span>
       </div>
-      {localStorage.getItem('userLoggedIn') ?
+      {localStorage.getItem('userId') ?
         <HeaderProfile numOfCart={numOfCart} />
 
         :

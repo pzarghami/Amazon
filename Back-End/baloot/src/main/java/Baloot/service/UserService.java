@@ -82,10 +82,10 @@ public class UserService {
             if(!loginForm.checkNullability()) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
             }
-            var userEmail = loginForm.getEmail();
+            var userUsername = loginForm.getUsername();
             var userPassword = loginForm.getPassword();
-            UserDomainManager.getInstance().loginUser(userEmail, userPassword);
-            return new Response(true, "okeb", new JwtResponseDTO(userEmail, jwtTokenUtil.generateToken(userEmail)));
+            UserDomainManager.getInstance().loginUser(userUsername, userPassword);
+            return new Response(true, "OK", new JwtResponseDTO(userUsername, jwtTokenUtil.generateToken(userUsername)));
         } catch (CustomException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "InvalidCredential", e);
         } catch (SQLException throwables) {

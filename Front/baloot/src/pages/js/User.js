@@ -12,6 +12,7 @@ import PayForm from "../../component/PayForm"
 import BuylistList from "../../component/BuylistList";
 import HistoryList from "../../component/HistoryList";
 import Request from '../../functions/Request';
+import {logout} from '../../functions/logout'
 
 export default function User(props) {
 
@@ -73,10 +74,10 @@ export default function User(props) {
     }, []);
     const handleLogout = async () => {
         try {
-            localStorage.removeItem('userLoggedIn');
-            localStorage.removeItem('userId');
             const response = await axios.post('/auth/logout');
+            console.log(response);
             if (response.data.status) {
+                logout();
                 navigate('/commodities');
             }
         } catch (e) {

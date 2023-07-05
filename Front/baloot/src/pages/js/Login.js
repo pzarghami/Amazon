@@ -25,8 +25,10 @@ export default function Login() {
       const data = { username: username ,password: password };
 
       const response = await Request.post('/auth/login/', data);
+      
 
       if (response.data.status) {
+        console.log(response);
         login(response.data.content.jwt, response.data.content.username);
         navigate(from, { replace: true });
       }

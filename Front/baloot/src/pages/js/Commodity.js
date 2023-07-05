@@ -15,7 +15,7 @@ export default function Commodity(props) {
     const {setNumOfCart}=props;
     const [commodity, setCommodity] = useState(null);
     const { id } = useParams();
-    const isLoggedIn = localStorage.getItem('userLoggedIn');
+    const isLoggedIn = localStorage.getItem('userId');
     const userId = localStorage.getItem('userId');
     const [showMOre, setShowMoreFlage] = useState(false);
     const navigate = useNavigate();

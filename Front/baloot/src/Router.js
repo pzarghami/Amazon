@@ -35,18 +35,18 @@ export default function Router() {
     <Routes>
       <Route path='/' element={<Navigate to='/commodities' />} />
       <Route path='*' element={<NotFound404 />} />
-      <Route element={< UnprotectedPages />}>
+      {/* <Route element={< UnprotectedPages />}> */}
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/callback' element={<Callback />} />
-      </Route>
-      <Route element={<ProtectedPages />}>
+      {/* </Route> */}
+      {/* <Route element={<ProtectedPages />}> */}
         <Route element={<Layout numOfCart={numOfCart} />}>
           <Route path='/commodities' element={<Commodities setNumOfCart={setNumOfCart} />} />
           <Route path='/commodities/:id' element={<Commodity setNumOfCart={setNumOfCart} />} />
           <Route path='/provider/:providerId' element={<Provider />} />
           <Route path='/user' element={<User setNumOfCart={setNumOfCart} />} />
-        </Route>
+        {/* </Route> */}
       </Route>
     </Routes>
   )

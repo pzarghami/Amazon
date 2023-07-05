@@ -9,7 +9,7 @@ export default function CommentForm(props) {
 
   const { commodity,setCommodity } = props;
 
-  const isLoggedIn = localStorage.getItem('userLoggedIn');
+  const isLoggedIn = localStorage.getItem('userId');
 
   const [commentText, setCommentText] = useState('');
   const handleSubmit = async e => {
